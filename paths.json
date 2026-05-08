@@ -1,8 +1,10 @@
 {
   "mappings": [
-    "/content/aem-boilerplate/:/"
+    "/content/rapid-edge/:/",
+    "/content/rapid-edge/configuration:/.helix/config.json",
+    "/content/rapid-edge/metadata:/metadata.json"
   ],
   "includes": [
-    "/content/aem-boilerplate/"
+    "/content/rapid-edge/"
   ]
 }
