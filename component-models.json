@@ -226,5 +226,24 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "quickfacts",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "statistic",
+        "label": "Statistic",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subText",
+        "label": "Subtext",
+        "value": ""
+      }
+    ]
   }
 ]
