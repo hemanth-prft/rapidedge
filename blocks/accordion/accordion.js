@@ -12,12 +12,12 @@ export default function decorate(block) {
     button.className = 'accordion-trigger';
     button.setAttribute('aria-expanded', 'false');
     button.setAttribute('type', 'button');
-    button.innerHTML = titleDiv ? titleDiv.innerHTML : '';
+    button.textContent = titleDiv ? titleDiv.textContent.trim() : '';
 
     const panel = document.createElement('div');
     panel.className = 'accordion-panel';
     panel.setAttribute('hidden', '');
-    panel.innerHTML = bodyDiv ? bodyDiv.innerHTML : '';
+    if (bodyDiv) panel.innerHTML = bodyDiv.innerHTML;
 
     button.addEventListener('click', () => {
       const expanded = button.getAttribute('aria-expanded') === 'true';

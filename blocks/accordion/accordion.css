@@ -1,43 +1,80 @@
 .accordion-item {
-  border-bottom: 1px solid #dadada;
-}
-
-.accordion-item:first-child {
-  border-top: 1px solid #dadada;
+  margin-bottom: 8px;
 }
 
 .accordion-trigger {
   width: 100%;
-  background: none;
+  background-color: #0e5a81;
   border: none;
+  border-radius: 0;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  font-size: var(--body-font-size-m, 1rem);
+  padding: 14px 20px;
+  font-size: 1.1rem;
   font-weight: 600;
-  color: var(--text-color, #000);
+  color: #fff;
   text-align: left;
+  margin: 0;
+  text-decoration: none;
+}
+
+.accordion-trigger:hover,
+.accordion-trigger:focus,
+.accordion-trigger:active {
+  background-color: #0e5a81;
+  color: #fff;
+  outline: none;
+  text-decoration: none;
 }
 
 .accordion-trigger::after {
-  content: '+';
-  font-size: 1.5rem;
-  line-height: 1;
-  transition: transform 0.2s ease;
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #fff;
+  border-top: 2px solid #fff;
+  transform: rotate(135deg);
+  transition: transform 0.25s ease;
   flex-shrink: 0;
-  margin-left: 8px;
+  margin-left: 12px;
+  margin-bottom: 2px;
 }
 
 .accordion-trigger[aria-expanded='true']::after {
-  content: '−';
+  transform: rotate(-45deg);
+  margin-bottom: -4px;
 }
 
 .accordion-panel {
-  padding: 0 16px 16px;
+  padding: 20px 24px;
+  background-color: #fff;
+  border: 1px solid #dadada;
+  border-top: none;
 }
 
 .accordion-panel[hidden] {
   display: none;
+}
+
+.accordion-panel ul,
+.accordion-panel ol {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.accordion-panel li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.accordion-panel a {
+  color: #0072b1;
+  text-decoration: none;
+}
+
+.accordion-panel a:hover {
+  text-decoration: underline;
 }
