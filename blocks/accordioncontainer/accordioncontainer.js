@@ -21,9 +21,9 @@ export default function decorate(block) {
     // Extract header text from first cell and body content from rest
     if (row.children.length > 0) {
       header.textContent = row.children[0].textContent;
-      
+
       // Move remaining content to body
-      for (let i = 1; i < row.children.length; i++) {
+      for (let i = 1; i < row.children.length; i += 1) {
         body.append(row.children[i].cloneNode(true));
       }
     }
