@@ -15,11 +15,13 @@
       "hero",
       "cards",
       "columns",
-      "fragment"
+      "fragment",
+      "accordioncontainer",
+      "quickfacts"
     ]
   },
   {
-    "id": "accordion",
+    "id": "accordioncontainer",
     "components": [
       "accordion"
     ]
