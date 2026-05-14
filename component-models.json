@@ -214,5 +214,57 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "quick-facts",
+    "fields": [
+      {
+        "component": "text",
+        "name": "eyeBrow",
+        "label": "Eye Brow"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "statistic",
+        "label": "Statistic"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subtext",
+        "label": "Subtext"
+      },
+      {
+        "component": "select",
+        "name": "cardType",
+        "label": "Card Type",
+        "options": [
+          {
+            "name": "Small",
+            "value": "small"
+          },
+          {
+            "name": "Large",
+            "value": "large"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "responsiveFontSize",
+        "label": "Responsive Font Size",
+        "options": [
+          {
+            "name": "Disabled",
+            "value": "false"
+          },
+          {
+            "name": "Enabled",
+            "value": "true"
+          }
+        ]
+      }
+    ]
   }
 ]
