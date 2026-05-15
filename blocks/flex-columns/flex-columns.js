@@ -11,18 +11,38 @@ import { decorateBlock, loadBlock } from '../../scripts/aem.js';
  * nested divs for the key/value pair instead.
  */
 function extractWidth(col) {
+  // Case 1: model field rendered as .section-metadata key-value block.
+  // wrapTextNodes may have moved the class from the div onto a synthetic <p>.
   const meta = col.querySelector('.section-metadata');
-  if (!meta) return null;
-  let width = null;
-  meta.querySelectorAll('div').forEach((div) => {
-    if (div.children.length === 2) {
-      const key = div.children[0].textContent.trim().toLowerCase();
-      const val = div.children[1].textContent.trim();
-      if (key === 'width' && val) width = val;
+  if (meta) {
+    let width = null;
+    meta.querySelectorAll('div').forEach((div) => {
+      if (div.children.length === 2) {
+        const key = div.children[0].textContent.trim().toLowerCase();
+        const val = div.children[1].textContent.trim();
+        if (key === 'width' && val) width = val;
+      }
+    });
+    const wrapper = meta.parentElement;
+    meta.remove();
+    if (wrapper && wrapper !== col && !wrapper.children.length && !wrapper.textContent.trim()) {
+      wrapper.remove();
     }
-  });
-  meta.remove();
-  return width;
+    if (width) return width;
+  }
+
+  // Case 2: model field rendered as a plain <p> or wrapping element containing
+  // only a width value (e.g. "70%" or "70") — check the very first child only.
+  const first = col.firstElementChild;
+  if (first) {
+    const text = first.textContent.trim();
+    if (/^\d+%?$/.test(text)) {
+      first.remove();
+      return text.endsWith('%') ? text : `${text}%`;
+    }
+  }
+
+  return null;
 }
 
 export default async function decorate(block) {
