@@ -10,7 +10,7 @@
 }
 
 /* Mobile: stack columns */
-@media (max-width: 767px) {
+@media (width <= 767px) {
   .flex-columns .flex-columns-container {
     flex-direction: column;
   }
