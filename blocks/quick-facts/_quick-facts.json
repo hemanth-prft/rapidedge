@@ -38,7 +38,7 @@
         {
           "component": "select",
           "valueType": "string",
-          "name": "cardType",
+          "name": "variant",
           "label": "Card Type",
           "value": "large",
           "options": [
