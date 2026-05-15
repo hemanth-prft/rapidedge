@@ -21,26 +21,11 @@
       "id": "quick-facts",
       "fields": [
         {
-          "component": "text",
-          "name": "eyeBrow",
-          "label": "Eye Brow"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "statistic",
-          "label": "Statistic"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "subtext",
-          "label": "Subtext"
-        },
-        {
           "component": "select",
-          "name": "cardType",
           "label": "Card Type",
+          "name": "cardSize",
+          "required": true,
+          "valueType": "string",
           "options": [
             {
               "name": "Small",
@@ -53,19 +38,23 @@
           ]
         },
         {
-          "component": "select",
-          "name": "responsiveFontSize",
-          "label": "Responsive Font Size",
-          "options": [
-            {
-              "name": "Disabled",
-              "value": "false"
-            },
-            {
-              "name": "Enabled",
-              "value": "true"
-            }
-          ]
+          "component": "text-input",
+          "label": "Eye Brow",
+          "name": "eyeBrow",
+          "valueType": "string"
+        },
+        {
+          "component": "text-input",
+          "label": "Statistic",
+          "name": "statistic",
+          "required": true,
+          "valueType": "string"
+        },
+        {
+          "component": "text-area",
+          "label": "Subtext",
+          "name": "subtext",
+          "valueType": "string"
         }
       ]
     }
