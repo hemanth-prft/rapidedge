@@ -51,8 +51,7 @@
         "cards",
         "columns",
         "fragment",
-        "accordion",
-        "flex-columns"
+        "accordion"
       ]
     }
   ]

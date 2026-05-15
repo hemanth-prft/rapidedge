@@ -16,8 +16,7 @@
       "cards",
       "columns",
       "fragment",
-      "accordion",
-      "flex-columns"
+      "accordion"
     ]
   },
   {
@@ -46,26 +45,6 @@
       "button",
       "title",
       "accordion"
-    ]
-  },
-  {
-    "id": "flex-columns",
-    "components": [
-      "flex-column"
-    ]
-  },
-  {
-    "id": "flex-column",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title",
-      "accordion",
-      "cards",
-      "columns",
-      "hero",
-      "fragment"
     ]
   }
 ]
