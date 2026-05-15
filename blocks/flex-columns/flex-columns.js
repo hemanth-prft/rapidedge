@@ -6,19 +6,22 @@ import { decorateBlock, loadBlock } from '../../scripts/aem.js';
  * with data-aue-* instrumentation already on it. The width model field is
  * appended as a section-metadata key-value block when it has a value.
  *
- * This function reads the width from the section-metadata block (if present),
- * removes it from the DOM (it is config, not content), and returns the value.
+ * aem.js wrapTextNodes() runs before decorate() and wraps the section-metadata
+ * rows inside a synthetic <p>, so we cannot use :scope > div — we search all
+ * nested divs for the key/value pair instead.
  */
 function extractWidth(col) {
-  const meta = col.querySelector(':scope > .section-metadata, :scope > div.section-metadata');
+  const meta = col.querySelector('.section-metadata');
   if (!meta) return null;
   let width = null;
-  [...meta.querySelectorAll(':scope > div')].forEach((row) => {
-    const key = row.children[0]?.textContent?.trim().toLowerCase();
-    const val = row.children[1]?.textContent?.trim();
-    if (key === 'width' && val) width = val;
+  meta.querySelectorAll('div').forEach((div) => {
+    if (div.children.length === 2) {
+      const key = div.children[0].textContent.trim().toLowerCase();
+      const val = div.children[1].textContent.trim();
+      if (key === 'width' && val) width = val;
+    }
   });
-  meta.parentElement?.removeChild(meta);
+  meta.remove();
   return width;
 }
 
