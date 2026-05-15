@@ -6,65 +6,16 @@
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/franklin/components/block/v1/block",
+            "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
-              "name": "Flex Columns",
-              "filter": "flex-columns"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Flex Column",
-      "id": "flex-column",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/section/v1/section",
-            "template": {
-              "model": "flex-column",
-              "filter": "flex-column"
+              "columns": "2",
+              "rows": "1"
             }
           }
         }
       }
     }
   ],
-  "models": [
-    {
-      "id": "flex-column",
-      "fields": [
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "width",
-          "label": "Width (e.g. 30% or 30)",
-          "value": "50%"
-        }
-      ]
-    }
-  ],
-  "filters": [
-    {
-      "id": "flex-columns",
-      "components": [
-        "flex-column"
-      ]
-    },
-    {
-      "id": "flex-column",
-      "components": [
-        "text",
-        "image",
-        "button",
-        "title",
-        "accordion",
-        "cards",
-        "columns",
-        "hero",
-        "fragment"
-      ]
-    }
-  ]
+  "models": [],
+  "filters": []
 }

@@ -199,18 +199,6 @@
     ]
   },
   {
-    "id": "flex-column",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "width",
-        "label": "Width (e.g. 30% or 30)",
-        "value": "50%"
-      }
-    ]
-  },
-  {
     "id": "fragment",
     "fields": [
       {
