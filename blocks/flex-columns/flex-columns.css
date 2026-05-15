@@ -1,0 +1,22 @@
+.flex-columns .flex-columns-container {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.flex-columns .flex-column {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Mobile: stack columns */
+@media (max-width: 767px) {
+  .flex-columns .flex-columns-container {
+    flex-direction: column;
+  }
+
+  .flex-columns .flex-column {
+    flex-basis: 100% !important;
+    max-width: 100% !important;
+  }
+}
