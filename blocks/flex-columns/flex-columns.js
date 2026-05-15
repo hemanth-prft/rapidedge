@@ -1,73 +1,46 @@
 import { decorateBlock, loadBlock } from '../../scripts/aem.js';
-import { moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
- * aem.js's wrapTextNodes() runs on the block BEFORE our decorate() is called.
- * It wraps cell content in a synthetic <p> whenever the first child is not a
- * "valid wrapper" (P, H1-H6, UL, OL, PICTURE, TABLE, HR).  Block divs
- * (accordion, cards, etc.) are DIVs → they get wrapped.
- * wrapTextNodes also moves data-aue-* attrs from the cell div onto that <p>.
+ * flex-column items use resourceType core/franklin/components/section/v1/section.
+ * The server renders each flex-column as a plain <div> (direct child of the block)
+ * with data-aue-* instrumentation already on it. The width model field is
+ * appended as a section-metadata key-value block when it has a value.
  *
- * This helper walks every <p> that directly contains a <div> inside a col and
- * lifts the block div back up, restoring any instrumentation attrs.
+ * This function reads the width from the section-metadata block (if present),
+ * removes it from the DOM (it is config, not content), and returns the value.
  */
-function unwrapBlocks(col) {
-  col.querySelectorAll(':scope > p > div').forEach((blockDiv) => {
-    const p = blockDiv.parentElement;
-    [...p.attributes].forEach(({ name, value }) => {
-      if (name.startsWith('data-aue-') || name.startsWith('data-richtext-')) {
-        blockDiv.setAttribute(name, value);
-        p.removeAttribute(name);
-      }
-    });
-    p.before(blockDiv);
-    if (!p.textContent.trim()) p.remove();
+function extractWidth(col) {
+  const meta = col.querySelector(':scope > .section-metadata, :scope > div.section-metadata');
+  if (!meta) return null;
+  let width = null;
+  [...meta.querySelectorAll(':scope > div')].forEach((row) => {
+    const key = row.children[0]?.textContent?.trim().toLowerCase();
+    const val = row.children[1]?.textContent?.trim();
+    if (key === 'width' && val) width = val;
   });
+  meta.parentElement?.removeChild(meta);
+  return width;
 }
 
 export default async function decorate(block) {
-  const rows = [...block.children];
+  // Each direct child div is a flex-column section rendered by section/v1/section.
+  // They already carry data-aue-resource / data-aue-type / data-aue-filter from
+  // the server — no moveInstrumentation needed.
+  const cols = [...block.children];
 
   const container = document.createElement('div');
   container.className = 'flex-columns-container';
 
-  rows.forEach((row) => {
-    const cells = [...row.children];
+  cols.forEach((col) => {
+    col.classList.add('flex-column');
 
-    const col = document.createElement('div');
-    col.className = 'flex-column';
-
-    // Move all data-aue-* / data-richtext-* from the original row onto col so
-    // UE can open the flex-column's properties dialog (data-aue-model) and
-    // recognise it as a container (data-aue-filter, if the server rendered it).
-    moveInstrumentation(row, col);
-
-    // Explicitly set the filter so UE shows the "+" add button inside each
-    // column even when the server did not render data-aue-filter on the item row
-    // (block/v1/block/item may not emit it server-side).
-    if (!col.dataset.aueFilter) {
-      col.dataset.aueFilter = 'flex-column';
-    }
-
-    // cells[0] = width field (e.g. "50%")
-    const widthCell = cells[0];
-    if (widthCell) {
-      const raw = widthCell.textContent.trim();
-      if (raw) {
-        const pct = raw.endsWith('%') ? raw : `${raw}%`;
-        col.style.flexBasis = pct;
-        col.style.maxWidth = pct;
-      }
-    }
-
-    // cells[1..n] = content / child components.
-    // Each child component added via UE becomes its own cell, so we must loop
-    // all remaining cells – not just cells[1] – to avoid silently dropping
-    // components when more than one has been added to a column.
-    for (let i = 1; i < cells.length; i += 1) {
-      while (cells[i].firstChild) {
-        col.appendChild(cells[i].firstChild);
-      }
+    // Read width from section-metadata block (appended by the server for the
+    // "width" model field) and apply it as an inline flex-basis / max-width.
+    const width = extractWidth(col);
+    if (width) {
+      const pct = width.endsWith('%') ? width : `${width}%`;
+      col.style.flexBasis = pct;
+      col.style.maxWidth = pct;
     }
 
     container.appendChild(col);
@@ -76,10 +49,8 @@ export default async function decorate(block) {
   block.innerHTML = '';
   block.appendChild(container);
 
-  // Lift block divs that wrapTextNodes wrapped inside synthetic <p> tags.
-  container.querySelectorAll('.flex-column').forEach(unwrapBlocks);
-
-  // Decorate and load all nested blocks (accordion, cards, columns, hero, etc.)
+  // Decorate and load any nested blocks (accordion, cards, columns, hero, etc.)
+  // that the server placed inside each flex-column section div.
   const candidates = [...container.querySelectorAll('.flex-column > div[class]')];
   candidates.forEach(decorateBlock);
   await Promise.all(
