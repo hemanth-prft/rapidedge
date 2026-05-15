@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @param {HTMLElement} statisticEl
  */
 function applyFitText(statisticEl) {
@@ -39,22 +39,22 @@ export default function decorate(block) {
   });
 
   if (!statistic) {
-    block.innerHTML = '<p class="quick-facts__placeholder">Please enter the appropriate values.</p>';
+    block.innerHTML = '<p class="quick-facts-placeholder">Please enter the appropriate values.</p>';
     return;
   }
 
   const container = document.createElement('div');
-  container.classList.add('quick-facts__container', `quick-facts--${cardType}`);
+  container.classList.add('quick-facts-container', `quick-facts-${cardType}`);
 
   if (eyeBrow) {
     const eyeBrowEl = document.createElement('span');
-    eyeBrowEl.classList.add('quick-facts__eye-brow');
+    eyeBrowEl.classList.add('quick-facts-eye-brow');
     eyeBrowEl.textContent = eyeBrow;
     container.appendChild(eyeBrowEl);
   }
 
   const statisticEl = document.createElement('div');
-  statisticEl.classList.add('quick-facts__statistic', 'font-smooth');
+  statisticEl.classList.add('quick-facts-statistic', 'font-smooth');
   statisticEl.textContent = statistic;
 
   if (cardType === 'large') {
@@ -64,12 +64,12 @@ export default function decorate(block) {
   container.appendChild(statisticEl);
 
   const hr = document.createElement('hr');
-  hr.classList.add('quick-facts__border');
+  hr.classList.add('quick-facts-border');
   container.appendChild(hr);
 
   if (subtext) {
     const subtextEl = document.createElement('p');
-    subtextEl.classList.add('quick-facts__subtext');
+    subtextEl.classList.add('quick-facts-subtext');
     subtextEl.textContent = subtext;
     container.appendChild(subtextEl);
   }

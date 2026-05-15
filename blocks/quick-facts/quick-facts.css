@@ -1,24 +1,24 @@
-
+﻿
 /* ─── Block wrapper ────────────────────────────────────────────────── */
 .quick-facts {
   height: 100%;
 }
 
 /* ─── Container ────────────────────────────────────────────────────── */
-.quick-facts__container {
+.quick-facts-container {
   color: #000;
   position: relative;
   margin-top: 8px;
 }
 
-@media (min-width: 576px) {
-  .quick-facts__container {
+@media (width >= 576px) {
+  .quick-facts-container {
     min-height: 70px;
   }
 }
 
 /* ─── Eye brow ─────────────────────────────────────────────────────── */
-.quick-facts__eye-brow {
+.quick-facts-eye-brow {
   font-size: 12px;
   line-height: 18px;
   text-transform: uppercase;
@@ -32,42 +32,42 @@
   overflow: hidden;
 }
 
-@media (min-width: 576px) {
-  .quick-facts__eye-brow {
+@media (width >= 576px) {
+  .quick-facts-eye-brow {
     font-size: 10px;
     line-height: 16px;
   }
 }
 
 /* ─── Statistic ────────────────────────────────────────────────────── */
-.quick-facts__statistic {
+.quick-facts-statistic {
   font-size: 21px;
   font-weight: 600;
   line-height: 27px;
 }
 
 /* ─── Border / separator ───────────────────────────────────────────── */
-.quick-facts__border {
+.quick-facts-border {
   border-color: #767676; /* gray, dark-alt */
   margin: 0;
 }
 
 /* ─── Subtext ──────────────────────────────────────────────────────── */
-.quick-facts__subtext {
+.quick-facts-subtext {
   font-size: 16px;
   line-height: 22px;
   margin-bottom: 0;
   margin-top: 2px;
 }
 
-@media (min-width: 576px) {
-  .quick-facts__subtext {
+@media (width >= 576px) {
+  .quick-facts-subtext {
     font-size: 14px;
     line-height: 20px;
   }
 }
 
-.quick-facts--large {
+.quick-facts-large {
   min-height: 183px;
   background-color: #003764; /* blue, dark-slate */
   color: #fff;
@@ -79,7 +79,7 @@
   padding: 42px 45px;
 }
 
-.quick-facts--large .quick-facts__eye-brow {
+.quick-facts-large .quick-facts-eye-brow {
   font-size: 14px;
   line-height: 20px;
   position: static;
@@ -94,12 +94,12 @@
   overflow: hidden;
 }
 
-.quick-facts--large .quick-facts__border {
+.quick-facts-large .quick-facts-border {
   border: 2px solid #d07000;
   width: 41px;
 }
 
-.quick-facts--large .quick-facts__statistic {
+.quick-facts-large .quick-facts-statistic {
   margin-bottom: 10px;
   text-align: center;
 
@@ -110,7 +110,7 @@
   overflow: hidden;
 }
 
-.quick-facts--large .quick-facts__subtext {
+.quick-facts-large .quick-facts-subtext {
   font-size: 14px;
   line-height: 20px;
   margin-top: 10px;
@@ -124,67 +124,67 @@
 }
 
 /* — Large column context — */
-.quick-facts.large .quick-facts--large .quick-facts__statistic {
+.quick-facts.large .quick-facts-large .quick-facts-statistic {
   font-size: 28px;
   line-height: 34px;
 }
 
-@media (min-width: 768px) {
-  .quick-facts.large .quick-facts--large .quick-facts__statistic {
+@media (width >= 768px) {
+  .quick-facts.large .quick-facts-large .quick-facts-statistic {
     font-size: 32px;
     line-height: 38px;
   }
 }
 
-@media (min-width: 1200px) {
-  .quick-facts.large .quick-facts--large .quick-facts__statistic {
+@media (width >= 1200px) {
+  .quick-facts.large .quick-facts-large .quick-facts-statistic {
     font-size: 38px;
     line-height: 44px;
   }
 }
 
 /* — Medium column context — */
-.quick-facts.medium .quick-facts--large .quick-facts__statistic {
+.quick-facts.medium .quick-facts-large .quick-facts-statistic {
   font-size: 18px;
   line-height: 24px;
 }
 
-@media (min-width: 576px) {
-  .quick-facts.medium .quick-facts--large .quick-facts__statistic {
+@media (width >= 576px) {
+  .quick-facts.medium .quick-facts-large .quick-facts-statistic {
     font-size: 22px;
     line-height: 28px;
   }
 }
 
-@media (min-width: 768px) {
-  .quick-facts.medium .quick-facts--large .quick-facts__statistic {
+@media (width >= 768px) {
+  .quick-facts.medium .quick-facts-large .quick-facts-statistic {
     font-size: 28px;
     line-height: 34px;
   }
 }
 
-@media (min-width: 1200px) {
-  .quick-facts.medium .quick-facts--large .quick-facts__statistic {
+@media (width >= 1200px) {
+  .quick-facts.medium .quick-facts-large .quick-facts-statistic {
     font-size: 32px;
     line-height: 38px;
   }
 }
 
 
-.quick-facts.small .quick-facts--large .quick-facts__statistic {
+.quick-facts.small .quick-facts-large .quick-facts-statistic {
   font-size: 18px;
   line-height: 24px;
 }
 
-@media (min-width: 768px) {
-  .quick-facts.small .quick-facts--large .quick-facts__statistic {
+@media (width >= 768px) {
+  .quick-facts.small .quick-facts-large .quick-facts-statistic {
     font-size: 22px;
     line-height: 28px;
   }
 }
 
-@media (min-width: 1200px) {
-  .quick-facts.small .quick-facts--large .quick-facts__statistic {
+@media (width >= 1200px) {
+  .quick-facts.small .quick-facts-large .quick-facts-statistic {
     font-size: 28px;
     line-height: 34px;
   }
