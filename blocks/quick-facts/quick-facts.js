@@ -1,79 +1,52 @@
-/**
- * @param {HTMLElement} statisticEl
- */
-function applyFitText(statisticEl) {
-  statisticEl.style.fontSize = 'clamp(14px, 4vw, 38px)';
-  statisticEl.style.lineHeight = '1.2';
-}
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
-/**
- * Decorate a Quick Facts block.
- *
- * @param {HTMLElement} block
- */
 export default function decorate(block) {
-  const isLarge = block.classList.contains('large');
-  const rows = [...block.querySelectorAll(':scope > div')];
+  // Block variant 'small' = small card type; default is 'large'
+  const cardType = block.classList.contains('small') ? 'small' : 'large';
 
-  let cardType = isLarge ? 'large' : 'small';
-  let eyeBrow = '';
-  let statistic = '';
-  let subtext = '';
+  const ul = document.createElement('ul');
 
-  rows.forEach((row) => {
-    const cells = [...row.querySelectorAll(':scope > div')];
-    if (cells.length < 2) return;
+  [...block.children].forEach((row) => {
+    const li = document.createElement('li');
+    li.classList.add('quick-facts-item', `quick-facts-${cardType}`);
+    moveInstrumentation(row, li);
 
-    const label = cells[0].textContent.trim().toLowerCase();
-    const value = cells[1].textContent.trim();
+    const cols = [...row.children];
+    let eyeBrow = null;
+    let statistic = null;
+    let subtext = null;
 
-    if (label === 'card type') {
-      cardType = value.toLowerCase() === 'large' ? 'large' : 'small';
-    } else if (label === 'eye brow') {
-      eyeBrow = value;
-    } else if (label === 'statistic') {
-      statistic = value;
-    } else if (label === 'subtext') {
-      subtext = value;
+    if (cols.length >= 3) {
+      // 3 columns: eyeBrow | statistic | subtext
+      [eyeBrow, statistic, subtext] = cols;
+    } else if (cols.length === 2) {
+      // 2 columns: statistic | subtext
+      [statistic, subtext] = cols;
+    } else {
+      [statistic] = cols;
     }
+
+    if (eyeBrow) {
+      eyeBrow.className = 'quick-facts-eye-brow';
+      li.append(eyeBrow);
+    }
+
+    if (statistic) {
+      statistic.className = 'quick-facts-statistic';
+      li.append(statistic);
+    }
+
+    const hr = document.createElement('hr');
+    hr.className = 'quick-facts-border';
+    li.append(hr);
+
+    if (subtext) {
+      subtext.className = 'quick-facts-subtext';
+      li.append(subtext);
+    }
+
+    ul.append(li);
   });
 
-  if (!statistic) {
-    block.innerHTML = '<p class="quick-facts-placeholder">Please enter the appropriate values.</p>';
-    return;
-  }
-
-  const container = document.createElement('div');
-  container.classList.add('quick-facts-container', `quick-facts-${cardType}`);
-
-  if (eyeBrow) {
-    const eyeBrowEl = document.createElement('span');
-    eyeBrowEl.classList.add('quick-facts-eye-brow');
-    eyeBrowEl.textContent = eyeBrow;
-    container.appendChild(eyeBrowEl);
-  }
-
-  const statisticEl = document.createElement('div');
-  statisticEl.classList.add('quick-facts-statistic', 'font-smooth');
-  statisticEl.textContent = statistic;
-
-  if (cardType === 'large') {
-    applyFitText(statisticEl);
-  }
-
-  container.appendChild(statisticEl);
-
-  const hr = document.createElement('hr');
-  hr.classList.add('quick-facts-border');
-  container.appendChild(hr);
-
-  if (subtext) {
-    const subtextEl = document.createElement('p');
-    subtextEl.classList.add('quick-facts-subtext');
-    subtextEl.textContent = subtext;
-    container.appendChild(subtextEl);
-  }
-
-  block.innerHTML = '';
-  block.appendChild(container);
+  block.replaceChildren(ul);
 }

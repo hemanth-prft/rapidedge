@@ -216,43 +216,45 @@
     ]
   },
   {
-    "id": "quick-facts",
+    "id": "quick-fact",
     "fields": [
       {
         "component": "select",
-        "label": "Card Type",
-        "name": "cardSize",
-        "required": true,
         "valueType": "string",
+        "name": "cardType",
+        "label": "Card Type",
+        "value": "large",
         "options": [
-          {
-            "name": "Small",
-            "value": "small"
-          },
           {
             "name": "Large",
             "value": "large"
+          },
+          {
+            "name": "Small",
+            "value": "small"
           }
         ]
       },
       {
-        "component": "text-input",
-        "label": "Eye Brow",
+        "component": "text",
+        "valueType": "string",
         "name": "eyeBrow",
-        "valueType": "string"
+        "label": "Eye Brow",
+        "value": ""
       },
       {
-        "component": "text-input",
-        "label": "Statistic",
+        "component": "text",
+        "valueType": "string",
         "name": "statistic",
-        "required": true,
-        "valueType": "string"
+        "label": "Statistic",
+        "value": ""
       },
       {
-        "component": "text-area",
-        "label": "Subtext",
+        "component": "textarea",
+        "valueType": "string",
         "name": "subtext",
-        "valueType": "string"
+        "label": "Subtext",
+        "value": ""
       }
     ]
   }
