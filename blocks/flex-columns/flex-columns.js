@@ -1,4 +1,5 @@
 import { decorateBlock, loadBlock } from '../../scripts/aem.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * aem.js's wrapTextNodes() is called by decorateBlock() on the flex-columns outer block
@@ -11,7 +12,7 @@ import { decorateBlock, loadBlock } from '../../scripts/aem.js';
  * editing still works.
  */
 function unwrapBlocks(col) {
-  col.querySelectorAll(':scope > p > div, :scope > p > div[class]').forEach((blockDiv) => {
+  col.querySelectorAll(':scope > p > div').forEach((blockDiv) => {
     const p = blockDiv.parentElement;
     // Transfer AUE instrumentation attributes from the synthetic <p> to the block div
     [...p.attributes].forEach(({ name, value }) => {
@@ -40,6 +41,11 @@ export default async function decorate(block) {
 
     const col = document.createElement('div');
     col.className = 'flex-column';
+
+    // Preserve UE instrumentation: move all data-aue-* / data-richtext-* from
+    // the original row div onto our new col div so UE can still open the dialog
+    // and show the add-component button for this flex-column item.
+    moveInstrumentation(row, col);
 
     // Read width from first cell (e.g. "30%" or "30")
     if (widthCell) {
