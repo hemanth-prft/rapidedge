@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @param {HTMLElement} statisticEl
  */
 function applyFitText(statisticEl) {
