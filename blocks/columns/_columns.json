@@ -51,7 +51,10 @@
         "image",
         "button",
         "title",
-        "accordion"
+        "accordion",
+        "cards",
+        "hero",
+        "fragment"
       ]
     }
   ]
