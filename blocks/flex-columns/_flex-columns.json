@@ -17,5 +17,12 @@
     }
   ],
   "models": [],
-  "filters": []
+  "filters": [
+    {
+      "id": "flex-columns",
+      "components": [
+        "column"
+      ]
+    }
+  ]
 }

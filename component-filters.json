@@ -50,5 +50,11 @@
       "hero",
       "fragment"
     ]
+  },
+  {
+    "id": "flex-columns",
+    "components": [
+      "column"
+    ]
   }
 ]
