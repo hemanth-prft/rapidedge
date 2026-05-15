@@ -24,7 +24,8 @@
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
               "name": "Flex Column",
-              "model": "flex-column"
+              "model": "flex-column",
+              "filter": "flex-column"
             }
           }
         }
@@ -41,13 +42,6 @@
           "name": "width",
           "label": "Width (e.g. 30% or 30)",
           "value": "50%"
-        },
-        {
-          "component": "richtext",
-          "valueType": "string",
-          "name": "content",
-          "label": "Content",
-          "value": ""
         }
       ]
     }
@@ -57,6 +51,20 @@
       "id": "flex-columns",
       "components": [
         "flex-column"
+      ]
+    },
+    {
+      "id": "flex-column",
+      "components": [
+        "text",
+        "image",
+        "button",
+        "title",
+        "accordion",
+        "cards",
+        "columns",
+        "hero",
+        "fragment"
       ]
     }
   ]

@@ -207,13 +207,6 @@
         "name": "width",
         "label": "Width (e.g. 30% or 30)",
         "value": "50%"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "content",
-        "label": "Content",
-        "value": ""
       }
     ]
   },

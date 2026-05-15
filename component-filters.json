@@ -53,5 +53,19 @@
     "components": [
       "flex-column"
     ]
+  },
+  {
+    "id": "flex-column",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title",
+      "accordion",
+      "cards",
+      "columns",
+      "hero",
+      "fragment"
+    ]
   }
 ]

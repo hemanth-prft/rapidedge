@@ -181,7 +181,8 @@
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
                   "name": "Flex Column",
-                  "model": "flex-column"
+                  "model": "flex-column",
+                  "filter": "flex-column"
                 }
               }
             }
