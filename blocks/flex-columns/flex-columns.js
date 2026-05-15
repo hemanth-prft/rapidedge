@@ -2,28 +2,25 @@ import { decorateBlock, loadBlock } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
- * aem.js's wrapTextNodes() is called by decorateBlock() on the flex-columns outer block
- * BEFORE our decorate() runs. It wraps any content-cell child whose first element is not
- * a "valid wrapper" (P, H1-H6, UL, OL, PICTURE, TABLE, HR) inside a synthetic <p>.
- * Because block divs (accordion, cards, etc.) are DIVs they get wrapped.
- * This helper lifts those block divs back out of the synthetic <p> so we can
- * query/decorate them normally. Any data-aue-* instrumentation attributes that
- * wrapTextNodes moved onto the <p> are transferred to the block div so UE
- * editing still works.
+ * aem.js's wrapTextNodes() runs on the block BEFORE our decorate() is called.
+ * It wraps cell content in a synthetic <p> whenever the first child is not a
+ * "valid wrapper" (P, H1-H6, UL, OL, PICTURE, TABLE, HR).  Block divs
+ * (accordion, cards, etc.) are DIVs → they get wrapped.
+ * wrapTextNodes also moves data-aue-* attrs from the cell div onto that <p>.
+ *
+ * This helper walks every <p> that directly contains a <div> inside a col and
+ * lifts the block div back up, restoring any instrumentation attrs.
  */
 function unwrapBlocks(col) {
   col.querySelectorAll(':scope > p > div').forEach((blockDiv) => {
     const p = blockDiv.parentElement;
-    // Transfer AUE instrumentation attributes from the synthetic <p> to the block div
     [...p.attributes].forEach(({ name, value }) => {
       if (name.startsWith('data-aue-') || name.startsWith('data-richtext-')) {
         blockDiv.setAttribute(name, value);
         p.removeAttribute(name);
       }
     });
-    // Lift the block div out of the <p>
     p.before(blockDiv);
-    // Remove the now-empty (or whitespace-only) <p>
     if (!p.textContent.trim()) p.remove();
   });
 }
@@ -36,18 +33,24 @@ export default async function decorate(block) {
 
   rows.forEach((row) => {
     const cells = [...row.children];
-    const widthCell = cells[0];
-    const contentCell = cells[1];
 
     const col = document.createElement('div');
     col.className = 'flex-column';
 
-    // Preserve UE instrumentation: move all data-aue-* / data-richtext-* from
-    // the original row div onto our new col div so UE can still open the dialog
-    // and show the add-component button for this flex-column item.
+    // Move all data-aue-* / data-richtext-* from the original row onto col so
+    // UE can open the flex-column's properties dialog (data-aue-model) and
+    // recognise it as a container (data-aue-filter, if the server rendered it).
     moveInstrumentation(row, col);
 
-    // Read width from first cell (e.g. "30%" or "30")
+    // Explicitly set the filter so UE shows the "+" add button inside each
+    // column even when the server did not render data-aue-filter on the item row
+    // (block/v1/block/item may not emit it server-side).
+    if (!col.dataset.aueFilter) {
+      col.dataset.aueFilter = 'flex-column';
+    }
+
+    // cells[0] = width field (e.g. "50%")
+    const widthCell = cells[0];
     if (widthCell) {
       const raw = widthCell.textContent.trim();
       if (raw) {
@@ -57,10 +60,13 @@ export default async function decorate(block) {
       }
     }
 
-    // Move content from second cell into column div
-    if (contentCell) {
-      while (contentCell.firstChild) {
-        col.appendChild(contentCell.firstChild);
+    // cells[1..n] = content / child components.
+    // Each child component added via UE becomes its own cell, so we must loop
+    // all remaining cells – not just cells[1] – to avoid silently dropping
+    // components when more than one has been added to a column.
+    for (let i = 1; i < cells.length; i += 1) {
+      while (cells[i].firstChild) {
+        col.appendChild(cells[i].firstChild);
       }
     }
 
@@ -70,7 +76,7 @@ export default async function decorate(block) {
   block.innerHTML = '';
   block.appendChild(container);
 
-  // Lift any block divs that wrapTextNodes wrapped inside synthetic <p> tags
+  // Lift block divs that wrapTextNodes wrapped inside synthetic <p> tags.
   container.querySelectorAll('.flex-column').forEach(unwrapBlocks);
 
   // Decorate and load all nested blocks (accordion, cards, columns, hero, etc.)
@@ -82,3 +88,4 @@ export default async function decorate(block) {
       .map(loadBlock),
   );
 }
+
