@@ -173,11 +173,17 @@
    ========================================================================== */
 
 /* Flex container — all environments */
+
+
+/* column-gap: 16px matches the flex-basis calc (50% - 8px, (100% - 32px) / 3).  */
+
+
+/* row-gap: 24px gives clear vertical breathing room between block rows.        */
 .quick-facts-container,
 .section:has(.quick-facts) {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 24px 16px;
   align-items: stretch;
 }
 

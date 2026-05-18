@@ -127,7 +127,8 @@ export default function decorate(block) {
     const applyLayout = () => {
       container.style.display = 'flex';
       container.style.flexWrap = 'wrap';
-      container.style.gap = '16px';
+      container.style.columnGap = '16px';
+      container.style.rowGap = '24px';
       container.style.alignItems = 'stretch';
 
       const els = inWrapper
