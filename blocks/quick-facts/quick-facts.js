@@ -97,36 +97,56 @@ export default function decorate(block) {
 
   block.replaceChildren(ul);
 
-  // Section-level 2-col / 3-col layout.
-  // Blocks 1–4 in a section sit 2-per-row; block 5 onwards sit 3-per-row.
-  // The layout is applied once the section finishes loading all its blocks.
-  const section = block.closest('.section');
-  if (section) {
-    const updateLayout = () => {
-      // In UE authoring the block is a direct child of .section (no wrapper).
-      // In preview/published EDS wraps each block in .quick-facts-wrapper first.
-      // Detect which structure is present and target the right flex item.
-      const wrappers = [...section.querySelectorAll(':scope > .quick-facts-wrapper')];
-      const items = wrappers.length > 0
-        ? wrappers
-        : [...section.querySelectorAll(':scope > .quick-facts')];
-      items.forEach((item, i) => {
-        item.classList.toggle('quick-facts-col-3', i >= 4);
-      });
-    };
-    if (section.dataset.sectionStatus === 'loaded') {
-      // UE authoring: section is already loaded, update immediately.
-      updateLayout();
-    } else if (!section.dataset.qfLayoutObserved) {
-      // Initial page load: register once per section and wait for all blocks.
-      section.dataset.qfLayoutObserved = 'true';
-      const observer = new MutationObserver(() => {
-        if (section.dataset.sectionStatus === 'loaded') {
-          observer.disconnect();
-          updateLayout();
-        }
-      });
-      observer.observe(section, { attributes: true, attributeFilter: ['data-section-status'] });
+  // Section-level 2-col / 3-col layout applied via inline styles.
+  // Using inline styles (not CSS classes) because in UE authoring AEM may
+  // pre-set data-section-status which skips JS class decoration, making
+  // CSS class selectors unreliable. Inline styles work in every environment.
+  //
+  // Structure detection:
+  //   UE authoring  → block is direct child of the section-like container
+  //   Preview/published → block is inside .quick-facts-wrapper inside section
+  const inWrapper = block.parentElement?.classList.contains('quick-facts-wrapper');
+  const container = inWrapper ? block.parentElement?.parentElement : block.parentElement;
+  const flexItem = inWrapper ? block.parentElement : block;
+
+  if (container && flexItem) {
+    // Make the section-level container a flex row (applied once per container).
+    if (!container.dataset.qfFlex) {
+      container.dataset.qfFlex = '1';
+      container.style.display = 'flex';
+      container.style.flexWrap = 'wrap';
+      container.style.gap = '16px';
+      container.style.alignItems = 'stretch';
+    }
+
+    // Default: 2 per row.
+    flexItem.style.flex = '0 0 calc(50% - 8px)';
+    flexItem.style.minWidth = '0';
+
+    // After all blocks in the container load, upgrade blocks 5+ to 3-per-row.
+    if (!container.dataset.qfLayoutObserved) {
+      container.dataset.qfLayoutObserved = '1';
+      const applyLayout = () => {
+        const els = inWrapper
+          ? [...container.querySelectorAll(':scope > .quick-facts-wrapper')]
+          : [...container.querySelectorAll(':scope > .quick-facts')];
+        els.forEach((el, i) => {
+          el.style.flex = i >= 4
+            ? '0 0 calc((100% - 32px) / 3)'
+            : '0 0 calc(50% - 8px)';
+        });
+      };
+      if (container.dataset.sectionStatus === 'loaded') {
+        applyLayout();
+      } else {
+        const observer = new MutationObserver(() => {
+          if (container.dataset.sectionStatus === 'loaded') {
+            observer.disconnect();
+            applyLayout();
+          }
+        });
+        observer.observe(container, { attributes: true, attributeFilter: ['data-section-status'] });
+      }
     }
   }
 }
