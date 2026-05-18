@@ -152,16 +152,24 @@
 }
 
 /* ==========================================================================
-   Responsive grid
+   Section-level grid layout
+   When multiple quick-facts blocks share a section (one block = one card),
+   the section becomes a flex container so cards sit side by side.
+   auto-fit inside each block still handles multi-row document authoring.
    ========================================================================== */
-@media (width < 576px) {
-  .quick-facts .quick-facts-list {
-    grid-template-columns: 1fr;
-  }
+.section:has(> .quick-facts) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: stretch;
 }
 
-@media (width >= 576px) and (width < 900px) {
-  .quick-facts .quick-facts-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.section:has(> .quick-facts) > .quick-facts {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+/* Any non-quick-facts content in the same section stays full-width */
+.section:has(> .quick-facts) > :not(.quick-facts) {
+  flex-basis: 100%;
 }

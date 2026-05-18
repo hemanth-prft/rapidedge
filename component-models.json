@@ -216,7 +216,7 @@
     ]
   },
   {
-    "id": "quick-fact",
+    "id": "quick-facts",
     "fields": [
       {
         "component": "select",

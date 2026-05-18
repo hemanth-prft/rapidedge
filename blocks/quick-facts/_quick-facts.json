@@ -9,22 +9,7 @@
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
               "name": "Quick Facts",
-              "filter": "quick-facts"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Quick Fact",
-      "id": "quick-fact",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "name": "Quick Fact",
-              "model": "quick-fact"
+              "model": "quick-facts"
             }
           }
         }
@@ -33,7 +18,7 @@
   ],
   "models": [
     {
-      "id": "quick-fact",
+      "id": "quick-facts",
       "fields": [
         {
           "component": "select",
@@ -70,12 +55,5 @@
       ]
     }
   ],
-  "filters": [
-    {
-      "id": "quick-facts",
-      "components": [
-        "quick-fact"
-      ]
-    }
-  ]
+  "filters": []
 }
