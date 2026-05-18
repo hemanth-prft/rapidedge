@@ -202,9 +202,9 @@
 }
 
 .pagination-btn.active {
-  background-color: #000;
+  background-color: #2680a0;
   color: #fff;
-  border-color: #000;
+  border-color: #2680a0;
 }
 
 .pagination-btn:focus {
