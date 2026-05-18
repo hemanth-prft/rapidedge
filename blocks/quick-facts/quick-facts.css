@@ -156,7 +156,7 @@
    ========================================================================== */
 .quick-facts-card-large:not(:has(.quick-facts-statistic:not(:empty)))::before,
 .quick-facts-card-small:not(:has(.quick-facts-statistic:not(:empty)))::before {
-  content: 'Open Properties panel \2192  fill in Card Type, Statistic and Subtext';
+  /* content: 'Open Properties panel \2192  fill in Card Type, Statistic and Subtext'; */
   font-size: 13px;
   opacity: 0.6;
   font-style: italic;
@@ -188,6 +188,12 @@
 .section:has(> div > .quick-facts) > div:has(> .quick-facts) {
   flex: 0 0 calc(50% - 8px);
   min-width: 0;
+}
+
+/* Cancel the padding injected by main > .section > div so it does not
+   inflate the wrapper beyond its flex-basis (which would break 2-per-row). */
+.quick-facts-container > .quick-facts-wrapper {
+  padding: 0;
 }
 
 /* 3 per row for blocks 5 and beyond (JS toggles .quick-facts-col-3) */

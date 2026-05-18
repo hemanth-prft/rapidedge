@@ -115,8 +115,11 @@ export default function decorate(block) {
 
   if (container && flexItem) {
     // Set initial width so blocks don't jump when the section becomes visible.
+    // padding: 0 cancels the `main > .section > div { padding: 0 24px }` rule
+    // that would inflate each wrapper beyond its flex-basis with content-box sizing.
     flexItem.style.flex = '0 0 calc(50% - 8px)';
     flexItem.style.minWidth = '0';
+    flexItem.style.padding = '0';
 
     // applyLayout re-sets ALL container + item styles.
     // It is always called after sectionStatus='loaded' (post display=null),
@@ -135,6 +138,7 @@ export default function decorate(block) {
           ? '0 0 calc((100% - 32px) / 3)'
           : '0 0 calc(50% - 8px)';
         el.style.minWidth = '0';
+        el.style.padding = '0';
       });
     };
 
