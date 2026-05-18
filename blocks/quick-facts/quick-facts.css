@@ -166,23 +166,29 @@
 
 /* ==========================================================================
    Section-level grid layout
-   When multiple quick-facts blocks share a section (one block = one card),
-   the section becomes a flex container so cards sit side by side.
-   auto-fit inside each block still handles multi-row document authoring.
+   EDS wraps each block in a .quick-facts-wrapper div and adds
+   .quick-facts-container to the section. Blocks 1–4 sit 2-per-row;
+   block 5 onwards (class added by JS) sit 3-per-row.
    ========================================================================== */
-.section:has(> .quick-facts) {
+.quick-facts-container {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
   align-items: stretch;
 }
 
-.section:has(> .quick-facts) > .quick-facts {
-  flex: 1 1 280px;
+/* 2 per row — default for blocks 1 to 4 */
+.quick-facts-container > .quick-facts-wrapper {
+  flex: 0 0 calc(50% - 8px);
   min-width: 0;
 }
 
-/* Any non-quick-facts content in the same section stays full-width */
-.section:has(> .quick-facts) > :not(.quick-facts) {
+/* 3 per row — blocks 5 and beyond (JS toggles .quick-facts-wrapper-3col) */
+.quick-facts-container > .quick-facts-wrapper.quick-facts-wrapper-3col {
+  flex: 0 0 calc(33.333% - 10.667px);
+}
+
+/* Headings and other default content in the same section stay full-width */
+.quick-facts-container > :not(.quick-facts-wrapper) {
   flex-basis: 100%;
 }

@@ -96,4 +96,31 @@ export default function decorate(block) {
   }
 
   block.replaceChildren(ul);
+
+  // Section-level 2-col / 3-col layout.
+  // Blocks 1–4 in a section sit 2-per-row; block 5 onwards sit 3-per-row.
+  // The layout is applied once the section finishes loading all its blocks.
+  const section = block.closest('.section');
+  if (section) {
+    const updateLayout = () => {
+      const wrappers = [...section.querySelectorAll(':scope > .quick-facts-wrapper')];
+      wrappers.forEach((wrapper, i) => {
+        wrapper.classList.toggle('quick-facts-wrapper-3col', i >= 4);
+      });
+    };
+    if (section.dataset.sectionStatus === 'loaded') {
+      // UE authoring: section is already loaded, update immediately.
+      updateLayout();
+    } else if (!section.dataset.qfLayoutObserved) {
+      // Initial page load: register once per section and wait for all blocks.
+      section.dataset.qfLayoutObserved = 'true';
+      const observer = new MutationObserver(() => {
+        if (section.dataset.sectionStatus === 'loaded') {
+          observer.disconnect();
+          updateLayout();
+        }
+      });
+      observer.observe(section, { attributes: true, attributeFilter: ['data-section-status'] });
+    }
+  }
 }
