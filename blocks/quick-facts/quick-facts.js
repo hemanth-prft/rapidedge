@@ -123,18 +123,33 @@ export default function decorate(block) {
       const items = [...container.querySelectorAll(selector)];
       if (items.length === 0) return;
 
-      // First 4 blocks → 2-col grid
-      const grid2 = document.createElement('div');
-      grid2.className = 'qf-grid qf-grid-2col';
-      items.slice(0, 4).forEach((el) => grid2.append(el));
-      container.append(grid2);
+      // Split by card variant: small cards are always 3-per-row;
+      // large cards follow 2-col (first 4) → 3-col (5th+) rule.
+      const isSmall = (el) => !!el.querySelector('.quick-facts-card-small');
+      const largeItems = items.filter((el) => !isSmall(el));
+      const smallItems = items.filter((el) => isSmall(el));
 
-      // Blocks 5+ → 3-col grid
-      if (items.length > 4) {
-        const grid3 = document.createElement('div');
-        grid3.className = 'qf-grid qf-grid-3col';
-        items.slice(4).forEach((el) => grid3.append(el));
-        container.append(grid3);
+      // Large cards: first 4 → 2-col grid, remainder → 3-col grid
+      if (largeItems.length > 0) {
+        const grid2 = document.createElement('div');
+        grid2.className = 'qf-grid qf-grid-2col';
+        largeItems.slice(0, 4).forEach((el) => grid2.append(el));
+        container.append(grid2);
+
+        if (largeItems.length > 4) {
+          const grid3Large = document.createElement('div');
+          grid3Large.className = 'qf-grid qf-grid-3col';
+          largeItems.slice(4).forEach((el) => grid3Large.append(el));
+          container.append(grid3Large);
+        }
+      }
+
+      // Small cards: always 3-col grid
+      if (smallItems.length > 0) {
+        const grid3Small = document.createElement('div');
+        grid3Small.className = 'qf-grid qf-grid-3col';
+        smallItems.forEach((el) => grid3Small.append(el));
+        container.append(grid3Small);
       }
     };
 
