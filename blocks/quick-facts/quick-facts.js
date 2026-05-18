@@ -98,45 +98,51 @@ export default function decorate(block) {
   block.replaceChildren(ul);
 
   // Section-level 2-col / 3-col layout applied via inline styles.
-  // Using inline styles (not CSS classes) because in UE authoring AEM may
-  // pre-set data-section-status which skips JS class decoration, making
-  // CSS class selectors unreliable. Inline styles work in every environment.
   //
-  // Structure detection:
-  //   UE authoring  → block is direct child of the section-like container
-  //   Preview/published → block is inside .quick-facts-wrapper inside section
+  // IMPORTANT: We must set container flex styles inside applyLayout(), NOT
+  // during block decoration. aem.js loadSection() calls
+  //   section.dataset.sectionStatus = 'loaded'
+  //   section.style.display = null          ← clears any display:flex we set early
+  // The MutationObserver fires asynchronously AFTER display=null, so
+  // applyLayout() runs after the clear and can safely re-apply display:flex.
+  //
+  // Structure:
+  //   Published / preview → .section > .quick-facts-wrapper > .quick-facts
+  //   UE authoring        → [section div] > .quick-facts  (no wrapper added)
   const inWrapper = block.parentElement?.classList.contains('quick-facts-wrapper');
   const container = inWrapper ? block.parentElement?.parentElement : block.parentElement;
   const flexItem = inWrapper ? block.parentElement : block;
 
   if (container && flexItem) {
-    // Make the section-level container a flex row (applied once per container).
-    if (!container.dataset.qfFlex) {
-      container.dataset.qfFlex = '1';
+    // Set initial width so blocks don't jump when the section becomes visible.
+    flexItem.style.flex = '0 0 calc(50% - 8px)';
+    flexItem.style.minWidth = '0';
+
+    // applyLayout re-sets ALL container + item styles.
+    // It is always called after sectionStatus='loaded' (post display=null),
+    // so it reliably overrides the cleared inline display.
+    const applyLayout = () => {
       container.style.display = 'flex';
       container.style.flexWrap = 'wrap';
       container.style.gap = '16px';
       container.style.alignItems = 'stretch';
-    }
 
-    // Default: 2 per row.
-    flexItem.style.flex = '0 0 calc(50% - 8px)';
-    flexItem.style.minWidth = '0';
+      const els = inWrapper
+        ? [...container.querySelectorAll(':scope > .quick-facts-wrapper')]
+        : [...container.querySelectorAll(':scope > .quick-facts')];
+      els.forEach((el, i) => {
+        el.style.flex = i >= 4
+          ? '0 0 calc((100% - 32px) / 3)'
+          : '0 0 calc(50% - 8px)';
+        el.style.minWidth = '0';
+      });
+    };
 
-    // After all blocks in the container load, upgrade blocks 5+ to 3-per-row.
+    // Register once per container; the first block to decorate owns the observer.
     if (!container.dataset.qfLayoutObserved) {
       container.dataset.qfLayoutObserved = '1';
-      const applyLayout = () => {
-        const els = inWrapper
-          ? [...container.querySelectorAll(':scope > .quick-facts-wrapper')]
-          : [...container.querySelectorAll(':scope > .quick-facts')];
-        els.forEach((el, i) => {
-          el.style.flex = i >= 4
-            ? '0 0 calc((100% - 32px) / 3)'
-            : '0 0 calc(50% - 8px)';
-        });
-      };
       if (container.dataset.sectionStatus === 'loaded') {
+        // Section already fully loaded (e.g. UE single-block re-decoration).
         applyLayout();
       } else {
         const observer = new MutationObserver(() => {
