@@ -166,48 +166,44 @@
 
 /* ==========================================================================
    Section-level grid layout
-   Three selector groups cover every rendering environment:
-   A) JS-decorated (published/preview): .quick-facts-container + .quick-facts-wrapper
-   B) UE authoring: block is a direct child of .section
-   C) AEM author preview: block is inside an anonymous wrapper div in .section
+   JS splits blocks into two CSS Grid containers:
+     .qf-grid.qf-grid-2col  — first 4 blocks  → 2 columns on desktop
+     .qf-grid.qf-grid-3col  — blocks 5+        → 3 columns on desktop
    ========================================================================== */
 
-/* Flex container — all environments */
-
-/* gap: 20px 30px = row-gap 20px (matches mercy.net margin-bottom) +
-   column-gap 30px (matches mercy.net 15px gutter × 2 sides).           */
+/* Section container: normal block flow; layout lives on the .qf-grid children */
 .quick-facts-container,
 .section:has(.quick-facts) {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px 30px;
-  align-items: stretch;
+  display: block;
 }
 
-/* 2 per row — all environments */
-.quick-facts-container > .quick-facts,
-.quick-facts-container > .quick-facts-wrapper,
-.section:has(> .quick-facts) > .quick-facts,
-.section:has(> div > .quick-facts) > div:has(> .quick-facts) {
-  flex: 0 0 calc(50% - 15px);
-  min-width: 0;
+/* Grid wrapper — mobile-first: single column */
+.qf-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
 }
 
-/* Cancel the padding injected by main > .section > div so it does not
-   inflate the wrapper beyond its flex-basis (which would break 2-per-row). */
-.quick-facts-container > .quick-facts-wrapper {
+/* Vertical space between the 2-col and 3-col grids */
+.qf-grid + .qf-grid {
+  margin-top: 20px;
+}
+
+/* Desktop: 2-column grid (first 4 blocks) */
+@media (width >= 992px) {
+  .qf-grid-2col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: 3-column grid (blocks 5+) */
+@media (width >= 992px) {
+  .qf-grid-3col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Reset the padding that main > .section > div injects on wrapper divs */
+.qf-grid > .quick-facts-wrapper {
   padding: 0;
-}
-
-/* 3 per row for blocks 5 and beyond (JS toggles .quick-facts-col-3) */
-.quick-facts-container > .quick-facts.quick-facts-col-3,
-.quick-facts-container > .quick-facts-wrapper.quick-facts-col-3,
-.section:has(> .quick-facts) > .quick-facts.quick-facts-col-3,
-.section:has(> div > .quick-facts) > div.quick-facts-col-3:has(> .quick-facts) {
-  flex: 0 0 calc((100% - 60px) / 3);
-}
-
-/* Non-block content (headings etc.) stays full-width */
-.quick-facts-container > :not(.quick-facts, .quick-facts-wrapper) {
-  flex-basis: 100%;
 }

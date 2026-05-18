@@ -97,57 +97,51 @@ export default function decorate(block) {
 
   block.replaceChildren(ul);
 
-  // Section-level 2-col / 3-col layout applied via inline styles.
+  // Section-level grid layout.
+  // After all blocks in the section finish loading, JS groups them into two
+  // CSS Grid containers:
+  //   .qf-grid.qf-grid-2col  — first 4 blocks  (2 columns on desktop)
+  //   .qf-grid.qf-grid-3col  — blocks 5+        (3 columns on desktop)
   //
-  // IMPORTANT: We must set container flex styles inside applyLayout(), NOT
-  // during block decoration. aem.js loadSection() calls
-  //   section.dataset.sectionStatus = 'loaded'
-  //   section.style.display = null          ← clears any display:flex we set early
-  // The MutationObserver fires asynchronously AFTER display=null, so
-  // applyLayout() runs after the clear and can safely re-apply display:flex.
-  //
-  // Structure:
+  // Structure detection:
   //   Published / preview → .section > .quick-facts-wrapper > .quick-facts
-  //   UE authoring        → [section div] > .quick-facts  (no wrapper added)
+  //   UE authoring        → [section div] > .quick-facts  (no wrapper)
   const inWrapper = block.parentElement?.classList.contains('quick-facts-wrapper');
   const container = inWrapper ? block.parentElement?.parentElement : block.parentElement;
-  const flexItem = inWrapper ? block.parentElement : block;
 
-  if (container && flexItem) {
-    // Set initial width so blocks don't jump when the section becomes visible.
-    // padding: 0 cancels the `main > .section > div { padding: 0 24px }` rule
-    // that would inflate each wrapper beyond its flex-basis with content-box sizing.
-    flexItem.style.flex = '0 0 calc(50% - 15px)';
-    flexItem.style.minWidth = '0';
-    flexItem.style.padding = '0';
-
-    // applyLayout re-sets ALL container + item styles.
-    // It is always called after sectionStatus='loaded' (post display=null),
-    // so it reliably overrides the cleared inline display.
+  if (container) {
     const applyLayout = () => {
-      container.style.display = 'flex';
-      container.style.flexWrap = 'wrap';
-      container.style.columnGap = '30px';
-      container.style.rowGap = '20px';
-      container.style.alignItems = 'stretch';
-
-      const els = inWrapper
-        ? [...container.querySelectorAll(':scope > .quick-facts-wrapper')]
-        : [...container.querySelectorAll(':scope > .quick-facts')];
-      els.forEach((el, i) => {
-        el.style.flex = i >= 4
-          ? '0 0 calc((100% - 60px) / 3)'
-          : '0 0 calc(50% - 15px)';
-        el.style.minWidth = '0';
-        el.style.padding = '0';
+      // Remove any previously created grid wrappers (idempotent on UE re-decoration).
+      container.querySelectorAll(':scope > .qf-grid').forEach((g) => {
+        [...g.children].forEach((child) => container.insertBefore(child, g));
+        g.remove();
       });
+
+      const selector = inWrapper
+        ? ':scope > .quick-facts-wrapper'
+        : ':scope > .quick-facts';
+      const items = [...container.querySelectorAll(selector)];
+      if (items.length === 0) return;
+
+      // First 4 blocks → 2-col grid
+      const grid2 = document.createElement('div');
+      grid2.className = 'qf-grid qf-grid-2col';
+      items.slice(0, 4).forEach((el) => grid2.append(el));
+      container.append(grid2);
+
+      // Blocks 5+ → 3-col grid
+      if (items.length > 4) {
+        const grid3 = document.createElement('div');
+        grid3.className = 'qf-grid qf-grid-3col';
+        items.slice(4).forEach((el) => grid3.append(el));
+        container.append(grid3);
+      }
     };
 
     // Register once per container; the first block to decorate owns the observer.
     if (!container.dataset.qfLayoutObserved) {
       container.dataset.qfLayoutObserved = '1';
       if (container.dataset.sectionStatus === 'loaded') {
-        // Section already fully loaded (e.g. UE single-block re-decoration).
         applyLayout();
       } else {
         const observer = new MutationObserver(() => {
