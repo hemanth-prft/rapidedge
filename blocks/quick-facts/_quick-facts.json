@@ -38,7 +38,7 @@
         {
           "component": "select",
           "valueType": "string",
-          "name": "cardType",
+          "name": "variant",
           "label": "Card Type",
           "required": true,
           "value": "small",
@@ -68,14 +68,6 @@
           "name": "subtext",
           "label": "Subtext",
           "value": ""
-        },
-        {
-          "component": "boolean",
-          "valueType": "boolean",
-          "name": "responsiveFontSize",
-          "label": "Responsive Font Size",
-          "description": "Enables responsive font scaling on the statistic for the Large card variant.",
-          "value": true
         }
       ]
     }

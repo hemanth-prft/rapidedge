@@ -14,19 +14,15 @@ export default function decorate(block) {
 
     const cols = [...row.children];
     let cardTypeDiv = null;
-    let responsiveFontSizeDiv = null;
     let eyeBrowDiv = null;
     let statisticDiv = null;
     let subtextDiv = null;
 
-    // UE-authored (5 cols): cardType | eyeBrow | statistic | subtext | responsiveFontSize
     // UE-authored (4 cols): cardType | eyeBrow | statistic | subtext
     // Document-based (3 cols): eyeBrow | statistic | subtext
     // Document-based (2 cols): statistic | subtext
     // Document-based (1 col):  statistic
-    if (cols.length >= 5) {
-      [cardTypeDiv, eyeBrowDiv, statisticDiv, subtextDiv, responsiveFontSizeDiv] = cols;
-    } else if (cols.length === 4) {
+    if (cols.length >= 4) {
       [cardTypeDiv, eyeBrowDiv, statisticDiv, subtextDiv] = cols;
     } else if (cols.length === 3) {
       [eyeBrowDiv, statisticDiv, subtextDiv] = cols;
@@ -42,14 +38,6 @@ export default function decorate(block) {
       const val = cardTypeDiv.textContent.trim().toLowerCase();
       if (val === 'small' || val === 'large') cardType = val;
       cardTypeDiv.remove();
-    }
-
-    // Resolve responsiveFontSize — defaults to true (matches AEM dialog checkbox default)
-    let responsiveFontSize = true;
-    if (responsiveFontSizeDiv) {
-      const val = responsiveFontSizeDiv.textContent.trim().toLowerCase();
-      responsiveFontSize = val !== 'false';
-      responsiveFontSizeDiv.remove();
     }
 
     // Inner card container — holds all visual elements for this fact item
@@ -68,12 +56,10 @@ export default function decorate(block) {
     // Statistic — the main highlighted value
     if (statisticDiv) {
       const div = document.createElement('div');
-      div.className = 'quick-facts-statistic';
-      // Responsive font scaling only applies to the large card when enabled
-      // (mirrors AEM v-fit-text directive behaviour; defaults on)
-      if (cardType === 'large' && responsiveFontSize) {
-        div.classList.add('quick-facts-statistic-responsive');
-      }
+      // Large cards always use responsive font scaling (mirrors AEM v-fit-text default: on)
+      div.className = cardType === 'large'
+        ? 'quick-facts-statistic quick-facts-statistic-responsive'
+        : 'quick-facts-statistic';
       div.textContent = statisticDiv.textContent.trim();
       card.append(div);
       statisticDiv.remove();
