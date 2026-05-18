@@ -205,13 +205,9 @@
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.pagination-btn:hover:not(:disabled):not(.active) {
-  background-color: #f0f0f0;
-}
-
-.pagination-btn:focus {
-  outline: 2px solid #003b5c;
-  outline-offset: 2px;
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .pagination-btn.active {
@@ -220,9 +216,13 @@
   border-color: #003b5c;
 }
 
-.pagination-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+.pagination-btn:focus {
+  outline: 2px solid #003b5c;
+  outline-offset: 2px;
+}
+
+.pagination-btn:hover:not(:disabled, .active) {
+  background-color: #f0f0f0;
 }
 
 .pagination-prev,
