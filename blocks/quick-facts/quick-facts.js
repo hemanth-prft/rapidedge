@@ -32,6 +32,9 @@ export default function decorate(block) {
       [statisticDiv] = cols;
     }
 
+    // Skip rows that have no statistic content (e.g. empty placeholder rows in UE)
+    if (!statisticDiv || !statisticDiv.textContent.trim()) return;
+
     // Resolve cardType — reads the authored value, falls back to block-level class
     let cardType = defaultCardType;
     if (cardTypeDiv) {

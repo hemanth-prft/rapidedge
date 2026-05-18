@@ -40,7 +40,6 @@
           "valueType": "string",
           "name": "variant",
           "label": "Card Type",
-          "required": true,
           "value": "small",
           "options": [
             { "name": "Small", "value": "small" },
@@ -59,7 +58,6 @@
           "valueType": "string",
           "name": "statistic",
           "label": "Statistic",
-          "required": true,
           "value": ""
         },
         {
