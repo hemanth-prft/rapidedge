@@ -152,6 +152,19 @@
 }
 
 /* ==========================================================================
+   Authoring placeholder — shown when statistic is empty (e.g. newly added block)
+   ========================================================================== */
+.quick-facts-card-large:not(:has(.quick-facts-statistic:not(:empty)))::before,
+.quick-facts-card-small:not(:has(.quick-facts-statistic:not(:empty)))::before {
+  content: 'Open Properties panel \2192  fill in Card Type, Statistic and Subtext';
+  font-size: 13px;
+  opacity: 0.6;
+  font-style: italic;
+  text-align: center;
+  padding: 8px;
+}
+
+/* ==========================================================================
    Section-level grid layout
    When multiple quick-facts blocks share a section (one block = one card),
    the section becomes a flex container so cards sit side by side.
