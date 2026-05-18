@@ -25,17 +25,18 @@
           "valueType": "string",
           "name": "variant",
           "label": "Card Type",
-          "value": "small",
+          "value": "large",
+          "required": true,
           "options": [
-            { "name": "Small", "value": "small" },
-            { "name": "Large", "value": "large" }
+            { "name": "Large", "value": "large" },
+            { "name": "Small", "value": "small" }
           ]
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "eyeBrow",
-          "label": "Eye Brow",
+          "label": "Eye brow",
           "value": ""
         },
         {
@@ -43,7 +44,8 @@
           "valueType": "string",
           "name": "statistic",
           "label": "Statistic",
-          "value": ""
+          "value": "",
+          "required": true
         },
         {
           "component": "textarea",
