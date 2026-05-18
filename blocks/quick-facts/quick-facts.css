@@ -1,5 +1,5 @@
 /* quick-facts block */
-.quick-facts > ul {
+.quick-facts .quick-facts-list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -8,8 +8,14 @@
   gap: 16px;
 }
 
-/* ---- Large Card (default) ---- */
-.quick-facts .quick-facts-item.quick-facts-large {
+.quick-facts .quick-facts-item {
+  height: 100%;
+}
+
+/* ==========================================================================
+   Large card variant
+   ========================================================================== */
+.quick-facts .quick-facts-card-large {
   background-color: #5b5377;
   color: #fff;
   min-height: 183px;
@@ -18,9 +24,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 
-.quick-facts .quick-facts-large .quick-facts-eye-brow {
+.quick-facts .quick-facts-card-large .quick-facts-eye-brow {
   font-size: 14px;
   line-height: 20px;
   text-transform: uppercase;
@@ -33,26 +40,19 @@
   -webkit-box-orient: vertical;
 }
 
-.quick-facts .quick-facts-large .quick-facts-statistic {
+.quick-facts .quick-facts-card-large .quick-facts-statistic {
   font-size: 28px;
   font-weight: 600;
   line-height: 34px;
   text-align: center;
   margin-bottom: 10px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
-.quick-facts .quick-facts-large .quick-facts-statistic p,
-.quick-facts .quick-facts-large .quick-facts-statistic h1,
-.quick-facts .quick-facts-large .quick-facts-statistic h2,
-.quick-facts .quick-facts-large .quick-facts-statistic h3 {
-  margin: 0;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  color: inherit;
-}
-
-.quick-facts .quick-facts-large .quick-facts-border {
+.quick-facts .quick-facts-card-large .quick-facts-border {
   border: none;
   border-top: 2px solid #d07000;
   width: 41px;
@@ -60,7 +60,7 @@
   align-self: center;
 }
 
-.quick-facts .quick-facts-large .quick-facts-subtext {
+.quick-facts .quick-facts-card-large .quick-facts-subtext {
   font-size: 14px;
   line-height: 20px;
   text-align: center;
@@ -72,22 +72,16 @@
   -webkit-box-orient: vertical;
 }
 
-.quick-facts .quick-facts-large .quick-facts-subtext p {
-  margin: 0;
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-}
-
-/* ---- Small Card ---- */
-.quick-facts .quick-facts-item.quick-facts-small {
+/* ==========================================================================
+   Small card variant
+   ========================================================================== */
+.quick-facts .quick-facts-card-small {
   color: #000;
   position: relative;
   margin-top: 8px;
-  min-height: 70px;
 }
 
-.quick-facts .quick-facts-small .quick-facts-eye-brow {
+.quick-facts .quick-facts-card-small .quick-facts-eye-brow {
   font-size: 12px;
   line-height: 18px;
   text-transform: uppercase;
@@ -99,76 +93,75 @@
   -webkit-box-orient: vertical;
 }
 
-.quick-facts .quick-facts-small .quick-facts-statistic {
+.quick-facts .quick-facts-card-small .quick-facts-statistic {
   font-size: 21px;
   font-weight: 600;
   line-height: 27px;
 }
 
-.quick-facts .quick-facts-small .quick-facts-statistic p {
-  margin: 0;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-}
-
-.quick-facts .quick-facts-small .quick-facts-border {
+.quick-facts .quick-facts-card-small .quick-facts-border {
   border: none;
   border-top: 1px solid #979797;
   margin: 0;
 }
 
-.quick-facts .quick-facts-small .quick-facts-subtext {
+.quick-facts .quick-facts-card-small .quick-facts-subtext {
   font-size: 16px;
   line-height: 22px;
   margin-top: 2px;
   margin-bottom: 0;
 }
 
-.quick-facts .quick-facts-small .quick-facts-subtext p {
-  margin: 0;
-  font-size: inherit;
-  line-height: inherit;
-}
-
-/* ---- Responsive: small card at >= 600px ---- */
-@media (width >= 600px) {
-  .quick-facts .quick-facts-small .quick-facts-eye-brow {
-    font-size: 10px;
-    line-height: 16px;
-  }
-
-  .quick-facts .quick-facts-small .quick-facts-subtext,
-  .quick-facts .quick-facts-small .quick-facts-subtext p {
-    font-size: 14px;
-    line-height: 20px;
-  }
-}
-
-/* ---- Responsive font sizes: large card statistic ---- */
+/* ==========================================================================
+   Responsive font sizes — large card statistic
+   Applied only when responsiveFontSize is enabled (quick-facts-statistic-responsive class)
+   Breakpoints mirror AEM SCSS media-breakpoint-up(md) and media-breakpoint-up(xl)
+   ========================================================================== */
 @media (width >= 900px) {
-  .quick-facts .quick-facts-large .quick-facts-statistic {
+  .quick-facts .quick-facts-card-large .quick-facts-statistic-responsive {
     font-size: 32px;
     line-height: 38px;
   }
 }
 
 @media (width >= 1200px) {
-  .quick-facts .quick-facts-large .quick-facts-statistic {
+  .quick-facts .quick-facts-card-large .quick-facts-statistic-responsive {
     font-size: 38px;
     line-height: 44px;
   }
 }
 
-/* ---- Responsive grid ---- */
-@media (width < 600px) {
-  .quick-facts > ul {
+/* ==========================================================================
+   Responsive breakpoints — small card
+   Mirrors AEM SCSS media-breakpoint-up(sm) at 576px
+   ========================================================================== */
+@media (width >= 576px) {
+  .quick-facts .quick-facts-card-small {
+    min-height: 70px;
+  }
+
+  .quick-facts .quick-facts-card-small .quick-facts-eye-brow {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .quick-facts .quick-facts-card-small .quick-facts-subtext {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+/* ==========================================================================
+   Responsive grid
+   ========================================================================== */
+@media (width < 576px) {
+  .quick-facts .quick-facts-list {
     grid-template-columns: 1fr;
   }
 }
 
-@media (width >= 600px) and (width < 900px) {
-  .quick-facts > ul {
+@media (width >= 576px) and (width < 900px) {
+  .quick-facts .quick-facts-list {
     grid-template-columns: repeat(2, 1fr);
   }
 }

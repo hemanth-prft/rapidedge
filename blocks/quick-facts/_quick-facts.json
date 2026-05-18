@@ -38,12 +38,13 @@
         {
           "component": "select",
           "valueType": "string",
-          "name": "variant",
+          "name": "cardType",
           "label": "Card Type",
-          "value": "large",
+          "required": true,
+          "value": "small",
           "options": [
-            { "name": "Large", "value": "large" },
-            { "name": "Small", "value": "small" }
+            { "name": "Small", "value": "small" },
+            { "name": "Large", "value": "large" }
           ]
         },
         {
@@ -58,6 +59,7 @@
           "valueType": "string",
           "name": "statistic",
           "label": "Statistic",
+          "required": true,
           "value": ""
         },
         {
@@ -66,6 +68,14 @@
           "name": "subtext",
           "label": "Subtext",
           "value": ""
+        },
+        {
+          "component": "boolean",
+          "valueType": "boolean",
+          "name": "responsiveFontSize",
+          "label": "Responsive Font Size",
+          "description": "Enables responsive font scaling on the statistic for the Large card variant.",
+          "value": true
         }
       ]
     }
