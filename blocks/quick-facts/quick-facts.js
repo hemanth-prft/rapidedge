@@ -117,7 +117,7 @@ export default function decorate(block) {
     // Set initial width so blocks don't jump when the section becomes visible.
     // padding: 0 cancels the `main > .section > div { padding: 0 24px }` rule
     // that would inflate each wrapper beyond its flex-basis with content-box sizing.
-    flexItem.style.flex = '0 0 calc(50% - 8px)';
+    flexItem.style.flex = '0 0 calc(50% - 15px)';
     flexItem.style.minWidth = '0';
     flexItem.style.padding = '0';
 
@@ -127,8 +127,8 @@ export default function decorate(block) {
     const applyLayout = () => {
       container.style.display = 'flex';
       container.style.flexWrap = 'wrap';
-      container.style.columnGap = '16px';
-      container.style.rowGap = '24px';
+      container.style.columnGap = '30px';
+      container.style.rowGap = '20px';
       container.style.alignItems = 'stretch';
 
       const els = inWrapper
@@ -136,8 +136,8 @@ export default function decorate(block) {
         : [...container.querySelectorAll(':scope > .quick-facts')];
       els.forEach((el, i) => {
         el.style.flex = i >= 4
-          ? '0 0 calc((100% - 32px) / 3)'
-          : '0 0 calc(50% - 8px)';
+          ? '0 0 calc((100% - 60px) / 3)'
+          : '0 0 calc(50% - 15px)';
         el.style.minWidth = '0';
         el.style.padding = '0';
       });

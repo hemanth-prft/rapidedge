@@ -174,16 +174,13 @@
 
 /* Flex container — all environments */
 
-
-/* column-gap: 16px matches the flex-basis calc (50% - 8px, (100% - 32px) / 3).  */
-
-
-/* row-gap: 24px gives clear vertical breathing room between block rows.        */
+/* gap: 20px 30px = row-gap 20px (matches mercy.net margin-bottom) +
+   column-gap 30px (matches mercy.net 15px gutter × 2 sides).           */
 .quick-facts-container,
 .section:has(.quick-facts) {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px 16px;
+  gap: 20px 30px;
   align-items: stretch;
 }
 
@@ -192,7 +189,7 @@
 .quick-facts-container > .quick-facts-wrapper,
 .section:has(> .quick-facts) > .quick-facts,
 .section:has(> div > .quick-facts) > div:has(> .quick-facts) {
-  flex: 0 0 calc(50% - 8px);
+  flex: 0 0 calc(50% - 15px);
   min-width: 0;
 }
 
@@ -207,7 +204,7 @@
 .quick-facts-container > .quick-facts-wrapper.quick-facts-col-3,
 .section:has(> .quick-facts) > .quick-facts.quick-facts-col-3,
 .section:has(> div > .quick-facts) > div.quick-facts-col-3:has(> .quick-facts) {
-  flex: 0 0 calc((100% - 32px) / 3);
+  flex: 0 0 calc((100% - 60px) / 3);
 }
 
 /* Non-block content (headings etc.) stays full-width */
