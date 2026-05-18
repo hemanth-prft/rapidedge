@@ -1,0 +1,231 @@
+/* Quick Facts Block */
+.quick-facts-heading {
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #003b5c;
+  margin: 0 0 24px;
+  padding: 20px 0 0;
+}
+
+/* Sort Dropdown */
+.quick-facts-sort {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #f9f9f9;
+}
+
+.quick-facts-sort-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.quick-facts-sort-select {
+  font-size: 0.95rem;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  color: #003b5c;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.quick-facts-sort-select:focus {
+  outline: 2px solid #003b5c;
+  outline-offset: 2px;
+}
+
+/* Accordion List */
+.quick-facts-list {
+  margin: 0;
+  padding: 0;
+}
+
+/* Accordion Item */
+.quick-facts-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.quick-facts-item:first-child {
+  border-top: 1px solid #ddd;
+}
+
+/* Trigger Button */
+.quick-facts-trigger {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #003b5c;
+  text-align: left;
+  margin: 0;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.quick-facts-trigger:hover {
+  background-color: #f5f5f5;
+}
+
+.quick-facts-trigger:focus {
+  outline: 2px solid #003b5c;
+  outline-offset: -2px;
+}
+
+/* Chevron Icon */
+.quick-facts-trigger-icon {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid #003b5c;
+  border-bottom: 2px solid #003b5c;
+  transform: rotate(45deg);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.quick-facts-trigger[aria-expanded='true'] .quick-facts-trigger-icon {
+  transform: rotate(-135deg);
+}
+
+/* Panel */
+.quick-facts-panel {
+  padding: 20px 24px;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  position: relative;
+}
+
+.quick-facts-panel[hidden] {
+  display: none;
+}
+
+/* Close Button */
+.quick-facts-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #003b5c;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 8px;
+  font-weight: 300;
+}
+
+.quick-facts-close:hover {
+  color: #000;
+}
+
+.quick-facts-close:focus {
+  outline: 2px solid #003b5c;
+  outline-offset: 2px;
+}
+
+/* Panel Content */
+.quick-facts-panel-content {
+  padding-right: 30px;
+}
+
+/* Learn More Link */
+.quick-facts-learn-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  padding: 10px 24px;
+  border: 2px solid #003b5c;
+  border-radius: 4px;
+  color: #003b5c;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.quick-facts-learn-more:hover {
+  background-color: #003b5c;
+  color: #fff;
+  text-decoration: none;
+}
+
+.quick-facts-learn-more:focus {
+  outline: 2px solid #003b5c;
+  outline-offset: 2px;
+}
+
+.quick-facts-arrow {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* Pagination */
+.quick-facts-pagination-wrapper {
+  margin-top: 24px;
+}
+
+.quick-facts-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 16px 0;
+}
+
+.pagination-btn {
+  min-width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #003b5c;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled):not(.active) {
+  background-color: #f0f0f0;
+}
+
+.pagination-btn:focus {
+  outline: 2px solid #003b5c;
+  outline-offset: 2px;
+}
+
+.pagination-btn.active {
+  background-color: #003b5c;
+  color: #fff;
+  border-color: #003b5c;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-prev,
+.pagination-next {
+  font-size: 1.1rem;
+}

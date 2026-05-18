@@ -47,7 +47,14 @@
       "accordion",
       "cards",
       "hero",
-      "fragment"
+      "fragment",
+      "quick-facts"
+    ]
+  },
+  {
+    "id": "quick-facts",
+    "components": [
+      "quick-facts-item"
     ]
   }
 ]

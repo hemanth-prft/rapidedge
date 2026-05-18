@@ -9,7 +9,8 @@
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
               "columns": "2",
-              "rows": "1"
+              "rows": "1",
+              "model": "columns"
             }
           }
         }
@@ -24,15 +25,59 @@
           "component": "text",
           "valueType": "number",
           "name": "columns",
-          "value": "",
-          "label": "Columns"
+          "value": "2",
+          "label": "Number of Columns"
         },
         {
           "component": "text",
           "valueType": "number",
           "name": "rows",
-          "value": "",
-          "label": "Rows"
+          "value": "1",
+          "label": "Number of Rows"
+        },
+        {
+          "component": "select",
+          "name": "layout",
+          "label": "Column Width Layout",
+          "description": "Choose how columns split the width",
+          "options": [
+            {
+              "name": "Equal Width",
+              "value": ""
+            },
+            {
+              "name": "30 / 70",
+              "value": "columns-30-70"
+            },
+            {
+              "name": "70 / 30",
+              "value": "columns-70-30"
+            },
+            {
+              "name": "40 / 60",
+              "value": "columns-40-60"
+            },
+            {
+              "name": "60 / 40",
+              "value": "columns-60-40"
+            },
+            {
+              "name": "25 / 75",
+              "value": "columns-25-75"
+            },
+            {
+              "name": "75 / 25",
+              "value": "columns-75-25"
+            },
+            {
+              "name": "33 / 33 / 33",
+              "value": "columns-33-33-33"
+            },
+            {
+              "name": "25 / 50 / 25",
+              "value": "columns-25-50-25"
+            }
+          ]
         }
       ]
     }
@@ -54,7 +99,8 @@
         "accordion",
         "cards",
         "hero",
-        "fragment"
+        "fragment",
+        "quick-facts"
       ]
     }
   ]
