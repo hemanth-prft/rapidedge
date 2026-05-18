@@ -23,14 +23,14 @@
   padding: 2px 6px;
   border: none;
   background: transparent;
-  color: #004165;
+  color: #000;
   font-weight: 700;
   cursor: pointer;
   appearance: auto;
 }
 
 .quick-facts-sort-select:focus {
-  outline: 2px solid #004165;
+  outline: 2px solid #000;
   outline-offset: 2px;
 }
 
@@ -50,27 +50,30 @@
   width: 100%;
   background: none;
   border: none;
+  border-radius: 0;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 18px 20px;
-  font-size: 0.95rem;
+  font-size: 14px;
   font-weight: 600;
-  color: #004165;
+  color: #000;
   text-align: left;
   margin: 0;
   text-decoration: none;
-  transition: background-color 0.15s ease;
 }
 
-.quick-facts-trigger:hover {
-  background-color: #f8f8f8;
-}
-
-.quick-facts-trigger:focus {
-  outline: 2px solid #004165;
-  outline-offset: -2px;
+.quick-facts-trigger:hover,
+.quick-facts-trigger:active,
+.quick-facts-trigger:focus,
+.quick-facts-trigger:focus-visible {
+  background-color: transparent;
+  color: #000;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Icon — chevron down when collapsed, × when expanded */
@@ -90,8 +93,8 @@
   left: 3px;
   width: 10px;
   height: 10px;
-  border-right: 2.5px solid #004165;
-  border-bottom: 2.5px solid #004165;
+  border-right: 2.5px solid #000;
+  border-bottom: 2.5px solid #000;
   transform: rotate(45deg);
   transition: transform 0.25s ease, opacity 0.2s ease;
 }
@@ -103,7 +106,7 @@
   transform: none;
   font-size: 1.6rem;
   font-weight: 300;
-  color: #004165;
+  color: #000;
   top: -6px;
   left: 0;
   width: auto;
@@ -140,7 +143,7 @@
   padding: 12px 24px;
   border: 1.5px solid #d9d9d9;
   border-radius: 3px;
-  color: #004165;
+  color: #000;
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
@@ -149,12 +152,12 @@
 
 .quick-facts-learn-more:hover {
   background-color: #f5f5f5;
-  border-color: #004165;
+  border-color: #000;
   text-decoration: none;
 }
 
 .quick-facts-learn-more:focus {
-  outline: 2px solid #004165;
+  outline: 2px solid #000;
   outline-offset: 2px;
 }
 
@@ -185,7 +188,7 @@
   justify-content: center;
   border: 1px solid #d9d9d9;
   background: #fff;
-  color: #004165;
+  color: #000;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
@@ -199,13 +202,13 @@
 }
 
 .pagination-btn.active {
-  background-color: #004165;
+  background-color: #000;
   color: #fff;
-  border-color: #004165;
+  border-color: #000;
 }
 
 .pagination-btn:focus {
-  outline: 2px solid #004165;
+  outline: 2px solid #000;
   outline-offset: 2px;
 }
 
