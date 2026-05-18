@@ -166,32 +166,39 @@
 
 /* ==========================================================================
    Section-level grid layout
-   In UE authoring, AEM serves blocks as direct children of .section
-   (no wrapper div). In preview/published, EDS JS wraps each block in
-   .quick-facts-wrapper. Both structures are handled below.
-   aem.js adds .quick-facts-container to the section in both cases.
+   Three selector groups cover every rendering environment:
+   A) JS-decorated (published/preview): .quick-facts-container + .quick-facts-wrapper
+   B) UE authoring: block is a direct child of .section
+   C) AEM author preview: block is inside an anonymous wrapper div in .section
    ========================================================================== */
-.quick-facts-container {
+
+/* Flex container — all environments */
+.quick-facts-container,
+.section:has(.quick-facts) {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
   align-items: stretch;
 }
 
-/* 2 per row — UE: block is direct child; preview: wrapper is direct child */
+/* 2 per row — all environments */
 .quick-facts-container > .quick-facts,
-.quick-facts-container > .quick-facts-wrapper {
+.quick-facts-container > .quick-facts-wrapper,
+.section:has(> .quick-facts) > .quick-facts,
+.section:has(> div > .quick-facts) > div:has(> .quick-facts) {
   flex: 0 0 calc(50% - 8px);
   min-width: 0;
 }
 
-/* 3 per row — blocks 5 and beyond (JS toggles .quick-facts-col-3) */
+/* 3 per row for blocks 5 and beyond (JS toggles .quick-facts-col-3) */
 .quick-facts-container > .quick-facts.quick-facts-col-3,
-.quick-facts-container > .quick-facts-wrapper.quick-facts-col-3 {
-  flex: 0 0 calc(33.333% - 10.667px);
+.quick-facts-container > .quick-facts-wrapper.quick-facts-col-3,
+.section:has(> .quick-facts) > .quick-facts.quick-facts-col-3,
+.section:has(> div > .quick-facts) > div.quick-facts-col-3:has(> .quick-facts) {
+  flex: 0 0 calc((100% - 32px) / 3);
 }
 
-/* Headings and other default content in the same section stay full-width */
+/* Non-block content (headings etc.) stays full-width */
 .quick-facts-container > :not(.quick-facts, .quick-facts-wrapper) {
   flex-basis: 100%;
 }
