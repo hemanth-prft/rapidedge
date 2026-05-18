@@ -279,25 +279,6 @@
     ]
   },
   {
-    "id": "quick-facts",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "heading",
-        "label": "Block Heading",
-        "value": "Community Quick Facts"
-      },
-      {
-        "component": "number",
-        "valueType": "number",
-        "name": "itemsPerPage",
-        "label": "Items Per Page",
-        "value": 10
-      }
-    ]
-  },
-  {
     "id": "quick-facts-item",
     "fields": [
       {

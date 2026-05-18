@@ -137,12 +137,8 @@ function renderItems(block, items, page, listContainer) {
 export default function decorate(block) {
   const rows = [...block.children];
 
-  // First row: block heading
-  const headingRow = rows[0];
-  const heading = headingRow ? headingRow.textContent.trim() : '';
-
-  // Remaining rows: accordion items (title | link | content)
-  const items = rows.slice(1).map((row) => {
+  // All rows are items (title | link | content)
+  const items = rows.map((row) => {
     const cols = [...row.children];
     return {
       title: cols[0] ? cols[0].textContent.trim() : '',
@@ -152,11 +148,6 @@ export default function decorate(block) {
   });
 
   block.innerHTML = '';
-
-  // Heading
-  const headingEl = document.createElement('h2');
-  headingEl.className = 'quick-facts-heading';
-  headingEl.textContent = heading;
 
   // Sort dropdown
   const sortWrapper = document.createElement('div');
@@ -204,6 +195,6 @@ export default function decorate(block) {
     render();
   });
 
-  block.append(headingEl, sortWrapper, listContainer, paginationContainer);
+  block.append(sortWrapper, listContainer, paginationContainer);
   render();
 }
