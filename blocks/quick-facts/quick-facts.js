@@ -1,5 +1,3 @@
-import { moveInstrumentation } from '../../scripts/scripts.js';
-
 const ITEMS_PER_PAGE = 10;
 
 function sortItems(items, order) {
