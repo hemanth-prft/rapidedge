@@ -1,3 +1,5 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 const ITEMS_PER_PAGE = 10;
 
 function sortItems(items, order) {
@@ -16,7 +18,6 @@ function renderPagination(container, totalItems, currentPage, onPageChange) {
   const paginationEl = document.createElement('div');
   paginationEl.className = 'quick-facts-pagination';
 
-  // Previous button
   const prevBtn = document.createElement('button');
   prevBtn.className = 'pagination-btn pagination-prev';
   prevBtn.textContent = '\u00AB';
@@ -24,7 +25,6 @@ function renderPagination(container, totalItems, currentPage, onPageChange) {
   prevBtn.addEventListener('click', () => onPageChange(currentPage - 1));
   paginationEl.append(prevBtn);
 
-  // Page numbers
   for (let i = 1; i <= totalPages; i += 1) {
     const pageBtn = document.createElement('button');
     pageBtn.className = `pagination-btn pagination-page${i === currentPage ? ' active' : ''}`;
@@ -33,7 +33,6 @@ function renderPagination(container, totalItems, currentPage, onPageChange) {
     paginationEl.append(pageBtn);
   }
 
-  // Next button
   const nextBtn = document.createElement('button');
   nextBtn.className = 'pagination-btn pagination-next';
   nextBtn.textContent = '\u00BB';
@@ -44,110 +43,95 @@ function renderPagination(container, totalItems, currentPage, onPageChange) {
   container.append(paginationEl);
 }
 
-function renderItems(block, items, page, listContainer) {
-  listContainer.innerHTML = '';
-  const start = (page - 1) * ITEMS_PER_PAGE;
-  const pageItems = items.slice(start, start + ITEMS_PER_PAGE);
+function createAccordionItem(item, listContainer) {
+  const accordionItem = document.createElement('div');
+  accordionItem.className = 'quick-facts-item';
 
-  pageItems.forEach((item) => {
-    const accordionItem = document.createElement('div');
-    accordionItem.className = 'quick-facts-item';
+  const trigger = document.createElement('button');
+  trigger.className = 'quick-facts-trigger';
+  trigger.setAttribute('aria-expanded', 'false');
+  trigger.setAttribute('type', 'button');
 
-    const trigger = document.createElement('button');
-    trigger.className = 'quick-facts-trigger';
-    trigger.setAttribute('aria-expanded', 'false');
-    trigger.setAttribute('type', 'button');
+  const titleSpan = document.createElement('span');
+  titleSpan.className = 'quick-facts-trigger-title';
+  titleSpan.textContent = item.title;
 
-    const titleSpan = document.createElement('span');
-    titleSpan.className = 'quick-facts-trigger-title';
-    titleSpan.textContent = item.title;
+  const icon = document.createElement('span');
+  icon.className = 'quick-facts-trigger-icon';
 
-    const icon = document.createElement('span');
-    icon.className = 'quick-facts-trigger-icon';
+  trigger.append(titleSpan, icon);
 
-    trigger.append(titleSpan, icon);
+  const panel = document.createElement('div');
+  panel.className = 'quick-facts-panel';
+  panel.setAttribute('hidden', '');
 
-    const panel = document.createElement('div');
-    panel.className = 'quick-facts-panel';
-    panel.setAttribute('hidden', '');
+  const panelContent = document.createElement('div');
+  panelContent.className = 'quick-facts-panel-content';
+  if (item.content) {
+    panelContent.innerHTML = item.content;
+  }
 
-    // Close button inside panel
-    const closeBtn = document.createElement('button');
-    closeBtn.className = 'quick-facts-close';
-    closeBtn.setAttribute('type', 'button');
-    closeBtn.setAttribute('aria-label', 'Close');
-    closeBtn.textContent = '\u00D7';
+  if (item.link) {
+    const learnMore = document.createElement('a');
+    learnMore.className = 'quick-facts-learn-more';
+    learnMore.href = item.link;
+    learnMore.innerHTML = 'Learn More <span class="quick-facts-arrow">&rsaquo;</span>';
+    panelContent.append(learnMore);
+  }
 
-    // Panel content
-    const panelContent = document.createElement('div');
-    panelContent.className = 'quick-facts-panel-content';
-    if (item.content) {
-      panelContent.innerHTML = item.content;
+  panel.append(panelContent);
+
+  const toggleItem = (open) => {
+    if (open) {
+      listContainer.querySelectorAll('.quick-facts-item').forEach((otherItem) => {
+        const otherTrigger = otherItem.querySelector('.quick-facts-trigger');
+        const otherPanel = otherItem.querySelector('.quick-facts-panel');
+        if (otherTrigger && otherPanel && otherItem !== accordionItem) {
+          otherTrigger.setAttribute('aria-expanded', 'false');
+          otherPanel.setAttribute('hidden', '');
+        }
+      });
+      trigger.setAttribute('aria-expanded', 'true');
+      panel.removeAttribute('hidden');
+    } else {
+      trigger.setAttribute('aria-expanded', 'false');
+      panel.setAttribute('hidden', '');
     }
+  };
 
-    // Learn More link
-    if (item.link) {
-      const learnMore = document.createElement('a');
-      learnMore.className = 'quick-facts-learn-more';
-      learnMore.href = item.link;
-      learnMore.textContent = 'Learn More';
-      const arrow = document.createElement('span');
-      arrow.className = 'quick-facts-arrow';
-      arrow.textContent = ' \u203A';
-      learnMore.append(arrow);
-      panelContent.append(learnMore);
-    }
-
-    panel.append(closeBtn, panelContent);
-
-    // Toggle behavior - only one open at a time
-    const toggleItem = (open) => {
-      if (open) {
-        // Close all other items
-        listContainer.querySelectorAll('.quick-facts-item').forEach((otherItem) => {
-          const otherTrigger = otherItem.querySelector('.quick-facts-trigger');
-          const otherPanel = otherItem.querySelector('.quick-facts-panel');
-          if (otherTrigger && otherPanel && otherItem !== accordionItem) {
-            otherTrigger.setAttribute('aria-expanded', 'false');
-            otherPanel.setAttribute('hidden', '');
-          }
-        });
-        trigger.setAttribute('aria-expanded', 'true');
-        panel.removeAttribute('hidden');
-      } else {
-        trigger.setAttribute('aria-expanded', 'false');
-        panel.setAttribute('hidden', '');
-      }
-    };
-
-    trigger.addEventListener('click', () => {
-      const expanded = trigger.getAttribute('aria-expanded') === 'true';
-      toggleItem(!expanded);
-    });
-
-    closeBtn.addEventListener('click', () => {
-      toggleItem(false);
-    });
-
-    accordionItem.append(trigger, panel);
-    listContainer.append(accordionItem);
+  trigger.addEventListener('click', () => {
+    const expanded = trigger.getAttribute('aria-expanded') === 'true';
+    toggleItem(!expanded);
   });
+
+  accordionItem.append(trigger, panel);
+  return accordionItem;
 }
 
 export default function decorate(block) {
   const rows = [...block.children];
+  const listContainer = document.createElement('div');
+  listContainer.className = 'quick-facts-list';
 
-  // All rows are items (title | link | content)
-  const items = rows.map((row) => {
+  // Parse items from rows and build accordion elements
+  const items = [];
+  rows.forEach((row) => {
     const cols = [...row.children];
-    return {
+    const item = {
       title: cols[0] ? cols[0].textContent.trim() : '',
       link: cols[1] ? cols[1].textContent.trim() : '',
       content: cols[2] ? cols[2].innerHTML : '',
     };
+
+    const accordionItem = createAccordionItem(item, listContainer);
+    moveInstrumentation(row, accordionItem);
+    item.el = accordionItem;
+    items.push(item);
+    row.replaceWith(accordionItem);
   });
 
-  block.innerHTML = '';
+  // Move all accordion items into the list container
+  items.forEach((item) => listContainer.append(item.el));
 
   // Sort dropdown
   const sortWrapper = document.createElement('div');
@@ -166,12 +150,7 @@ export default function decorate(block) {
   optZA.value = 'za';
   optZA.textContent = 'Z-A';
   sortSelect.append(optAZ, optZA);
-
   sortWrapper.append(sortLabel, sortSelect);
-
-  // List container
-  const listContainer = document.createElement('div');
-  listContainer.className = 'quick-facts-list';
 
   // Pagination container
   const paginationContainer = document.createElement('div');
@@ -181,8 +160,18 @@ export default function decorate(block) {
   let sortedItems = sortItems(items, 'az');
 
   const render = () => {
+    // Reorder DOM
+    sortedItems.forEach((item) => listContainer.append(item.el));
+
+    // Show/hide based on page
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    sortedItems.forEach((item, i) => {
+      item.el.style.display = (i >= start && i < end) ? '' : 'none';
+    });
+
+    // Render pagination
     paginationContainer.innerHTML = '';
-    renderItems(block, sortedItems, currentPage, listContainer);
     renderPagination(paginationContainer, sortedItems.length, currentPage, (page) => {
       currentPage = page;
       render();
@@ -195,6 +184,7 @@ export default function decorate(block) {
     render();
   });
 
+  block.innerHTML = '';
   block.append(sortWrapper, listContainer, paginationContainer);
   render();
 }
