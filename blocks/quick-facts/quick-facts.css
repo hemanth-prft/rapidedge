@@ -166,9 +166,10 @@
 
 /* ==========================================================================
    Section-level grid layout
-   EDS wraps each block in a .quick-facts-wrapper div and adds
-   .quick-facts-container to the section. Blocks 1–4 sit 2-per-row;
-   block 5 onwards (class added by JS) sit 3-per-row.
+   In UE authoring, AEM serves blocks as direct children of .section
+   (no wrapper div). In preview/published, EDS JS wraps each block in
+   .quick-facts-wrapper. Both structures are handled below.
+   aem.js adds .quick-facts-container to the section in both cases.
    ========================================================================== */
 .quick-facts-container {
   display: flex;
@@ -177,18 +178,20 @@
   align-items: stretch;
 }
 
-/* 2 per row — default for blocks 1 to 4 */
+/* 2 per row — UE: block is direct child; preview: wrapper is direct child */
+.quick-facts-container > .quick-facts,
 .quick-facts-container > .quick-facts-wrapper {
   flex: 0 0 calc(50% - 8px);
   min-width: 0;
 }
 
-/* 3 per row — blocks 5 and beyond (JS toggles .quick-facts-wrapper-3col) */
-.quick-facts-container > .quick-facts-wrapper.quick-facts-wrapper-3col {
+/* 3 per row — blocks 5 and beyond (JS toggles .quick-facts-col-3) */
+.quick-facts-container > .quick-facts.quick-facts-col-3,
+.quick-facts-container > .quick-facts-wrapper.quick-facts-col-3 {
   flex: 0 0 calc(33.333% - 10.667px);
 }
 
 /* Headings and other default content in the same section stay full-width */
-.quick-facts-container > :not(.quick-facts-wrapper) {
+.quick-facts-container > :not(.quick-facts, .quick-facts-wrapper) {
   flex-basis: 100%;
 }

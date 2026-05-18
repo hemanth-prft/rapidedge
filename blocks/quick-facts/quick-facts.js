@@ -103,9 +103,15 @@ export default function decorate(block) {
   const section = block.closest('.section');
   if (section) {
     const updateLayout = () => {
+      // In UE authoring the block is a direct child of .section (no wrapper).
+      // In preview/published EDS wraps each block in .quick-facts-wrapper first.
+      // Detect which structure is present and target the right flex item.
       const wrappers = [...section.querySelectorAll(':scope > .quick-facts-wrapper')];
-      wrappers.forEach((wrapper, i) => {
-        wrapper.classList.toggle('quick-facts-wrapper-3col', i >= 4);
+      const items = wrappers.length > 0
+        ? wrappers
+        : [...section.querySelectorAll(':scope > .quick-facts')];
+      items.forEach((item, i) => {
+        item.classList.toggle('quick-facts-col-3', i >= 4);
       });
     };
     if (section.dataset.sectionStatus === 'loaded') {
