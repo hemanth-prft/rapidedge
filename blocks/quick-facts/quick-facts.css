@@ -87,7 +87,7 @@
    Reference: mercy.net lower grid — stat / line / blue subtext, no background
    ========================================================================== */
 .quick-facts .quick-facts-card-small {
-  color: #1a1a1a;
+  color: #055372;
   padding: 12px 0 16px;
 }
 
@@ -105,14 +105,14 @@
 
 .quick-facts .quick-facts-card-small .quick-facts-border {
   border: none;
-  border-top: 1px solid #d0d0d0;
+  border-top: 1px solid #c0dce6;
   margin: 0 0 8px;
 }
 
 .quick-facts .quick-facts-card-small .quick-facts-subtext {
   font-size: 13px;
   line-height: 1.4;
-  color: #1074bc;
+  color: #0a8ab6;
   margin-top: 0;
   margin-bottom: 0;
 }
