@@ -44,6 +44,16 @@
   font-size: 14px;
   line-height: 20px;
   color: #086489;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.quick-facts .quick-facts-card-large .quick-facts-subtext {
+  font-size: 14px;
+  line-height: 20px;
+  color: #086489;
   margin-bottom: auto;
   overflow: hidden;
   display: -webkit-box;
@@ -65,21 +75,7 @@
 }
 
 .quick-facts .quick-facts-card-large .quick-facts-border {
-  border: none;
-  border-top: 1px solid #c0dce6;
-  width: 100%;
-  margin: 10px 0;
-}
-
-.quick-facts .quick-facts-card-large .quick-facts-subtext {
-  font-size: 13px;
-  line-height: 19px;
-  color: #509db7;
-  margin-bottom: 0;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  display: none;
 }
 
 /* ==========================================================================

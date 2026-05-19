@@ -34,6 +34,14 @@ export default function decorate(block) {
       card.append(span);
     }
 
+    // Large card: label text (subtext) sits above the statistic; no HR
+    if (cardType === 'large' && subtext) {
+      const p = document.createElement('p');
+      p.className = 'quick-facts-subtext';
+      p.textContent = subtext;
+      card.append(p);
+    }
+
     const statisticDiv = document.createElement('div');
     statisticDiv.className = cardType === 'large'
       ? 'quick-facts-statistic quick-facts-statistic-responsive'
@@ -41,15 +49,18 @@ export default function decorate(block) {
     statisticDiv.textContent = statistic;
     card.append(statisticDiv);
 
-    const hr = document.createElement('hr');
-    hr.className = 'quick-facts-border';
-    card.append(hr);
+    // Small card: HR + subtext below the statistic
+    if (cardType === 'small') {
+      const hr = document.createElement('hr');
+      hr.className = 'quick-facts-border';
+      card.append(hr);
 
-    if (subtext) {
-      const p = document.createElement('p');
-      p.className = 'quick-facts-subtext';
-      p.textContent = subtext;
-      card.append(p);
+      if (subtext) {
+        const p = document.createElement('p');
+        p.className = 'quick-facts-subtext';
+        p.textContent = subtext;
+        card.append(p);
+      }
     }
 
     return card;
