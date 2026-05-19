@@ -9,7 +9,8 @@
 }
 
 .quick-facts .quick-facts-item {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ==========================================================================
@@ -20,17 +21,17 @@
   color: #055372;
   border: 2px solid rgb(192 220 230 / 50%);
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgb(0 83 114 / 8%);
-  padding: 18px;
+  padding: 19px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
   overflow: hidden;
+  flex: 1;
 }
 
 .quick-facts .quick-facts-card-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 9px;
 }
 
@@ -76,7 +77,7 @@
   color: #055372;
   text-align: right;
   width: 100%;
-  margin-top: 8px;
+  margin-top: auto;
   margin-bottom: 0;
   overflow: hidden;
   display: -webkit-box;
@@ -194,7 +195,7 @@
 /* Grid wrapper — mobile-first: single column */
 .qf-grid {
   display: grid;
-  align-items: start;
+  align-items: stretch;
   gap: 20px;
   grid-template-columns: 1fr;
   margin-bottom: 29px;
@@ -209,6 +210,14 @@
 @media (width >= 992px) {
   .qf-grid-4col {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 4th card spans 2 rows in column 4 (7-card layout: 3+1span+3) */
+@media (width >= 992px) {
+  .qf-grid-4col > .qf-col4-span2 {
+    grid-column: 4;
+    grid-row: 1 / span 2;
   }
 }
 

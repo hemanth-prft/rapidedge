@@ -173,12 +173,20 @@ export default function decorate(block) {
       const largeItems = items.filter((el) => !isSmall(el));
       const smallItems = items.filter((el) => isSmall(el));
 
-      // Large cards: single 4-col grid — row separation is handled via
-      // margin-bottom on grid items (increases row track height).
+      // Clean up span class from any previous layout run.
+      largeItems.forEach((el) => el.classList.remove('qf-col4-span2'));
+
+      // Large cards: single 4-col grid.
+      // When count is 3k+1 (e.g. 7 = 3+1span+3), the 4th card (index 3) spans
+      // 2 rows in column 4, filling the right column across both content rows.
       if (largeItems.length > 0) {
+        const spanLayout = largeItems.length > 3 && (largeItems.length - 1) % 3 === 0;
         const grid4 = document.createElement('div');
         grid4.className = 'qf-grid qf-grid-4col';
-        largeItems.forEach((el) => grid4.append(el));
+        largeItems.forEach((el, i) => {
+          if (spanLayout && i === 3) el.classList.add('qf-col4-span2');
+          grid4.append(el);
+        });
         container.append(grid4);
       }
 
