@@ -60,8 +60,9 @@
 }
 
 .quick-facts .quick-facts-card-large .quick-facts-subtext {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 16px;
+  line-height: 130%;
+  font-weight: 600;
   color: #0a8ab6;
   margin-bottom: 8px;
   overflow: hidden;
@@ -213,9 +214,12 @@
   }
 }
 
-/* 4th card spans 2 rows in column 4 (7-card layout: 3+1span+3) */
+/* 4th card spans 2 rows in column 4 (7-card layout: 3+1span+3).
+   Pure CSS: :nth-child(4):nth-last-child(4) matches item 4 only when
+   there are exactly 7 children — no JS class needed. */
 @media (width >= 992px) {
-  .qf-grid-4col > .qf-col4-span2 {
+  .qf-grid-4col > .qf-col4-span2,
+  .qf-grid-4col > :nth-child(4):nth-last-child(4) {
     grid-column: 4;
     grid-row: 1 / span 2;
   }
