@@ -67,6 +67,7 @@
 .quick-facts .quick-facts-card-large .quick-facts-subtext {
   font-size: 16px;
   line-height: 130%;
+  margin-bottom: 0px;
   font-weight: 600;
   color: #0a8ab6;
   margin-bottom: 8px;
@@ -227,6 +228,7 @@
 @media (width >= 992px) {
   .qf-grid-4col {
     grid-template-columns: repeat(4, 1fr);
+    align-items: start;
   }
 }
 
@@ -284,10 +286,13 @@
     margin-bottom: 0;
   }
 
-  /* Grid item: overflow:hidden stops it from pushing row tracks taller than col 1-3 items */
+  /* Grid item: align-self:stretch overrides the grid's align-items:start so the spanning
+     card still fills the combined height of both rows; overflow:hidden prevents it from
+     inflating the row tracks beyond what cols 1-3 naturally need. */
   .qf-grid-4col > .qf-col4-span2 {
     display: flex;
     flex-direction: column;
+    align-self: stretch;
     overflow: hidden;
   }
 
@@ -313,5 +318,13 @@
     min-height: 0;
     display: flex;
     flex-direction: column;
+  }
+
+  /* Spanning card has more vertical space — allow statistic to show more lines;
+     font-size and line-height differ from regular large cards per Figma spec. */
+  .qf-grid-4col > .qf-col4-span2 .quick-facts-statistic {
+    font-size: 28px;
+    line-height: 1;
+    -webkit-line-clamp: 5;
   }
 }
