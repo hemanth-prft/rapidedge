@@ -16,7 +16,9 @@
       "cards",
       "columns",
       "fragment",
-      "accordion"
+      "accordion",
+      "quick-facts",
+      "hospital-search"
     ]
   },
   {
