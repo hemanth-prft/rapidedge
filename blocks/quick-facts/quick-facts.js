@@ -16,22 +16,30 @@ export default function decorate(block) {
     const card = document.createElement('div');
     card.className = `quick-facts-card quick-facts-card-${cardType}`;
 
-    if (cardType === 'large' && iconSrc) {
-      const iconWrapper = document.createElement('div');
-      iconWrapper.className = 'quick-facts-icon';
-      const img = document.createElement('img');
-      img.src = iconSrc;
-      img.alt = eyeBrow || '';
-      img.loading = 'lazy';
-      iconWrapper.append(img);
-      card.append(iconWrapper);
-    }
+    if (cardType === 'large' && (iconSrc || eyeBrow)) {
+      // Header row: icon on left, eyeBrow text on right (matches reference design)
+      const header = document.createElement('div');
+      header.className = 'quick-facts-card-header';
 
-    if (eyeBrow) {
-      const span = document.createElement('span');
-      span.className = 'quick-facts-eye-brow';
-      span.textContent = eyeBrow;
-      card.append(span);
+      if (iconSrc) {
+        const iconWrapper = document.createElement('div');
+        iconWrapper.className = 'quick-facts-icon';
+        const img = document.createElement('img');
+        img.src = iconSrc;
+        img.alt = eyeBrow || '';
+        img.loading = 'lazy';
+        iconWrapper.append(img);
+        header.append(iconWrapper);
+      }
+
+      if (eyeBrow) {
+        const span = document.createElement('span');
+        span.className = 'quick-facts-eye-brow';
+        span.textContent = eyeBrow;
+        header.append(span);
+      }
+
+      card.append(header);
     }
 
     // Large card: label text (subtext) sits above the statistic; no HR
@@ -165,21 +173,21 @@ export default function decorate(block) {
       const largeItems = items.filter((el) => !isSmall(el));
       const smallItems = items.filter((el) => isSmall(el));
 
-      // Large cards: each row of 4 gets its own grid so .qf-grid + .qf-grid margin-top
-      // provides reliable row separation regardless of CSS Grid row-gap rendering.
-      for (let i = 0; i < largeItems.length; i += 4) {
+      // Large cards: single 4-col grid — row separation is handled via
+      // margin-bottom on grid items (increases row track height).
+      if (largeItems.length > 0) {
         const grid4 = document.createElement('div');
         grid4.className = 'qf-grid qf-grid-4col';
-        largeItems.slice(i, i + 4).forEach((el) => grid4.append(el));
+        largeItems.forEach((el) => grid4.append(el));
         container.append(grid4);
       }
 
-      // Small cards: each row of 3 gets its own grid for the same reason.
-      for (let i = 0; i < smallItems.length; i += 3) {
-        const grid3Small = document.createElement('div');
-        grid3Small.className = 'qf-grid qf-grid-3col';
-        smallItems.slice(i, i + 3).forEach((el) => grid3Small.append(el));
-        container.append(grid3Small);
+      // Small cards: single 3-col grid.
+      if (smallItems.length > 0) {
+        const grid3 = document.createElement('div');
+        grid3.className = 'qf-grid qf-grid-3col';
+        smallItems.forEach((el) => grid3.append(el));
+        container.append(grid3);
       }
     };
 
