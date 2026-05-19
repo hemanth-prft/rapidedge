@@ -50,8 +50,10 @@
 }
 
 .quick-facts .quick-facts-card-large .quick-facts-eye-brow {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
   color: #0a8ab6;
   overflow: hidden;
   display: -webkit-box;
@@ -72,9 +74,10 @@
 }
 
 .quick-facts .quick-facts-card-large .quick-facts-statistic {
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 34px;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.32;
+  letter-spacing: -0.02em;
   color: #055372;
   text-align: right;
   width: 100%;
@@ -249,4 +252,52 @@
 .qf-grid > .quick-facts-wrapper > .quick-facts {
   height: auto;
   margin-bottom: 20px;
+}
+
+/* Spanning card (col 4, rows 1–2): propagate grid-area height down to the card.
+   Each level is converted to a flex column with flex:1 + min-height:0 so the
+   card fills the combined height of both rows without inflating the row tracks. */
+@media (width >= 992px) {
+  /* Remove item margins in the 4-col grid — the grid gap: 20px handles row spacing.
+     Without this, each row track is inflated by 20px (wrapper margin-bottom), so the
+     spanning card's grid area is taller than the combined visual height of rows 1+2. */
+  .qf-grid-4col > .quick-facts-wrapper,
+  .qf-grid-4col > .quick-facts {
+    margin-bottom: 0;
+  }
+
+  .qf-grid-4col > .quick-facts-wrapper > .quick-facts {
+    margin-bottom: 0;
+  }
+
+  /* Grid item: overflow:hidden stops it from pushing row tracks taller than col 1-3 items */
+  .qf-grid-4col > .qf-col4-span2 {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* .quick-facts block (inside wrapper in preview, or IS the wrapper in UE) */
+  .qf-grid-4col > .qf-col4-span2 .quick-facts {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Override the base display:grid on the list to a flex column fill */
+  .qf-grid-4col > .qf-col4-span2 .quick-facts-list {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Single list item stretches to fill the list */
+  .qf-grid-4col > .qf-col4-span2 .quick-facts-item {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
 }
