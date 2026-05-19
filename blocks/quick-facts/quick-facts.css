@@ -16,36 +16,48 @@
    Large card variant
    ========================================================================== */
 .quick-facts .quick-facts-card-large {
-  background-color: #5b5377;
-  color: #fff;
-  min-height: 183px;
-  padding: 42px 45px;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100%;
+}
+
+.quick-facts .quick-facts-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.quick-facts .quick-facts-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .quick-facts .quick-facts-card-large .quick-facts-eye-brow {
   font-size: 14px;
   line-height: 20px;
-  text-transform: uppercase;
-  text-align: center;
-  margin-bottom: 10px;
-  padding: 0 20px;
+  color: #555;
+  margin-bottom: auto;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
 .quick-facts .quick-facts-card-large .quick-facts-statistic {
   font-size: 28px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 34px;
-  text-align: center;
-  margin-bottom: 10px;
+  color: #1a1a1a;
+  margin-top: 8px;
+  margin-bottom: 0;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -54,17 +66,15 @@
 
 .quick-facts .quick-facts-card-large .quick-facts-border {
   border: none;
-  border-top: 2px solid #d07000;
-  width: 41px;
-  margin: 0;
-  align-self: center;
+  border-top: 1px solid #e0e0e0;
+  width: 100%;
+  margin: 10px 0;
 }
 
 .quick-facts .quick-facts-card-large .quick-facts-subtext {
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  margin-top: 10px;
+  font-size: 13px;
+  line-height: 19px;
+  color: #555;
   margin-bottom: 0;
   overflow: hidden;
   display: -webkit-box;
@@ -167,8 +177,8 @@
 /* ==========================================================================
    Section-level grid layout
    JS splits blocks into two CSS Grid containers:
-     .qf-grid.qf-grid-2col  — first 4 blocks  → 2 columns on desktop
-     .qf-grid.qf-grid-3col  — blocks 5+        → 3 columns on desktop
+     .qf-grid.qf-grid-4col  — large cards  → 4 columns on desktop
+     .qf-grid.qf-grid-3col  — small cards  → 3 columns on desktop
    ========================================================================== */
 
 /* Section container: normal block flow; layout lives on the .qf-grid children */
@@ -189,14 +199,14 @@
   margin-top: 20px;
 }
 
-/* Desktop: 2-column grid (first 4 blocks) */
+/* Desktop: 4-column grid (large cards) */
 @media (width >= 992px) {
-  .qf-grid-2col {
-    grid-template-columns: repeat(2, 1fr);
+  .qf-grid-4col {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
-/* Desktop: 3-column grid (blocks 5+) */
+/* Desktop: 3-column grid (small cards) */
 @media (width >= 992px) {
   .qf-grid-3col {
     grid-template-columns: repeat(3, 1fr);
@@ -206,4 +216,10 @@
 /* Reset the padding that main > .section > div injects on wrapper divs */
 .qf-grid > .quick-facts-wrapper {
   padding: 0;
+}
+
+/* Ensure full card height inside grid wrappers */
+.qf-grid > .quick-facts,
+.qf-grid > .quick-facts-wrapper > .quick-facts {
+  height: 100%;
 }

@@ -7,14 +7,25 @@ export default function decorate(block) {
   ul.className = 'quick-facts-list';
 
   // UE model-based authoring stores each field as its own single-column row:
-  //   rows[0] = variant, rows[1] = eyeBrow, rows[2] = statistic, rows[3] = subtext
+  //   rows[0] = icon, rows[1] = eyeBrow, rows[2] = statistic, rows[3] = subtext
   // Document authoring stores each card as one row with multiple columns.
   // Detect UE mode: 2+ rows where every row has at most 1 column.
   const isUEModel = rows.length >= 2 && rows.every((r) => r.children.length <= 1);
 
-  const buildCard = (cardType, eyeBrow, statistic, subtext) => {
+  const buildCard = (cardType, iconSrc, eyeBrow, statistic, subtext) => {
     const card = document.createElement('div');
     card.className = `quick-facts-card quick-facts-card-${cardType}`;
+
+    if (cardType === 'large' && iconSrc) {
+      const iconWrapper = document.createElement('div');
+      iconWrapper.className = 'quick-facts-icon';
+      const img = document.createElement('img');
+      img.src = iconSrc;
+      img.alt = eyeBrow || '';
+      img.loading = 'lazy';
+      iconWrapper.append(img);
+      card.append(iconWrapper);
+    }
 
     if (eyeBrow) {
       const span = document.createElement('span');
@@ -45,13 +56,24 @@ export default function decorate(block) {
   };
 
   if (isUEModel) {
-    // All rows are fields of a single card: [variant, eyeBrow, statistic, subtext]
+    // All rows are fields of a single card: [icon, eyeBrow, statistic, subtext]
     const getText = (row) => (row && row.children[0] ? row.children[0].textContent.trim() : '');
-    const variantVal = getText(rows[0]);
-    const cardType = (variantVal === 'small' || variantVal === 'large') ? variantVal : defaultCardType;
+    const getIconSrc = (row) => {
+      if (!row || !row.children[0]) return '';
+      const img = row.children[0].querySelector('img');
+      if (img) return img.src;
+      const a = row.children[0].querySelector('a');
+      return a ? a.href : '';
+    };
     const li = document.createElement('li');
     li.className = 'quick-facts-item';
-    li.append(buildCard(cardType, getText(rows[1]), getText(rows[2]), getText(rows[3])));
+    li.append(buildCard(
+      defaultCardType,
+      getIconSrc(rows[0]),
+      getText(rows[1]),
+      getText(rows[2]),
+      getText(rows[3]),
+    ));
     ul.append(li);
   } else {
     // Document authoring: each row is one card with 1–4 columns
@@ -64,13 +86,13 @@ export default function decorate(block) {
       li.className = 'quick-facts-item';
       moveInstrumentation(row, li);
 
-      let cardTypeDiv = null;
+      let iconDiv = null;
       let eyeBrowDiv = null;
       let statisticDiv = null;
       let subtextDiv = null;
 
       if (cols.length >= 4) {
-        [cardTypeDiv, eyeBrowDiv, statisticDiv, subtextDiv] = cols;
+        [iconDiv, eyeBrowDiv, statisticDiv, subtextDiv] = cols;
       } else if (cols.length === 3) {
         [eyeBrowDiv, statisticDiv, subtextDiv] = cols;
       } else if (cols.length === 2) {
@@ -79,14 +101,15 @@ export default function decorate(block) {
         [statisticDiv] = cols;
       }
 
-      let cardType = defaultCardType;
-      if (cardTypeDiv) {
-        const val = cardTypeDiv.textContent.trim().toLowerCase();
-        if (val === 'small' || val === 'large') cardType = val;
+      let iconSrc = '';
+      if (iconDiv) {
+        const img = iconDiv.querySelector('img');
+        iconSrc = img ? img.src : '';
       }
 
       li.append(buildCard(
-        cardType,
+        defaultCardType,
+        iconSrc,
         eyeBrowDiv ? eyeBrowDiv.textContent.trim() : '',
         statisticDiv ? statisticDiv.textContent.trim() : '',
         subtextDiv ? subtextDiv.textContent.trim() : '',
@@ -98,10 +121,10 @@ export default function decorate(block) {
   block.replaceChildren(ul);
 
   // Section-level grid layout.
-  // After all blocks in the section finish loading, JS groups them into two
-  // CSS Grid containers:
-  //   .qf-grid.qf-grid-2col  — first 4 blocks  (2 columns on desktop)
-  //   .qf-grid.qf-grid-3col  — blocks 5+        (3 columns on desktop)
+  // After all blocks in the section finish loading, JS groups them into CSS Grid
+  // containers based on card type:
+  //   .qf-grid.qf-grid-4col  — large cards (4 columns on desktop)
+  //   .qf-grid.qf-grid-3col  — small cards (3 columns on desktop)
   //
   // Structure detection:
   //   Published / preview → .section > .quick-facts-wrapper > .quick-facts
@@ -123,25 +146,17 @@ export default function decorate(block) {
       const items = [...container.querySelectorAll(selector)];
       if (items.length === 0) return;
 
-      // Split by card variant: small cards are always 3-per-row;
-      // large cards follow 2-col (first 4) → 3-col (5th+) rule.
+      // Split by card variant: large cards → 4-col, small cards → 3-col.
       const isSmall = (el) => !!el.querySelector('.quick-facts-card-small');
       const largeItems = items.filter((el) => !isSmall(el));
       const smallItems = items.filter((el) => isSmall(el));
 
-      // Large cards: first 4 → 2-col grid, remainder → 3-col grid
+      // Large cards: single 4-col grid
       if (largeItems.length > 0) {
-        const grid2 = document.createElement('div');
-        grid2.className = 'qf-grid qf-grid-2col';
-        largeItems.slice(0, 4).forEach((el) => grid2.append(el));
-        container.append(grid2);
-
-        if (largeItems.length > 4) {
-          const grid3Large = document.createElement('div');
-          grid3Large.className = 'qf-grid qf-grid-3col';
-          largeItems.slice(4).forEach((el) => grid3Large.append(el));
-          container.append(grid3Large);
-        }
+        const grid4 = document.createElement('div');
+        grid4.className = 'qf-grid qf-grid-4col';
+        largeItems.forEach((el) => grid4.append(el));
+        container.append(grid4);
       }
 
       // Small cards: always 3-col grid
