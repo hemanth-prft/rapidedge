@@ -6,7 +6,7 @@
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/franklin/components/block/v1/block",
+            "resourceType": "core/franklin/components/block",
             "template": {
               "name": "Mercy Image",
               "model": "mercy-image"
@@ -22,17 +22,31 @@
       "fields": [
         {
           "component": "reference",
-          "valueType": "string",
           "name": "image",
           "label": "Image",
+          "valueType": "string",
           "multi": false
         },
         {
           "component": "text",
+          "name": "width",
+          "label": "Width (e.g. 870px, 100%)",
           "valueType": "string",
-          "name": "imageAlt",
-          "label": "Alt Text",
-          "value": ""
+          "value": "870px"
+        },
+        {
+          "component": "text",
+          "name": "height",
+          "label": "Height (e.g. 330px, auto)",
+          "valueType": "string",
+          "value": "330px"
+        },
+        {
+          "component": "text",
+          "name": "borderRadius",
+          "label": "Border Radius (e.g. 16px)",
+          "valueType": "string",
+          "value": "16px"
         }
       ]
     }

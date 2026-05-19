@@ -300,17 +300,31 @@
     "fields": [
       {
         "component": "reference",
-        "valueType": "string",
         "name": "image",
         "label": "Image",
+        "valueType": "string",
         "multi": false
       },
       {
         "component": "text",
+        "name": "width",
+        "label": "Width (e.g. 870px, 100%)",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Alt Text",
-        "value": ""
+        "value": "870px"
+      },
+      {
+        "component": "text",
+        "name": "height",
+        "label": "Height (e.g. 330px, auto)",
+        "valueType": "string",
+        "value": "330px"
+      },
+      {
+        "component": "text",
+        "name": "borderRadius",
+        "label": "Border Radius (e.g. 16px)",
+        "valueType": "string",
+        "value": "16px"
       }
     ]
   },
@@ -322,6 +336,27 @@
         "name": "content",
         "label": "Content",
         "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "fontSize",
+        "label": "Font Size (e.g. 12px)",
+        "valueType": "string",
+        "value": "12px"
+      },
+      {
+        "component": "text",
+        "name": "fontWeight",
+        "label": "Font Weight (e.g. 500)",
+        "valueType": "string",
+        "value": "500"
+      },
+      {
+        "component": "text",
+        "name": "styles",
+        "label": "Styles: lineHeight, letterSpacing, color, alignment (comma separated)",
+        "valueType": "string",
+        "value": "100%, -5%, #9BABB1, left"
       }
     ]
   },
