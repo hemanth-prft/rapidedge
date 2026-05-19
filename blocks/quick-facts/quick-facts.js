@@ -165,19 +165,20 @@ export default function decorate(block) {
       const largeItems = items.filter((el) => !isSmall(el));
       const smallItems = items.filter((el) => isSmall(el));
 
-      // Large cards: single 4-col grid
-      if (largeItems.length > 0) {
+      // Large cards: each row of 4 gets its own grid so .qf-grid + .qf-grid margin-top
+      // provides reliable row separation regardless of CSS Grid row-gap rendering.
+      for (let i = 0; i < largeItems.length; i += 4) {
         const grid4 = document.createElement('div');
         grid4.className = 'qf-grid qf-grid-4col';
-        largeItems.forEach((el) => grid4.append(el));
+        largeItems.slice(i, i + 4).forEach((el) => grid4.append(el));
         container.append(grid4);
       }
 
-      // Small cards: always 3-col grid
-      if (smallItems.length > 0) {
+      // Small cards: each row of 3 gets its own grid for the same reason.
+      for (let i = 0; i < smallItems.length; i += 3) {
         const grid3Small = document.createElement('div');
         grid3Small.className = 'qf-grid qf-grid-3col';
-        smallItems.forEach((el) => grid3Small.append(el));
+        smallItems.slice(i, i + 3).forEach((el) => grid3Small.append(el));
         container.append(grid3Small);
       }
     };
