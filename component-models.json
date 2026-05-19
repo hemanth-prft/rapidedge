@@ -320,5 +320,31 @@
         "value": ""
       }
     ]
+  },
+  {
+    "id": "richtext",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "content",
+        "label": "Content",
+        "valueType": "string",
+        "rpiCharacterLimit": 50000,
+        "customProperties": [
+          {
+            "name": "toolbar",
+            "value": "bold,italic,underline,strikethrough,subscript,superscript,|,link,anchor,|,heading#h1,heading#h2,heading#h3,heading#h4,heading#h5,heading#h6,paragraph,|,ordered-list,unordered-list,indent,outdent,|,blockquote,code,|,align#left,align#center,align#right,align#justify,|,table,image,horizontal-rule,|,source-editing,|,undo,redo,remove-format,special-characters,find-and-replace"
+          },
+          {
+            "name": "allowedElements",
+            "value": "h1,h2,h3,h4,h5,h6,p,a,strong,em,u,s,sub,sup,ol,ul,li,blockquote,pre,code,table,thead,tbody,tr,th,td,img,hr,br,div,span,figure,figcaption,iframe,video,audio,source"
+          },
+          {
+            "name": "sourceEditing",
+            "value": "true"
+          }
+        ]
+      }
+    ]
   }
 ]
