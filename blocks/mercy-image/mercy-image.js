@@ -5,7 +5,7 @@ export default function decorate(block) {
   if (!row) return;
 
   const cols = [...row.children];
-  const imgEl = cols[0]?.querySelector('picture') || cols[0]?.querySelector('img');
+  const cell = cols[0];
   const width = cols[1]?.textContent?.trim() || '870px';
   const height = cols[2]?.textContent?.trim() || '330px';
   const borderRadius = cols[3]?.textContent?.trim() || '16px';
@@ -14,15 +14,37 @@ export default function decorate(block) {
   wrapper.className = 'mercy-image-wrapper';
   moveInstrumentation(row, wrapper);
 
-  if (imgEl) {
-    const img = imgEl.tagName === 'IMG' ? imgEl : imgEl.querySelector('img');
+  const picture = cell?.querySelector('picture');
+  if (picture) {
+    const img = picture.querySelector('img');
     if (img) {
       img.style.width = width;
       img.style.height = height;
       img.style.borderRadius = borderRadius;
       img.style.objectFit = 'cover';
     }
-    wrapper.append(imgEl);
+    wrapper.append(picture);
+  } else {
+    const img = cell?.querySelector('img');
+    if (img) {
+      img.style.width = width;
+      img.style.height = height;
+      img.style.borderRadius = borderRadius;
+      img.style.objectFit = 'cover';
+      wrapper.append(img);
+    } else {
+      const src = cell?.textContent?.trim();
+      if (src) {
+        const newImg = document.createElement('img');
+        newImg.src = src;
+        newImg.alt = '';
+        newImg.style.width = width;
+        newImg.style.height = height;
+        newImg.style.borderRadius = borderRadius;
+        newImg.style.objectFit = 'cover';
+        wrapper.append(newImg);
+      }
+    }
   }
 
   block.textContent = '';
