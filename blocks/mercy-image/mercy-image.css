@@ -1,0 +1,19 @@
+.mercy-image-wrapper {
+  max-width: 870px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.mercy-image-img {
+  display: block;
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+@media (width <= 768px) {
+  .mercy-image-img {
+    height: auto;
+  }
+}

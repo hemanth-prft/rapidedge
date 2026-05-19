@@ -55,7 +55,9 @@
         "quick-facts",
         "hospital-search",
         "richtext",
-        "mercy-title"
+        "mercy-title",
+        "mercy-text",
+        "mercy-image"
       ]
     }
   ]
