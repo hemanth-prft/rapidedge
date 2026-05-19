@@ -216,6 +216,67 @@
     ]
   },
   {
+    "id": "news-media-contact-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "fullName",
+        "label": "Full Name",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "email",
+        "label": "Email",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "phone",
+        "label": "Phone",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "cell",
+        "label": "Cell",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "page",
+        "label": "Page",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "twitter",
+        "label": "Twitter Handle",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "twitterLink",
+        "label": "Twitter Username (for link)",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "quick-facts",
     "fields": [
       {

@@ -16,7 +16,8 @@
       "cards",
       "columns",
       "fragment",
-      "quick-facts"
+      "quick-facts",
+      "news-media-contact"
     ]
   },
   {
@@ -38,6 +39,12 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "news-media-contact",
+    "components": [
+      "news-media-contact-item"
     ]
   }
 ]

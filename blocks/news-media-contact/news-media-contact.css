@@ -1,0 +1,98 @@
+/* news-media-contact block */
+
+.news-media-contact .news-media-contact-card {
+  display: flex;
+  align-items: flex-start;
+  background-color: #fff;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
+  padding: 20px 20px 18px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.news-media-contact .news-media-contact-swiper-container {
+  overflow: hidden;
+  padding: 2px;
+}
+
+.news-media-contact .news-media-contact-swiper-container > .news-media-contact-card + .news-media-contact-card {
+  margin-top: 16px;
+}
+
+.news-media-contact .news-media-contact-img-container {
+  flex-shrink: 0;
+  padding-right: 26px;
+}
+
+.news-media-contact .news-media-contact-img {
+  display: block;
+  height: 110px;
+  width: 110px;
+  object-fit: cover;
+  object-position: top;
+  margin-bottom: 18px;
+}
+
+.news-media-contact .news-media-contact-full-name {
+  margin: 0 0 8px;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.news-media-contact .news-media-contact-info {
+  text-align: left;
+}
+
+.news-media-contact .news-media-contact-email {
+  font-weight: 600;
+  margin-bottom: 11px;
+  word-break: break-all;
+}
+
+.news-media-contact .news-media-contact-label {
+  font-weight: 600;
+}
+
+.news-media-contact .news-media-contact-view-more-link {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.news-media-contact .news-media-contact-view-more-link::after {
+  background-image: url('/icons/right-chevron.svg');
+  background-repeat: no-repeat;
+  content: '';
+  display: inline-block;
+  position: relative;
+  top: 1px;
+  background-size: contain;
+  height: 10px;
+  width: 7px;
+  margin-left: 4px;
+}
+
+.news-media-contact .news-media-contact-quick-facts {
+  display: block;
+  width: 100%;
+  font-size: 12px;
+  background-color: var(--light-color, #f8f8f8);
+  font-weight: 600;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.news-media-contact .news-media-contact-quick-facts a {
+  font-weight: 400;
+}
+
+.news-media-contact .news-media-contact-quick-facts-with-margin {
+  margin-top: 16px;
+}
+
+.news-media-contact .news-media-contact-see-all {
+  margin-top: 8px;
+}
