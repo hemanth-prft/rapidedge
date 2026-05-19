@@ -1,18 +1,21 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  const row = block.children[0];
-  if (!row) return;
+  const rows = [...block.children];
+  if (!rows.length) return;
 
-  const cols = [...row.children];
-  const name = cols[0]?.textContent?.trim() || '';
-  const email = cols[1]?.textContent?.trim() || '';
-  const phone = cols[2]?.textContent?.trim() || '';
-  const ctaLink = cols[3]?.querySelector('a')?.href || cols[3]?.textContent?.trim() || '';
+  // Fields come as separate rows: name, email, phone, ctaLink
+  const getName = (r) => r?.children[0]?.textContent?.trim() || '';
+  const name = getName(rows[0]);
+  const email = rows[1] ? rows[1].children[0]?.textContent?.trim() : '';
+  const phone = rows[2] ? rows[2].children[0]?.textContent?.trim() : '';
+  const ctaLink = rows[3]
+    ? (rows[3].children[0]?.querySelector('a')?.href || rows[3].children[0]?.textContent?.trim())
+    : '';
 
   const wrapper = document.createElement('div');
   wrapper.className = 'media-contact-card';
-  moveInstrumentation(row, wrapper);
+  moveInstrumentation(rows[0], wrapper);
 
   const title = document.createElement('h3');
   title.className = 'media-contact-title';
