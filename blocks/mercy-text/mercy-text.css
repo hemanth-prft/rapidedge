@@ -1,3 +1,9 @@
 .mercy-text-content {
   font-family: Inter, sans-serif;
+  font-style: normal;
+  padding: 12px 0 40px;
+}
+
+.mercy-text-content p {
+  margin: 0;
 }
