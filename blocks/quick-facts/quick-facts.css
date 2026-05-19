@@ -84,41 +84,36 @@
 
 /* ==========================================================================
    Small card variant
+   Reference: mercy.net lower grid — stat / line / blue subtext, no background
    ========================================================================== */
 .quick-facts .quick-facts-card-small {
-  color: #000;
-  position: relative;
-  margin-top: 8px;
+  color: #1a1a1a;
+  padding: 12px 0 16px;
 }
 
+/* Eyebrow is not shown in the small variant */
 .quick-facts .quick-facts-card-small .quick-facts-eye-brow {
-  font-size: 12px;
-  line-height: 18px;
-  text-transform: uppercase;
-  position: absolute;
-  top: -10px;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
+  display: none;
 }
 
 .quick-facts .quick-facts-card-small .quick-facts-statistic {
-  font-size: 21px;
-  font-weight: 600;
-  line-height: 27px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 8px;
 }
 
 .quick-facts .quick-facts-card-small .quick-facts-border {
   border: none;
-  border-top: 1px solid #979797;
-  margin: 0;
+  border-top: 1px solid #d0d0d0;
+  margin: 0 0 8px;
 }
 
 .quick-facts .quick-facts-card-small .quick-facts-subtext {
-  font-size: 16px;
-  line-height: 22px;
-  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #1074bc;
+  margin-top: 0;
   margin-bottom: 0;
 }
 
@@ -142,22 +137,17 @@
 }
 
 /* ==========================================================================
-   Responsive breakpoints — small card
-   Mirrors AEM SCSS media-breakpoint-up(sm) at 576px
+   Responsive breakpoints — small card statistic
    ========================================================================== */
-@media (width >= 576px) {
-  .quick-facts .quick-facts-card-small {
-    min-height: 70px;
+@media (width >= 768px) {
+  .quick-facts .quick-facts-card-small .quick-facts-statistic {
+    font-size: 28px;
   }
+}
 
-  .quick-facts .quick-facts-card-small .quick-facts-eye-brow {
-    font-size: 10px;
-    line-height: 16px;
-  }
-
-  .quick-facts .quick-facts-card-small .quick-facts-subtext {
-    font-size: 14px;
-    line-height: 20px;
+@media (width >= 992px) {
+  .quick-facts .quick-facts-card-small .quick-facts-statistic {
+    font-size: 32px;
   }
 }
 
