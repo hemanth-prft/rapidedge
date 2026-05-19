@@ -173,8 +173,12 @@ export default function decorate(block) {
       const largeItems = items.filter((el) => !isSmall(el));
       const smallItems = items.filter((el) => isSmall(el));
 
-      // Clean up span class from any previous layout run.
-      largeItems.forEach((el) => el.classList.remove('qf-col4-span2'));
+      // Clean up span class and inline styles from any previous layout run.
+      largeItems.forEach((el) => {
+        el.classList.remove('qf-col4-span2');
+        el.style.removeProperty('grid-column');
+        el.style.removeProperty('grid-row');
+      });
 
       // Large cards: single 4-col grid.
       // When count is 3k+1 and at least 7 (e.g. 7 = 3+1span+3), the 4th card
@@ -188,6 +192,25 @@ export default function decorate(block) {
           grid4.append(el);
         });
         container.append(grid4);
+
+        // Apply span via inline styles + matchMedia for reliable responsive behaviour.
+        if (spanLayout) {
+          const spanItem = grid4.querySelector('.qf-col4-span2');
+          if (spanItem) {
+            const mq = window.matchMedia('(min-width: 992px)');
+            const applySpanStyle = () => {
+              if (mq.matches) {
+                spanItem.style.gridColumn = '4';
+                spanItem.style.gridRow = '1 / span 2';
+              } else {
+                spanItem.style.removeProperty('grid-column');
+                spanItem.style.removeProperty('grid-row');
+              }
+            };
+            applySpanStyle();
+            mq.addEventListener('change', applySpanStyle);
+          }
+        }
       }
 
       // Small cards: single 3-col grid.
