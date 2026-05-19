@@ -45,7 +45,7 @@
           "name": "styles",
           "label": "Styles: lineHeight, letterSpacing, color, alignment (comma separated)",
           "valueType": "string",
-          "value": "100%, -5%, #9BABB1, left"
+          "value": "normal, -0.6px, #9BABB1, left"
         }
       ]
     }
