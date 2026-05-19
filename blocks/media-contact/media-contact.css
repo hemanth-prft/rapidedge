@@ -1,4 +1,4 @@
-.media-contact-card {
+.media-contact {
   border: 2px solid #b8dce8;
   border-radius: 12px;
   padding: 24px 32px;
@@ -24,32 +24,39 @@
   background-size: contain;
 }
 
-.media-contact-name {
+.media-contact > div {
+  display: flex;
+  align-items: center;
+}
+
+.media-contact .media-contact-name {
   font-family: Inter, sans-serif;
   font-size: 1rem;
   font-weight: 700;
   color: #1a1a1a;
-  margin: 0 0 8px;
+  margin-bottom: 8px;
 }
 
-.media-contact-info {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-bottom: 16px;
+.media-contact .media-contact-email,
+.media-contact .media-contact-phone {
+  margin-right: 24px;
 }
 
-.media-contact-email,
-.media-contact-phone {
+.media-contact .media-contact-email a,
+.media-contact .media-contact-phone a {
   font-family: Inter, sans-serif;
   font-size: 0.875rem;
   color: #0e7394;
   text-decoration: none;
 }
 
-.media-contact-email:hover,
-.media-contact-phone:hover {
+.media-contact .media-contact-email a:hover,
+.media-contact .media-contact-phone a:hover {
   text-decoration: underline;
+}
+
+.media-contact .media-contact-cta-wrap {
+  margin-top: 16px;
 }
 
 .media-contact-cta {
