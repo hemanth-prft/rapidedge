@@ -1,58 +1,63 @@
 .accordion-item {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
 }
 
 .accordion-trigger {
   width: 100%;
-  background-color: #0e5a81;
+  background-color: #fff;
   border: none;
   border-radius: 0;
   cursor: pointer;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 14px 20px;
+  padding: 18px 20px;
   font-size: 1.1rem;
-  font-weight: 600;
-  color: #fff;
+  font-weight: 700;
+  color: #000;
   text-align: left;
   margin: 0;
   text-decoration: none;
+  gap: 12px;
 }
 
 .accordion-trigger:hover,
 .accordion-trigger:focus,
 .accordion-trigger:active {
-  background-color: #0e5a81;
-  color: #fff;
+  background-color: #fff;
+  color: #000;
   outline: none;
   text-decoration: none;
 }
 
-.accordion-trigger::after {
+.accordion-trigger::before {
   content: '';
   display: inline-block;
   width: 10px;
   height: 10px;
-  border-right: 2px solid #fff;
-  border-top: 2px solid #fff;
-  transform: rotate(135deg);
+  border-right: 2.5px solid #2680a0;
+  border-bottom: 2.5px solid #2680a0;
+  transform: rotate(45deg);
   transition: transform 0.25s ease;
   flex-shrink: 0;
-  margin-left: 12px;
-  margin-bottom: 2px;
 }
 
-.accordion-trigger[aria-expanded='true']::after {
-  transform: rotate(-45deg);
-  margin-bottom: -4px;
+.accordion-trigger[aria-expanded='true']::before {
+  transform: rotate(-135deg);
+}
+
+.accordion-trigger::after {
+  display: none;
 }
 
 .accordion-panel {
-  padding: 20px 24px;
+  padding: 0 24px 24px;
   background-color: #fff;
-  border: 1px solid #dadada;
-  border-top: none;
+  border-top: 3px solid #2680a0;
+  margin: 0 20px;
 }
 
 .accordion-panel[hidden] {
@@ -62,7 +67,7 @@
 .accordion-panel ul,
 .accordion-panel ol {
   padding-left: 20px;
-  margin: 0;
+  margin: 12px 0 0;
 }
 
 .accordion-panel li {

@@ -46,7 +46,20 @@ export default async function decorate(block) {
   });
 
   // Decorate and load any nested blocks inside columns
-  const nestedBlocks = [...block.querySelectorAll('.block')];
+  // Nested blocks from AEM delivery have a class (block name) but not '.block' yet
+  const nestedBlocks = [];
+  rows.forEach((row) => {
+    [...row.children].forEach((col) => {
+      [...col.children].forEach((child) => {
+        if (child.tagName === 'DIV' && child.className
+          && !child.classList.contains('button-container')
+          && !child.classList.contains('columns-img-col')
+          && child.querySelector(':scope > div')) {
+          nestedBlocks.push(child);
+        }
+      });
+    });
+  });
   nestedBlocks.forEach((nestedBlock) => decorateBlock(nestedBlock));
   await Promise.all(nestedBlocks.map((nestedBlock) => loadBlock(nestedBlock)));
 }
