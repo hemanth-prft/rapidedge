@@ -177,10 +177,10 @@ export default function decorate(block) {
       largeItems.forEach((el) => el.classList.remove('qf-col4-span2'));
 
       // Large cards: single 4-col grid.
-      // When count is 3k+1 (e.g. 7 = 3+1span+3), the 4th card (index 3) spans
-      // 2 rows in column 4, filling the right column across both content rows.
+      // When count is 3k+1 and at least 7 (e.g. 7 = 3+1span+3), the 4th card
+      // (index 3) spans 2 rows in column 4, filling the right column across both rows.
       if (largeItems.length > 0) {
-        const spanLayout = largeItems.length > 3 && (largeItems.length - 1) % 3 === 0;
+        const spanLayout = largeItems.length >= 7 && (largeItems.length - 1) % 3 === 0;
         const grid4 = document.createElement('div');
         grid4.className = 'qf-grid qf-grid-4col';
         largeItems.forEach((el, i) => {
