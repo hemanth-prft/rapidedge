@@ -65,14 +65,17 @@ export default function decorate(block) {
       const a = row.children[0].querySelector('a');
       return a ? a.href : '';
     };
+    // rows[0]=variant, rows[1]=icon, rows[2]=eyeBrow, rows[3]=statistic, rows[4]=subtext
+    const variantVal = getText(rows[0]);
+    const cardType = (variantVal === 'small' || variantVal === 'large') ? variantVal : defaultCardType;
     const li = document.createElement('li');
     li.className = 'quick-facts-item';
     li.append(buildCard(
-      defaultCardType,
-      getIconSrc(rows[0]),
-      getText(rows[1]),
+      cardType,
+      getIconSrc(rows[1]),
       getText(rows[2]),
       getText(rows[3]),
+      getText(rows[4]),
     ));
     ul.append(li);
   } else {
