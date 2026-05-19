@@ -37,12 +37,17 @@ function parseDocumentRow(imageCell, infoCell) {
 }
 
 function parseUERow(cells) {
-  const [imgCell, nameCell, emailCell, phoneCell] = cells;
+  const [imgCell, nameCell, emailCell, phoneCell,
+    cellCell, pageCell, twitterHandleCell, twitterUsernameCell] = cells;
   return {
     imageEl: imgCell?.querySelector('picture') || imgCell?.querySelector('img'),
     fullName: nameCell?.textContent?.trim() || '',
     email: emailCell?.textContent?.trim() || '',
     phone: phoneCell?.textContent?.trim() || '',
+    cell: cellCell?.textContent?.trim() || '',
+    page: pageCell?.textContent?.trim() || '',
+    twitter: twitterHandleCell?.textContent?.trim() || '',
+    twitterLink: twitterUsernameCell?.textContent?.trim() || '',
   };
 }
 

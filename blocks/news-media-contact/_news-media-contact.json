@@ -76,6 +76,34 @@
           "name": "phone",
           "label": "Phone",
           "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "cell",
+          "label": "Cell",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "page",
+          "label": "Page",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "twitterHandle",
+          "label": "Twitter Handle",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "twitterUsername",
+          "label": "Twitter Username",
+          "value": ""
         }
       ]
     }
