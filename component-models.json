@@ -245,34 +245,6 @@
         "name": "phone",
         "label": "Phone",
         "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "cell",
-        "label": "Cell",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "page",
-        "label": "Page",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "twitter",
-        "label": "Twitter Handle",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "twitterLink",
-        "label": "Twitter Username (for link)",
-        "value": ""
       }
     ]
   },

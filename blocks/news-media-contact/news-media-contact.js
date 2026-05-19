@@ -37,19 +37,12 @@ function parseDocumentRow(imageCell, infoCell) {
 }
 
 function parseUERow(cells) {
-  const [
-    imgCell, nameCell, emailCell, phoneCell,
-    cellCell, pageCell, twitterCell, twitterLinkCell,
-  ] = cells;
+  const [imgCell, nameCell, emailCell, phoneCell] = cells;
   return {
     imageEl: imgCell?.querySelector('picture') || imgCell?.querySelector('img'),
     fullName: nameCell?.textContent?.trim() || '',
     email: emailCell?.textContent?.trim() || '',
     phone: phoneCell?.textContent?.trim() || '',
-    cell: cellCell?.textContent?.trim() || '',
-    page: pageCell?.textContent?.trim() || '',
-    twitter: twitterCell?.textContent?.trim() || '',
-    twitterLink: twitterLinkCell?.textContent?.trim() || '',
   };
 }
 
@@ -189,8 +182,8 @@ export default function decorate(block) {
       }
     }
 
-    // UE-mode: each contact item renders as one row with 8 field-columns
-    if (cells.length >= 7) {
+    // UE-mode: each contact item renders as one row with 4 field-columns
+    if (cells.length >= 3) {
       const contact = parseUERow(cells);
       if (contact.fullName) contactItems.push(contact);
     }
