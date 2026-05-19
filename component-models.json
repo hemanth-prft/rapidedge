@@ -216,6 +216,19 @@
     ]
   },
   {
+    "id": "news-media-contact",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "seeAllLink",
+        "label": "See All Media Contacts URL",
+        "description": "Optional. Relative or absolute URL for the 'See All Media Contacts' link.",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "news-media-contact-item",
     "fields": [
       {

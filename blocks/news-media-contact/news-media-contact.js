@@ -153,12 +153,24 @@ export default function decorate(block) {
     const cells = [...row.children];
     if (!cells.length) return;
 
-    // Single-cell row: see-all link (one anchor, no picture)
+    // Single-cell row
     if (cells.length === 1) {
       const cell = cells[0];
       const anchor = cell.querySelector('a');
+      const text = cell.textContent.trim();
+
+      // Document authoring: row with an anchor link (no image)
       if (anchor && !cell.querySelector('picture') && !cell.querySelector('img')) {
         seeAllLink = anchor;
+        return;
+      }
+
+      // UE authoring: seeAllLink text field renders as a plain-text URL
+      if (text && (text.startsWith('/') || text.startsWith('http')) && !cell.querySelector('picture')) {
+        const a = document.createElement('a');
+        a.href = text;
+        a.textContent = 'See All Media Contacts';
+        seeAllLink = a;
       }
       return;
     }
