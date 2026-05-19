@@ -178,11 +178,12 @@
   display: grid;
   gap: 20px;
   grid-template-columns: 1fr;
+  margin-bottom: 20px;
 }
 
-/* Vertical space between the 2-col and 3-col grids */
-.qf-grid + .qf-grid {
-  margin-top: 20px;
+/* Vertical space between consecutive grids; ~ handles UE-injected elements between grids */
+.qf-grid ~ .qf-grid {
+  margin-top: 0;
 }
 
 /* Desktop: 4-column grid (large cards) */
