@@ -9,7 +9,7 @@
 }
 
 .quick-facts .quick-facts-item {
-  height: 100%;
+  display: block;
 }
 
 /* ==========================================================================
@@ -24,7 +24,6 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
 .quick-facts .quick-facts-icon {
@@ -54,7 +53,7 @@
   font-size: 14px;
   line-height: 20px;
   color: #086489;
-  margin-bottom: auto;
+  margin-bottom: 8px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -176,6 +175,7 @@
 /* Grid wrapper — mobile-first: single column */
 .qf-grid {
   display: grid;
+  align-items: start;
   gap: 20px;
   grid-template-columns: 1fr;
   margin-bottom: 20px;
@@ -205,8 +205,8 @@
   padding: 0;
 }
 
-/* Ensure full card height inside grid wrappers */
+/* Cards size to their own content; no height stretching to avoid overflow */
 .qf-grid > .quick-facts,
 .qf-grid > .quick-facts-wrapper > .quick-facts {
-  height: 100%;
+  height: auto;
 }
