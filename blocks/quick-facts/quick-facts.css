@@ -35,9 +35,11 @@
 }
 
 .quick-facts .quick-facts-icon {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   flex-shrink: 0;
+  overflow: hidden;
+  background-color: #fff;
 }
 
 .quick-facts .quick-facts-icon img {
@@ -195,7 +197,7 @@
   align-items: start;
   gap: 20px;
   grid-template-columns: 1fr;
-  margin-bottom: 20px;
+  margin-bottom: 29px;
 }
 
 /* Vertical space between consecutive grids; ~ handles UE-injected elements between grids */
@@ -215,6 +217,12 @@
   .qf-grid-3col {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+/* Small card grid: 24px gap between cards and rows */
+.qf-grid-3col {
+  gap: 24px;
+  margin-bottom: 24px;
 }
 
 /* Reset the padding that main > .section > div injects on wrapper divs */
