@@ -16,8 +16,7 @@
       "cards",
       "columns",
       "fragment",
-      "accordion",
-      "quick-facts"
+      "accordion"
     ]
   },
   {
@@ -50,6 +49,12 @@
       "hero",
       "fragment",
       "quick-facts"
+    ]
+  },
+  {
+    "id": "hospital-search",
+    "components": [
+      "hospital-search-item"
     ]
   },
   {

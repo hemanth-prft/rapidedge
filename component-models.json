@@ -279,6 +279,23 @@
     ]
   },
   {
+    "id": "hospital-search-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Hospital Name"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link URL"
+      }
+    ]
+  },
+  {
     "id": "quick-facts-item",
     "fields": [
       {
