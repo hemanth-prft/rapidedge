@@ -2,7 +2,7 @@ import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 /**
- * Marks the last paragraph in the brand section that contains icon/image links as social links.
+ * Marks the paragraph in the brand section that contains icon/image links as social links.
  * @param {Element} brandSection
  */
 function decorateBrandSection(brandSection) {
