@@ -216,6 +216,105 @@
     ]
   },
   {
+    "id": "mercy-title",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title Text",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "tag",
+        "label": "Heading Level",
+        "valueType": "string",
+        "value": "h2",
+        "options": [
+          {
+            "name": "H1",
+            "value": "h1"
+          },
+          {
+            "name": "H2",
+            "value": "h2"
+          },
+          {
+            "name": "H3",
+            "value": "h3"
+          },
+          {
+            "name": "H4",
+            "value": "h4"
+          },
+          {
+            "name": "H5",
+            "value": "h5"
+          },
+          {
+            "name": "H6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "style",
+        "label": "Title Style",
+        "valueType": "string",
+        "value": "large-teal",
+        "description": "Predefined styles: size, weight, color",
+        "options": [
+          {
+            "name": "Large Teal (44px / 800 / #0E7394)",
+            "value": "large-teal"
+          },
+          {
+            "name": "Medium Teal (32px / 700 / #0E7394)",
+            "value": "medium-teal"
+          },
+          {
+            "name": "Small Teal (24px / 700 / #0E7394)",
+            "value": "small-teal"
+          },
+          {
+            "name": "Large Dark (44px / 800 / #000)",
+            "value": "large-dark"
+          },
+          {
+            "name": "Medium Dark (32px / 700 / #000)",
+            "value": "medium-dark"
+          },
+          {
+            "name": "Small Dark (24px / 700 / #000)",
+            "value": "small-dark"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "alignment",
+        "label": "Text Alignment",
+        "valueType": "string",
+        "value": "left",
+        "options": [
+          {
+            "name": "Left",
+            "value": "left"
+          },
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Right",
+            "value": "right"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "news-media-contact",
     "fields": [
       {
@@ -337,6 +436,60 @@
         "name": "subtext",
         "label": "Subtext",
         "value": ""
+      }
+    ]
+  },
+  {
+    "id": "split-banner",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "heading",
+        "value": "",
+        "label": "Heading",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "value": "",
+        "label": "Description",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctaLabel",
+        "label": "CTA Label",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctaLink",
+        "label": "CTA Link",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "ctaIcon",
+        "label": "CTA Icon",
+        "multi": false
       }
     ]
   }
