@@ -32,4 +32,10 @@ export default function decorate(block) {
   nav.append(ol);
   block.textContent = '';
   block.append(nav);
+
+  // Remove section margin so breadcrumb sits flush under header
+  const section = block.closest('.section');
+  if (section) {
+    section.style.margin = '0';
+  }
 }

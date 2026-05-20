@@ -1,15 +1,22 @@
-.mercy-breadcrumb {
+/* break out of section constraints */
+.mercy-breadcrumb-wrapper {
+  background-color: #edf6f9;
+  max-width: none !important;
+  padding: 0 !important;
+}
+
+.mercy-breadcrumb-wrapper .mercy-breadcrumb {
   display: flex;
   width: 100%;
   max-width: 1440px;
   height: 32px;
-  padding: 0 32px 0 60px;
+  padding: 0 12px 0 60px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 10px;
-  background-color: #edf6f9;
   margin: 0 auto;
+  background-color: #edf6f9;
+  gap: 10px;
 }
 
 .mercy-breadcrumb .breadcrumb-nav ol {
@@ -25,7 +32,7 @@
 .mercy-breadcrumb .breadcrumb-nav ol li {
   color: #055372;
   font-family: var(--typography-small-typeface, Inter);
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: 130%;
@@ -41,7 +48,7 @@
   color: #055372;
   text-decoration: none;
   font-family: var(--typography-small-typeface, Inter);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 130%;
 }
