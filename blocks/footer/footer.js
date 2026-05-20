@@ -4,7 +4,7 @@ export default async function decorate(block) {
       <div class="footer-top">
         <div class="footer-brand">
           <a href="/" class="footer-logo" aria-label="Mercy Home">
-            <span class="footer-logo-text">Mercy</span><span class="footer-logo-cross">&#8224;</span>
+            <img src="/blocks/footer/reversedLogo.png" alt="Mercy" class="footer-logo-img">
           </a>
           <address class="footer-address">
             1200 N. One Mile Road<br>

@@ -29,25 +29,14 @@ footer .footer-brand {
 
 footer .footer-logo {
   text-decoration: none;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 2px;
+  display: inline-block;
 }
 
-footer .footer-logo-text {
-  font-size: 30px;
-  font-weight: 700;
-  font-style: italic;
-  color: #fff;
-  line-height: 1;
-}
-
-footer .footer-logo-cross {
-  color: #e8392a;
-  font-size: 26px;
-  font-style: normal;
-  line-height: 1;
-  vertical-align: super;
+footer .footer-logo-img {
+  display: block;
+  width: auto;
+  max-width: 160px;
+  height: auto;
 }
 
 footer .footer-address {
@@ -137,13 +126,14 @@ footer .footer-nav-col {
 footer .footer-divider {
   border: none;
   border-top: 1px solid rgb(255 255 255 / 30%);
-  margin: 32px 0 32px 326px;
+  margin: 32px 0 32px 316px;
 }
 
 /* ── Languages ── */
 footer .footer-languages {
   margin-bottom: 28px;
-  padding-left: 326px;
+  padding-left: 316px;
+  padding-right: 269px;
   line-height: 2.2;
   font-size: 13px;
 }
@@ -154,9 +144,8 @@ footer .footer-sep {
 
 /* ── Legal bar ── */
 footer .footer-legal {
-  border-top: 1px solid rgb(255 255 255 / 30%);
   padding-top: 20px;
-  padding-left: 326px;
+  margin-left: 326px;
   font-size: 13px;
 }
 
@@ -191,9 +180,10 @@ footer .footer-legal {
 
   footer .footer-languages {
     padding-left: 0;
+    padding-right: 0;
   }
 
   footer .footer-legal {
-    padding-left: 0;
+    margin-left: 0;
   }
 }
