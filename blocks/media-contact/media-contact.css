@@ -1,7 +1,7 @@
 .media-contact-card {
   border: 1.5px solid #b8dce8;
   border-radius: 12px;
-  padding: 20px 28px;
+  padding: 24px;
 }
 
 .media-contact-title {
@@ -16,8 +16,9 @@
   color: #055372;
   margin: 0 0 12px;
 }
-.media-contact-wrapper{
-  padding: 24px 24px 32px 24px !important;
+
+.media-contact {
+  padding: 37px 0;
 }
 
 .media-contact-icon::before {
