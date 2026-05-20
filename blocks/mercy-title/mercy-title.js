@@ -1,19 +1,20 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
+import { readBlockConfig } from '../../scripts/aem.js';
 
 export default function decorate(block) {
-  const row = block.children[0];
-  if (!row) return;
+  const config = readBlockConfig(block);
 
-  const cols = [...row.children];
-  const titleText = cols[0]?.textContent?.trim() || '';
-  const tag = cols[1]?.textContent?.trim()?.toLowerCase() || 'h2';
-  const style = cols[2]?.textContent?.trim() || 'large-teal';
-  const alignment = cols[3]?.textContent?.trim() || 'left';
+  const titleText = config.title || config['title-text'] || '';
+  const tag = (config.tag || 'h2').toLowerCase();
+  const style = config.style || 'large-teal';
+  const alignment = config.alignment || 'left';
 
   const heading = document.createElement(tag.match(/^h[1-6]$/) ? tag : 'h2');
   heading.className = `mercy-title-heading mercy-title-${style}`;
   heading.textContent = titleText;
-  moveInstrumentation(row, heading);
+
+  const row = block.children[0];
+  if (row) moveInstrumentation(row, heading);
 
   if (alignment && alignment !== 'left') {
     heading.style.textAlign = alignment;

@@ -16,6 +16,9 @@
   color: #055372;
   margin: 0 0 12px;
 }
+.media-contact-wrapper{
+  padding: 24px 24px 32px 24px !important;
+}
 
 .media-contact-icon::before {
   content: '';
