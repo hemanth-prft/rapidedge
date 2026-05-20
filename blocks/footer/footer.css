@@ -1,20 +1,224 @@
+/* ============================================
+   Footer – Mercy EDS
+   Background: #055372 | Text: white
+   ============================================ */
+
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  background-color: #055372;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+footer .footer-wrapper {
+  background-color: #055372;
+}
+
+footer .footer {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 48px 40px 0;
 }
 
 footer .footer p {
   margin: 0;
 }
 
+/* ── Top row: brand + nav ─────────────────── */
+
+footer .footer-top-row {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(255 255 255 / 30%);
+}
+
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+  footer .footer-top-row {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 64px;
+  }
+}
+
+/* ── Brand section ────────────────────────── */
+
+footer .footer-brand {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+footer .footer-brand img {
+  max-width: 130px;
+  height: auto;
+  display: block;
+}
+
+footer .footer-brand .default-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+footer .footer-brand p {
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+footer .footer-brand a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer .footer-brand a:hover {
+  text-decoration: underline;
+}
+
+/* Social icons row */
+footer .footer-brand .footer-social {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+footer .footer-brand .footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255 255 255 / 50%);
+  border-radius: 4px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+footer .footer-brand .footer-social a:hover {
+  background-color: rgba(255 255 255 / 15%);
+  border-color: #fff;
+  text-decoration: none;
+}
+
+footer .footer-brand .footer-social a img,
+footer .footer-brand .footer-social a .icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+/* ── Nav section ──────────────────────────── */
+
+footer .footer-nav {
+  flex: 1;
+}
+
+footer .footer-nav .default-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 40px;
+}
+
+footer .footer-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+footer .footer-nav li {
+  margin: 0;
+}
+
+footer .footer-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+footer .footer-nav a:hover {
+  text-decoration: underline;
+}
+
+/* If nav uses columns block */
+footer .footer-nav .columns > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 40px;
+}
+
+footer .footer-nav .columns > div > div {
+  min-width: 160px;
+}
+
+/* ── Language links ───────────────────────── */
+
+footer .footer-languages {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255 255 255 / 30%);
+}
+
+footer .footer-languages p,
+footer .footer-languages .default-content-wrapper p {
+  font-size: 13px;
+  color: rgba(255 255 255 / 80%);
+  line-height: 2.2;
+}
+
+footer .footer-languages a {
+  color: rgba(255 255 255 / 80%);
+  text-decoration: none;
+}
+
+footer .footer-languages a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ── Legal / copyright bar ────────────────── */
+
+footer .footer-legal {
+  padding: 16px 0 24px;
+}
+
+footer .footer-legal p,
+footer .footer-legal .default-content-wrapper p {
+  font-size: 13px;
+  color: rgba(255 255 255 / 80%);
+}
+
+footer .footer-legal a {
+  color: rgba(255 255 255 / 80%);
+  text-decoration: none;
+}
+
+footer .footer-legal a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ── Responsive tweaks ────────────────────── */
+
+@media (width <= 600px) {
+  footer .footer {
+    padding: 32px 20px 0;
+  }
+
+  footer .footer-top-row {
+    gap: 32px;
+  }
+
+  footer .footer-nav .default-content-wrapper {
+    gap: 20px 32px;
+  }
+
+  footer .footer-nav ul {
+    min-width: 140px;
   }
 }
