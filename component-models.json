@@ -333,6 +333,25 @@
     ]
   },
   {
+    "id": "mercy-breadcrumb-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link URL",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "mercy-image",
     "fields": [
       {

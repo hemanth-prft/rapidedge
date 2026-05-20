@@ -23,7 +23,8 @@
       "mercy-title",
       "mercy-text",
       "mercy-image",
-      "media-contact"
+      "media-contact",
+      "mercy-breadcrumb"
     ]
   },
   {
@@ -62,6 +63,12 @@
     "id": "hospital-search",
     "components": [
       "hospital-search-item"
+    ]
+  },
+  {
+    "id": "mercy-breadcrumb",
+    "components": [
+      "mercy-breadcrumb-item"
     ]
   },
   {

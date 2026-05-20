@@ -58,7 +58,8 @@
         "mercy-title",
         "mercy-text",
         "mercy-image",
-        "media-contact"
+        "media-contact",
+        "mercy-breadcrumb"
       ]
     }
   ]

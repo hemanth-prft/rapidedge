@@ -1,0 +1,42 @@
+.mercy-breadcrumb {
+  background-color: #edf6f9;
+  padding: 14px 48px;
+  border-bottom: 1.5px solid #b8dce8;
+}
+
+.mercy-breadcrumb .breadcrumb-nav ol {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.mercy-breadcrumb .breadcrumb-nav ol li {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #055372;
+  line-height: 1.4;
+}
+
+.mercy-breadcrumb .breadcrumb-nav ol li[data-separator]::after {
+  content: attr(data-separator);
+  margin: 0 8px;
+  color: #055372;
+}
+
+.mercy-breadcrumb .breadcrumb-nav ol li a {
+  color: #055372;
+  text-decoration: none;
+}
+
+.mercy-breadcrumb .breadcrumb-nav ol li a:hover {
+  text-decoration: underline;
+}
+
+.mercy-breadcrumb .breadcrumb-nav ol li:last-child {
+  font-weight: 500;
+}
