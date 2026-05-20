@@ -40,10 +40,17 @@
         },
         {
           "component": "text",
-          "name": "ctaLink",
-          "label": "CTA Button (text, link)",
+          "name": "cta_text",
+          "label": "CTA Button Text",
           "valueType": "string",
-          "value": "See All Media Contacts, #"
+          "value": "See All Media Contacts"
+        },
+        {
+          "component": "text",
+          "name": "cta_link",
+          "label": "CTA Button Link",
+          "valueType": "string",
+          "value": "#"
         }
       ]
     }

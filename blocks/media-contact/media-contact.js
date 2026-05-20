@@ -7,7 +7,8 @@ export default function decorate(block) {
   let contactName = '';
   let email = '';
   let phone = '';
-  let ctaRaw = '#';
+  let ctaText = 'See All Media Contacts';
+  let ctaLink = '#';
 
   if (rows.length === 1) {
     // Single row with multiple columns
@@ -15,18 +16,25 @@ export default function decorate(block) {
     contactName = cols[0]?.textContent?.trim() || '';
     email = cols[1]?.textContent?.trim() || '';
     phone = cols[2]?.textContent?.trim() || '';
-    ctaRaw = cols[3]?.textContent?.trim() || 'See All Media Contacts, #';
+    // cta_text and cta_link collapse into one cell with two <p> or text nodes
+    const ctaCell = cols[3];
+    if (ctaCell) {
+      const parts = [...ctaCell.children];
+      ctaText = parts[0]?.textContent?.trim() || ctaCell.textContent?.trim() || 'See All Media Contacts';
+      ctaLink = parts[1]?.textContent?.trim() || '#';
+    }
   } else {
     // Multiple rows, one field per row
     contactName = rows[0]?.children[0]?.textContent?.trim() || '';
     email = rows[1]?.children[0]?.textContent?.trim() || '';
     phone = rows[2]?.children[0]?.textContent?.trim() || '';
-    ctaRaw = rows[3]?.children[0]?.textContent?.trim() || 'See All Media Contacts, #';
+    const ctaCell = rows[3]?.children[0];
+    if (ctaCell) {
+      const parts = [...ctaCell.children];
+      ctaText = parts[0]?.textContent?.trim() || ctaCell.textContent?.trim() || 'See All Media Contacts';
+      ctaLink = parts[1]?.textContent?.trim() || '#';
+    }
   }
-
-  const ctaParts = ctaRaw.split(',');
-  const ctaText = ctaParts[0]?.trim() || 'See All Media Contacts';
-  const ctaLink = ctaParts.slice(1).join(',').trim() || '#';
 
   const card = document.createElement('div');
   card.className = 'media-contact-card';
