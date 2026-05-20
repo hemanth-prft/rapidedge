@@ -16,8 +16,14 @@ export default function decorate(block) {
     const card = document.createElement('div');
     card.className = `quick-facts-card quick-facts-card-${cardType}`;
 
-    if (cardType === 'large' && (iconSrc || eyeBrow)) {
-      // Header row: icon on left, eyeBrow text on right (matches reference design)
+    // When a large card has an icon, the label text lives next to the icon in the
+    // header row. Authors typically store the label in `subtext`; fall back to it
+    // when `eyeBrow` is empty so the header always shows icon + label on one line.
+    const headerLabel = eyeBrow || (cardType === 'large' && iconSrc ? subtext : '');
+    const subtextUsedAsLabel = cardType === 'large' && !!iconSrc && !eyeBrow && !!subtext;
+
+    if (cardType === 'large' && (iconSrc || headerLabel)) {
+      // Header row: icon on left, label text on right (matches reference design)
       const header = document.createElement('div');
       header.className = 'quick-facts-card-header';
 
@@ -26,24 +32,25 @@ export default function decorate(block) {
         iconWrapper.className = 'quick-facts-icon';
         const img = document.createElement('img');
         img.src = iconSrc;
-        img.alt = eyeBrow || '';
+        img.alt = headerLabel || '';
         img.loading = 'lazy';
         iconWrapper.append(img);
         header.append(iconWrapper);
       }
 
-      if (eyeBrow) {
+      if (headerLabel) {
         const span = document.createElement('span');
         span.className = 'quick-facts-eye-brow';
-        span.textContent = eyeBrow;
+        span.textContent = headerLabel;
         header.append(span);
       }
 
       card.append(header);
     }
 
-    // Large card: label text (subtext) sits above the statistic; no HR
-    if (cardType === 'large' && subtext) {
+    // Large card: label text (subtext) sits above the statistic; no HR.
+    // Skip if subtext was already used as the header label alongside the icon.
+    if (cardType === 'large' && subtext && !subtextUsedAsLabel) {
       const p = document.createElement('p');
       p.className = 'quick-facts-subtext';
       p.textContent = subtext;
