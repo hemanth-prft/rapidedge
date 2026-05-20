@@ -1,35 +1,3 @@
-import { moveInstrumentation } from '../../scripts/scripts.js';
-
-/**
- * Extracts the AEM content path from the block's data-aue-resource attribute.
- * @param {Element} block
- * @returns {string|null}
- */
-function getContentPath(block) {
-  const resource = block.getAttribute('data-aue-resource');
-  if (!resource) return null;
-  // urn:aemconnection:/content/...
-  const match = resource.match(/urn:aemconnection:(.+)/);
-  return match ? match[1] : null;
-}
-
-/**
- * Fetches block model properties from AEM's JSON endpoint.
- * @param {string} path
- * @returns {Promise<object|null>}
- */
-async function fetchBlockProperties(path) {
-  try {
-    const resp = await fetch(`${path}.json`);
-    if (resp.ok) {
-      return resp.json();
-    }
-  } catch (e) {
-    // silent fail
-  }
-  return null;
-}
-
 export default async function decorate(block) {
   let titleText = '';
   let tag = 'h2';
@@ -38,17 +6,15 @@ export default async function decorate(block) {
 
   const row = block.children[0];
   const cols = row ? [...row.children] : [];
-  // Check if table cells have actual authored content (not just empty wrappers)
-  const hasContent = cols.length > 0 && cols[0]?.textContent?.trim();
+
+  const hasContent = cols.some((col) => col.textContent.trim() !== '');
 
   if (hasContent) {
-    // Read from block table rows (standard EDS delivery)
-    titleText = cols[0]?.textContent?.trim() || '';
-    tag = cols[1]?.textContent?.trim()?.toLowerCase() || 'h2';
-    style = cols[2]?.textContent?.trim() || 'large-teal';
-    alignment = cols[3]?.textContent?.trim() || 'left';
+    titleText = cols[0]?.textContent.trim() || '';
+    tag = cols[1]?.textContent.trim().toLowerCase() || 'h2';
+    style = cols[2]?.textContent.trim() || 'large-teal';
+    alignment = cols[3]?.textContent.trim() || 'left';
   } else {
-    // Fetch properties from AEM resource (Universal Editor / xwalk)
     const contentPath = getContentPath(block);
     if (contentPath) {
       const props = await fetchBlockProperties(contentPath);
@@ -61,15 +27,18 @@ export default async function decorate(block) {
     }
   }
 
-  const heading = document.createElement(tag.match(/^h[1-6]$/) ? tag : 'h2');
+  style = style.replace(/\s+/g, '-').toLowerCase();
+
+  const heading = document.createElement(/^h[1-6]$/.test(tag) ? tag : 'h2');
   heading.className = `mercy-title-heading mercy-title-${style}`;
   heading.textContent = titleText;
+
   if (row) moveInstrumentation(row, heading);
 
-  if (alignment && alignment !== 'left') {
+  if (alignment !== 'left') {
     heading.style.textAlign = alignment;
   }
 
-  block.textContent = '';
+  block.innerHTML = '';
   block.append(heading);
 }
