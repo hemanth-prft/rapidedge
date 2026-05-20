@@ -5,7 +5,7 @@ export default function decorate(block) {
   if (!row) return;
 
   const cols = [...row.children];
-  const name = cols[0]?.textContent?.trim() || '';
+  const contactName = cols[0]?.textContent?.trim() || '';
   const email = cols[1]?.textContent?.trim() || '';
   const phone = cols[2]?.textContent?.trim() || '';
   const ctaLink = cols[3]?.textContent?.trim() || '#';
@@ -20,7 +20,7 @@ export default function decorate(block) {
 
   const nameEl = document.createElement('p');
   nameEl.className = 'media-contact-name';
-  nameEl.textContent = name;
+  nameEl.textContent = contactName;
 
   const infoEl = document.createElement('div');
   infoEl.className = 'media-contact-info';

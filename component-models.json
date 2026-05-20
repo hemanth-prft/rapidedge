@@ -300,7 +300,7 @@
     "fields": [
       {
         "component": "text",
-        "name": "name",
+        "name": "contactName",
         "label": "Contact Name",
         "valueType": "string"
       },
