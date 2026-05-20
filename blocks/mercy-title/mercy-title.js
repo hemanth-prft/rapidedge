@@ -1,3 +1,24 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
+function getContentPath(block) {
+  const resource = block.getAttribute('data-aue-resource');
+  if (!resource) return null;
+  const match = resource.match(/urn:aemconnection:(.+)/);
+  return match ? match[1] : null;
+}
+
+async function fetchBlockProperties(path) {
+  try {
+    const resp = await fetch(`${path}.json`);
+    if (resp.ok) {
+      return resp.json();
+    }
+  } catch (e) {
+    // silent fail
+  }
+  return null;
+}
+
 export default async function decorate(block) {
   let titleText = '';
   let tag = 'h2';
