@@ -24,7 +24,9 @@
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
               "name": "Breadcrumb Item",
-              "model": "mercy-breadcrumb-item"
+              "model": "mercy-breadcrumb-item",
+              "label": "Page",
+              "url": "/"
             }
           }
         }
@@ -38,14 +40,14 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "linkText",
+          "name": "label",
           "label": "Link Text",
           "value": ""
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "linkUrl",
+          "name": "url",
           "label": "Link URL",
           "value": ""
         }

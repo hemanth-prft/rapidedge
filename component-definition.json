@@ -256,7 +256,9 @@
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
                   "name": "Breadcrumb Item",
-                  "model": "mercy-breadcrumb-item"
+                  "model": "mercy-breadcrumb-item",
+                  "label": "Page",
+                  "url": "/"
                 }
               }
             }
