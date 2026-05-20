@@ -1,12 +1,17 @@
 /* split-banner block */
+.split-banner-wrapper {
+  background-color: #fcfeff;
+}
+
 .split-banner > div {
   display: flex;
   flex-direction: column;
   gap: 24px;
   padding: 40px 24px;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   align-items: center;
+  background-color: #fcfeff;
 }
 
 /* Image column */
@@ -24,6 +29,7 @@
   display: block;
   border-radius: 16px;
   object-fit: cover;
+  aspect-ratio: 104 / 53;
 }
 
 /* Content column */
@@ -33,18 +39,26 @@
 
 .split-banner-content h1,
 .split-banner-content h2,
-.split-banner-content h3 {
-  color: #0c3d6e;
-  font-size: var(--heading-font-size-xl);
-  font-weight: 700;
-  line-height: 1.2;
+.split-banner-content h3,
+.split-banner-content h4,
+.split-banner-content h5,
+.split-banner-content h6 {
+  color: #0e7394;
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -1.5px;
+  text-align: right;
   margin: 0 0 16px;
+  font-family: var(--heading-font-family);
 }
 
 .split-banner-content p {
-  color: #4a4a4a;
-  font-size: var(--body-font-size-s);
+  color: #526268;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 1.6;
+  letter-spacing: -0.5px;
   margin: 0 0 24px;
 }
 
@@ -56,20 +70,22 @@
 .split-banner-cta a {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  border: 2px solid #0c3d6e;
-  border-radius: 4px;
-  color: #0c3d6e;
-  font-size: var(--body-font-size-xs);
+  justify-content: center;
+  gap: 4px;
+  padding: 16px 16px 16px 24px;
+  border: 1px solid #055372;
+  border-radius: 8px;
+  color: #055372;
+  font-size: 18px;
   font-weight: 600;
+  letter-spacing: -0.9px;
   text-decoration: none;
-  background: transparent;
+  background: #fcfeff;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
 .split-banner-cta a:hover {
-  background: #0c3d6e;
+  background: #055372;
   color: #fff;
 }
 
@@ -81,8 +97,8 @@
 }
 
 .split-banner-cta a .split-banner-cta-icon {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
 }
 
@@ -95,12 +111,13 @@
   .split-banner > div {
     flex-direction: row;
     gap: 64px;
-    padding: 64px 32px;
+    padding: 64px 80px;
+    align-items: center;
   }
 
   .split-banner-image {
-    flex: 0 0 45%;
-    max-width: 45%;
+    flex: 0 0 600px;
+    max-width: 600px;
   }
 
   .split-banner-content {
@@ -109,7 +126,17 @@
 
   .split-banner-content h1,
   .split-banner-content h2,
-  .split-banner-content h3 {
-    font-size: var(--heading-font-size-xxl);
+  .split-banner-content h3,
+  .split-banner-content h4,
+  .split-banner-content h5,
+  .split-banner-content h6 {
+    font-size: 54px;
+    line-height: 52px;
+    letter-spacing: -2.7px;
+  }
+
+  .split-banner-content p {
+    font-size: 18px;
+    letter-spacing: -0.9px;
   }
 }
