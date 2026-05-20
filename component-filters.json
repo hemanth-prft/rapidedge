@@ -70,11 +70,5 @@
     "components": [
       "mercy-breadcrumb-item"
     ]
-  },
-  {
-    "id": "quick-facts",
-    "components": [
-      "quick-facts-item"
-    ]
   }
 ]

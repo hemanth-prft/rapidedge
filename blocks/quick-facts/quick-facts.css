@@ -1,222 +1,330 @@
-/* Quick Facts Block */
-
-/* Sort Dropdown */
-.quick-facts-sort {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 0;
-  padding: 14px 16px;
-  border: 1px solid #ccc;
-  background: #f7f7f7;
-}
-
-.quick-facts-sort-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #333;
-}
-
-.quick-facts-sort-select {
-  font-size: 0.9rem;
-  padding: 2px 6px;
-  border: none;
-  background: transparent;
-  color: #000;
-  font-weight: 700;
-  cursor: pointer;
-  appearance: auto;
-}
-
-.quick-facts-sort-select:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
-}
-
-/* Accordion List */
-.quick-facts-list {
+/* quick-facts block */
+.quick-facts .quick-facts-list {
+  list-style: none;
   margin: 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
 }
 
-/* Accordion Item */
-.quick-facts-item {
-  border-bottom: 1px solid #d9d9d9;
-}
-
-/* Trigger Button */
-.quick-facts-trigger {
-  width: 100%;
-  background: none;
-  border: none;
-  border-radius: 0;
-  cursor: pointer;
+.quick-facts .quick-facts-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 20px;
-  font-size: 14px;
-  font-weight: 400;
-  color: #000;
-  text-align: left;
-  margin: 0;
-  text-decoration: none;
+  flex-direction: column;
 }
 
-.quick-facts-trigger:hover,
-.quick-facts-trigger:active,
-.quick-facts-trigger:focus,
-.quick-facts-trigger:focus-visible {
-  background-color: transparent;
-  color: #000;
-  outline: none;
-  box-shadow: none;
-  border: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Icon — chevron down when collapsed, × when expanded */
-.quick-facts-trigger-icon {
-  flex-shrink: 0;
-  margin-left: 12px;
-  font-size: 0;
-  width: 18px;
-  height: 18px;
-  position: relative;
-}
-
-.quick-facts-trigger-icon::after {
-  content: '';
-  position: absolute;
-  top: 4px;
-  left: 3px;
-  width: 10px;
-  height: 10px;
-  border-right: 2.5px solid #000;
-  border-bottom: 2.5px solid #000;
-  transform: rotate(45deg);
-  transition: transform 0.25s ease, opacity 0.2s ease;
-}
-
-/* Expanded state — icon becomes × */
-.quick-facts-trigger[aria-expanded='true'] .quick-facts-trigger-icon::after {
-  content: '\00D7';
-  border: none;
-  transform: none;
-  font-size: 1.6rem;
-  font-weight: 300;
-  color: #000;
-  top: -6px;
-  left: 0;
-  width: auto;
-  height: auto;
-  line-height: 1;
-}
-
-/* Panel */
-.quick-facts-panel {
-  padding: 0 20px 20px;
+/* ==========================================================================
+   Large card variant
+   ========================================================================== */
+.quick-facts .quick-facts-card-large {
   background-color: #fff;
-  position: relative;
+  color: #055372;
+  border: 2px solid rgb(192 220 230 / 50%);
+  border-radius: 12px;
+  padding: 19px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  overflow: hidden;
+  flex: 1;
 }
 
-.quick-facts-panel[hidden] {
+.quick-facts .quick-facts-card-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+}
+
+.quick-facts .quick-facts-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.quick-facts .quick-facts-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.quick-facts .quick-facts-card-large .quick-facts-eye-brow {
+  flex: 1 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+  color: #0a8ab6;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.quick-facts .quick-facts-card-large .quick-facts-subtext {
+  font-size: 16px;
+  line-height: 130%;
+  font-weight: 600;
+  color: #0a8ab6;
+  margin-bottom: 8px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.quick-facts .quick-facts-card-large .quick-facts-statistic {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.32;
+  letter-spacing: -0.02em;
+  color: #055372;
+  text-align: right;
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.quick-facts .quick-facts-card-large .quick-facts-border {
   display: none;
 }
 
-/* Panel Content */
-.quick-facts-panel-content {
+/* ==========================================================================
+   Small card variant
+   Reference: mercy.net lower grid — stat / line / blue subtext, no background
+   ========================================================================== */
+.quick-facts .quick-facts-card-small {
+  color: #055372;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 9px;
 }
 
-/* Learn More Link */
-.quick-facts-learn-more {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 100%;
-  max-width: 320px;
-  padding: 12px 24px;
-  border: 1.5px solid #d9d9d9;
-  border-radius: 3px;
-  color: #000;
-  font-size: 0.95rem;
+/* Eyebrow is not shown in the small variant */
+.quick-facts .quick-facts-card-small .quick-facts-eye-brow {
+  display: none;
+}
+
+.quick-facts .quick-facts-card-small .quick-facts-statistic {
+  align-self: stretch;
+  font-size: 24px;
   font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  line-height: 1.32;
+  letter-spacing: -0.02em;
+  color: #055372;
 }
 
-.quick-facts-learn-more:hover {
-  background-color: #f5f5f5;
-  border-color: #000;
-  text-decoration: none;
+.quick-facts .quick-facts-card-small .quick-facts-border {
+  border: none;
+  border-top: 1px solid #c0dce6;
+  margin: 0;
 }
 
-.quick-facts-learn-more:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
-}
-
-.quick-facts-arrow {
-  font-size: 1.3rem;
-  font-weight: 700;
-  line-height: 1;
-}
-
-/* Pagination */
-.quick-facts-pagination-wrapper {
-  margin-top: 20px;
-}
-
-.quick-facts-pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  padding: 12px 0;
-}
-
-.pagination-btn {
-  min-width: 34px;
-  height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #d9d9d9;
-  background: #fff;
-  color: #000;
-  font-size: 0.9rem;
+.quick-facts .quick-facts-card-small .quick-facts-subtext {
+  align-self: stretch;
+  font-size: 16px;
   font-weight: 600;
-  cursor: pointer;
-  border-radius: 3px;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+  color: #0a8ab6;
 }
 
-.pagination-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
+/* ==========================================================================
+   Responsive font sizes — large card statistic
+   Applied only when responsiveFontSize is enabled (quick-facts-statistic-responsive class)
+   Breakpoints mirror AEM SCSS media-breakpoint-up(md) and media-breakpoint-up(xl)
+   ========================================================================== */
+@media (width >= 900px) {
+  .quick-facts .quick-facts-card-large .quick-facts-statistic-responsive {
+    font-size: 32px;
+    line-height: 38px;
+  }
 }
 
-.pagination-btn.active {
-  background-color: #2680a0;
-  color: #fff;
-  border-color: #2680a0;
+@media (width >= 1200px) {
+  .quick-facts .quick-facts-card-large .quick-facts-statistic-responsive {
+    font-size: 38px;
+    line-height: 44px;
+  }
 }
 
-.pagination-btn:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
+/* ==========================================================================
+   Responsive breakpoints — small card statistic
+   ========================================================================== */
+@media (width >= 768px) {
+  .quick-facts .quick-facts-card-small .quick-facts-statistic {
+    font-size: 28px;
+    line-height: 1.32;
+    letter-spacing: -0.02em;
+  }
 }
 
-.pagination-btn:hover:not(:disabled, .active) {
-  background-color: #e8e8e8;
+@media (width >= 992px) {
+  .quick-facts .quick-facts-card-small .quick-facts-statistic {
+    font-size: 32px;
+    line-height: 1.32;
+    letter-spacing: -0.02em;
+  }
 }
 
-.pagination-prev,
-.pagination-next {
-  font-size: 1rem;
+/* ==========================================================================
+   Authoring placeholder — shown when statistic is empty (e.g. newly added block)
+   ========================================================================== */
+.quick-facts-card-large:not(:has(.quick-facts-statistic:not(:empty)))::before,
+.quick-facts-card-small:not(:has(.quick-facts-statistic:not(:empty)))::before {
+  /* content: 'Open Properties panel \2192  fill in Card Type, Statistic and Subtext'; */
+  font-size: 13px;
+  opacity: 0.6;
+  font-style: italic;
+  text-align: center;
+  padding: 8px;
+}
+
+/* ==========================================================================
+   Section-level grid layout
+   JS splits blocks into two CSS Grid containers:
+     .qf-grid.qf-grid-4col  — large cards  → 4 columns on desktop
+     .qf-grid.qf-grid-3col  — small cards  → 3 columns on desktop
+   ========================================================================== */
+
+/* Section container: normal block flow; layout lives on the .qf-grid children */
+.quick-facts-container,
+.section:has(.quick-facts) {
+  display: block;
+}
+
+/* Match Figma section padding: 80px L/R on desktop */
+@media (width >= 992px) {
+  .quick-facts-container {
+    padding: 0 80px;
+  }
+}
+
+/* Grid wrapper — mobile-first: single column */
+.qf-grid {
+  display: grid;
+  align-items: stretch;
+  gap: 20px;
+  grid-template-columns: 1fr;
+  margin-bottom: 29px;
+}
+
+/* Vertical space between consecutive grids; ~ handles UE-injected elements between grids */
+.qf-grid ~ .qf-grid {
+  margin-top: 0;
+}
+
+/* Desktop: 4-column grid (large cards) */
+@media (width >= 992px) {
+  .qf-grid-4col {
+    grid-template-columns: repeat(4, 1fr);
+    align-items: start;
+  }
+}
+
+/* 4th card spans 2 rows in column 4 (7-card layout: 3+1span+3).
+   Pure CSS: :nth-child(4):nth-last-child(4) matches item 4 only when
+   there are exactly 7 children — no JS class needed. */
+@media (width >= 992px) {
+  .qf-grid-4col > .qf-col4-span2,
+  .qf-grid-4col > :nth-child(4):nth-last-child(4) {
+    grid-column: 4;
+    grid-row: 1 / span 2;
+  }
+}
+
+/* Desktop: 3-column grid (small cards) */
+@media (width >= 992px) {
+  .qf-grid-3col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Small card grid: 24px gap between cards and rows; items start-aligned (natural height) */
+.qf-grid-3col {
+  gap: 24px;
+  margin-bottom: 24px;
+  align-items: start;
+}
+
+/* Reset the padding that main > .section > div injects on wrapper divs */
+.qf-grid > .quick-facts-wrapper {
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+/* Cards size to their own content; margin-bottom creates visual row gap via track height */
+.qf-grid > .quick-facts,
+.qf-grid > .quick-facts-wrapper > .quick-facts {
+  height: auto;
+  margin-bottom: 20px;
+}
+
+/* Spanning card (col 4, rows 1–2): propagate grid-area height down to the card.
+   Each level is converted to a flex column with flex:1 + min-height:0 so the
+   card fills the combined height of both rows without inflating the row tracks. */
+@media (width >= 992px) {
+  /* Remove item margins in the 4-col grid — the grid gap: 20px handles row spacing.
+     Without this, each row track is inflated by 20px (wrapper margin-bottom), so the
+     spanning card's grid area is taller than the combined visual height of rows 1+2. */
+  .qf-grid-4col > .quick-facts-wrapper,
+  .qf-grid-4col > .quick-facts {
+    margin-bottom: 0;
+  }
+
+  .qf-grid-4col > .quick-facts-wrapper > .quick-facts {
+    margin-bottom: 0;
+  }
+
+  /* Grid item: align-self:stretch overrides the grid's align-items:start so the spanning
+     card still fills the combined height of both rows; overflow:hidden prevents it from
+     inflating the row tracks beyond what cols 1-3 naturally need. */
+  .qf-grid-4col > .qf-col4-span2 {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    overflow: hidden;
+  }
+
+  /* .quick-facts block (inside wrapper in preview, or IS the wrapper in UE) */
+  .qf-grid-4col > .qf-col4-span2 .quick-facts {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Override the base display:grid on the list to a flex column fill */
+  .qf-grid-4col > .qf-col4-span2 .quick-facts-list {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Single list item stretches to fill the list */
+  .qf-grid-4col > .qf-col4-span2 .quick-facts-item {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Spanning card has more vertical space — allow statistic to show more lines;
+     font-size and line-height differ from regular large cards per Figma spec. */
+  .qf-grid-4col > .qf-col4-span2 .quick-facts-statistic {
+    font-size: 28px;
+    line-height: 1;
+    -webkit-line-clamp: 5;
+  }
 }

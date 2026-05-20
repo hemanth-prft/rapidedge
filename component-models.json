@@ -516,27 +516,52 @@
     ]
   },
   {
-    "id": "quick-facts-item",
+    "id": "quick-facts",
     "fields": [
       {
+        "component": "select",
+        "valueType": "string",
+        "name": "variant",
+        "label": "Card Type",
+        "value": "large",
+        "required": true,
+        "options": [
+          {
+            "name": "Large",
+            "value": "large"
+          },
+          {
+            "name": "Small",
+            "value": "small"
+          }
+        ]
+      },
+      {
+        "component": "reference",
+        "name": "icon",
+        "label": "Icon",
+        "multi": false
+      },
+      {
         "component": "text",
         "valueType": "string",
-        "name": "title",
-        "label": "Item Title",
+        "name": "eyeBrow",
+        "label": "Eye brow",
         "value": ""
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link",
-        "label": "Learn More Link URL",
-        "value": ""
+        "name": "statistic",
+        "label": "Statistic",
+        "value": "",
+        "required": true
       },
       {
-        "component": "richtext",
+        "component": "textarea",
         "valueType": "string",
-        "name": "content",
-        "label": "Panel Content",
+        "name": "subtext",
+        "label": "Subtext",
         "value": ""
       }
     ]
