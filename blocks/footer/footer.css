@@ -31,15 +31,7 @@ footer .footer-top-row {
   flex-direction: column;
   gap: 40px;
   padding-bottom: 32px;
-  border-bottom: 1px solid rgba(255 255 255 / 30%);
-}
-
-@media (width >= 900px) {
-  footer .footer-top-row {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 64px;
-  }
+  border-bottom: 1px solid rgb(255 255 255 / 30%);
 }
 
 /* ── Brand section ────────────────────────── */
@@ -64,18 +56,8 @@ footer .footer-brand .default-content-wrapper {
 }
 
 footer .footer-brand p {
-  color: #fff;
   font-size: 14px;
   line-height: 1.6;
-}
-
-footer .footer-brand a {
-  color: #fff;
-  text-decoration: none;
-}
-
-footer .footer-brand a:hover {
-  text-decoration: underline;
 }
 
 /* Social icons row */
@@ -84,23 +66,6 @@ footer .footer-brand .footer-social {
   gap: 10px;
   align-items: center;
   margin-top: 4px;
-}
-
-footer .footer-brand .footer-social a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(255 255 255 / 50%);
-  border-radius: 4px;
-  transition: border-color 0.2s, background-color 0.2s;
-}
-
-footer .footer-brand .footer-social a:hover {
-  background-color: rgba(255 255 255 / 15%);
-  border-color: #fff;
-  text-decoration: none;
 }
 
 footer .footer-brand .footer-social a img,
@@ -136,16 +101,6 @@ footer .footer-nav li {
   margin: 0;
 }
 
-footer .footer-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-footer .footer-nav a:hover {
-  text-decoration: underline;
-}
-
 /* If nav uses columns block */
 footer .footer-nav .columns > div {
   display: flex;
@@ -161,24 +116,12 @@ footer .footer-nav .columns > div > div {
 
 footer .footer-languages {
   padding: 20px 0;
-  border-bottom: 1px solid rgba(255 255 255 / 30%);
+  border-bottom: 1px solid rgb(255 255 255 / 30%);
 }
 
-footer .footer-languages p,
-footer .footer-languages .default-content-wrapper p {
+footer .footer-languages p {
   font-size: 13px;
-  color: rgba(255 255 255 / 80%);
   line-height: 2.2;
-}
-
-footer .footer-languages a {
-  color: rgba(255 255 255 / 80%);
-  text-decoration: none;
-}
-
-footer .footer-languages a:hover {
-  color: #fff;
-  text-decoration: underline;
 }
 
 /* ── Legal / copyright bar ────────────────── */
@@ -187,23 +130,70 @@ footer .footer-legal {
   padding: 16px 0 24px;
 }
 
-footer .footer-legal p,
-footer .footer-legal .default-content-wrapper p {
+footer .footer-legal p {
   font-size: 13px;
-  color: rgba(255 255 255 / 80%);
+  color: rgb(255 255 255 / 80%);
+}
+
+/* ── Link styles – ascending specificity ─── */
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer .footer-nav a {
+  font-size: 14px;
+}
+
+footer .footer-languages a {
+  color: rgb(255 255 255 / 80%);
+  font-size: 13px;
 }
 
 footer .footer-legal a {
-  color: rgba(255 255 255 / 80%);
-  text-decoration: none;
+  color: rgb(255 255 255 / 80%);
+  font-size: 13px;
+}
+
+footer .footer-languages a:hover {
+  color: #fff;
 }
 
 footer .footer-legal a:hover {
   color: #fff;
-  text-decoration: underline;
+}
+
+footer .footer-brand .footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgb(255 255 255 / 50%);
+  border-radius: 4px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+footer .footer-brand .footer-social a:hover {
+  background-color: rgb(255 255 255 / 15%);
+  border-color: #fff;
+  text-decoration: none;
 }
 
 /* ── Responsive tweaks ────────────────────── */
+
+@media (width >= 900px) {
+  footer .footer-top-row {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 64px;
+  }
+}
 
 @media (width <= 600px) {
   footer .footer {
@@ -214,11 +204,8 @@ footer .footer-legal a:hover {
     gap: 32px;
   }
 
-  footer .footer-nav .default-content-wrapper {
-    gap: 20px 32px;
-  }
-
   footer .footer-nav ul {
     min-width: 140px;
   }
 }
+
