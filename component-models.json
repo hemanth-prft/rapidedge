@@ -338,14 +338,14 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "text",
-        "label": "Text",
+        "name": "linkText",
+        "label": "Link Text",
         "value": ""
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "link",
+        "name": "linkUrl",
         "label": "Link URL",
         "value": ""
       }
