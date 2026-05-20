@@ -37,16 +37,18 @@ export default async function decorate(block) {
   let alignment = 'left';
 
   const row = block.children[0];
+  const cols = row ? [...row.children] : [];
+  // Check if table cells have actual authored content (not just empty wrappers)
+  const hasContent = cols.length > 0 && cols[0]?.textContent?.trim();
 
-  // Try reading from block table rows (standard EDS delivery)
-  if (row && row.children && row.children.length > 0) {
-    const cols = [...row.children];
+  if (hasContent) {
+    // Read from block table rows (standard EDS delivery)
     titleText = cols[0]?.textContent?.trim() || '';
     tag = cols[1]?.textContent?.trim()?.toLowerCase() || 'h2';
     style = cols[2]?.textContent?.trim() || 'large-teal';
     alignment = cols[3]?.textContent?.trim() || 'left';
   } else {
-    // Fallback: fetch properties from AEM resource (Universal Editor / xwalk)
+    // Fetch properties from AEM resource (Universal Editor / xwalk)
     const contentPath = getContentPath(block);
     if (contentPath) {
       const props = await fetchBlockProperties(contentPath);

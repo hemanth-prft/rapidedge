@@ -39,21 +39,23 @@ export default async function decorate(block) {
   let alignment = 'left';
 
   const row = block.children[0];
+  const cols = row ? [...row.children] : [];
+  // Check if table cells have actual authored content (not just empty wrappers)
+  const hasContent = cols.length > 1 && cols[1]?.textContent?.trim();
 
-  // Try reading from block table rows (standard EDS delivery)
-  if (row && row.children && row.children.length > 0) {
-    const cols = [...row.children];
+  if (hasContent) {
+    // Read from block table rows (standard EDS delivery)
     text = cols[0]?.innerHTML?.trim() || '';
     fontSize = cols[1]?.textContent?.trim() || '12px';
     fontWeight = cols[2]?.textContent?.trim() || '500';
-    const stylesRaw = cols[3]?.textContent?.trim() || '100%, -5%, #9BABB1, left';
+    const stylesRaw = cols[3]?.textContent?.trim() || 'normal, -0.6px, #9BABB1, left';
     const parts = stylesRaw.split(',').map((s) => s.trim());
     lineHeight = parts[0] || '100%';
-    letterSpacing = parts[1] || '-5%';
+    letterSpacing = parts[1] || '-0.6px';
     color = parts[2] || '#9BABB1';
     alignment = parts[3] || 'left';
   } else {
-    // Fallback: fetch properties from AEM resource (Universal Editor / xwalk)
+    // Fetch properties from AEM resource (Universal Editor / xwalk)
     const contentPath = getContentPath(block);
     if (contentPath) {
       const props = await fetchBlockProperties(contentPath);
@@ -61,10 +63,10 @@ export default async function decorate(block) {
         text = props.content || '';
         fontSize = props.fontSize || '12px';
         fontWeight = props.fontWeight || '500';
-        const stylesRaw = props.styles || '100%, -5%, #9BABB1, left';
+        const stylesRaw = props.styles || 'normal, -0.6px, #9BABB1, left';
         const parts = stylesRaw.split(',').map((s) => s.trim());
         lineHeight = parts[0] || '100%';
-        letterSpacing = parts[1] || '-5%';
+        letterSpacing = parts[1] || '-0.6px';
         color = parts[2] || '#9BABB1';
         alignment = parts[3] || 'left';
       }
