@@ -59,6 +59,12 @@
   text-decoration: underline;
 }
 
+.media-contact .media-contact-email:any-link,
+.media-contact .media-contact-phone:any-link {
+  color: #0a8ab6;
+  text-decoration: none;
+}
+
 .media-contact-cta {
   display: inline-flex;
   align-items: center;
