@@ -17,7 +17,6 @@
       "columns",
       "fragment",
       "quick-facts",
-      "news-media-contact",
       "split-banner",
       "mercy-title"
     ]
@@ -41,12 +40,6 @@
       "image",
       "button",
       "title"
-    ]
-  },
-  {
-    "id": "news-media-contact",
-    "components": [
-      "news-media-contact-item"
     ]
   }
 ]
