@@ -2,15 +2,19 @@
   font-family: Inter, sans-serif;
   line-height: 1.18;
   letter-spacing: -0.05em;
-  margin: 0 24px;
-  padding: 0;
+  padding: 40px 0 0 0;
+  margin-top: 0px
 }
 
 /* Large Teal — 44px / 800 / #0E7394 */
 .mercy-title-large-teal {
-  font-size: 44px;
-  font-weight: 800;
-  color: #0e7394;
+color: #0E7394;
+font-family: Inter, sans-serif;
+font-size: 44px;
+font-style: normal;
+font-weight: 800;
+line-height: 52px; /* 118.182% */
+letter-spacing: -2.2px;
 }
 
 /* Medium Teal — 32px / 700 / #0E7394 */
