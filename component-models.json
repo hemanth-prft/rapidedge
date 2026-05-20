@@ -296,6 +296,35 @@
     ]
   },
   {
+    "id": "media-contact",
+    "fields": [
+      {
+        "component": "text",
+        "name": "name",
+        "label": "Contact Name",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "email",
+        "label": "Email Address",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "phone",
+        "label": "Phone Number",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "ctaLink",
+        "label": "CTA Button Link",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "mercy-image",
     "fields": [
       {
