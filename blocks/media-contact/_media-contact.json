@@ -41,8 +41,9 @@
         {
           "component": "text",
           "name": "ctaLink",
-          "label": "CTA Button Link",
-          "valueType": "string"
+          "label": "CTA Button (text, link)",
+          "valueType": "string",
+          "value": "See All Media Contacts, #"
         }
       ]
     }

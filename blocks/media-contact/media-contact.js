@@ -1,18 +1,36 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  const row = block.children[0];
-  if (!row) return;
+  const rows = [...block.children];
+  if (!rows.length) return;
 
-  const cols = [...row.children];
-  const contactName = cols[0]?.textContent?.trim() || '';
-  const email = cols[1]?.textContent?.trim() || '';
-  const phone = cols[2]?.textContent?.trim() || '';
-  const ctaLink = cols[3]?.textContent?.trim() || '#';
+  let contactName = '';
+  let email = '';
+  let phone = '';
+  let ctaRaw = '#';
+
+  if (rows.length === 1) {
+    // Single row with multiple columns
+    const cols = [...rows[0].children];
+    contactName = cols[0]?.textContent?.trim() || '';
+    email = cols[1]?.textContent?.trim() || '';
+    phone = cols[2]?.textContent?.trim() || '';
+    ctaRaw = cols[3]?.textContent?.trim() || 'See All Media Contacts, #';
+  } else {
+    // Multiple rows, one field per row
+    contactName = rows[0]?.children[0]?.textContent?.trim() || '';
+    email = rows[1]?.children[0]?.textContent?.trim() || '';
+    phone = rows[2]?.children[0]?.textContent?.trim() || '';
+    ctaRaw = rows[3]?.children[0]?.textContent?.trim() || 'See All Media Contacts, #';
+  }
+
+  const ctaParts = ctaRaw.split(',');
+  const ctaText = ctaParts[0]?.trim() || 'See All Media Contacts';
+  const ctaLink = ctaParts.slice(1).join(',').trim() || '#';
 
   const card = document.createElement('div');
   card.className = 'media-contact-card';
-  moveInstrumentation(row, card);
+  moveInstrumentation(rows[0], card);
 
   const titleEl = document.createElement('h3');
   titleEl.className = 'media-contact-title';
@@ -34,7 +52,7 @@ export default function decorate(block) {
   const ctaEl = document.createElement('a');
   ctaEl.href = ctaLink;
   ctaEl.className = 'media-contact-cta';
-  ctaEl.textContent = 'See All Media Contacts';
+  ctaEl.textContent = ctaText;
 
   card.append(titleEl, nameEl, infoEl, ctaEl);
 
