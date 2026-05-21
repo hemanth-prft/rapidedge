@@ -188,6 +188,7 @@
           }
         },
         {
+        {
           "title": "Hospital Search",
           "id": "hospital-search",
           "plugins": {
