@@ -52,7 +52,8 @@
         "columns",
         "fragment",
         "quick-facts",
-        "split-banner"
+        "split-banner",
+        "cta-callout"
       ]
     }
   ]
