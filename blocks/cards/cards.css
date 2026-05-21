@@ -25,3 +25,119 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+/* ============================================================
+   VARIANT: specialty  (Provider by Specialty)
+   Usage in UE: Cards (specialty) block
+   Card fields: image | label | link
+   ============================================================ */
+.cards.specialty > ul {
+  display: flex;
+  overflow-x: auto;
+  grid-template-columns: unset;
+  gap: 16px;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.cards.specialty > ul::-webkit-scrollbar {
+  display: none;
+}
+
+.cards.specialty > ul > li {
+  position: relative;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  flex: 0 0 190px;
+  background-color: transparent;
+}
+
+.cards.specialty .cards-card-image {
+  line-height: 0;
+  height: 100%;
+}
+
+.cards.specialty .cards-card-image picture,
+.cards.specialty .cards-card-image img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+}
+
+.cards.specialty .cards-card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 32px 14px 14px;
+  background: linear-gradient(transparent, rgba(0 0 0 / 65%));
+}
+
+.cards.specialty .cards-card-body p {
+  margin: 0;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* ============================================================
+   VARIANT: news  (Mercy Top News)
+   Usage in UE: Cards (news) block
+   Card fields: image | date | title | link
+   ============================================================ */
+.cards.news {
+  border: 2px dashed #90c4f0;
+  padding: 16px;
+}
+
+.cards.news > ul {
+  display: flex;
+  overflow-x: auto;
+  grid-template-columns: unset;
+  gap: 20px;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.cards.news > ul::-webkit-scrollbar {
+  display: none;
+}
+
+.cards.news > ul > li {
+  border: none;
+  background-color: transparent;
+  flex: 0 0 210px;
+}
+
+.cards.news .cards-card-image {
+  line-height: 0;
+}
+
+.cards.news .cards-card-image img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.cards.news .cards-card-body {
+  margin: 10px 0 0;
+}
+
+.cards.news .cards-card-body p {
+  margin: 0 0 6px;
+  font-size: 0.85rem;
+  color: var(--text-color, #333);
+  line-height: 1.4;
+}
+
+/* First <p> is the date line */
+.cards.news .cards-card-body p:first-child {
+  font-weight: 700;
+  color: var(--text-color, #1a1a1a);
+  font-size: 0.9rem;
+}
