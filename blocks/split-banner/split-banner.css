@@ -1,0 +1,131 @@
+/* split-banner block */
+
+.split-banner-wrapper {
+  background-color: #fcfeff;
+}
+
+.split-banner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.split-banner-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+}
+
+/* Image column */
+.split-banner-image {
+  width: 100%;
+}
+
+.split-banner-image picture,
+.split-banner-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Content column */
+.split-banner-content {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  padding: 0 5px;
+}
+
+/* Title */
+.split-banner-title {
+  margin: 0;
+  color: #0e7394;
+  font-family: Inter, sans-serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1.8px;
+  text-align: right;
+}
+
+/* Description */
+.split-banner-description {
+  margin: 0;
+  color: #526268;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.9px;
+}
+
+/* CTA Button */
+.split-banner-cta {
+  display: flex;
+}
+
+.split-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 24px;
+  border: 1.5px solid #055372;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #055372;
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.9px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+
+.split-banner-btn:hover {
+  background-color: #055372;
+  color: #fff;
+}
+
+/* Desktop layout */
+@media (width >= 900px) {
+  .split-banner {
+    padding: 40px 32px;
+  }
+
+  .split-banner-inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+  }
+
+  .split-banner-image {
+    flex: 0 0 auto;
+    width: 46%;
+    padding-left: 80px;
+  }
+
+  .split-banner-content {
+    flex: 1;
+    padding: 0 36px 201.78px 59px;
+    gap: 36px;
+  }
+
+  .split-banner-title {
+    font-size: 54px;
+    line-height: 52px;
+    letter-spacing: -2.7px;
+  }
+
+  .split-banner-description {
+    font-size: 18px;
+    max-width: 612px;
+  }
+}
