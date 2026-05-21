@@ -1,6 +1,3 @@
-import { getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../fragment/fragment.js';
-
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
@@ -75,7 +72,6 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-  // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
   if (isDesktop.matches) {
     navDrops.forEach((drop) => {
@@ -91,11 +87,8 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
     });
   }
 
-  // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
-    // collapse menu on escape press
     window.addEventListener('keydown', closeOnEscape);
-    // collapse menu on focus lost
     nav.addEventListener('focusout', closeOnFocusLost);
   } else {
     window.removeEventListener('keydown', closeOnEscape);
@@ -108,34 +101,47 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // load nav as fragment
-  const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
-  const fragment = await loadFragment(navPath);
-
-  // decorate nav DOM
   block.textContent = '';
+
   const nav = document.createElement('nav');
   nav.id = 'nav';
-  while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools'];
-  classes.forEach((c, i) => {
-    const section = nav.children[i];
-    if (section) section.classList.add(`nav-${c}`);
-  });
+  // Brand - Mercy Logo
+  const navBrand = document.createElement('div');
+  navBrand.className = 'nav-brand';
+  navBrand.innerHTML = `<a href="/" aria-label="Mercy Home">
+    <img src="${window.hlx.codeBasePath}/icons/mercy-logo.svg" alt="Mercy" width="160" height="60" loading="eager">
+  </a>`;
 
-  const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
-  if (brandLink) {
-    brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
-  }
+  // Nav Sections
+  const navSections = document.createElement('div');
+  navSections.className = 'nav-sections';
+  navSections.innerHTML = `<div class="default-content-wrapper">
+    <ul>
+      <li><a href="/find-care">Find Care</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/patients-visitors">Patients &amp; Visitors</a></li>
+      <li><a href="/bill-pay">Bill Pay</a></li>
+      <li class="nav-drop"><a href="/more">More</a>
+        <ul>
+          <li><a href="/about">About Mercy</a></li>
+          <li><a href="/careers">Careers</a></li>
+          <li><a href="/research">Research</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>`;
 
-  const navSections = nav.querySelector('.nav-sections');
-  if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+  // Tools - Sign In
+  const navTools = document.createElement('div');
+  navTools.className = 'nav-tools';
+  navTools.innerHTML = '<a href="/sign-in" class="nav-sign-in">Sign In</a>';
+
+  nav.append(navBrand, navSections, navTools);
+
+  // Setup nav-drop interactions
+  navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+    if (navSection.classList.contains('nav-drop')) {
       navSection.addEventListener('click', () => {
         if (isDesktop.matches) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
@@ -143,8 +149,8 @@ export default async function decorate(block) {
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });
-    });
-  }
+    }
+  });
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
@@ -155,7 +161,6 @@ export default async function decorate(block) {
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
-  // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 

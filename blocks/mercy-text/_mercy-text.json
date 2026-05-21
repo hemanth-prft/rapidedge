@@ -1,0 +1,54 @@
+{
+  "definitions": [
+    {
+      "title": "Mercy Text",
+      "id": "mercy-text",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block",
+            "template": {
+              "name": "Mercy Text",
+              "model": "mercy-text"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "mercy-text",
+      "fields": [
+        {
+          "component": "richtext",
+          "name": "content",
+          "label": "Content",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "fontSize",
+          "label": "Font Size (e.g. 12px)",
+          "valueType": "string",
+          "value": "12px"
+        },
+        {
+          "component": "text",
+          "name": "fontWeight",
+          "label": "Font Weight (e.g. 500)",
+          "valueType": "string",
+          "value": "500"
+        },
+        {
+          "component": "text",
+          "name": "styles",
+          "label": "Styles: lineHeight, letterSpacing, color, alignment (comma separated)",
+          "valueType": "string",
+          "value": "normal, -0.6px, #9BABB1, left"
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

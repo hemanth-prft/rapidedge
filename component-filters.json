@@ -16,7 +16,21 @@
       "cards",
       "columns",
       "fragment",
-      "quick-facts"
+      "accordion",
+      "quick-facts",
+      "hospital-search",
+      "richtext",
+      "mercy-title",
+      "mercy-text",
+      "mercy-image",
+      "media-contact",
+      "mercy-breadcrumb"
+    ]
+  },
+  {
+    "id": "accordion",
+    "components": [
+      "accordion-item"
     ]
   },
   {
@@ -37,7 +51,24 @@
       "text",
       "image",
       "button",
-      "title"
+      "title",
+      "accordion",
+      "cards",
+      "hero",
+      "fragment",
+      "quick-facts"
+    ]
+  },
+  {
+    "id": "hospital-search",
+    "components": [
+      "hospital-search-item"
+    ]
+  },
+  {
+    "id": "mercy-breadcrumb",
+    "components": [
+      "mercy-breadcrumb-item"
     ]
   }
 ]

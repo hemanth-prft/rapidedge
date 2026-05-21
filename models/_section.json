@@ -51,7 +51,15 @@
         "cards",
         "columns",
         "fragment",
-        "quick-facts"
+        "accordion",
+        "quick-facts",
+        "hospital-search",
+        "richtext",
+        "mercy-title",
+        "mercy-text",
+        "mercy-image",
+        "media-contact",
+        "mercy-breadcrumb"
       ]
     }
   ]

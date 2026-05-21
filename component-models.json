@@ -142,6 +142,25 @@
     ]
   },
   {
+    "id": "accordion-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "body",
+        "label": "Body",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -167,15 +186,59 @@
         "component": "text",
         "valueType": "number",
         "name": "columns",
-        "value": "",
-        "label": "Columns"
+        "value": "2",
+        "label": "Number of Columns"
       },
       {
         "component": "text",
         "valueType": "number",
         "name": "rows",
-        "value": "",
-        "label": "Rows"
+        "value": "1",
+        "label": "Number of Rows"
+      },
+      {
+        "component": "select",
+        "name": "layout",
+        "label": "Column Width Layout",
+        "description": "Choose how columns split the width",
+        "options": [
+          {
+            "name": "Equal Width",
+            "value": ""
+          },
+          {
+            "name": "30 / 70",
+            "value": "columns-30-70"
+          },
+          {
+            "name": "70 / 30",
+            "value": "columns-70-30"
+          },
+          {
+            "name": "40 / 60",
+            "value": "columns-40-60"
+          },
+          {
+            "name": "60 / 40",
+            "value": "columns-60-40"
+          },
+          {
+            "name": "25 / 75",
+            "value": "columns-25-75"
+          },
+          {
+            "name": "75 / 25",
+            "value": "columns-75-25"
+          },
+          {
+            "name": "33 / 33 / 33",
+            "value": "columns-33-33-33"
+          },
+          {
+            "name": "25 / 50 / 25",
+            "value": "columns-25-50-25"
+          }
+        ]
       }
     ]
   },
@@ -212,6 +275,243 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "hospital-search-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Hospital Name"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link URL"
+      }
+    ]
+  },
+  {
+    "id": "media-contact",
+    "fields": [
+      {
+        "component": "text",
+        "name": "contactName",
+        "label": "Contact Name",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "email",
+        "label": "Email Address",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "phone",
+        "label": "Phone Number",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "cta_text",
+        "label": "CTA Button Text",
+        "valueType": "string",
+        "value": "See All Media Contacts"
+      },
+      {
+        "component": "text",
+        "name": "cta_link",
+        "label": "CTA Button Link",
+        "valueType": "string",
+        "value": "#"
+      }
+    ]
+  },
+  {
+    "id": "mercy-breadcrumb-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Link Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "url",
+        "label": "Link URL",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "mercy-image",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "valueType": "string",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "width",
+        "label": "Width (e.g. 870px, 100%)",
+        "valueType": "string",
+        "value": "870px"
+      },
+      {
+        "component": "text",
+        "name": "height",
+        "label": "Height (e.g. 330px, auto)",
+        "valueType": "string",
+        "value": "330px"
+      },
+      {
+        "component": "text",
+        "name": "borderRadius",
+        "label": "Border Radius (e.g. 16px)",
+        "valueType": "string",
+        "value": "16px"
+      }
+    ]
+  },
+  {
+    "id": "mercy-text",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "content",
+        "label": "Content",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "fontSize",
+        "label": "Font Size (e.g. 12px)",
+        "valueType": "string",
+        "value": "12px"
+      },
+      {
+        "component": "text",
+        "name": "fontWeight",
+        "label": "Font Weight (e.g. 500)",
+        "valueType": "string",
+        "value": "500"
+      },
+      {
+        "component": "text",
+        "name": "styles",
+        "label": "Styles: lineHeight, letterSpacing, color, alignment (comma separated)",
+        "valueType": "string",
+        "value": "normal, -0.6px, #9BABB1, left"
+      }
+    ]
+  },
+  {
+    "id": "mercy-title",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title Text",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "tag",
+        "label": "Heading Level",
+        "valueType": "string",
+        "value": "h2",
+        "options": [
+          {
+            "name": "H1",
+            "value": "h1"
+          },
+          {
+            "name": "H2",
+            "value": "h2"
+          },
+          {
+            "name": "H3",
+            "value": "h3"
+          },
+          {
+            "name": "H4",
+            "value": "h4"
+          },
+          {
+            "name": "H5",
+            "value": "h5"
+          },
+          {
+            "name": "H6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "style",
+        "label": "Title Style",
+        "valueType": "string",
+        "value": "large-teal",
+        "description": "Predefined styles: size, weight, color",
+        "options": [
+          {
+            "name": "Large Teal (44px / 800 / #0E7394)",
+            "value": "large-teal"
+          },
+          {
+            "name": "Medium Teal (32px / 700 / #0E7394)",
+            "value": "medium-teal"
+          },
+          {
+            "name": "Small Teal (24px / 700 / #0E7394)",
+            "value": "small-teal"
+          },
+          {
+            "name": "Large Dark (44px / 800 / #000)",
+            "value": "large-dark"
+          },
+          {
+            "name": "Medium Dark (32px / 700 / #000)",
+            "value": "medium-dark"
+          },
+          {
+            "name": "Small Dark (24px / 700 / #000)",
+            "value": "small-dark"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "alignment",
+        "label": "Text Alignment",
+        "valueType": "string",
+        "value": "left",
+        "options": [
+          {
+            "name": "Left",
+            "value": "left"
+          },
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Right",
+            "value": "right"
+          }
+        ]
       }
     ]
   },
@@ -263,6 +563,32 @@
         "name": "subtext",
         "label": "Subtext",
         "value": ""
+      }
+    ]
+  },
+  {
+    "id": "richtext",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "content",
+        "label": "Content",
+        "valueType": "string",
+        "rpiCharacterLimit": 50000,
+        "customProperties": [
+          {
+            "name": "toolbar",
+            "value": "bold,italic,underline,strikethrough,subscript,superscript,|,link,anchor,|,heading#h1,heading#h2,heading#h3,heading#h4,heading#h5,heading#h6,paragraph,|,ordered-list,unordered-list,indent,outdent,|,blockquote,code,|,align#left,align#center,align#right,align#justify,|,table,image,horizontal-rule,|,source-editing,|,undo,redo,remove-format,special-characters,find-and-replace"
+          },
+          {
+            "name": "allowedElements",
+            "value": "h1,h2,h3,h4,h5,h6,p,a,strong,em,u,s,sub,sup,ol,ul,li,blockquote,pre,code,table,thead,tbody,tr,th,td,img,hr,br,div,span,figure,figcaption,iframe,video,audio,source"
+          },
+          {
+            "name": "sourceEditing",
+            "value": "true"
+          }
+        ]
       }
     ]
   }

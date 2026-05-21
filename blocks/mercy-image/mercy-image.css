@@ -1,0 +1,8 @@
+.mercy-image-wrapper img {
+  display: block;
+  max-width: 100%;
+}
+
+.mercy-image {
+  margin-bottom: 8px;
+}

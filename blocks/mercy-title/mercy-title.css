@@ -1,0 +1,53 @@
+.mercy-title-heading {
+  font-family: Inter, sans-serif;
+  line-height: 1.18;
+  letter-spacing: -0.05em;
+  padding: 40px 0 0;
+  margin-top: 0;
+}
+
+/* Large Teal — 44px / 800 / #0E7394 */
+.mercy-title-heading.mercy-title-large-teal {
+  color: #0E7394;
+  font-family: Inter, sans-serif;
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 52px; /* 118.182% */
+  letter-spacing: -2.2px;
+}
+
+/* Medium Teal — 32px / 700 / #0E7394 */
+.mercy-title-heading.mercy-title-medium-teal {
+  font-size: 32px;
+  font-weight: 700;
+  color: #0e7394;
+}
+
+/* Small Teal — 24px / 700 / #0E7394 */
+.mercy-title-heading.mercy-title-small-teal {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0e7394;
+}
+
+/* Large Dark — 44px / 800 / #000 */
+.mercy-title-heading.mercy-title-large-dark {
+  font-size: 44px;
+  font-weight: 800;
+  color: #000;
+}
+
+/* Medium Dark — 32px / 700 / #000 */
+.mercy-title-heading.mercy-title-medium-dark {
+  font-size: 32px;
+  font-weight: 700;
+  color: #000;
+}
+
+/* Small Dark — 24px / 700 / #000 */
+.mercy-title-heading.mercy-title-small-dark {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000;
+}
