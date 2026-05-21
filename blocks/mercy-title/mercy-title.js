@@ -4,7 +4,10 @@ export default function decorate(block) {
   const rows = [...block.children];
   if (!rows.length) return;
 
-  let titleText, tag, style, alignment;
+  let titleText;
+  let tag;
+  let style;
+  let alignment;
 
   // UE model authoring: each field stored as its own single-cell row
   // Document authoring: all four fields in one row as separate columns
