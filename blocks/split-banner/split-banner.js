@@ -8,24 +8,28 @@ export default function decorate(block) {
   // Fields order: image, imageAlt, title, description, buttonUrl, buttonLabel
   const isUEModel = rows.length >= 2 && rows.every((r) => r.children.length <= 1);
 
-  let imageAlt = '';
   let titleText = '';
   let descriptionText = '';
   let buttonUrl = '';
   let buttonLabel = '';
+  let buttonIcon = '';
   let imageEl = null;
 
   if (isUEModel) {
-    const getCell = (row) => row?.querySelector('div')?.innerHTML?.trim() || '';
-    const getImg = (row) => row?.querySelector('img');
+    const getText = (row) => (row && row.children[0] ? row.children[0].textContent.trim() : '');
     const getPicture = (row) => row?.querySelector('picture');
+    const getImg = (row) => row?.querySelector('img');
 
+    // imageAlt is stored directly on the <img alt="..."> — no separate row
+    // Actual row order: [0]=image, [1]=title, [2]=description, [3]=buttonUrl, [4]=buttonLabel
     imageEl = getPicture(rows[0]) || getImg(rows[0]);
-    imageAlt = getCell(rows[1]);
-    titleText = getCell(rows[2]);
-    descriptionText = getCell(rows[3]);
-    buttonUrl = getCell(rows[4]);
-    buttonLabel = getCell(rows[5]);
+    titleText = getText(rows[1]);
+    descriptionText = getText(rows[2]);
+    // buttonUrl is rendered as <a href="..."> inside its cell
+    const urlAnchor = rows[3]?.querySelector('a');
+    buttonUrl = urlAnchor?.getAttribute('href') || getText(rows[3]);
+    buttonLabel = getText(rows[4]);
+    buttonIcon = getText(rows[5]);
   } else {
     // Document-based authoring: two columns — left: image, right: content
     const leftCol = rows[0]?.children[0];
@@ -54,7 +58,7 @@ export default function decorate(block) {
   if (imageEl) {
     const imgTag = imageEl.tagName === 'IMG' ? imageEl : imageEl.querySelector('img');
     if (imgTag) {
-      const optimizedPic = createOptimizedPicture(imgTag.src, imageAlt || imgTag.alt, false, [
+      const optimizedPic = createOptimizedPicture(imgTag.src, imgTag.alt, false, [
         { media: '(min-width: 900px)', width: '760' },
         { width: '480' },
       ]);
@@ -89,7 +93,19 @@ export default function decorate(block) {
     const a = document.createElement('a');
     a.href = buttonUrl;
     a.className = 'split-banner-btn';
-    a.textContent = buttonLabel;
+    const labelSpan = document.createElement('span');
+    labelSpan.textContent = buttonLabel;
+    a.append(labelSpan);
+    if (buttonIcon) {
+      const iconSpan = document.createElement('span');
+      iconSpan.className = `icon icon-${buttonIcon}`;
+      const img = document.createElement('img');
+      img.src = `/icons/${buttonIcon}.svg`;
+      img.alt = '';
+      img.loading = 'lazy';
+      iconSpan.append(img);
+      a.append(iconSpan);
+    }
     btnWrapper.append(a);
     contentCol.append(btnWrapper);
   }

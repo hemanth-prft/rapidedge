@@ -310,6 +310,13 @@
         "name": "buttonLabel",
         "label": "Button Label",
         "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttonIcon",
+        "label": "Button Icon (icon name from /icons/ folder)",
+        "value": ""
       }
     ]
   }
