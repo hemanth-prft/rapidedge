@@ -1,12 +1,19 @@
 /* cta-callout block */
 
+.cta-callout-container .cta-callout-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
 .cta-callout {
+  max-width: 1280px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
   height: 80px;
-  padding: 10px 24px;
+  padding: 10px 32px;
   background: #f0faff;
   border-radius: 16px;
 }
@@ -35,7 +42,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  min-width: 0;
+  overflow: hidden;
 }
 
 .cta-callout-title {
@@ -55,9 +62,11 @@
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.8px;
+  white-space: nowrap;
 }
 
-.cta-callout-button {
+.cta-callout-button,
+.cta-callout-button:any-link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,4 +89,12 @@
 .cta-callout-button:focus {
   background: #0a5e7a;
   color: #fff;
+  text-decoration: none;
+}
+
+.cta-callout-button .icon img {
+  width: 18px;
+  height: 18px;
+  display: block;
+  filter: brightness(0) invert(1);
 }

@@ -11,6 +11,7 @@ export default function decorate(block) {
   let descriptionText = '';
   let buttonUrl = '';
   let buttonLabel = '';
+  let buttonIcon = '';
 
   if (isUEModel) {
     const getText = (row) => (row && row.children[0] ? row.children[0].textContent.trim() : '');
@@ -21,6 +22,7 @@ export default function decorate(block) {
     const urlAnchor = rows[3]?.querySelector('a');
     buttonUrl = urlAnchor?.getAttribute('href') || getText(rows[3]);
     buttonLabel = getText(rows[4]);
+    buttonIcon = getText(rows[5]);
   } else {
     // Document-based authoring: single row with multiple columns
     const cells = [...(rows[0]?.children || [])];
@@ -30,6 +32,7 @@ export default function decorate(block) {
     const linkEl = cells[3]?.querySelector('a');
     buttonUrl = linkEl?.href || '';
     buttonLabel = linkEl?.textContent?.trim() || cells[4]?.textContent?.trim() || '';
+    buttonIcon = cells[5]?.textContent?.trim() || '';
   }
 
   // Build content group: icon + text
@@ -61,7 +64,21 @@ export default function decorate(block) {
   const btn = document.createElement('a');
   btn.classList.add('cta-callout-button');
   btn.href = buttonUrl || '#';
-  btn.textContent = buttonLabel;
+
+  const labelSpan = document.createElement('span');
+  labelSpan.textContent = buttonLabel;
+  btn.append(labelSpan);
+
+  if (buttonIcon) {
+    const iconSpan = document.createElement('span');
+    iconSpan.className = `icon icon-${buttonIcon}`;
+    const img = document.createElement('img');
+    img.src = `/icons/${buttonIcon}.svg`;
+    img.alt = '';
+    img.loading = 'lazy';
+    iconSpan.append(img);
+    btn.append(iconSpan);
+  }
 
   // Apply instrumentation for Universal Editor
   if (isUEModel) {
