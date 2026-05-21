@@ -74,7 +74,7 @@
   right: 0;
   margin: 0;
   padding: 32px 14px 14px;
-  background: linear-gradient(transparent, rgba(0 0 0 / 65%));
+  background: linear-gradient(transparent, rgb(0 0 0 / 65%));
 }
 
 .cards.specialty .cards-card-body p {
