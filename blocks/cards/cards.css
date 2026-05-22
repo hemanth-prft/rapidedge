@@ -1,3 +1,32 @@
+/* Section header: left-aligned title + See All button */
+.cards-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.cards-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-color, #1a1a1a);
+}
+
+.cards-header .button {
+  margin: 0;
+  padding: 0.3em 1em;
+  font-size: 0.85rem;
+}
+
+/* Card navigation link wrapper */
+.cards-card-link {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
 .cards > ul {
   list-style: none;
   margin: 0;
