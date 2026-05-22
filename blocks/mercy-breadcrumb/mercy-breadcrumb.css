@@ -56,3 +56,9 @@
 .mercy-breadcrumb .breadcrumb-nav ol li a:hover {
   text-decoration: underline;
 }
+
+.mercy-breadcrumb .breadcrumb-nav ol li[aria-current='page'] {
+  color: #055372;
+  font-weight: 600;
+  cursor: default;
+}

@@ -1,28 +1,47 @@
+function getPagePath() {
+  const { pathname } = window.location;
+  // On AEM author the path is /content/<sitename>/... — strip that prefix
+  const authorMatch = pathname.match(/^\/content\/[^/]+(\/.*?)(?:\.html)?$/);
+  if (authorMatch) return authorMatch[1];
+  return pathname.replace(/\.html$/, '');
+}
+
+function buildCrumbs(pathname) {
+  const segments = pathname.split('/').filter(Boolean);
+  const crumbs = [{ label: 'Home', url: '/', current: segments.length === 0 }];
+  segments.forEach((segment, i) => {
+    crumbs.push({
+      label: segment.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+      url: `/${segments.slice(0, i + 1).join('/')}`,
+      current: i === segments.length - 1,
+    });
+  });
+  return crumbs;
+}
+
 export default function decorate(block) {
-  const items = [...block.children];
+  const crumbs = buildCrumbs(getPagePath());
+
   const nav = document.createElement('nav');
   nav.className = 'breadcrumb-nav';
   nav.setAttribute('aria-label', 'Breadcrumb');
 
   const ol = document.createElement('ol');
 
-  items.forEach((row, i) => {
-    const cols = [...row.children];
-    const text = cols[0]?.textContent.trim() || '';
-    const link = cols[1]?.textContent.trim() || '';
-
+  crumbs.forEach((crumb, i) => {
     const li = document.createElement('li');
 
-    if (link) {
-      const a = document.createElement('a');
-      a.href = link;
-      a.textContent = text;
-      li.append(a);
+    if (crumb.current) {
+      li.textContent = crumb.label;
+      li.setAttribute('aria-current', 'page');
     } else {
-      li.textContent = text;
+      const a = document.createElement('a');
+      a.href = crumb.url;
+      a.textContent = crumb.label;
+      li.append(a);
     }
 
-    if (i < items.length - 1) {
+    if (i < crumbs.length - 1) {
       li.setAttribute('data-separator', '/');
     }
 
