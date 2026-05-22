@@ -40,35 +40,44 @@ export default async function decorate(block) {
 
   const row = block.children[0];
   const cols = row ? [...row.children] : [];
-  // Check if table cells have actual authored content (not just empty wrappers)
-  const hasContent = cols.length > 1 && cols[1]?.textContent?.trim();
 
-  if (hasContent) {
-    // Read from block table rows (standard EDS delivery)
-    text = cols[0]?.innerHTML?.trim() || '';
-    fontSize = cols[1]?.textContent?.trim() || '12px';
-    fontWeight = cols[2]?.textContent?.trim() || '500';
-    const stylesRaw = cols[3]?.textContent?.trim() || 'normal, -0.6px, #9BABB1, left';
-    const parts = stylesRaw.split(',').map((s) => s.trim());
-    lineHeight = parts[0] || '100%';
-    letterSpacing = parts[1] || '-0.6px';
-    color = parts[2] || '#9BABB1';
-    alignment = parts[3] || 'left';
+  if (cols[0]?.innerHTML?.trim()) {
+    // Standard EDS / Franklin delivery: richtext content is always in cols[0].
+    // Style overrides (fontSize, fontWeight, styles) are optional extra columns —
+    // only present when the author explicitly set them; fall back to defaults otherwise.
+    text = cols[0].innerHTML.trim();
+    if (cols[1]?.textContent?.trim()) fontSize = cols[1].textContent.trim();
+    if (cols[2]?.textContent?.trim()) fontWeight = cols[2].textContent.trim();
+    const stylesRaw = cols[3]?.textContent?.trim();
+    if (stylesRaw) {
+      const parts = stylesRaw.split(',').map((s) => s.trim());
+      [lineHeight, letterSpacing, color, alignment] = [
+        parts[0] || lineHeight,
+        parts[1] || letterSpacing,
+        parts[2] || color,
+        parts[3] || alignment,
+      ];
+    }
   } else {
-    // Fetch properties from AEM resource (Universal Editor / xwalk)
+    // Fallback: fetch properties from AEM resource (UE / xwalk context where
+    // field values are not rendered inline by the delivery endpoint).
     const contentPath = getContentPath(block);
     if (contentPath) {
       const props = await fetchBlockProperties(contentPath);
       if (props) {
         text = props.content || '';
-        fontSize = props.fontSize || '12px';
-        fontWeight = props.fontWeight || '500';
-        const stylesRaw = props.styles || 'normal, -0.6px, #9BABB1, left';
-        const parts = stylesRaw.split(',').map((s) => s.trim());
-        lineHeight = parts[0] || '100%';
-        letterSpacing = parts[1] || '-0.6px';
-        color = parts[2] || '#9BABB1';
-        alignment = parts[3] || 'left';
+        if (props.fontSize) fontSize = props.fontSize;
+        if (props.fontWeight) fontWeight = props.fontWeight;
+        const stylesRaw = props.styles;
+        if (stylesRaw) {
+          const parts = stylesRaw.split(',').map((s) => s.trim());
+          [lineHeight, letterSpacing, color, alignment] = [
+            parts[0] || lineHeight,
+            parts[1] || letterSpacing,
+            parts[2] || color,
+            parts[3] || alignment,
+          ];
+        }
       }
     }
   }
