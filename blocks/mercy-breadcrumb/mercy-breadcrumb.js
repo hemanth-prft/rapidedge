@@ -1,3 +1,11 @@
+function getPagePath() {
+  const { pathname } = window.location;
+  // On AEM author the path is /content/<sitename>/... — strip that prefix
+  const authorMatch = pathname.match(/^\/content\/[^/]+(\/.*?)(?:\.html)?$/);
+  if (authorMatch) return authorMatch[1];
+  return pathname.replace(/\.html$/, '');
+}
+
 function buildCrumbs(pathname) {
   const segments = pathname.split('/').filter(Boolean);
   const crumbs = [{ label: 'Home', url: '/', current: segments.length === 0 }];
@@ -12,7 +20,7 @@ function buildCrumbs(pathname) {
 }
 
 export default function decorate(block) {
-  const crumbs = buildCrumbs(window.location.pathname);
+  const crumbs = buildCrumbs(getPagePath());
 
   const nav = document.createElement('nav');
   nav.className = 'breadcrumb-nav';
