@@ -87,13 +87,6 @@
           "valueType": "string"
         },
         {
-          "component": "richtext",
-          "name": "description",
-          "value": "",
-          "label": "Description",
-          "valueType": "string"
-        },
-        {
           "component": "aem-content",
           "valueType": "string",
           "name": "link",
