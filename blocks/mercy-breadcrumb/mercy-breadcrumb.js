@@ -13,6 +13,13 @@ export default function decorate(block) {
 
     const li = document.createElement('li');
 
+    // Preserve Universal Editor authoring attributes so items remain editable
+    [...row.attributes].forEach((attr) => {
+      if (attr.name.startsWith('data-aue-') || attr.name.startsWith('data-richtext-')) {
+        li.setAttribute(attr.name, attr.value);
+      }
+    });
+
     if (link) {
       const a = document.createElement('a');
       a.href = link;
