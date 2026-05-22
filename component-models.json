@@ -142,31 +142,6 @@
     ]
   },
   {
-    "id": "cards",
-    "fields": [
-      {
-        "component": "select",
-        "valueType": "string",
-        "name": "classes",
-        "label": "Variant",
-        "options": [
-          {
-            "name": "Default",
-            "value": ""
-          },
-          {
-            "name": "Specialty",
-            "value": "specialty"
-          },
-          {
-            "name": "News",
-            "value": "news"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "card",
     "fields": [
       {
