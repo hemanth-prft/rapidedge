@@ -34,6 +34,42 @@
   ],
   "models": [
     {
+      "id": "cards",
+      "fields": [
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "classes",
+          "label": "Variant",
+          "options": [
+            { "name": "Default", "value": "" },
+            { "name": "Specialty", "value": "specialty" },
+            { "name": "News", "value": "news" }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "title",
+          "label": "Section Title",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "ctaLabel",
+          "label": "CTA Label",
+          "value": ""
+        },
+        {
+          "component": "aem-content",
+          "valueType": "string",
+          "name": "ctaLink",
+          "label": "CTA Link"
+        }
+      ]
+    },
+    {
       "id": "card",
       "fields": [
         {

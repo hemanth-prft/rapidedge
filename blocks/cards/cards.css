@@ -78,7 +78,7 @@
   border: none;
   border-radius: 12px;
   overflow: hidden;
-  flex: 0 0 190px;
+  flex: 0 0 calc((100% - 4 * 16px) / 5);
   background-color: transparent;
 }
 
@@ -111,6 +111,11 @@
   color: #fff;
   font-size: 0.95rem;
   font-weight: 600;
+}
+
+.cards.specialty .cards-card-body p::after {
+  content: ' \2192';
+  font-weight: 400;
 }
 
 /* ============================================================

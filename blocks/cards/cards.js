@@ -32,8 +32,15 @@ export default function decorate(block) {
     [...li.children].forEach((div) => {
       if (div.children.length === 1 && div.querySelector('picture')) {
         div.className = 'cards-card-image';
+      } else if (div.querySelector('.button-container, a.button')) {
+        /* link field: EDS decorateButtons() wraps aem-content links as .button-container */
+        const anchor = div.querySelector('a');
+        if (anchor) {
+          linkHref = anchor.href;
+          toRemove.push(div);
+        }
       } else if (div.children.length === 1 && div.firstElementChild?.tagName === 'A') {
-        /* link field: single anchor child — extract href and drop the wrapper div */
+        /* link field: raw anchor fallback (un-decorated) */
         linkHref = div.firstElementChild.href;
         toRemove.push(div);
       } else {
