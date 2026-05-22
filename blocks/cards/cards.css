@@ -8,15 +8,24 @@
 
 .cards-header h2 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 24px;
   font-weight: 700;
-  color: var(--text-color, #1a1a1a);
+  letter-spacing: -0.05em;
+  color: #385b7d;
+  line-height: 1;
 }
 
 .cards-header .button {
   margin: 0;
-  padding: 0.3em 1em;
-  font-size: 0.85rem;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: -0.05em;
+  color: #385b7d;
+  border: 2px solid #385b7d;
+  border-radius: 8px;
+  background-color: transparent;
 }
 
 /* Card navigation link wrapper */
@@ -84,15 +93,18 @@
 
 .cards.specialty .cards-card-image {
   line-height: 0;
-  height: 100%;
 }
 
-.cards.specialty .cards-card-image picture,
+.cards.specialty .cards-card-image picture {
+  display: block;
+}
+
 .cards.specialty .cards-card-image img {
   width: 100%;
-  height: 100%;
-  aspect-ratio: 3 / 4;
+  height: auto;
+  aspect-ratio: 237 / 194;
   object-fit: cover;
+  object-position: center top;
   display: block;
 }
 
@@ -108,14 +120,19 @@
 
 .cards.specialty .cards-card-body p {
   margin: 0;
-  color: #fff;
-  font-size: 0.95rem;
+  font-family: Inter, sans-serif;
+  font-size: 18px;
   font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: #fcfeff;
 }
 
 .cards.specialty .cards-card-body p::after {
   content: ' \2192';
+  font-size: 14.67px;
   font-weight: 400;
+  color: #fcfeff;
 }
 
 /* ============================================================
@@ -124,8 +141,7 @@
    Card fields: image | date | title | link
    ============================================================ */
 .cards.news {
-  border: 2px dashed #90c4f0;
-  padding: 16px;
+  padding: 0;
 }
 
 .cards.news > ul {
@@ -153,9 +169,9 @@
 
 .cards.news .cards-card-image img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 237 / 150;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 16px;
 }
 
 .cards.news .cards-card-body {
@@ -163,15 +179,37 @@
 }
 
 .cards.news .cards-card-body p {
-  margin: 0 0 6px;
+  margin: 0;
   font-size: 0.85rem;
   color: var(--text-color, #333);
   line-height: 1.4;
 }
 
-/* First <p> is the date line */
-.cards.news .cards-card-body p:first-child {
+/* Date field: first body div (immediately after image) — bold + ">" arrow */
+.cards.news .cards-card-image + .cards-card-body p {
+  font-family: Inter, sans-serif;
+  font-size: 18px;
   font-weight: 700;
-  color: var(--text-color, #1a1a1a);
-  font-size: 0.9rem;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: #385b7d;
+  margin-bottom: 6px;
+}
+
+.cards.news .cards-card-image + .cards-card-body p::after {
+  content: ' \203A';
+  color: #0a8ab6;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Description field: second body div (after date body) */
+.cards.news .cards-card-body + .cards-card-body p {
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: #526268;
 }

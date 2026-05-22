@@ -2,14 +2,37 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  const { title, ctaLabel, ctaLink } = block.dataset;
+  const rows = [...block.children];
 
-  /* build optional section header (title + See All CTA) */
+  /* ── Detect block-level field rows (UE model authoring) ──────────────────
+     UE renders block-level model fields (title, ctaLabel, ctaLink) as child
+     rows BEFORE card item rows. Card item rows always contain a picture/img.
+     Collect rows until we hit the first one with an image.           ────── */
+  let cardStartIndex = rows.length;
+  for (let i = 0; i < rows.length; i += 1) {
+    if (rows[i].querySelector('picture, img')) {
+      cardStartIndex = i;
+      break;
+    }
+  }
+
+  const fieldRows = rows.slice(0, cardStartIndex);
+  const cardRows = rows.slice(cardStartIndex);
+
+  /* Extract block-level fields: title (row 0), ctaLabel (row 1), ctaLink (row 2) */
+  const getText = (row) => row?.querySelector('div')?.textContent?.trim() || '';
+  const getHref = (row) => row?.querySelector('a')?.href || getText(row);
+
+  const sectionTitle = getText(fieldRows[0]);
+  const ctaLabel = getText(fieldRows[1]);
+  const ctaLink = getHref(fieldRows[2]);
+
+  /* Build optional section header (title + See All CTA) */
   const headerEl = document.createElement('div');
   headerEl.className = 'cards-header';
-  if (title) {
+  if (sectionTitle) {
     const h2 = document.createElement('h2');
-    h2.textContent = title;
+    h2.textContent = sectionTitle;
     headerEl.append(h2);
   }
   if (ctaLabel) {
@@ -20,9 +43,9 @@ export default function decorate(block) {
     headerEl.append(a);
   }
 
-  /* build card list */
+  /* Build card list */
   const ul = document.createElement('ul');
-  [...block.children].forEach((row) => {
+  cardRows.forEach((row) => {
     const li = document.createElement('li');
     moveInstrumentation(row, li);
     while (row.firstElementChild) li.append(row.firstElementChild);
@@ -43,8 +66,10 @@ export default function decorate(block) {
         /* link field: raw anchor fallback (un-decorated) */
         linkHref = div.firstElementChild.href;
         toRemove.push(div);
-      } else {
+      } else if (div.textContent.trim()) {
         div.className = 'cards-card-body';
+      } else {
+        toRemove.push(div); /* remove empty field divs (e.g. unused description in specialty) */
       }
     });
     toRemove.forEach((d) => d.remove());
@@ -66,7 +91,7 @@ export default function decorate(block) {
     img.closest('picture').replaceWith(optimizedPic);
   });
 
-  if (title || ctaLabel) {
+  if (sectionTitle || ctaLabel) {
     block.replaceChildren(headerEl, ul);
   } else {
     block.replaceChildren(ul);
