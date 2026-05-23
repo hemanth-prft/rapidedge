@@ -1,0 +1,55 @@
+{
+  "definitions": [
+    {
+      "title": "Mercy Image",
+      "id": "mercy-image",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block",
+            "template": {
+              "name": "Mercy Image",
+              "model": "mercy-image"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "mercy-image",
+      "fields": [
+        {
+          "component": "reference",
+          "name": "image",
+          "label": "Image",
+          "valueType": "string",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "width",
+          "label": "Width (e.g. 870px, 100%)",
+          "valueType": "string",
+          "value": "870px"
+        },
+        {
+          "component": "text",
+          "name": "height",
+          "label": "Height (e.g. 330px, auto)",
+          "valueType": "string",
+          "value": "330px"
+        },
+        {
+          "component": "text",
+          "name": "borderRadius",
+          "label": "Border Radius (e.g. 16px)",
+          "valueType": "string",
+          "value": "16px"
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

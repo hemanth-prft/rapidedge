@@ -17,7 +17,7 @@
   --dark-color: #505050;
   --text-color: #131313;
   --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --link-hover-color: #1d4ccf;
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
@@ -86,6 +86,12 @@ body.appear {
 
 header {
   height: var(--nav-height);
+}
+
+@media (width >= 900px) {
+  header {
+    height: 114px;
+  }
 }
 
 header .header,

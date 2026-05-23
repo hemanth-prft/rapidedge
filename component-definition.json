@@ -83,6 +83,36 @@
       "id": "blocks",
       "components": [
         {
+          "title": "Accordion",
+          "id": "accordion",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Accordion",
+                  "filter": "accordion"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Accordion Item",
+          "id": "accordion-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Accordion Item",
+                  "model": "accordion-item"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Cards",
           "id": "cards",
           "plugins": {
@@ -174,6 +204,128 @@
           }
         },
         {
+          "title": "Hospital Search",
+          "id": "hospital-search",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Hospital Search",
+                  "filter": "hospital-search"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Hospital Search Item",
+          "id": "hospital-search-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Hospital Search Item",
+                  "model": "hospital-search-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Media Contact",
+          "id": "media-contact",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Media Contact",
+                  "model": "media-contact"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Mercy Breadcrumb",
+          "id": "mercy-breadcrumb",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Mercy Breadcrumb",
+                  "filter": "mercy-breadcrumb"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Breadcrumb Item",
+          "id": "mercy-breadcrumb-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Breadcrumb Item",
+                  "model": "mercy-breadcrumb-item",
+                  "label": "Page",
+                  "url": "/"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Mercy Image",
+          "id": "mercy-image",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block",
+                "template": {
+                  "name": "Mercy Image",
+                  "model": "mercy-image"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Mercy Text",
+          "id": "mercy-text",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block",
+                "template": {
+                  "name": "Mercy Text",
+                  "model": "mercy-text"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Mercy Title",
+          "id": "mercy-title",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Mercy Title",
+                  "model": "mercy-title"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Quick Facts",
           "id": "quick-facts",
           "plugins": {
@@ -183,6 +335,21 @@
                 "template": {
                   "name": "Quick Facts",
                   "model": "quick-facts"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Rich Text",
+          "id": "richtext",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Rich Text",
+                  "model": "richtext"
                 }
               }
             }

@@ -1,9 +1,9 @@
 /* header and nav layout */
 header .nav-wrapper {
-  background-color: var(--background-color);
+  background-color: #edf6f9;
   width: 100%;
   z-index: 2;
-  position: fixed;
+  top: 0;
 }
 
 header nav {
@@ -15,17 +15,16 @@ header nav {
   align-items: center;
   gap: 0 24px;
   margin: auto;
-  max-width: 1248px;
+  max-width: 1440px;
   height: var(--nav-height);
   padding: 0 24px;
-  font-family: var(--body-font-family);
+  font-family: Inter, sans-serif;
 }
 
 header nav[aria-expanded='true'] {
   grid-template:
-    'hamburger brand' var(--nav-height)
-    'sections sections' 1fr
-    'tools tools' var(--nav-height) / auto 1fr;
+    'hamburger brand tools' var(--nav-height)
+    'sections sections sections' 1fr / auto 1fr auto;
   overflow-y: auto;
   min-height: 100dvh;
 }
@@ -37,10 +36,10 @@ header nav[aria-expanded='true'] {
 
   header nav {
     display: flex;
-    justify-content: space-between;
-    gap: 0 32px;
-    max-width: 1264px;
-    padding: 0 32px;
+    align-items: center;
+    gap: 0 48px;
+    max-width: 1440px;
+    height: 114px;
   }
 
   header nav[aria-expanded='true'] {
@@ -56,6 +55,7 @@ header nav p {
 
 header nav a:any-link {
   color: currentcolor;
+  text-decoration: none;
 }
 
 /* hamburger */
@@ -72,7 +72,7 @@ header nav .nav-hamburger button {
   border: 0;
   border-radius: 0;
   padding: 0;
-  background-color: var(--background-color);
+  background-color: transparent;
   color: inherit;
   overflow: initial;
   text-overflow: initial;
@@ -143,14 +143,15 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 header .nav-brand {
   grid-area: brand;
   flex-basis: 128px;
+  flex-shrink: 0;
   font-size: var(--heading-font-size-s);
   font-weight: 700;
   line-height: 1;
 }
 
 header nav .nav-brand img {
-  width: 128px;
-  height: auto;
+  width: 160px;
+  height: 60px;
 }
 
 /* sections */
@@ -170,11 +171,12 @@ header nav[aria-expanded='true'] .nav-sections {
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
-  font-size: var(--body-font-size-s);
+  font-size: 16px;
+  font-weight: 700;
 }
 
 header nav .nav-sections ul > li {
-  font-weight: 500;
+  font-weight: 700;
 }
 
 header nav .nav-sections ul > li > ul {
@@ -183,6 +185,17 @@ header nav .nav-sections ul > li > ul {
 
 header nav .nav-sections ul > li > ul > li {
   font-weight: 400;
+}
+
+header nav .nav-sections ul > li > a {
+  color: #055372;
+  text-decoration: none;
+  padding: 8px 0;
+  display: block;
+}
+
+header nav .nav-sections ul > li > a:hover {
+  color: #0a8ab6;
 }
 
 @media (width >= 900px) {
@@ -196,9 +209,32 @@ header nav .nav-sections ul > li > ul > li {
     align-self: unset;
   }
 
+  header nav .nav-sections .default-content-wrapper > ul {
+    display: inline-flex;
+    padding-bottom: 8px;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1.5px solid #0a8ab6;
+    
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li {
+    flex: 0 1 auto;
+    position: relative;
+    padding: 0 24px;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > a {
+    padding: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #055372;
+    letter-spacing: -0.02em;
+  }
+
   header nav .nav-sections .nav-drop {
     position: relative;
-    padding-right: 16px;
+    padding-right: 32px;
     cursor: pointer;
   }
 
@@ -206,31 +242,20 @@ header nav .nav-sections ul > li > ul > li {
     content: '';
     display: inline-block;
     position: absolute;
-    top: 0.5em;
-    right: 2px;
+    top: 0.4em;
+    right: 8px;
     transform: rotate(135deg);
     width: 6px;
     height: 6px;
-    border: 2px solid currentcolor;
+    border: 2px solid #055372;
     border-radius: 0 1px 0 0;
     border-width: 2px 2px 0 0;
   }
 
   header nav .nav-sections .nav-drop[aria-expanded='true']::after {
     top: unset;
-    bottom: 0.5em;
+    bottom: 0.4em;
     transform: rotate(315deg);
-  }
-
-  header nav .nav-sections ul {
-    display: flex;
-    gap: 24px;
-    margin: 0;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li {
-    flex: 0 1 auto;
-    position: relative;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
@@ -239,14 +264,13 @@ header nav .nav-sections ul > li > ul > li {
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-    display: block;
-    position: absolute;
-    left: -24px;
-    width: 200px;
-    top: 150%;
-    padding: 16px;
-    background-color: var(--light-color);
-    white-space: initial;
+    color: #086489;
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -1px;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
@@ -258,7 +282,7 @@ header nav .nav-sections ul > li > ul > li {
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--light-color);
+    border-bottom: 8px solid #fff;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
@@ -269,4 +293,41 @@ header nav .nav-sections ul > li > ul > li {
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
+  flex-shrink: 0;
 }
+
+/* Sign In button */
+header nav .nav-tools .nav-sign-in {
+  color: #FCFEFF;
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background-color: #055372;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+  padding: 10px 12px 10px 20px;
+
+}
+
+header nav .nav-tools .nav-sign-in:hover {
+  background-color: #0a8ab6;
+}
+
+header nav .nav-tools .nav-sign-in::after {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ffffff' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM12 14a7 7 0 0 0-7 7h14a7 7 0 0 0-7-7z'/%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+}
+

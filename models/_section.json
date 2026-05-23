@@ -51,9 +51,17 @@
         "cards",
         "columns",
         "fragment",
+        "accordion",
         "quick-facts",
         "split-banner",
-        "cta-callout"
+        "cta-callout",
+        "hospital-search",
+        "richtext",
+        "mercy-title",
+        "mercy-text",
+        "mercy-image",
+        "media-contact",
+        "mercy-breadcrumb"
       ]
     }
   ]
