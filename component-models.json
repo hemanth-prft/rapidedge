@@ -474,74 +474,11 @@
         "valueType": "string"
       },
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "button1Text",
-        "label": "Button 1 Text",
-        "value": "Book appointment"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "button1Link",
-        "label": "Button 1 Link",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "button2Text",
-        "label": "Button 2 Text",
-        "value": "Urgent care near me"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "button2Link",
-        "label": "Button 2 Link",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "button3Text",
-        "label": "Button 3 Text",
-        "value": "Pay my bill"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "button3Link",
-        "label": "Button 3 Link",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "button4Text",
-        "label": "Button 4 Text",
-        "value": "Virtual care"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "button4Link",
-        "label": "Button 4 Link",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "button5Text",
-        "label": "Button 5 Text",
-        "value": "Find a doctor"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "button5Link",
-        "label": "Button 5 Link",
-        "value": ""
+        "component": "richtext",
+        "name": "links",
+        "value": "",
+        "label": "Quick Links (add links that become buttons)",
+        "valueType": "string"
       },
       {
         "component": "text",
