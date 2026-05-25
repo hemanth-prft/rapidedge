@@ -1,16 +1,12 @@
 /* split-banner block */
 
-.split-banner-wrapper {
-  background-color: #fcfeff;
-}
-
 .split-banner-container .split-banner-wrapper {
   max-width: unset;
   padding: 0;
 }
 
 .split-banner {
-  max-width: 1440px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 40px 24px;
 }
@@ -127,9 +123,8 @@
   }
 
   .split-banner-image {
-    flex: 0 0 43%;
+    flex: 0 0 45%;
     box-sizing: border-box;
-    padding-left: 80px;
     display: flex;
   }
 
@@ -145,7 +140,7 @@
 
   .split-banner-content {
     flex: 1;
-    padding: 0 clamp(24px, 5.5vw, 79px) 0 clamp(24px, 4.1vw, 59px);
+    padding: 0 24px 0 40px;
     gap: 36px;
     display: flex;
     flex-direction: column;
