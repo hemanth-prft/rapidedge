@@ -614,6 +614,67 @@
     ]
   },
   {
+    "id": "promo-card",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "headerIcon",
+        "label": "Header Icon (icon name from /icons/ folder)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": ""
+      },
+      {
+        "component": "textarea",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttonUrl",
+        "label": "Button URL",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttonLabel",
+        "label": "Button Label",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttonIcon",
+        "label": "Button Icon (icon name from /icons/ folder)",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt Image",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "quick-facts",
     "fields": [
       {
