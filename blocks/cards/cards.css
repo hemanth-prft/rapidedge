@@ -1,3 +1,41 @@
+/* Section header: left-aligned title + See All button */
+.cards-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.cards-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: #385b7d;
+  line-height: 1;
+}
+
+.cards-header .button {
+  margin: 0;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: -0.05em;
+  color: #385b7d;
+  border: 2px solid #385b7d;
+  border-radius: 8px;
+  background-color: transparent;
+}
+
+/* Card navigation link wrapper */
+.cards-card-link {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
 .cards > ul {
   list-style: none;
   margin: 0;
@@ -24,4 +62,148 @@
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+/* ============================================================
+   VARIANT: specialty  (Provider by Specialty)
+   Usage in UE: Cards (specialty) block
+   Card fields: image | label | link
+   ============================================================ */
+.cards.specialty > ul {
+  display: flex;
+  overflow-x: auto;
+  grid-template-columns: unset;
+  gap: 16px;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.cards.specialty > ul::-webkit-scrollbar {
+  display: none;
+}
+
+.cards.specialty > ul > li {
+  position: relative;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  flex: 0 0 calc((100% - 4 * 16px) / 5);
+  background-color: transparent;
+}
+
+.cards.specialty .cards-card-image {
+  line-height: 0;
+}
+
+.cards.specialty .cards-card-image picture {
+  display: block;
+}
+
+.cards.specialty .cards-card-image img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 237 / 194;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.cards.specialty .cards-card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 32px 14px 14px;
+  background: linear-gradient(transparent, rgb(0 0 0 / 65%));
+}
+
+.cards.specialty .cards-card-body p {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: #fcfeff;
+}
+
+.cards.specialty .cards-card-body p::after {
+  content: ' \2192';
+  font-size: 14.67px;
+  font-weight: 400;
+  color: #fcfeff;
+}
+
+/* ============================================================
+   VARIANT: news  (Mercy Top News)
+   Usage in UE: Cards (news) block
+   Card fields: image | date | title | link
+   ============================================================ */
+.cards.news {
+  padding: 0;
+}
+
+.cards.news > ul {
+  display: flex;
+  overflow-x: auto;
+  grid-template-columns: unset;
+  gap: 20px;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.cards.news > ul::-webkit-scrollbar {
+  display: none;
+}
+
+.cards.news > ul > li {
+  border: none;
+  background-color: transparent;
+  flex: 0 0 210px;
+}
+
+.cards.news .cards-card-image {
+  line-height: 0;
+}
+
+.cards.news .cards-card-image img {
+  width: 100%;
+  aspect-ratio: 237 / 150;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.cards.news .cards-card-body {
+  margin: 10px 0 0;
+}
+
+/* Date: first <p> in news card body — bold + "›" arrow */
+.cards.news .cards-card-body p:first-child {
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: #385b7d;
+  margin: 0 0 6px;
+}
+
+.cards.news .cards-card-body p:first-child::after {
+  content: ' \203A';
+  color: #0a8ab6;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Description: subsequent <p> tags in news card body */
+.cards.news .cards-card-body p:not(:first-child) {
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: #526268;
+  margin: 0;
 }
