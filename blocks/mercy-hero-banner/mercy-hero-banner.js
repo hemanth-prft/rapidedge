@@ -42,7 +42,7 @@ export default function decorate(block) {
     const buttonContainers = textContent.querySelectorAll('.button-container');
     if (buttonContainers.length > 0) {
       const quickLinks = document.createElement('div');
-      quickLinks.className = 'mercy-hero-banner-quick-links';
+      quickLinks.className = 'mercy-hero-banner-quick-prompt';
       buttonContainers.forEach((container) => {
         quickLinks.appendChild(container);
       });
@@ -52,7 +52,7 @@ export default function decorate(block) {
       const links = textContent.querySelectorAll('p a');
       if (links.length > 0) {
         const quickLinks = document.createElement('div');
-        quickLinks.className = 'mercy-hero-banner-quick-links';
+        quickLinks.className = 'mercy-hero-banner-quick-prompt';
         links.forEach((link) => {
           link.classList.add('button');
           const wrapper = document.createElement('p');
@@ -66,7 +66,7 @@ export default function decorate(block) {
   }
 
   // Add default quick links if none found in content
-  if (!heroContent.querySelector('.mercy-hero-banner-quick-links')) {
+  if (!heroContent.querySelector('.mercy-hero-banner-quick-prompt')) {
     const defaultLinks = [
       { text: 'Book appointment', url: '#' },
       { text: 'Urgent care near me', url: '#' },
@@ -75,7 +75,7 @@ export default function decorate(block) {
       { text: 'Find a doctor', url: '#' },
     ];
     const quickLinks = document.createElement('div');
-    quickLinks.className = 'mercy-hero-banner-quick-links';
+    quickLinks.className = 'mercy-hero-banner-quick-prompt';
     defaultLinks.forEach(({ text, url }) => {
       const wrapper = document.createElement('p');
       wrapper.className = 'button-container';
