@@ -6,7 +6,8 @@
 }
 
 .split-banner {
-  margin: 0 125px;
+  max-width: 1280px;
+  margin: 0 auto;
   padding: 40px 24px;
 }
 
@@ -112,7 +113,7 @@
 /* Desktop layout */
 @media (width >= 900px) {
   .split-banner {
-    padding: 0;
+    padding: 40px 0;
   }
 
   .split-banner-inner {
@@ -140,10 +141,10 @@
   .split-banner-content {
     flex: 1;
     padding: 0 24px 0 40px;
-    gap: 16px;
+    gap: 36px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .split-banner-title {
@@ -155,6 +156,5 @@
   .split-banner-description {
     font-size: 18px;
     max-width: 612px;
-    margin-bottom: 0;
   }
 }
