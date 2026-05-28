@@ -87,8 +87,14 @@
   border: none;
   border-radius: 12px;
   overflow: hidden;
-  flex: 0 0 calc((100% - 4 * 16px) / 5);
+  flex: 0 0 160px;
   background-color: transparent;
+}
+
+@media (width >= 900px) {
+  .cards.specialty > ul > li {
+    flex: 0 0 calc((100% - 4 * 16px) / 5);
+  }
 }
 
 .cards.specialty .cards-card-image {
