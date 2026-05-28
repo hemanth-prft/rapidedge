@@ -9,8 +9,24 @@
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
               "columns": "2",
-              "rows": "1"
+              "rows": "1",
+              "row1": {
+                "col1": {},
+                "col2": {}
+              }
             }
+          }
+        }
+      }
+    },
+    {
+      "title": "Column",
+      "id": "column",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/columns/v1/columns/column",
+            "template": {}
           }
         }
       }
@@ -18,65 +34,33 @@
   ],
   "models": [
     {
+      "id": "column",
+      "fields": [
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Text",
+          "value": ""
+        }
+      ]
+    },
+    {
       "id": "columns",
       "fields": [
         {
           "component": "text",
           "valueType": "number",
           "name": "columns",
-          "value": "2",
-          "label": "Number of Columns"
+          "value": "",
+          "label": "Columns"
         },
         {
           "component": "text",
           "valueType": "number",
           "name": "rows",
-          "value": "1",
-          "label": "Number of Rows"
-        },
-        {
-          "component": "select",
-          "name": "layout",
-          "label": "Column Width Layout",
-          "description": "Choose how columns split the width",
-          "options": [
-            {
-              "name": "Equal Width",
-              "value": ""
-            },
-            {
-              "name": "30 / 70",
-              "value": "columns-30-70"
-            },
-            {
-              "name": "70 / 30",
-              "value": "columns-70-30"
-            },
-            {
-              "name": "40 / 60",
-              "value": "columns-40-60"
-            },
-            {
-              "name": "60 / 40",
-              "value": "columns-60-40"
-            },
-            {
-              "name": "25 / 75",
-              "value": "columns-25-75"
-            },
-            {
-              "name": "75 / 25",
-              "value": "columns-75-25"
-            },
-            {
-              "name": "33 / 33 / 33",
-              "value": "columns-33-33-33"
-            },
-            {
-              "name": "25 / 50 / 25",
-              "value": "columns-25-50-25"
-            }
-          ]
+          "value": "",
+          "label": "Rows"
         }
       ]
     }
@@ -94,12 +78,7 @@
         "text",
         "image",
         "button",
-        "title",
-        "accordion",
-        "cards",
-        "hero",
-        "fragment",
-        "quick-facts"
+        "title"
       ]
     }
   ]
