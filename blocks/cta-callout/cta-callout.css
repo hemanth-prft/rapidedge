@@ -98,3 +98,43 @@
   display: block;
   filter: brightness(0) invert(1);
 }
+
+@media (width <= 768px) {
+  .cta-callout {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .cta-callout-content {
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .cta-callout-text {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    overflow: visible;
+  }
+
+  .cta-callout-title {
+    white-space: normal;
+    font-size: 16px;
+  }
+
+  .cta-callout-description {
+    white-space: normal;
+    font-size: 14px;
+  }
+
+  .cta-callout-button,
+  .cta-callout-button:any-link {
+    width: 100%;
+    justify-content: center;
+    font-size: 16px;
+  }
+}
