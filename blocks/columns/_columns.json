@@ -14,9 +14,36 @@
           }
         }
       }
+    },
+    {
+      "title": "Column",
+      "id": "column",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Column",
+              "model": "column"
+            }
+          }
+        }
+      }
     }
   ],
   "models": [
+    {
+      "id": "column",
+      "fields": [
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Text",
+          "value": ""
+        }
+      ]
+    },
     {
       "id": "columns",
       "fields": [
