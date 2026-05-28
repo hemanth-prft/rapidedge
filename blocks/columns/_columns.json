@@ -9,7 +9,11 @@
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
               "columns": "2",
-              "rows": "1"
+              "rows": "1",
+              "row1": {
+                "col1": {},
+                "col2": {}
+              }
             }
           }
         }
@@ -21,11 +25,8 @@
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "name": "Column",
-              "model": "column"
-            }
+            "resourceType": "core/franklin/components/columns/v1/columns/column",
+            "template": {}
           }
         }
       }
