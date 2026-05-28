@@ -99,7 +99,7 @@
   filter: brightness(0) invert(1);
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .cta-callout {
     flex-direction: column;
     align-items: flex-start;
