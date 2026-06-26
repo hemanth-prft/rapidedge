@@ -1,0 +1,12 @@
+.mercy-hero-banner-covered-container .mercy-hero-banner-covered-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.mercy-hero-banner-covered picture,
+.mercy-hero-banner-covered img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
