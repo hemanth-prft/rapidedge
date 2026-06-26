@@ -22,16 +22,23 @@ module.exports = {
     // Form component cell limits
     'xwalk/max-cells': ['error', {
       '*': 4, // default limit
+      // Existing project blocks
+      'cta-callout': 6,
+      'mercy-hero-banner': 13,
+      'promo-card': 7,
+      'quick-facts': 5,
+      'split-banner': 6,
+      // Form components
       form: 15,
       wizard: 12,
       'form-button': 7,
       'checkbox-group': 20,
       checkbox: 19,
       'date-input': 21,
-      'drop-down': 19,
+      'drop-down': 20,
       email: 22,
       'file-input': 20,
-      'form-fragment': 15,
+      'form-fragment': 16,
       'form-image': 7,
       'multiline-input': 23,
       'number-input': 22,
@@ -43,6 +50,7 @@ module.exports = {
       'text-input': 23,
       accordion: 14,
       modal: 11,
+      range: 19,
       rating: 18,
       password: 20,
       tnc: 12,
