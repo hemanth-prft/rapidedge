@@ -19,7 +19,7 @@
   gap: 10px;
 }
 
-.mercy-breadcrumb .breadcrumb-nav ol {
+.mercy-breadcrumb .breadcrumb-nav ul {
   display: flex;
   align-items: center;
   list-style: none;
@@ -29,7 +29,7 @@
   flex-wrap: wrap;
 }
 
-.mercy-breadcrumb .breadcrumb-nav ol li {
+.mercy-breadcrumb .breadcrumb-nav ul li {
   color: #055372;
   font-family: var(--typography-small-typeface, Inter);
   font-size: 14px;
@@ -38,7 +38,7 @@
   line-height: 130%;
 }
 
-.mercy-breadcrumb .breadcrumb-nav ol li[data-separator]::after {
+.mercy-breadcrumb .breadcrumb-nav ul li[data-separator]::after {
     border-style: solid;
     border-width: 1px 1px 0 0;
     content: "";
@@ -53,7 +53,7 @@
     width: 5px;
 }
 
-.mercy-breadcrumb .breadcrumb-nav ol li a {
+.mercy-breadcrumb .breadcrumb-nav ul li a {
   color: #055372;
   text-decoration: none;
   font-family: var(--typography-small-typeface, Inter);
@@ -62,11 +62,11 @@
   line-height: 130%;
 }
 
-.mercy-breadcrumb .breadcrumb-nav ol li a:hover {
+.mercy-breadcrumb .breadcrumb-nav ul li a:hover {
   text-decoration: underline;
 }
 
-.mercy-breadcrumb .breadcrumb-nav ol li[aria-current='page'] {
+.mercy-breadcrumb .breadcrumb-nav ul li[aria-current='page'] {
   color: #055372;
   font-weight: 600;
   cursor: default;
