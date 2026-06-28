@@ -26,7 +26,7 @@ export default function decorate(block) {
   nav.className = 'breadcrumb-nav';
   nav.setAttribute('aria-label', 'Breadcrumb');
 
-  const ul = document.createElement('ul');
+  const ol = document.createElement('ol');
 
   crumbs.forEach((crumb, i) => {
     const li = document.createElement('li');
@@ -42,13 +42,13 @@ export default function decorate(block) {
     }
 
     if (i < crumbs.length - 1) {
-      li.setAttribute('data-separator');
+      li.setAttribute('data-separator', '/');
     }
 
-    ul.append(li);
+    ol.append(li);
   });
 
-  nav.append(ul);
+  nav.append(ol);
   block.textContent = '';
   block.append(nav);
 
