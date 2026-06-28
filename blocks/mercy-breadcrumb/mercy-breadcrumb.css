@@ -39,9 +39,9 @@
 }
 
 .mercy-breadcrumb .breadcrumb-nav ul li[data-separator]::after {
+    content: attr(data-separator);  
     border-style: solid;
     border-width: 1px 1px 0 0;
-    content: "";
     display: inline-block;
     height: 5px;
     left: 5px;
