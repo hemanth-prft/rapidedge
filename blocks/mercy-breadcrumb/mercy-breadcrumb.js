@@ -42,7 +42,7 @@ export default function decorate(block) {
     }
 
     if (i < crumbs.length - 1) {
-      li.setAttribute('data-separator');
+      li.setAttribute('data-separator','');
     }
 
     ul.append(li);
