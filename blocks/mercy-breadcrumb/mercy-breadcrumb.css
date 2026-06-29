@@ -33,10 +33,9 @@
 
 .mercy-breadcrumb .breadcrumb-nav ul li {
   color: #000;
-  font-family: var(--typography-small-typeface, Inter);
+  font-family: var(--body-font-family, Open Sans);
   font-size: 14px;
   font-style: normal;
-  font-weight: 500;
   line-height: 130%;
 }
 
@@ -58,9 +57,8 @@
 .mercy-breadcrumb .breadcrumb-nav ul li a {
   color: #000;
   text-decoration: none;
-  font-family: var(--typography-small-typeface, Inter);
+  font-family: var(--body-font-family, Open Sans);
   font-size: 14px;
-  font-weight: 500;
   line-height: 130%;
 }
 
