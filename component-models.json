@@ -5148,6 +5148,27 @@
         "name": "imageAlt",
         "label": "Image Alt Text",
         "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subtext",
+        "label": "Subtext",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "button",
+        "label": "Button Link",
+        "value": ""
       }
     ]
   },
