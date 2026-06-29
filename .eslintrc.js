@@ -23,6 +23,7 @@ module.exports = {
     'xwalk/max-cells': ['error', {
       '*': 4, // default limit
       // Existing project blocks
+      'mercy-hero-banner-covered': 5,
       'cta-callout': 6,
       'mercy-hero-banner': 13,
       'promo-card': 7,
