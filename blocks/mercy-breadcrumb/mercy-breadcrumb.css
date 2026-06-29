@@ -68,6 +68,6 @@
 
 .mercy-breadcrumb .breadcrumb-nav ul li[aria-current='page'] {
   color: #000;
-  font-weight: 600;
+  font-family: var(--body-font-family, Open Sans);
   cursor: default;
 }
