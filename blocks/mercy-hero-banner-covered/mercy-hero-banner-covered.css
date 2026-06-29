@@ -1,17 +1,18 @@
+/* Remove default container constraints */
 .mercy-hero-banner-covered-container .mercy-hero-banner-covered-wrapper {
   max-width: unset;
   padding: 0;
 }
 
+/* ── Block shell ── */
 .mercy-hero-banner-covered {
   position: relative;
-  min-height: 420px;
+  height: 200px;
   overflow: hidden;
 }
 
-.mercy-hero-banner-covered-image,
-.mercy-hero-banner-covered-overlay,
-.mercy-hero-banner-covered-content {
+/* ── Full-bleed background image ── */
+.mercy-hero-banner-covered-image {
   position: absolute;
   inset: 0;
 }
@@ -22,113 +23,136 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: right center;
 }
 
+/* ── Left-to-transparent teal gradient overlay ── */
 .mercy-hero-banner-covered-overlay {
-  background: linear-gradient(90deg, rgb(0 92 122 / 82%) 0%, rgb(0 92 122 / 58%) 28%, rgb(0 92 122 / 0%) 62%);
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgb(0 92 122 / 90%) 0%,
+    rgb(0 92 122 / 72%) 28%,
+    rgb(0 92 122 / 30%) 52%,
+    rgb(0 92 122 / 0%) 68%
+  );
   pointer-events: none;
 }
 
+/* ── Content layer: title+subtext left, button right ── */
 .mercy-hero-banner-covered-content {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 1rem;
-  max-width: 34rem;
-  padding: 3rem 1.5rem 2.5rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 5%;
   color: #fff;
 }
 
+.mercy-hero-banner-covered-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+/* ── Title ── */
 .mercy-hero-banner-covered-title {
   margin: 0;
   color: inherit;
-  max-width: 8ch;
-  font-size: clamp(3.25rem, 5.8vw, 4.9rem);
-  font-weight: 300;
-  line-height: 0.96;
-  letter-spacing: -0.03em;
+  font-size: 3.375rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
 }
 
+/* ── Yellow subtext badge ── */
 .mercy-hero-banner-covered-subtext {
   margin: 0;
-  padding: 0.8rem 2rem;
+  padding: 0.55rem 1.25rem;
+  display: inline-block;
   background-color: #f4b548;
-  color: #000;
-  font-size: 1.125rem;
-  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* ── Right-side CTA button ── */
+.mercy-hero-banner-covered-right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
 .mercy-hero-banner-covered-button {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  min-width: 172px;
-  margin-top: 0.5rem;
-  padding: 1rem 1.75rem;
-  border-radius: 0;
-  background-color: #006b8f;
+  gap: 0.75rem;
+  padding: 0.85rem 1.5rem;
+  background-color: #005a78;
   color: #fff;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 600;
   text-decoration: none;
+  white-space: nowrap;
+}
+
+.mercy-hero-banner-covered-button::after {
+  content: "›";
+  font-size: 1.5rem;
+  line-height: 1;
 }
 
 .mercy-hero-banner-covered-button:hover,
 .mercy-hero-banner-covered-button:focus {
-  background-color: #005a78;
+  background-color: #004a63;
   color: #fff;
   text-decoration: none;
 }
 
-@media (width >= 768px) {
+/* ── Desktop: slightly taller, wider padding ── */
+@media (width >= 1024px) {
   .mercy-hero-banner-covered {
-    min-height: 560px;
+    height: 225px;
   }
 
   .mercy-hero-banner-covered-content {
-    gap: 1.5rem;
-    padding: 3rem 4rem 4rem 14%;
-  }
-
-  .mercy-hero-banner-covered-button {
-    position: absolute;
-    top: 6.4rem;
-    right: -22rem;
-    margin-top: 0;
-  }
-}
-
-@media (width >= 1200px) {
-  .mercy-hero-banner-covered-content {
-    padding-left: 14.1%;
-    padding-top: 3.2rem;
+    padding-inline: 10%;
   }
 
   .mercy-hero-banner-covered-title {
-    font-size: 4.95rem;
-  }
-
-  .mercy-hero-banner-covered-button {
-    right: -24rem;
+    font-size: 3.75rem;
   }
 }
 
+/* ── Mobile: stack button below content, fade from bottom ── */
 @media (width < 768px) {
   .mercy-hero-banner-covered {
-    min-height: 360px;
+    height: 300px;
   }
 
   .mercy-hero-banner-covered-overlay {
-    background: linear-gradient(90deg, rgb(0 92 122 / 84%) 0%, rgb(0 92 122 / 62%) 45%, rgb(0 92 122 / 18%) 72%, rgb(0 92 122 / 0%) 100%);
+    background: linear-gradient(
+      180deg,
+      rgb(0 92 122 / 0%) 0%,
+      rgb(0 92 122 / 55%) 45%,
+      rgb(0 92 122 / 88%) 100%
+    );
+  }
+
+  .mercy-hero-banner-covered-content {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 1.25rem;
+    gap: 0.75rem;
   }
 
   .mercy-hero-banner-covered-title {
-    max-width: 9ch;
-  }
-
-  .mercy-hero-banner-covered-subtext {
-    padding-inline: 1.25rem;
+    font-size: 2.5rem;
   }
 }

@@ -49,8 +49,7 @@
           "value": ""
         },
         {
-          "component": "aem-content",
-          "valueType": "string",
+          "component": "richtext",
           "name": "button",
           "label": "Button Link",
           "value": ""
