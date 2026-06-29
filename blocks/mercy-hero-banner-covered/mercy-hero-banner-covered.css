@@ -7,14 +7,17 @@
 /* ── Block shell ── */
 .mercy-hero-banner-covered {
   position: relative;
-  height: 200px;
+  height: 240px;
   overflow: hidden;
 }
 
-/* ── Full-bleed background image ── */
+/* ── Full-bleed background image ──
+   Mercy: position:absolute; width:100%; z-index:-1; overflow:hidden */
 .mercy-hero-banner-covered-image {
   position: absolute;
   inset: 0;
+  z-index: -1;
+  overflow: hidden;
 }
 
 .mercy-hero-banner-covered-image picture,
@@ -23,13 +26,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: right center;
+  object-position: center top;
 }
 
 /* ── Left-to-transparent teal gradient overlay ── */
 .mercy-hero-banner-covered-overlay {
   position: absolute;
   inset: 0;
+  z-index: 0;
   background: linear-gradient(
     90deg,
     rgb(0 92 122 / 90%) 0%,
@@ -56,60 +60,80 @@
 .mercy-hero-banner-covered-left {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 0.65rem;
 }
 
 /* ── Title ── */
 .mercy-hero-banner-covered-title {
   margin: 0;
-  color: inherit;
-  font-size: 3.375rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.01em;
+  max-width: 540px;
+  background: none;
+  color: #fff;
+  font-family: roboto, sans-serif;
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 67px;
+  text-align: left;
 }
 
-/* ── Yellow subtext badge ── */
+/* ── Yellow subtext badge ──
+   Mercy's .page-banner-title__label is 30px tall:
+   14px font + line-height:1 (14px) + 8px × 2 padding = 30px */
 .mercy-hero-banner-covered-subtext {
   margin: 0;
-  padding: 0.55rem 1.25rem;
+  padding: 8px 15px;
   display: inline-block;
-  background-color: #f4b548;
+  background-color: #f4a01e;
   color: #1a1a1a;
-  font-size: 0.9rem;
+  font-family: roboto, sans-serif;
+  font-size: 14px;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1;
 }
 
-/* ── Right-side CTA button ── */
+/* ── Right-side CTA button ──
+   Mercy: a.button--dark-blue → background #005a70, height 44px, font-size 14px
+   Use block-scope to beat global a:any-link { color: var(--link-color) } (0,1,1) */
 .mercy-hero-banner-covered-right {
   flex-shrink: 0;
   display: flex;
   align-items: center;
 }
 
-.mercy-hero-banner-covered-button {
+.mercy-hero-banner-covered .mercy-hero-banner-covered-button {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.85rem 1.5rem;
-  background-color: #005a78;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 44px;
+  max-height: 44px;
+  padding: 0 19px;
+  background-color: #005a70;
+  border: 1px solid #005a70;
+  border-radius: 3px;
   color: #fff;
-  font-size: 0.95rem;
+  font-family: roboto, sans-serif;
+  font-size: 14px;
   font-weight: 600;
+  letter-spacing: 0;
+  line-height: 22px;
   text-decoration: none;
   white-space: nowrap;
+  transition: background-color 0.3s ease;
+  margin: 0;
 }
 
-.mercy-hero-banner-covered-button::after {
+.mercy-hero-banner-covered .mercy-hero-banner-covered-button::after {
   content: "›";
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   line-height: 1;
 }
 
-.mercy-hero-banner-covered-button:hover,
-.mercy-hero-banner-covered-button:focus {
+.mercy-hero-banner-covered .mercy-hero-banner-covered-button:hover,
+.mercy-hero-banner-covered .mercy-hero-banner-covered-button:focus {
   background-color: #004a63;
+  border-color: #004a63;
   color: #fff;
   text-decoration: none;
 }
@@ -117,15 +141,11 @@
 /* ── Desktop: slightly taller, wider padding ── */
 @media (width >= 1024px) {
   .mercy-hero-banner-covered {
-    height: 225px;
+    height: 290px;
   }
 
   .mercy-hero-banner-covered-content {
     padding-inline: 10%;
-  }
-
-  .mercy-hero-banner-covered-title {
-    font-size: 3.75rem;
   }
 }
 
@@ -153,6 +173,7 @@
   }
 
   .mercy-hero-banner-covered-title {
-    font-size: 2.5rem;
+    font-size: 38px;
+    line-height: 42px;
   }
 }
