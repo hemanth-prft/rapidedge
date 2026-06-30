@@ -1,4 +1,6 @@
-export default function decorate(block) {
+import { decorateBlock, loadBlock } from '../../scripts/aem.js';
+
+export default async function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
 
@@ -15,4 +17,20 @@ export default function decorate(block) {
       }
     });
   });
+
+  // load all nested blocks inside columns
+  const columnCells = block.querySelectorAll(':scope > div > div');
+  const blockLoads = [];
+  columnCells.forEach((col) => {
+    col.querySelectorAll('div[class]').forEach((nested) => {
+      const hasBlockClass = nested.classList.length > 0
+        && !nested.classList.contains('columns-img-col')
+        && !nested.dataset.blockStatus;
+      if (hasBlockClass) {
+        decorateBlock(nested);
+        blockLoads.push(loadBlock(nested));
+      }
+    });
+  });
+  await Promise.all(blockLoads);
 }
