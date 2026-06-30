@@ -60,7 +60,7 @@ function getCellHtml(row, index) {
 
 function getCellLink(row, index) {
   const link = row.children[index] ? row.children[index].querySelector('a') : null;
-  return link ? link : null;
+  return link;
 }
 
 function buildSortOptions(items) {
@@ -83,10 +83,11 @@ function readBlockRows(block) {
   const rows = [...block.children].filter((child) => child instanceof HTMLDivElement);
 
   if (!rows.length) {
-    return { title: '', items: [] };
+    return { title: '', contentZone: '', items: [] };
   }
 
   const title = getCellText(rows[0], 0);
+  const contentZone = getCellText(rows[0], 1);
   const itemRows = rows.slice(1);
 
   const items = itemRows
@@ -108,7 +109,7 @@ function readBlockRows(block) {
     })
     .filter((item) => item.name || item.linkUrl || item.description);
 
-  return { title, items };
+  return { title, contentZone, items };
 }
 
 function getSortedItems(items, sortValue) {
@@ -129,7 +130,7 @@ function getSortedItems(items, sortValue) {
 function createPaginationButton(label, page, disabled) {
   const button = document.createElement('button');
   button.type = 'button';
-  button.className = 'quick-facts-accordion__pager-button';
+  button.className = 'quick-facts-accordion-pager-button';
   button.textContent = label;
   button.dataset.page = String(page);
 
@@ -143,6 +144,7 @@ function createPaginationButton(label, page, disabled) {
 function render(block, state) {
   const {
     title,
+    contentZone,
     items,
     sortValue,
     openIndex,
@@ -161,25 +163,37 @@ function render(block, state) {
 
   const root = document.createElement('section');
   root.className = 'quick-facts-accordion';
+  if (contentZone) {
+    root.dataset.contentZone = contentZone;
+  }
 
   if (title) {
     const heading = document.createElement('h2');
-    heading.className = 'quick-facts-accordion__title';
+    heading.className = 'quick-facts-accordion-title';
     heading.textContent = title;
     root.append(heading);
   }
 
+  if (!items.length) {
+    const empty = document.createElement('p');
+    empty.className = 'quick-facts-accordion-empty';
+    empty.textContent = 'No quick facts authored yet. Add at least one item with a Name to display this component.';
+    root.append(empty);
+    block.append(root);
+    return;
+  }
+
   const controls = document.createElement('div');
-  controls.className = 'quick-facts-accordion__controls';
+  controls.className = 'quick-facts-accordion-controls';
 
   const label = document.createElement('label');
-  label.className = 'quick-facts-accordion__sort-label';
+  label.className = 'quick-facts-accordion-sort-label';
   label.setAttribute('for', sortSelectId);
   label.textContent = 'Sort by:';
 
   const select = document.createElement('select');
   select.id = sortSelectId;
-  select.className = 'quick-facts-accordion__sort-select';
+  select.className = 'quick-facts-accordion-sort-select';
 
   buildSortOptions(items).forEach((optionDef) => {
     const option = document.createElement('option');
@@ -193,12 +207,12 @@ function render(block, state) {
   root.append(controls);
 
   const list = document.createElement('div');
-  list.className = 'quick-facts-accordion__list';
+  list.className = 'quick-facts-accordion-list';
 
   pagedItems.forEach((item, visibleIndex) => {
     const globalIndex = start + visibleIndex;
     const itemEl = document.createElement('article');
-    itemEl.className = 'quick-facts-accordion__item';
+    itemEl.className = 'quick-facts-accordion-item';
 
     if (openIndex === globalIndex) {
       itemEl.classList.add('is-open');
@@ -206,22 +220,27 @@ function render(block, state) {
 
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = 'quick-facts-accordion__trigger';
+    button.className = 'quick-facts-accordion-trigger';
     button.setAttribute('aria-expanded', String(openIndex === globalIndex));
+    button.id = `${sortSelectId}-trigger-${globalIndex}`;
     button.dataset.index = String(globalIndex);
 
     const name = document.createElement('span');
-    name.className = 'quick-facts-accordion__name';
+    name.className = 'quick-facts-accordion-name';
     name.textContent = item.name || 'Untitled';
 
     const icon = document.createElement('span');
-    icon.className = 'quick-facts-accordion__icon';
+    icon.className = 'quick-facts-accordion-icon';
     icon.setAttribute('aria-hidden', 'true');
 
     button.append(name, icon);
 
     const panel = document.createElement('div');
-    panel.className = 'quick-facts-accordion__panel';
+    panel.className = 'quick-facts-accordion-panel';
+    panel.id = `${sortSelectId}-panel-${globalIndex}`;
+    panel.setAttribute('role', 'region');
+    panel.setAttribute('aria-labelledby', button.id);
+    button.setAttribute('aria-controls', panel.id);
 
     if (openIndex !== globalIndex) {
       panel.hidden = true;
@@ -229,14 +248,14 @@ function render(block, state) {
 
     if (item.description) {
       const body = document.createElement('div');
-      body.className = 'quick-facts-accordion__description';
+      body.className = 'quick-facts-accordion-description';
       body.innerHTML = item.description;
       panel.append(body);
     }
 
     if (item.linkUrl) {
       const link = document.createElement('a');
-      link.className = 'quick-facts-accordion__cta';
+      link.className = 'quick-facts-accordion-cta';
       link.href = item.linkUrl;
       link.textContent = item.buttonText;
       link.target = item.newWindow ? '_blank' : '_self';
@@ -256,7 +275,7 @@ function render(block, state) {
 
   if (totalPages > 1) {
     const pager = document.createElement('nav');
-    pager.className = 'quick-facts-accordion__pager';
+    pager.className = 'quick-facts-accordion-pager';
     pager.setAttribute('aria-label', 'Quick facts pagination');
 
     pager.append(createPaginationButton('Prev', safePage - 1, safePage === 1));
@@ -282,6 +301,7 @@ export default async function decorate(block) {
 
   const state = {
     title: parsed.title,
+    contentZone: parsed.contentZone,
     items: parsed.items,
     sortValue: SORT.FEATURED,
     openIndex: -1,
@@ -293,12 +313,12 @@ export default async function decorate(block) {
   render(block, state);
 
   block.addEventListener('change', (event) => {
-    const target = event.target;
+    const { target } = event;
     if (!(target instanceof HTMLSelectElement)) {
       return;
     }
 
-    if (target.classList.contains('quick-facts-accordion__sort-select')) {
+    if (target.classList.contains('quick-facts-accordion-sort-select')) {
       state.sortValue = target.value;
       state.page = 1;
       state.openIndex = -1;
@@ -307,12 +327,12 @@ export default async function decorate(block) {
   });
 
   block.addEventListener('click', (event) => {
-    const target = event.target;
+    const { target } = event;
     if (!(target instanceof Element)) {
       return;
     }
 
-    const trigger = target.closest('.quick-facts-accordion__trigger');
+    const trigger = target.closest('.quick-facts-accordion-trigger');
     if (trigger instanceof HTMLElement) {
       const nextIndex = Number(trigger.dataset.index);
       state.openIndex = state.openIndex === nextIndex ? -1 : nextIndex;
@@ -320,7 +340,7 @@ export default async function decorate(block) {
       return;
     }
 
-    const pageButton = target.closest('.quick-facts-accordion__pager-button');
+    const pageButton = target.closest('.quick-facts-accordion-pager-button');
     if (!(pageButton instanceof HTMLButtonElement) || pageButton.disabled) {
       return;
     }
