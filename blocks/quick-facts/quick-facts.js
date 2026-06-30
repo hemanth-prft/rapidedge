@@ -87,8 +87,25 @@ function readBlockRows(block) {
   }
 
   const title = getCellText(rows[0], 0);
-  const contentZone = getCellText(rows[0], 1);
-  const itemRows = rows.slice(1);
+  let contentZone = getCellText(rows[0], 1);
+  let itemRows = rows.slice(1);
+
+  // Universal Editor may render block-level fields as stacked rows.
+  // When that happens, the second row can be Content Zone metadata,
+  // not a child item row.
+  if (!contentZone && rows.length > 2) {
+    const maybeContentZoneRow = rows[1];
+    const hasLikelyItemStructure = maybeContentZoneRow.children.length >= 3
+      || !!getCellLink(maybeContentZoneRow, 2)
+      || !!getCellHtml(maybeContentZoneRow, 1)
+      || !!getCellText(maybeContentZoneRow, 4)
+      || !!getCellText(maybeContentZoneRow, 5);
+
+    if (!hasLikelyItemStructure) {
+      contentZone = getCellText(maybeContentZoneRow, 0) || getCellText(maybeContentZoneRow, 1);
+      itemRows = rows.slice(2);
+    }
+  }
 
   const items = itemRows
     .map((row, index) => {
@@ -107,7 +124,22 @@ function readBlockRows(block) {
         newWindow: ['true', 'yes', 'y', '1'].includes(newWindowFlag),
       };
     })
-    .filter((item) => item.name || item.linkUrl || item.description);
+    .filter((item) => {
+      if (!(item.name || item.linkUrl || item.description)) {
+        return false;
+      }
+
+      // Guard against metadata rows accidentally becoming accordion items.
+      if (contentZone
+        && item.name === contentZone
+        && !item.linkUrl
+        && !item.description
+        && !item.date) {
+        return false;
+      }
+
+      return true;
+    });
 
   return { title, contentZone, items };
 }
