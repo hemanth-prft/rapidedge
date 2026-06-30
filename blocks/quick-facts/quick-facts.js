@@ -50,16 +50,34 @@ function getSortSelectId(block) {
   return `${baseId}-sort`;
 }
 
+function getRowCells(row) {
+  if (!(row instanceof HTMLElement)) {
+    return [];
+  }
+
+  const directCells = [...row.children].filter((child) => child instanceof HTMLDivElement);
+  if (directCells.length !== 1) {
+    return directCells;
+  }
+
+  const nestedCells = [...directCells[0].children]
+    .filter((child) => child instanceof HTMLDivElement);
+  return nestedCells.length ? nestedCells : directCells;
+}
+
 function getCellText(row, index) {
-  return row.children[index] ? row.children[index].textContent.trim() : '';
+  const cells = getRowCells(row);
+  return cells[index] ? cells[index].textContent.trim() : '';
 }
 
 function getCellHtml(row, index) {
-  return row.children[index] ? row.children[index].innerHTML.trim() : '';
+  const cells = getRowCells(row);
+  return cells[index] ? cells[index].innerHTML.trim() : '';
 }
 
 function getCellLink(row, index) {
-  const link = row.children[index] ? row.children[index].querySelector('a') : null;
+  const cells = getRowCells(row);
+  const link = cells[index] ? cells[index].querySelector('a') : null;
   return link;
 }
 
@@ -88,24 +106,24 @@ function readBlockRows(block) {
 
   const title = getCellText(rows[0], 0);
   let contentZone = getCellText(rows[0], 1);
-  let itemRows = rows.slice(1);
+  let itemStartIndex = 1;
 
-  // Universal Editor may render block-level fields as stacked rows.
-  // When that happens, the second row can be Content Zone metadata,
-  // not a child item row.
-  if (!contentZone && rows.length > 2) {
-    const maybeContentZoneRow = rows[1];
-    const hasLikelyItemStructure = maybeContentZoneRow.children.length >= 3
-      || !!getCellLink(maybeContentZoneRow, 2)
-      || !!getCellHtml(maybeContentZoneRow, 1)
-      || !!getCellText(maybeContentZoneRow, 4)
-      || !!getCellText(maybeContentZoneRow, 5);
+  if (!contentZone && rows.length > 1) {
+    const firstRowCells = getRowCells(rows[0]);
+    const secondRowCells = getRowCells(rows[1]);
+    const secondRowLooksLikeItem = secondRowCells.length >= 2
+      || !!getCellLink(rows[1], 2)
+      || !!getCellText(rows[1], 4)
+      || !!getCellText(rows[1], 5);
 
-    if (!hasLikelyItemStructure) {
-      contentZone = getCellText(maybeContentZoneRow, 0) || getCellText(maybeContentZoneRow, 1);
-      itemRows = rows.slice(2);
+    // UE can render block-level fields (title/contentZone) as two stacked rows.
+    if (firstRowCells.length === 1 && rows.length >= 3 && !secondRowLooksLikeItem) {
+      contentZone = getCellText(rows[1], 0) || getCellText(rows[1], 1);
+      itemStartIndex = 2;
     }
   }
+
+  const itemRows = rows.slice(itemStartIndex);
 
   const items = itemRows
     .map((row, index) => {
@@ -217,6 +235,14 @@ function render(block, state) {
 
   const controls = document.createElement('div');
   controls.className = 'quick-facts-accordion-controls';
+
+  if (contentZone) {
+    const intro = document.createElement('p');
+    intro.className = 'quick-facts-accordion-intro';
+    intro.textContent = contentZone;
+    root.append(intro);
+    controls.classList.add('has-intro');
+  }
 
   const label = document.createElement('label');
   label.className = 'quick-facts-accordion-sort-label';
