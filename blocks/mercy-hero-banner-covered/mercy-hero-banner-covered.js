@@ -15,39 +15,37 @@ export default function decorate(block) {
   const overlay = document.createElement('div');
   overlay.className = 'mercy-hero-banner-covered-overlay';
 
+  // Content: column layout — title on top, bottom row with badge + button
   const content = document.createElement('div');
   content.className = 'mercy-hero-banner-covered-content';
-
-  const contentLeft = document.createElement('div');
-  contentLeft.className = 'mercy-hero-banner-covered-left';
 
   if (title) {
     const heading = document.createElement('h1');
     heading.className = 'mercy-hero-banner-covered-title';
     heading.textContent = title;
-    contentLeft.appendChild(heading);
+    content.appendChild(heading);
   }
+
+  // Bottom row: badge on left, button on right, same horizontal line
+  const bottomRow = document.createElement('div');
+  bottomRow.className = 'mercy-hero-banner-covered-bottom';
 
   if (subtext) {
     const subtextEl = document.createElement('p');
     subtextEl.className = 'mercy-hero-banner-covered-subtext';
     subtextEl.textContent = subtext;
-    contentLeft.appendChild(subtextEl);
+    bottomRow.appendChild(subtextEl);
   }
 
-  content.appendChild(contentLeft);
-
   if (buttonLabel && buttonUrl) {
-    const contentRight = document.createElement('div');
-    contentRight.className = 'mercy-hero-banner-covered-right';
     const button = document.createElement('a');
     button.className = 'mercy-hero-banner-covered-button';
     button.href = buttonUrl;
     button.textContent = buttonLabel;
-    contentRight.appendChild(button);
-    content.appendChild(contentRight);
+    bottomRow.appendChild(button);
   }
 
+  content.appendChild(bottomRow);
   block.textContent = '';
   block.append(imageWrap, overlay, content);
 }
