@@ -498,7 +498,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "button1Text",
+        "name": "button1Label",
         "label": "Button 1 Text",
         "value": "Book appointment"
       },
@@ -512,7 +512,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "button2Text",
+        "name": "button2Label",
         "label": "Button 2 Text",
         "value": "Urgent care near me"
       },
@@ -526,7 +526,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "button3Text",
+        "name": "button3Label",
         "label": "Button 3 Text",
         "value": "Pay my bill"
       },
@@ -540,7 +540,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "button4Text",
+        "name": "button4Label",
         "label": "Button 4 Text",
         "value": "Virtual care"
       },
@@ -554,7 +554,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "button5Text",
+        "name": "button5Label",
         "label": "Button 5 Text",
         "value": "Find a doctor"
       },
