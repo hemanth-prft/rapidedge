@@ -55,7 +55,16 @@
       "text",
       "image",
       "button",
-      "title"
+      "title",
+      "mercy-title",
+      "mercy-text",
+      "mercy-image",
+      "richtext",
+      "promo-card",
+      "cta-callout",
+      "quick-facts",
+      "cards",
+      "split-banner"
     ]
   },
   {
