@@ -799,7 +799,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "buttonText",
+        "name": "buttonLabel",
         "label": "Button Text",
         "value": ""
       },
