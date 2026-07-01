@@ -117,26 +117,44 @@
 
 .quick-facts-accordion-icon {
   flex: 0 0 auto;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   position: relative;
 }
 
-.quick-facts-accordion-icon::before {
+.quick-facts-accordion-icon::before,
+.quick-facts-accordion-icon::after {
   content: '';
   position: absolute;
-  top: 2px;
-  left: 3px;
-  width: 8px;
-  height: 8px;
-  border-right: 3px solid #007fae;
-  border-bottom: 3px solid #007fae;
+  top: 4px;
+  width: 6px;
+  height: 2px;
+  background: #007fae;
+  border-radius: 1px;
+}
+
+.quick-facts-accordion-icon::before {
+  left: 2px;
   transform: rotate(45deg);
+}
+
+.quick-facts-accordion-icon::after {
+  left: 7px;
+  transform: rotate(-45deg);
 }
 
 .quick-facts-accordion-item.is-open .quick-facts-accordion-icon::before {
   top: 6px;
-  transform: rotate(225deg);
+  left: 3px;
+  width: 10px;
+  transform: rotate(45deg);
+}
+
+.quick-facts-accordion-item.is-open .quick-facts-accordion-icon::after {
+  top: 6px;
+  left: 3px;
+  width: 10px;
+  transform: rotate(-45deg);
 }
 
 .quick-facts-accordion-panel {
@@ -186,7 +204,8 @@
 }
 
 .quick-facts-accordion-pager {
-  display: inline-flex;
+  display: flex;
+  width: max-content;
   justify-content: center;
   align-items: center;
   gap: 0;
