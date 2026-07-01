@@ -3,11 +3,24 @@
   --quick-facts-outline: rgb(230 237 239 / 46%);
   --quick-facts-surface: rgb(230 237 239 / 46%);
   --quick-facts-text: #000;
-  --quick-facts-link: #005c84;
+  --quick-facts-link: #000;
 
   color: var(--quick-facts-text);
   font-family: "Open Sans", sans-serif !important;
   line-height: 1.4286 !important;
+}
+
+.quick-facts-accordion,
+.quick-facts-accordion * {
+  color: #000;
+}
+
+.quick-facts-accordion a.button:hover,
+.quick-facts-accordion a.button:focus,
+.quick-facts-accordion button:hover,
+.quick-facts-accordion button:focus {
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .quick-facts-accordion-title {
@@ -197,6 +210,11 @@
   border-radius: 4px;
   padding: 6px 10px;
   cursor: pointer;
+}
+
+.quick-facts-accordion-pager-button:hover,
+.quick-facts-accordion-pager-button:focus {
+  background: #fff;
 }
 
 .quick-facts-accordion-pager-button.is-active {
