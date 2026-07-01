@@ -6,6 +6,8 @@
   --quick-facts-link: #005c84;
 
   color: var(--quick-facts-text);
+  font-family: "Open Sans", sans-serif !important;
+  line-height: 1.4286 !important;
 }
 
 .quick-facts-accordion-title {
@@ -25,13 +27,15 @@
   line-height: 1.45;
 }
 
-.quick-facts-accordion-intro {
+.quick-facts-accordion-intro,
+:where([class~="mcy-accordion-links__info-text"]) {
   margin: 0;
-  padding: 14px 16px 8px;
-  border-top: 1px solid var(--quick-facts-border);
-  background: var(--quick-facts-surface);
-  font-size: 0.95rem;
-  line-height: 1.45;
+  padding: 20px 15px 12px;
+  border-top: 1px solid #6ba2b9;
+  background-color: #e6edef75;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
 }
 
 .quick-facts-accordion-controls {
