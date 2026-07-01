@@ -1,0 +1,140 @@
+/* mercy-callout block */
+
+.mercy-callout-container .mercy-callout-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.mercy-callout-outer {
+  margin-bottom: 20px;
+}
+
+.mercy-callout-container {
+  border: 5px solid #f3f3f3;
+}
+
+@media (width <= 575px) {
+  .mercy-callout-container {
+    border-left: none;
+    border-right: none;
+  }
+
+  .mercy-callout-container--no-image {
+    border-top: 5px solid #f3f3f3;
+  }
+}
+
+.mercy-callout-content {
+  display: flex;
+}
+
+@media (width <= 767px) {
+  .mercy-callout-content {
+    flex-direction: column;
+  }
+}
+
+.mercy-callout-image {
+  width: 40%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  min-height: 180px;
+}
+
+.mercy-callout-image.callout-contain {
+  background-size: contain;
+}
+
+@media (width <= 767px) {
+  .mercy-callout-image {
+    width: 100%;
+    height: 220px;
+  }
+}
+
+.mercy-callout-text-container {
+  display: flex;
+  width: 60%;
+  padding: 20px;
+}
+
+@media (width <= 767px) {
+  .mercy-callout-text-container {
+    width: 100%;
+  }
+}
+
+.mercy-callout-container--no-image .mercy-callout-text-container {
+  width: 100%;
+}
+
+.mercy-callout-text {
+  width: 100%;
+}
+
+.mercy-callout-header-text {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+@media (width <= 767px) {
+  .mercy-callout-header-text {
+    font-size: 20px;
+  }
+}
+
+.mercy-callout-sub-header-text {
+  font-size: 22px;
+  color: #005a70;
+  font-weight: 600;
+  margin: 0;
+}
+
+@media (width <= 767px) {
+  .mercy-callout-sub-header-text {
+    font-size: 24px;
+  }
+}
+
+.mercy-callout-rich-text {
+  word-wrap: break-word;
+}
+
+.mercy-callout-rich-text p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+@media (width <= 767px) {
+  .mercy-callout-rich-text p {
+    font-size: 16px;
+  }
+}
+
+.mercy-callout-rich-text a {
+  font-weight: 600;
+  color: #005a70;
+}
+
+.mercy-callout-rich-text a:last-child::after {
+  border-style: solid;
+  border-width: 1px 1px 0 0;
+  content: '';
+  display: inline-block;
+  height: 7px;
+  width: 7px;
+  left: 4px;
+  position: relative;
+  transform: rotate(45deg);
+  top: 6px;
+  vertical-align: top;
+}
+
+@media (width <= 767px) {
+  .mercy-callout-rich-text a:last-child::after {
+    top: 8px;
+  }
+}
