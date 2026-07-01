@@ -309,7 +309,7 @@ function render(block, state) {
     pager.className = 'quick-facts-accordion-pager';
     pager.setAttribute('aria-label', 'Quick facts pagination');
 
-    pager.append(createPaginationButton('Prev', safePage - 1, safePage === 1));
+    pager.append(createPaginationButton('«', safePage - 1, safePage === 1));
 
     for (let pageNumber = 1; pageNumber <= totalPages; pageNumber += 1) {
       const pageButton = createPaginationButton(String(pageNumber), pageNumber, false);
@@ -320,7 +320,7 @@ function render(block, state) {
       pager.append(pageButton);
     }
 
-    pager.append(createPaginationButton('Next', safePage + 1, safePage === totalPages));
+    pager.append(createPaginationButton('»', safePage + 1, safePage === totalPages));
     root.append(pager);
   }
 
