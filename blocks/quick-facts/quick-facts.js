@@ -5,7 +5,7 @@ const SORT = {
   ALPHA_DESC: 'alpha-desc',
 };
 
-const API_URL = 'https://dummyjson.com/c/e5cb-04de-4634-8e81';
+const API_URL = 'https://dummyjson.com/c/a408-8046-46a4-8255';
 const BREAKPOINT_SM = 767;
 let quickFactsInstanceCount = 0;
 
