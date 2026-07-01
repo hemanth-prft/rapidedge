@@ -19,7 +19,7 @@
     border-right: none;
   }
 
-  .mercy-callout-container--no-image {
+  .mercy-callout-container-no-image {
     border-top: 5px solid #f3f3f3;
   }
 }
@@ -65,7 +65,7 @@
   }
 }
 
-.mercy-callout-container--no-image .mercy-callout-text-container {
+.mercy-callout-container-no-image .mercy-callout-text-container {
   width: 100%;
 }
 
@@ -100,7 +100,7 @@
 }
 
 .mercy-callout-rich-text {
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .mercy-callout-rich-text p {

@@ -39,7 +39,7 @@ export default function decorate(block) {
   outer.className = 'mercy-callout-outer';
 
   const container = document.createElement('div');
-  container.className = `mercy-callout-container${hasImage ? '' : ' mercy-callout-container--no-image'}`;
+  container.className = `mercy-callout-container${hasImage ? '' : ' mercy-callout-container-no-image'}`;
   if (contentZone) {
     container.setAttribute('data-content-zone', contentZone);
   }
