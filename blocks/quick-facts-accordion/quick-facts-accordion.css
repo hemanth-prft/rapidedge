@@ -1,0 +1,221 @@
+.quick-facts-accordion {
+  --quick-facts-border: #6ba2b9;
+  --quick-facts-outline: rgb(230 237 239 / 46%);
+  --quick-facts-surface: rgb(230 237 239 / 46%);
+  --quick-facts-text: #000;
+  --quick-facts-link: #005c84;
+
+  color: var(--quick-facts-text);
+}
+
+.quick-facts-accordion-title {
+  margin: 16px 0 20px;
+  text-align: center;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  line-height: 1.2;
+}
+
+.quick-facts-accordion-empty {
+  margin: 0;
+  padding: 14px 16px;
+  border-top: 1px solid var(--quick-facts-border);
+  border-bottom: 1px solid var(--quick-facts-border);
+  background: var(--quick-facts-surface);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.quick-facts-accordion-intro {
+  margin: 0;
+  padding: 14px 16px 8px;
+  border-top: 1px solid var(--quick-facts-border);
+  background: var(--quick-facts-surface);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.quick-facts-accordion-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 16px;
+  border-top: 1px solid var(--quick-facts-border);
+  background: var(--quick-facts-surface);
+}
+
+.quick-facts-accordion-controls.has-intro {
+  border-top: 0;
+  padding-top: 6px;
+}
+
+.quick-facts-accordion-sort-label {
+  font-size: 0.95rem;
+}
+
+.quick-facts-accordion-sort-select {
+  appearance: none;
+  padding: 4px 24px 4px 8px;
+  border: 1px solid var(--quick-facts-outline);
+  border-radius: 4px;
+  background: #fff;
+  font: inherit;
+}
+
+.quick-facts-accordion-list {
+  border-bottom: 1px solid var(--quick-facts-border);
+}
+
+.quick-facts-accordion-item {
+  border-top: 1px solid var(--quick-facts-outline);
+}
+
+.quick-facts-accordion-item.is-open {
+  background: #f8fbfc;
+}
+
+.quick-facts-accordion-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+
+.quick-facts-accordion-item.is-open .quick-facts-accordion-trigger {
+  padding-bottom: 8px;
+}
+
+.quick-facts-accordion-name {
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.quick-facts-accordion-item.is-open .quick-facts-accordion-name {
+  font-size: 1.125rem;
+}
+
+.quick-facts-accordion-icon {
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  position: relative;
+}
+
+.quick-facts-accordion-icon::before,
+.quick-facts-accordion-icon::after {
+  content: '';
+  position: absolute;
+  background: #1f2f39;
+}
+
+.quick-facts-accordion-icon::before {
+  top: 6px;
+  left: 0;
+  width: 14px;
+  height: 2px;
+}
+
+.quick-facts-accordion-icon::after {
+  top: 0;
+  left: 6px;
+  width: 2px;
+  height: 14px;
+}
+
+.quick-facts-accordion-item.is-open .quick-facts-accordion-icon::after {
+  opacity: 0;
+}
+
+.quick-facts-accordion-panel {
+  padding: 0 16px 16px;
+}
+
+.quick-facts-accordion-description {
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.quick-facts-accordion-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  padding: 10px 16px;
+  border: 1px solid #b9c2c9;
+  border-radius: 4px;
+  background: #fff;
+  font-weight: 500;
+  color: var(--quick-facts-text);
+  text-decoration: none;
+  gap: 10px;
+}
+
+.quick-facts-accordion-cta::after {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid #000;
+  border-right: 2px solid #000;
+  transform: rotate(45deg);
+}
+
+.quick-facts-accordion-cta:any-link {
+  color: var(--quick-facts-text);
+  text-decoration: none;
+}
+
+.quick-facts-accordion-cta:hover,
+.quick-facts-accordion-cta:focus-visible {
+  background: #f5f7f8;
+  color: var(--quick-facts-text);
+  text-decoration: none;
+}
+
+.quick-facts-accordion-pager {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.quick-facts-accordion-pager-button {
+  border: 1px solid var(--quick-facts-outline);
+  background: #fff;
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.quick-facts-accordion-pager-button.is-active {
+  border-color: var(--quick-facts-link);
+  color: var(--quick-facts-link);
+  font-weight: 700;
+}
+
+.quick-facts-accordion-pager-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (width <= 767px) {
+  .quick-facts-accordion-name {
+    font-size: 1.0625rem;
+  }
+
+  .quick-facts-accordion-item.is-open .quick-facts-accordion-name {
+    font-size: 1.1875rem;
+  }
+
+  .quick-facts-accordion-description {
+    font-size: 1rem;
+  }
+}
