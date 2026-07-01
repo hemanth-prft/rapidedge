@@ -5,6 +5,7 @@ const SORT = {
   ALPHA_DESC: 'alpha-desc',
 };
 
+const API_URL = 'https://dummyjson.com/c/e5cb-04de-4634-8e81';
 const BREAKPOINT_SM = 767;
 let quickFactsInstanceCount = 0;
 
@@ -70,15 +71,31 @@ function getCellText(row, index) {
   return cells[index] ? cells[index].textContent.trim() : '';
 }
 
-function getCellHtml(row, index) {
-  const cells = getRowCells(row);
-  return cells[index] ? cells[index].innerHTML.trim() : '';
-}
+async function fetchQuickFactsItems() {
+  try {
+    const response = await fetch(API_URL);
+    if (!response.ok) {
+      return { title: '', items: [] };
+    }
 
-function getCellLink(row, index) {
-  const cells = getRowCells(row);
-  const link = cells[index] ? cells[index].querySelector('a') : null;
-  return link;
+    const payload = await response.json();
+    const items = Array.isArray(payload.items) ? payload.items : [];
+
+    return {
+      title: payload.title || '',
+      items: items.map((item, index) => ({
+        featuredOrder: index,
+        name: (item.name || '').trim(),
+        description: item.description || '',
+        linkUrl: item.linkUrl || '',
+        buttonText: (item.buttonText || '').trim() || 'Learn More',
+        date: item.date || '',
+        newWindow: !!(item.newWindow || item.openInNewTab),
+      })),
+    };
+  } catch (e) {
+    return { title: '', items: [] };
+  }
 }
 
 function buildSortOptions(items) {
@@ -97,69 +114,25 @@ function buildSortOptions(items) {
   return options;
 }
 
-function readBlockRows(block) {
+function readBlockFields(block) {
   const rows = [...block.children].filter((child) => child instanceof HTMLDivElement);
 
   if (!rows.length) {
-    return { title: '', contentZone: '', items: [] };
+    return { title: '', contentZone: '' };
   }
 
-  const title = getCellText(rows[0], 0);
-  let contentZone = getCellText(rows[0], 1);
-  let itemStartIndex = 1;
-
-  if (!contentZone && rows.length > 1) {
-    const firstRowCells = getRowCells(rows[0]);
-    const secondRowCells = getRowCells(rows[1]);
-    const secondRowLooksLikeItem = secondRowCells.length >= 2
-      || !!getCellLink(rows[1], 2)
-      || !!getCellText(rows[1], 4)
-      || !!getCellText(rows[1], 5);
-
-    // UE can render block-level fields (title/contentZone) as two stacked rows.
-    if (firstRowCells.length === 1 && rows.length >= 3 && !secondRowLooksLikeItem) {
-      contentZone = getCellText(rows[1], 0) || getCellText(rows[1], 1);
-      itemStartIndex = 2;
-    }
+  const firstRowCells = getRowCells(rows[0]);
+  if (firstRowCells.length >= 2) {
+    return {
+      title: getCellText(rows[0], 0),
+      contentZone: getCellText(rows[0], 1),
+    };
   }
 
-  const itemRows = rows.slice(itemStartIndex);
-
-  const items = itemRows
-    .map((row, index) => {
-      const link = getCellLink(row, 2);
-      const ctaText = getCellText(row, 3);
-      const dateText = getCellText(row, 4);
-      const newWindowFlag = getCellText(row, 5).toLowerCase();
-
-      return {
-        featuredOrder: index,
-        name: getCellText(row, 0),
-        description: getCellHtml(row, 1),
-        linkUrl: link ? link.href : '',
-        buttonText: ctaText || 'Learn More',
-        date: dateText,
-        newWindow: ['true', 'yes', 'y', '1'].includes(newWindowFlag),
-      };
-    })
-    .filter((item) => {
-      if (!(item.name || item.linkUrl || item.description)) {
-        return false;
-      }
-
-      // Guard against metadata rows accidentally becoming accordion items.
-      if (contentZone
-        && item.name === contentZone
-        && !item.linkUrl
-        && !item.description
-        && !item.date) {
-        return false;
-      }
-
-      return true;
-    });
-
-  return { title, contentZone, items };
+  return {
+    title: getCellText(rows[0], 0),
+    contentZone: rows.length > 1 ? getCellText(rows[1], 0) : '',
+  };
 }
 
 function getSortedItems(items, sortValue) {
@@ -227,7 +200,7 @@ function render(block, state) {
   if (!items.length) {
     const empty = document.createElement('p');
     empty.className = 'quick-facts-accordion-empty';
-    empty.textContent = 'No quick facts authored yet. Add at least one item with a Name to display this component.';
+    empty.textContent = 'No quick facts available right now.';
     root.append(empty);
     block.append(root);
     return;
@@ -355,12 +328,13 @@ function render(block, state) {
 }
 
 export default async function decorate(block) {
-  const parsed = readBlockRows(block);
+  const parsed = readBlockFields(block);
+  const apiData = await fetchQuickFactsItems();
 
   const state = {
-    title: parsed.title,
+    title: parsed.title || apiData.title,
     contentZone: parsed.contentZone,
-    items: parsed.items,
+    items: apiData.items,
     sortValue: SORT.FEATURED,
     openIndex: -1,
     page: 1,

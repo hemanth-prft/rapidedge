@@ -451,7 +451,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "button1Label",
+        "name": "button1Text",
         "label": "Button 1 Text",
         "value": "Book appointment"
       },
@@ -465,7 +465,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "button2Label",
+        "name": "button2Text",
         "label": "Button 2 Text",
         "value": "Urgent care near me"
       },
@@ -479,7 +479,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "button3Label",
+        "name": "button3Text",
         "label": "Button 3 Text",
         "value": "Pay my bill"
       },
@@ -493,7 +493,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "button4Label",
+        "name": "button4Text",
         "label": "Button 4 Text",
         "value": "Virtual care"
       },
@@ -507,7 +507,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "button5Label",
+        "name": "button5Text",
         "label": "Button 5 Text",
         "value": "Find a doctor"
       },
@@ -768,64 +768,6 @@
         "name": "contentZone",
         "label": "Content Zone",
         "value": ""
-      }
-    ]
-  },
-  {
-    "id": "quick-facts-item",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "name",
-        "label": "Name",
-        "value": "",
-        "required": true
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "description",
-        "label": "Description",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "linkUrl",
-        "label": "Link URL",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "buttonLabel",
-        "label": "Button Text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "date",
-        "label": "Date",
-        "value": ""
-      },
-      {
-        "component": "select",
-        "valueType": "string",
-        "name": "openInNewTab",
-        "label": "Open in New Tab",
-        "value": "",
-        "options": [
-          {
-            "name": "No",
-            "value": "false"
-          },
-          {
-            "name": "Yes",
-            "value": "true"
-          }
-        ]
       }
     ]
   },
