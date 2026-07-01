@@ -88,7 +88,7 @@
 }
 
 .quick-facts-accordion-item.is-open {
-  background: #f8fbfc;
+  background: rgb(230 237 239 / 46%);
 }
 
 .quick-facts-accordion-trigger {
