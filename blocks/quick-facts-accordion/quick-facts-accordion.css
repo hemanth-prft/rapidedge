@@ -117,34 +117,27 @@
 
 .quick-facts-accordion-icon {
   flex: 0 0 auto;
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   position: relative;
 }
 
-.quick-facts-accordion-icon::before,
-.quick-facts-accordion-icon::after {
+.quick-facts-accordion-icon::before {
   content: '';
   position: absolute;
-  background: #1f2f39;
-}
-
-.quick-facts-accordion-icon::before {
-  top: 6px;
-  left: 0;
-  width: 14px;
+  top: 4px;
+  left: 1px;
+  width: 10px;
   height: 2px;
+  background: #006f95;
+  transform: rotate(45deg);
+  transform-origin: center;
+  box-shadow: 4px 4px 0 0 #006f95;
 }
 
-.quick-facts-accordion-icon::after {
-  top: 0;
-  left: 6px;
-  width: 2px;
-  height: 14px;
-}
-
-.quick-facts-accordion-item.is-open .quick-facts-accordion-icon::after {
-  opacity: 0;
+.quick-facts-accordion-item.is-open .quick-facts-accordion-icon::before {
+  top: 6px;
+  transform: rotate(-45deg);
 }
 
 .quick-facts-accordion-panel {
@@ -194,42 +187,49 @@
 }
 
 .quick-facts-accordion-pager {
-  display: flex;
-  flex-wrap: wrap;
+  display: inline-flex;
   justify-content: center;
-  gap: 8px;
+  align-items: center;
+  gap: 0;
   margin-top: 14px;
+  border: 1px solid #c6ccd2;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
 }
 
 .quick-facts-accordion-pager-button {
-  min-width: 44px;
+  min-width: 46px;
   height: 44px;
   margin: 0;
-  border: 1px solid #e4e8ec;
-  background: #f6f7f8;
-  border-radius: 6px;
+  border: 0;
+  border-right: 1px solid #c6ccd2;
+  background: #fff;
+  border-radius: 0;
   padding: 0 14px;
-  color: #000;
-  font-weight: 700;
+  color: #1f252a;
+  font-weight: 500;
   cursor: pointer;
+}
+
+.quick-facts-accordion-pager-button:last-child {
+  border-right: 0;
 }
 
 .quick-facts-accordion-pager-button:hover,
 .quick-facts-accordion-pager-button:focus {
-  background: #edf1f3;
+  background: #f1f5f7;
 }
 
 .quick-facts-accordion-pager-button.is-active {
-  border-color: #000;
-  background: #fff;
-  color: #000;
+  background: #007fae;
+  color: #fff;
   font-weight: 700;
 }
 
 .quick-facts-accordion-pager-button:disabled {
-  border-color: #eceff2;
-  background: #f6f7f8;
-  color: #9aa0a6;
+  background: #f8fafb;
+  color: #b6bfc7;
   opacity: 1;
   cursor: not-allowed;
 }
