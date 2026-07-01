@@ -117,27 +117,26 @@
 
 .quick-facts-accordion-icon {
   flex: 0 0 auto;
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   position: relative;
 }
 
 .quick-facts-accordion-icon::before {
   content: '';
   position: absolute;
-  top: 4px;
-  left: 1px;
-  width: 10px;
-  height: 2px;
-  background: #006f95;
+  top: 2px;
+  left: 3px;
+  width: 8px;
+  height: 8px;
+  border-right: 3px solid #007fae;
+  border-bottom: 3px solid #007fae;
   transform: rotate(45deg);
-  transform-origin: center;
-  box-shadow: 4px 4px 0 0 #006f95;
 }
 
 .quick-facts-accordion-item.is-open .quick-facts-accordion-icon::before {
   top: 6px;
-  transform: rotate(-45deg);
+  transform: rotate(225deg);
 }
 
 .quick-facts-accordion-panel {
@@ -192,6 +191,8 @@
   align-items: center;
   gap: 0;
   margin-top: 14px;
+  margin-left: auto;
+  margin-right: auto;
   border: 1px solid #c6ccd2;
   border-radius: 4px;
   overflow: hidden;
