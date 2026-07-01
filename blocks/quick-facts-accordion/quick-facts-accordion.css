@@ -117,44 +117,14 @@
 
 .quick-facts-accordion-icon {
   flex: 0 0 auto;
-  width: 16px;
-  height: 16px;
-  position: relative;
+  width: 14px;
+  height: 14px;
+  background: center / 14px 9px no-repeat url('./downwordArrow.svg');
 }
 
-.quick-facts-accordion-icon::before,
-.quick-facts-accordion-icon::after {
-  content: '';
-  position: absolute;
-  top: 4px;
-  width: 6px;
-  height: 2px;
-  background: #007fae;
-  border-radius: 1px;
-}
-
-.quick-facts-accordion-icon::before {
-  left: 2px;
-  transform: rotate(45deg);
-}
-
-.quick-facts-accordion-icon::after {
-  left: 7px;
-  transform: rotate(-45deg);
-}
-
-.quick-facts-accordion-item.is-open .quick-facts-accordion-icon::before {
-  top: 6px;
-  left: 3px;
-  width: 10px;
-  transform: rotate(45deg);
-}
-
-.quick-facts-accordion-item.is-open .quick-facts-accordion-icon::after {
-  top: 6px;
-  left: 3px;
-  width: 10px;
-  transform: rotate(-45deg);
+.quick-facts-accordion-item.is-open .quick-facts-accordion-icon {
+  background-size: 14px 14px;
+  background-image: url('./cross.svg');
 }
 
 .quick-facts-accordion-panel {
