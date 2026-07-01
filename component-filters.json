@@ -18,6 +18,7 @@
       "fragment",
       "accordion",
       "quick-facts",
+      "quick-facts-accordion",
       "split-banner",
       "promo-card",
       "cta-callout",
@@ -54,7 +55,8 @@
       "text",
       "image",
       "button",
-      "title"
+      "title",
+      "quick-facts-accordion"
     ]
   },
   {
