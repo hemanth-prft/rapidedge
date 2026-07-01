@@ -7,36 +7,29 @@
 /* ── Block shell ── */
 .mercy-hero-banner-covered {
   position: relative;
-  height: 240px;
+  width: 100%;
   overflow: hidden;
-  background-color: rgb(0 92 122);
+  background-color: #005c7a;
 }
 
-/* ── Background image: centered up to 2560px, teal shows beyond ── */
+/* ── Background image ── */
 .mercy-hero-banner-covered-image {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
+  display: block;
+  width: 100%;
 }
 
 .mercy-hero-banner-covered-image picture {
   display: block;
   width: 100%;
-  max-width: 2560px;
-  height: 100%;
-  flex-shrink: 0;
 }
 
 .mercy-hero-banner-covered-image img,
 .mercy-hero-banner-covered-image picture img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
-  object-position: center top;
+  object-position: center center;
 }
 
 /* ── Left-to-transparent teal gradient overlay ── */
@@ -46,17 +39,15 @@
   z-index: 1;
   background: linear-gradient(
     90deg,
-    rgb(0 92 122 / 90%) 0%,
-    rgb(0 92 122 / 72%) 28%,
-    rgb(0 92 122 / 30%) 52%,
-    rgb(0 92 122 / 0%) 68%
+    rgb(0 92 122 / 92%) 0%,
+    rgb(0 92 122 / 75%) 25%,
+    rgb(0 92 122 / 40%) 50%,
+    rgb(0 92 122 / 0%) 70%
   );
   pointer-events: none;
 }
 
-/* ── Content: spans full banner; max() keeps text inside the 2560px image area ──
-   calc(50% - 1152px): half of 2560px (1280) minus 5% of 2560px (128) = 1152
-   → at 1440px: max(72px, -432px)=72px; at 2560px: max(128px, 128px)=128px */
+/* ── Content overlay ── */
 .mercy-hero-banner-covered-content {
   position: absolute;
   inset: 0;
@@ -64,13 +55,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-block: 1.25rem;
-  padding-inline: max(5%, calc(50% - 1152px));
+  padding: 40px 5%;
   color: #fff;
-  gap: 0.75rem;
+  gap: 12px;
 }
 
-/* ── Bottom row: badge on left, button on right, same horizontal line ── */
+/* ── Bottom row: badge on left, button on right ── */
 .mercy-hero-banner-covered-bottom {
   display: flex;
   flex-direction: row;
@@ -82,19 +72,17 @@
 /* ── Title ── */
 .mercy-hero-banner-covered-title {
   margin: 0;
-  max-width: 540px;
+  max-width: 600px;
   background: none;
   color: #fff;
   font-family: roboto, sans-serif;
   font-size: 64px;
   font-weight: 400;
-  line-height: 67px;
+  line-height: 1.05;
   text-align: left;
 }
 
-/* ── Subtext badge (.page-banner-title__label-text)
-   Mercy: bg #ffb251, fw 600, lh 14px, padding 8px 40px 8px 0 (no left pad, 40px right)
-   At ≥1560px: padding: 8px 40px (symmetric) */
+/* ── Subtext badge ── */
 .mercy-hero-banner-covered-subtext {
   margin: 0;
   padding: 8px 40px 8px 0;
@@ -107,16 +95,13 @@
   line-height: 14px;
 }
 
-/* ── CTA button ──
-   Mercy: a.button--dark-blue → background #005a70, height 44px, font-size 14px
-   Use block-scope to beat global a:any-link { color: var(--link-color) } (0,1,1) */
+/* ── CTA button ── */
 .mercy-hero-banner-covered .mercy-hero-banner-covered-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   height: 44px;
-  max-height: 44px;
   padding: 0 19px;
   background-color: #005a70;
   border: 1px solid #005a70;
@@ -157,53 +142,64 @@
   text-decoration: none;
 }
 
-/* ── Desktop: taller banner + wider inner padding ── */
+/* ── Desktop (>=1024px) ── */
 @media (width >= 1024px) {
-  .mercy-hero-banner-covered {
-    height: 290px;
+  .mercy-hero-banner-covered-content {
+    padding: 40px max(5%, calc(50% - 720px));
   }
 
-  .mercy-hero-banner-covered-content {
-    padding-inline: max(10%, calc(50% - 1024px));
+  .mercy-hero-banner-covered-title {
+    font-size: 64px;
+    line-height: 67px;
   }
 }
 
-/* ── Wide viewport: subtext badge symmetric padding (Mercy ≥1560px rule) ── */
+/* ── Tablet (768px - 1023px) ── */
+@media (width >= 768px) and (width < 1024px) {
+  .mercy-hero-banner-covered-title {
+    font-size: 48px;
+    line-height: 52px;
+    max-width: 400px;
+  }
+
+  .mercy-hero-banner-covered-content {
+    padding: 30px 5%;
+  }
+}
+
+/* ── Wide viewport: subtext badge symmetric padding ── */
 @media (width >= 1560px) {
   .mercy-hero-banner-covered-subtext {
     padding: 8px 40px;
   }
 }
 
-/* ── Mobile: stack badge below title, fade from bottom ── */
+/* ── Mobile (<768px) ── */
 @media (width < 768px) {
-  .mercy-hero-banner-covered {
-    height: 300px;
-  }
-
   .mercy-hero-banner-covered-overlay {
     background: linear-gradient(
       180deg,
       rgb(0 92 122 / 0%) 0%,
-      rgb(0 92 122 / 55%) 45%,
-      rgb(0 92 122 / 88%) 100%
+      rgb(0 92 122 / 50%) 40%,
+      rgb(0 92 122 / 90%) 100%
     );
   }
 
   .mercy-hero-banner-covered-content {
     justify-content: flex-end;
     align-items: flex-start;
-    padding: 1.25rem;
+    padding: 20px;
   }
 
   .mercy-hero-banner-covered-title {
-    font-size: 38px;
-    line-height: 42px;
+    font-size: 36px;
+    line-height: 40px;
+    max-width: 100%;
   }
 
   .mercy-hero-banner-covered-bottom {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: 12px;
   }
 }
