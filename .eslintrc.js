@@ -18,6 +18,45 @@ module.exports = {
     'import/extensions': ['error', { js: 'always' }], // require js file extensions in imports
     'linebreak-style': ['error', 'unix'], // enforce unix linebreaks
     'no-param-reassign': [2, { props: false }], // allow modifying properties of param
-    'xwalk/max-cells': 'off', // allow more than 4 cells per block item
+
+    // Form component cell limits
+    'xwalk/max-cells': ['error', {
+      '*': 4, // default limit
+      // Existing project blocks
+      'mercy-hero-banner-covered': 5,
+      'cta-callout': 6,
+      'mercy-hero-banner': 13,
+      'promo-card': 7,
+      'quick-facts': 5,
+      'split-banner': 6,
+      // Form components
+      form: 15,
+      wizard: 12,
+      'form-button': 7,
+      'checkbox-group': 20,
+      checkbox: 19,
+      'date-input': 21,
+      'drop-down': 19,
+      email: 22,
+      'file-input': 20,
+      'form-fragment': 15,
+      'form-image': 7,
+      'multiline-input': 23,
+      'number-input': 22,
+      panel: 17,
+      'radio-group': 20,
+      'form-reset-button': 7,
+      'form-submit-button': 7,
+      'telephone-input': 20,
+      'text-input': 23,
+      accordion: 14,
+      modal: 11,
+      rating: 18,
+      password: 20,
+      tnc: 12,
+    }],
+
+    // Disable this rule for forms
+    'xwalk/no-orphan-collapsible-fields': 'off',
   },
 };
