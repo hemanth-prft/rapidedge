@@ -30,8 +30,4 @@
     flex: 1;
     order: unset;
   }
-
-  .columns.columns-custom-widths > div > div {
-    flex: unset;
-  }
 }

@@ -15,18 +15,4 @@ export default function decorate(block) {
       }
     });
   });
-
-  // apply custom column widths (e.g. class "30-70" or "25-50-25")
-  const widthClass = [...block.classList].find((cls) => /^\d+(-\d+)+$/.test(cls));
-  if (widthClass) {
-    const widths = widthClass.split('-').map(Number);
-    block.classList.add('columns-custom-widths');
-    [...block.children].forEach((row) => {
-      [...row.children].forEach((col, i) => {
-        if (widths[i] !== undefined) {
-          col.style.flex = `0 0 ${widths[i]}%`;
-        }
-      });
-    });
-  }
 }
