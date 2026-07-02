@@ -265,6 +265,23 @@
         "name": "rows",
         "value": "",
         "label": "Rows"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "classes",
+        "label": "Column Widths",
+        "options": [
+          { "name": "Equal", "value": "" },
+          { "name": "30 / 70", "value": "30-70" },
+          { "name": "70 / 30", "value": "70-30" },
+          { "name": "40 / 60", "value": "40-60" },
+          { "name": "60 / 40", "value": "60-40" },
+          { "name": "25 / 75", "value": "25-75" },
+          { "name": "75 / 25", "value": "75-25" },
+          { "name": "25 / 50 / 25", "value": "25-50-25" },
+          { "name": "33 / 34 / 33", "value": "33-34-33" }
+        ]
       }
     ]
   },
