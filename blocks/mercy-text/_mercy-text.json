@@ -34,14 +34,14 @@
           "value": "",
           "options": [
             { "name": "White", "value": "" },
-            { "name": "Gray", "value": "bg--color bg--gray" },
-            { "name": "Support Magenta", "value": "bg--color bg--magenta" },
-            { "name": "Support Purple", "value": "bg--color bg--purple" },
-            { "name": "Support Blue", "value": "bg--color bg--blue" },
-            { "name": "Support Green", "value": "bg--color bg--green" },
-            { "name": "Mercy Red", "value": "bg--color bg--red" },
-            { "name": "Mercy Light Orange", "value": "bg--color bg--orange" },
-            { "name": "Mercy Light Green", "value": "bg--color bg--light-green" }
+            { "name": "Gray", "value": "bg-color bg-gray" },
+            { "name": "Support Magenta", "value": "bg-color bg-magenta" },
+            { "name": "Support Purple", "value": "bg-color bg-purple" },
+            { "name": "Support Blue", "value": "bg-color bg-blue" },
+            { "name": "Support Green", "value": "bg-color bg-green" },
+            { "name": "Mercy Red", "value": "bg-color bg-red" },
+            { "name": "Mercy Light Orange", "value": "bg-color bg-orange" },
+            { "name": "Mercy Light Green", "value": "bg-color bg-light-green" }
           ]
         }
       ]

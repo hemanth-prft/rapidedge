@@ -577,35 +577,35 @@
           },
           {
             "name": "Gray",
-            "value": "bg--color bg--gray"
+            "value": "bg-color bg-gray"
           },
           {
             "name": "Support Magenta",
-            "value": "bg--color bg--magenta"
+            "value": "bg-color bg-magenta"
           },
           {
             "name": "Support Purple",
-            "value": "bg--color bg--purple"
+            "value": "bg-color bg-purple"
           },
           {
             "name": "Support Blue",
-            "value": "bg--color bg--blue"
+            "value": "bg-color bg-blue"
           },
           {
             "name": "Support Green",
-            "value": "bg--color bg--green"
+            "value": "bg-color bg-green"
           },
           {
             "name": "Mercy Red",
-            "value": "bg--color bg--red"
+            "value": "bg-color bg-red"
           },
           {
             "name": "Mercy Light Orange",
-            "value": "bg--color bg--orange"
+            "value": "bg-color bg-orange"
           },
           {
             "name": "Mercy Light Green",
-            "value": "bg--color bg--light-green"
+            "value": "bg-color bg-light-green"
           }
         ]
       }

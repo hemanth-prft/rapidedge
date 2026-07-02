@@ -22,7 +22,7 @@ export default function decorate(block) {
   }
 
   const contentDiv = document.createElement('div');
-  contentDiv.className = 'mcy-rich-text__content';
+  contentDiv.className = 'mcy-rich-text-content';
 
   if (colorClass) {
     colorClass.split(' ').forEach((cls) => {
