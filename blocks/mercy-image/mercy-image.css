@@ -1,8 +1,19 @@
-.mercy-image-wrapper img {
+.mercy-image .mercy-image-picture {
   display: block;
-  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
-.mercy-image {
-  margin-bottom: 8px;
+.mercy-image .mercy-image-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Caption */
+.mercy-image .mercy-image-caption {
+  display: block;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  color: #555;
 }
