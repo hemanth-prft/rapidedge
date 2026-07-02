@@ -163,13 +163,19 @@ function insertResizers(block) {
   });
 }
 
+function isEditMode() {
+  return document.querySelector('[data-aue-resource]') !== null;
+}
+
 function initializeGrid(block, numCols) {
   const widths = parseColWidths(block, numCols);
   if (!block.classList.toString().match(/col-\d+(-\d+)+/)) {
     block.classList.add(`col-${widths.join('-')}`);
   }
   applyColumnWidths(block, widths);
-  insertResizers(block);
+  if (isEditMode()) {
+    insertResizers(block);
+  }
 }
 
 export default function decorate(block) {
