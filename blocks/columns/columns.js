@@ -163,8 +163,12 @@ function insertResizers(block) {
   });
 }
 
-function isEditMode() {
-  return document.querySelector('[data-aue-resource]') !== null;
+function isAuthoringEnvironment() {
+  try {
+    return window.self !== window.top;
+  } catch (e) {
+    return true;
+  }
 }
 
 function initializeGrid(block, numCols) {
@@ -173,7 +177,7 @@ function initializeGrid(block, numCols) {
     block.classList.add(`col-${widths.join('-')}`);
   }
   applyColumnWidths(block, widths);
-  if (isEditMode()) {
+  if (isAuthoringEnvironment()) {
     insertResizers(block);
   }
 }
