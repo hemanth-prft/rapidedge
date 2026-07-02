@@ -19,6 +19,33 @@
   display: block;
 }
 
+/* Resizer handle - hidden on mobile */
+.columns-resizer {
+  display: none;
+}
+
+/* Grid overlay - hidden by default */
+.columns-grid-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.columns-grid-overlay.visible {
+  display: flex;
+}
+
+.columns-grid-overlay > div {
+  flex: 1;
+  border-right: 1px dashed rgba(59, 99, 251, 0.25);
+}
+
+.columns-grid-overlay > div:last-child {
+  border-right: none;
+}
+
 @media (width >= 900px) {
   .columns > div {
     align-items: center;
@@ -29,5 +56,40 @@
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+
+  /* 12-grid: override flex:1 when col-* class is present */
+  .columns[class*="col-"] > div > div {
+    flex: none;
+  }
+
+  /* Resizer handle */
+  .columns-resizer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    margin: 0 -8px;
+    cursor: col-resize;
+    position: relative;
+    z-index: 10;
+    flex-shrink: 0;
+    user-select: none;
+    touch-action: none;
+  }
+
+  .columns-resizer::before {
+    content: '';
+    width: 4px;
+    height: 40px;
+    border-radius: 2px;
+    background: #ccc;
+    transition: background 0.15s, height 0.15s;
+  }
+
+  .columns-resizer:hover::before,
+  .columns-resizer.active::before {
+    background: #3b63fb;
+    height: 60px;
   }
 }
