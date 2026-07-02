@@ -1,9 +1,147 @@
-.mercy-text-content {
-  font-family: Inter, sans-serif;
-  font-style: normal;
-  padding: 12px 0 40px;
+.mercy-text .mcy-rich-text__content {
+  font-size: 1rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
-.mercy-text-content p {
-  margin: 0;
+.mercy-text .mcy-rich-text__content > *:first-child {
+  margin-top: 0;
+}
+
+.mercy-text .mcy-rich-text__content > *:last-child {
+  margin-bottom: 0;
+}
+
+.mercy-text .mcy-rich-text__content a {
+  font-weight: 600;
+}
+
+/* Inline text color classes (applied via RTE) */
+.mercy-text .text__support-magenta {
+  color: #a70067;
+}
+
+.mercy-text .text__support-purple {
+  color: #233960;
+}
+
+.mercy-text .text__support-blue {
+  color: #006b77;
+}
+
+.mercy-text .text__light-blue {
+  color: #0066cc;
+}
+
+.mercy-text .text__support-green {
+  color: #1d6530;
+}
+
+.mercy-text .text__dark-green {
+  color: #1a5276;
+}
+
+.mercy-text .text__mercy-light-green {
+  color: #5a9e6f;
+}
+
+.mercy-text .text__mercy-red {
+  color: #cc2229;
+}
+
+.mercy-text .text__dark-orange {
+  color: #c0392b;
+}
+
+.mercy-text .text__mercy-light-orange {
+  color: #c87941;
+}
+
+.mercy-text .text__gray {
+  color: #555;
+}
+
+.mercy-text .text__white {
+  color: #fff;
+}
+
+/* Background color classes */
+.mercy-text .mcy-rich-text__content.bg--color {
+  padding: 1.5rem;
+}
+
+.mercy-text .mcy-rich-text__content.bg--color b {
+  font-weight: 600;
+}
+
+.mercy-text .mcy-rich-text__content.bg--gray {
+  color: #333;
+  background-color: #e8e8e8;
+}
+
+.mercy-text .mcy-rich-text__content.bg--gray h1 {
+  color: #333;
+}
+
+.mercy-text .mcy-rich-text__content.bg--magenta {
+  color: #fff;
+  background-color: #a70067;
+}
+
+.mercy-text .mcy-rich-text__content.bg--magenta h1 {
+  color: #fff;
+}
+
+.mercy-text .mcy-rich-text__content.bg--purple {
+  color: #fff;
+  background-color: #233960;
+}
+
+.mercy-text .mcy-rich-text__content.bg--purple h1 {
+  color: #fff;
+}
+
+.mercy-text .mcy-rich-text__content.bg--blue {
+  color: #fff;
+  background-color: #006b77;
+}
+
+.mercy-text .mcy-rich-text__content.bg--blue h1 {
+  color: #fff;
+}
+
+.mercy-text .mcy-rich-text__content.bg--green {
+  color: #fff;
+  background-color: #1d6530;
+}
+
+.mercy-text .mcy-rich-text__content.bg--green h1 {
+  color: #fff;
+}
+
+.mercy-text .mcy-rich-text__content.bg--red {
+  color: #fff;
+  background-color: #cc2229;
+}
+
+.mercy-text .mcy-rich-text__content.bg--red h1 {
+  color: #fff;
+}
+
+.mercy-text .mcy-rich-text__content.bg--orange {
+  color: #333;
+  background-color: #f5a623;
+}
+
+.mercy-text .mcy-rich-text__content.bg--orange h1 {
+  color: #333;
+}
+
+.mercy-text .mcy-rich-text__content.bg--light-green {
+  color: #333;
+  background-color: #d4edda;
+}
+
+.mercy-text .mcy-rich-text__content.bg--light-green h1 {
+  color: #333;
 }
