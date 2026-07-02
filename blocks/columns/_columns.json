@@ -61,6 +61,14 @@
           "name": "rows",
           "value": "",
           "label": "Rows"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "widths",
+          "value": "",
+          "label": "Column Widths",
+          "description": "Enter column widths separated by dashes, e.g. 30-70 or 25-50-25"
         }
       ]
     }
