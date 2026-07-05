@@ -24,7 +24,6 @@ indices:
   rapid-edge-pages:
     include:
       - '/**'
-      - '/content/rapid-edge/**'
     exclude:
       - '/**.json'
     target: /rapid-edge-pages-index.json

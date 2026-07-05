@@ -8,28 +8,36 @@ const SORT = {
 const BREAKPOINT_SM = 767;
 let quickFactsInstanceCount = 0;
 
+// Edge Delivery content-bus coordinates (must match fstab.yaml mountpoint:
+// /bin/franklin.delivery/<owner>/<repo>/<branch>). The Git repo name (rapidedge)
+// differs from the AEM content path segment (rapid-edge), so it is pinned here
+// instead of being derived from window.location.
+const AEM_OWNER = 'hemanthsreenu';
+const AEM_REPO = 'rapidedge';
+const PAGES_INDEX = 'rapid-edge-pages-index.json';
+
 function getQueryIndexUrls() {
   const urls = [];
   const isAuthorHost = window.location.hostname.includes('adobeaemcloud.com');
-  const resourceRootMatch = window.location.pathname.match(/^\/content\/[^/]+\.resource/);
 
-  if (resourceRootMatch) {
-    urls.push(`${resourceRootMatch[0]}/rapid-edge-pages-index.json`);
-  }
+  if (isAuthorHost) {
+    // Universal Editor preview renders on the AEM author. The query index is
+    // served by the Edge Delivery content-bus delivery servlet — the SAME
+    // endpoint declared in fstab.yaml:
+    //   /bin/franklin.delivery/<owner>/<repo>/<branch>/<index>.json
+    // The branch is a PATH segment here (taken from the ?ref preview param,
+    // defaulting to main) — NOT an AEM `.resource` selector.
+    const branch = new URLSearchParams(window.location.search).get('ref') || 'main';
+    urls.push(`/bin/franklin.delivery/${AEM_OWNER}/${AEM_REPO}/${branch}/${PAGES_INDEX}`);
 
-  // Author page preview URL pattern:
-  // /content/<repo>/<page>.html?ref=<branch>
-  // Convert to resource URL: /content/<repo>.<branch>.resource/rapid-edge-pages-index.json
-  const previewPathMatch = window.location.pathname.match(/^\/content\/([^/]+)\//);
-  const refParam = new URLSearchParams(window.location.search).get('ref');
-  if (previewPathMatch && refParam) {
-    const repoName = previewPathMatch[1];
-    urls.push(`/content/${repoName}.${refParam}.resource/rapid-edge-pages-index.json`);
-  }
-
-  if (!isAuthorHost) {
-    // On edge domains use root endpoint.
-    urls.push('/rapid-edge-pages-index.json');
+    // Fallback: the stable, branch-agnostic paths.json-mapped resource route.
+    const previewPathMatch = window.location.pathname.match(/^\/content\/([^/.]+)/);
+    if (previewPathMatch) {
+      urls.push(`/content/${previewPathMatch[1]}.resource/${PAGES_INDEX}`);
+    }
+  } else {
+    // Edge (aem.page / aem.live) and published sites serve from the site root.
+    urls.push(`/${PAGES_INDEX}`);
   }
 
   return [...new Set(urls)];
@@ -95,6 +103,47 @@ function getRowCells(row) {
 function getCellText(row, index) {
   const cells = getRowCells(row);
   return cells[index] ? cells[index].textContent.trim() : '';
+}
+
+// Resolve the source cells that carry the Universal Editor instrumentation for
+// each model field so the binding can be re-applied after the block is re-rendered.
+function getFieldSources(block) {
+  const rows = [...block.children].filter((child) => child instanceof HTMLDivElement);
+  if (!rows.length) {
+    return { titleEl: null, contentZoneEl: null };
+  }
+
+  const firstRowCells = getRowCells(rows[0]);
+  if (firstRowCells.length >= 2) {
+    return { titleEl: firstRowCells[0], contentZoneEl: firstRowCells[1] };
+  }
+
+  const secondRowCells = rows.length > 1 ? getRowCells(rows[1]) : [];
+  return {
+    titleEl: firstRowCells[0] || rows[0],
+    contentZoneEl: secondRowCells[0] || rows[1] || null,
+  };
+}
+
+// Snapshot the data-aue-*/data-richtext-* attributes so they can be copied onto
+// the rendered elements on every render (render() wipes block.innerHTML, so a
+// one-time moveInstrumentation would be lost after the first re-render).
+function captureInstrumentation(element) {
+  if (!(element instanceof HTMLElement)) {
+    return [];
+  }
+
+  return [...element.attributes]
+    .filter(({ nodeName }) => nodeName.startsWith('data-aue-') || nodeName.startsWith('data-richtext-'))
+    .map(({ nodeName, value }) => ({ name: nodeName, value }));
+}
+
+function applyInstrumentation(element, attributes) {
+  if (!(element instanceof HTMLElement) || !attributes) {
+    return;
+  }
+
+  attributes.forEach(({ name, value }) => element.setAttribute(name, value));
 }
 
 async function fetchQuickFactsItems() {
@@ -290,6 +339,7 @@ function render(block, state) {
     page,
     itemsPerPage,
     sortSelectId,
+    instrumentation,
   } = state;
 
   const sortedItems = getSortedItems(items, sortValue);
@@ -310,6 +360,7 @@ function render(block, state) {
     const heading = document.createElement('h2');
     heading.className = 'quick-facts-accordion-title';
     heading.textContent = title;
+    applyInstrumentation(heading, instrumentation?.title);
     root.append(heading);
   }
 
@@ -328,6 +379,7 @@ function render(block, state) {
   if (contentZone) {
     const intro = document.createElement('p');
     intro.className = 'quick-facts-accordion-intro';
+    applyInstrumentation(intro, instrumentation?.contentZone);
     intro.textContent = contentZone;
     root.append(intro);
     controls.classList.add('has-intro');
@@ -445,6 +497,11 @@ function render(block, state) {
 
 export default async function decorate(block) {
   const parsed = readBlockFields(block);
+  const fieldSources = getFieldSources(block);
+  const instrumentation = {
+    title: captureInstrumentation(fieldSources.titleEl),
+    contentZone: captureInstrumentation(fieldSources.contentZoneEl),
+  };
   const apiData = await fetchQuickFactsItems();
 
   const state = {
@@ -457,6 +514,7 @@ export default async function decorate(block) {
     page: 1,
     itemsPerPage: getItemsPerPage(),
     sortSelectId: getSortSelectId(block),
+    instrumentation,
   };
 
   render(block, state);
