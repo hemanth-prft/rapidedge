@@ -5,9 +5,21 @@ const SORT = {
   ALPHA_DESC: 'alpha-desc',
 };
 
-const QUERY_INDEX_URLS = ['/rapid-edge-pages-index.json', '/query-index.json'];
 const BREAKPOINT_SM = 767;
 let quickFactsInstanceCount = 0;
+
+function getQueryIndexUrls() {
+  const urls = [];
+  const resourceRootMatch = window.location.pathname.match(/^\/content\/[^/]+\.resource/);
+
+  if (resourceRootMatch) {
+    urls.push(`${resourceRootMatch[0]}/rapid-edge-pages-index.json`);
+  }
+
+  urls.push('/rapid-edge-pages-index.json');
+
+  return [...new Set(urls)];
+}
 
 function parseDate(value) {
   if (!value) {
@@ -72,6 +84,8 @@ function getCellText(row, index) {
 }
 
 async function fetchQuickFactsItems() {
+  const queryIndexUrls = getQueryIndexUrls();
+
   const titleFromPath = (pathValue) => {
     if (!pathValue) {
       return '';
@@ -121,22 +135,40 @@ async function fetchQuickFactsItems() {
 
   try {
     const queryResponses = await Promise.all(
-      QUERY_INDEX_URLS.map(async (url) => {
-        const queryResponse = await fetch(url);
-        if (!queryResponse.ok) {
+      queryIndexUrls.map(async (url) => {
+        try {
+          const queryResponse = await fetch(url, { credentials: 'same-origin' });
+          if (!queryResponse.ok) {
+            return null;
+          }
+
+          const contentType = (queryResponse.headers.get('content-type') || '').toLowerCase();
+          const responseText = await queryResponse.text();
+
+          // Author endpoints may return HTML login/error pages with HTTP 200.
+          if (contentType.includes('text/html') || responseText.trim().startsWith('<!DOCTYPE html')) {
+            return null;
+          }
+
+          let queryPayload;
+          try {
+            queryPayload = JSON.parse(responseText);
+          } catch (error) {
+            return null;
+          }
+
+          const indexedItems = normalizeQueryIndexItems(queryPayload);
+          if (!indexedItems.length) {
+            return null;
+          }
+
+          return {
+            title: queryPayload.title || '',
+            items: indexedItems,
+          };
+        } catch (error) {
           return null;
         }
-
-        const queryPayload = await queryResponse.json();
-        const indexedItems = normalizeQueryIndexItems(queryPayload);
-        if (!indexedItems.length) {
-          return null;
-        }
-
-        return {
-          title: queryPayload.title || '',
-          items: indexedItems,
-        };
       }),
     );
 
