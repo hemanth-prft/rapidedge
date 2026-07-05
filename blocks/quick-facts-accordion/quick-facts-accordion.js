@@ -99,6 +99,7 @@ function getCellText(row, index) {
 
 async function fetchQuickFactsItems() {
   const queryIndexUrls = getQueryIndexUrls();
+  const isAuthorHost = window.location.hostname.includes('adobeaemcloud.com');
 
   const titleFromPath = (pathValue) => {
     if (!pathValue) {
@@ -195,9 +196,20 @@ async function fetchQuickFactsItems() {
     if (firstUsableResponse) {
       return firstUsableResponse;
     }
-    return { title: '', items: [] };
+
+    return {
+      title: '',
+      items: [],
+      errorMessage: isAuthorHost
+        ? 'Custom query index not reachable from author preview. Verify .resource endpoint auth and branch mapping.'
+        : 'Custom query index endpoint returned no JSON data.',
+    };
   } catch (e) {
-    return { title: '', items: [] };
+    return {
+      title: '',
+      items: [],
+      errorMessage: 'Custom query index request failed.',
+    };
   }
 }
 
@@ -272,6 +284,7 @@ function render(block, state) {
     title,
     contentZone,
     items,
+    errorMessage,
     sortValue,
     openIndex,
     page,
@@ -303,7 +316,7 @@ function render(block, state) {
   if (!items.length) {
     const empty = document.createElement('p');
     empty.className = 'quick-facts-accordion-empty';
-    empty.textContent = 'No quick facts available right now.';
+    empty.textContent = errorMessage || 'No quick facts available right now.';
     root.append(empty);
     block.append(root);
     return;
@@ -438,6 +451,7 @@ export default async function decorate(block) {
     title: parsed.title || apiData.title,
     contentZone: parsed.contentZone,
     items: apiData.items,
+    errorMessage: apiData.errorMessage || '',
     sortValue: SORT.FEATURED,
     openIndex: -1,
     page: 1,
