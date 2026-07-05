@@ -5,8 +5,7 @@ const SORT = {
   ALPHA_DESC: 'alpha-desc',
 };
 
-const QUERY_INDEX_URL = '/rapid-edge-pages-index.json';
-const FALLBACK_API_URL = 'https://dummyjson.com/c/a408-8046-46a4-8255';
+const QUERY_INDEX_URLS = ['/rapid-edge-pages-index.json', '/query-index.json'];
 const BREAKPOINT_SM = 767;
 let quickFactsInstanceCount = 0;
 
@@ -73,6 +72,17 @@ function getCellText(row, index) {
 }
 
 async function fetchQuickFactsItems() {
+  const titleFromPath = (pathValue) => {
+    if (!pathValue) {
+      return '';
+    }
+
+    const segment = pathValue.split('/').filter(Boolean).pop() || '';
+    return segment
+      .replace(/[-_]+/g, ' ')
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+
   const normalizeQueryIndexItems = (payload) => {
     const rows = payload?.data || payload?.items || payload?.results || payload?.pages || [];
     if (!Array.isArray(rows)) {
@@ -83,7 +93,12 @@ async function fetchQuickFactsItems() {
       .map((row, index) => {
         const properties = row?.properties || row || {};
         const linkUrl = row?.path || properties.path || properties.url || '';
-        const title = (properties.title || properties.name || row?.title || '').trim();
+        const title = (
+          properties.title
+          || properties.name
+          || row?.title
+          || titleFromPath(linkUrl)
+        ).trim();
         const description = (properties.description || properties.summary || '').trim();
         const date = properties.lastModified || properties.lastmod || properties.date || '';
 
@@ -105,39 +120,31 @@ async function fetchQuickFactsItems() {
   };
 
   try {
-    const queryResponse = await fetch(QUERY_INDEX_URL);
-    if (queryResponse.ok) {
-      const queryPayload = await queryResponse.json();
-      const indexedItems = normalizeQueryIndexItems(queryPayload);
+    const queryResponses = await Promise.all(
+      QUERY_INDEX_URLS.map(async (url) => {
+        const queryResponse = await fetch(url);
+        if (!queryResponse.ok) {
+          return null;
+        }
 
-      if (indexedItems.length) {
+        const queryPayload = await queryResponse.json();
+        const indexedItems = normalizeQueryIndexItems(queryPayload);
+        if (!indexedItems.length) {
+          return null;
+        }
+
         return {
           title: queryPayload.title || '',
           items: indexedItems,
         };
-      }
+      }),
+    );
+
+    const firstUsableResponse = queryResponses.find(Boolean);
+    if (firstUsableResponse) {
+      return firstUsableResponse;
     }
-
-    const response = await fetch(FALLBACK_API_URL);
-    if (!response.ok) {
-      return { title: '', items: [] };
-    }
-
-    const payload = await response.json();
-    const items = Array.isArray(payload.items) ? payload.items : [];
-
-    return {
-      title: payload.title || '',
-      items: items.map((item, index) => ({
-        featuredOrder: index,
-        name: (item.name || '').trim(),
-        description: item.description || '',
-        linkUrl: item.linkUrl || '',
-        buttonText: (item.buttonText || '').trim() || 'Learn More',
-        date: item.date || '',
-        newWindow: !!(item.newWindow || item.openInNewTab),
-      })),
-    };
+    return { title: '', items: [] };
   } catch (e) {
     return { title: '', items: [] };
   }
