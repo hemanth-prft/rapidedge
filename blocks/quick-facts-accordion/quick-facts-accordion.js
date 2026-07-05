@@ -15,28 +15,34 @@ let quickFactsInstanceCount = 0;
 const AEM_OWNER = 'hemanthsreenu';
 const AEM_REPO = 'rapidedge';
 const PAGES_INDEX = 'rapid-edge-pages-index.json';
+const DEFAULT_INDEX = 'query-index.json';
 
 function getQueryIndexUrls() {
   const isAuthorHost = window.location.hostname.includes('adobeaemcloud.com');
 
   if (!isAuthorHost) {
-    // Edge (aem.page / aem.live) and published sites serve the index from root.
-    return [`/${PAGES_INDEX}`];
+    // Edge preview (aem.page), published (aem.live) and the live site all serve
+    // the index SAME-ORIGIN at the site root. Prefer the custom index, then fall
+    // back to the always-present default query index.
+    return [`/${PAGES_INDEX}`, `/${DEFAULT_INDEX}`];
   }
 
-  // Universal Editor preview runs on the AEM author, which does NOT host the
-  // generated query index — the index is built by the Edge Delivery pipeline and
-  // is only available on aem.page (preview) / aem.live (published). Fetch it
-  // cross-origin from the Edge using the branch from the ?ref preview param
-  // (defaults to main). These endpoints send Access-Control-Allow-Origin:* for
-  // JSON resources, so the request is made without credentials.
-  const branch = new URLSearchParams(window.location.search).get('ref') || 'main';
-  const edgeHost = `${branch}--${AEM_REPO}--${AEM_OWNER}`;
+  // AEM author / Universal Editor. The generated index lives only on the Edge,
+  // and the Edge sends NO CORS headers, so a cross-origin fetch from the author
+  // is blocked by the browser. We therefore only try SAME-ORIGIN author routes
+  // (these can never CORS-fail): the crosswalk delivery servlet declared in
+  // fstab.yaml, plus the root paths. The branch is sanitized to a valid Edge ref
+  // (aem.page hosts cannot contain '/'): feature/quick-facts-block -> feature-quick-facts-block.
+  const rawRef = new URLSearchParams(window.location.search).get('ref') || 'main';
+  const branch = rawRef.replace(/[^a-zA-Z0-9-]/g, '-');
+  const delivery = `/bin/franklin.delivery/${AEM_OWNER}/${AEM_REPO}/${branch}`;
 
-  return [
-    `https://${edgeHost}.aem.page/${PAGES_INDEX}`, // branch preview
-    `https://${edgeHost}.aem.live/${PAGES_INDEX}`, // published
-  ];
+  return [...new Set([
+    `${delivery}/${PAGES_INDEX}`,
+    `${delivery}/${DEFAULT_INDEX}`,
+    `/${PAGES_INDEX}`,
+    `/${DEFAULT_INDEX}`,
+  ])];
 }
 
 function parseDate(value) {
@@ -246,7 +252,7 @@ async function fetchQuickFactsItems() {
       title: '',
       items: [],
       errorMessage: isAuthorHost
-        ? 'Custom query index not reachable from the Edge (aem.page/aem.live). Preview/publish the pages so the index is generated for this branch.'
+        ? 'Quick facts load on the Edge preview. Click Preview in the Sidekick to open the aem.page URL — the Edge does not allow the author to read the index cross-origin.'
         : 'Custom query index endpoint returned no JSON data.',
     };
   } catch (e) {
