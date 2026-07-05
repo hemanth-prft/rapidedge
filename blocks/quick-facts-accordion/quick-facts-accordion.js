@@ -10,6 +10,7 @@ let quickFactsInstanceCount = 0;
 
 function getQueryIndexUrls() {
   const urls = [];
+  const isAuthorHost = window.location.hostname.includes('adobeaemcloud.com');
   const resourceRootMatch = window.location.pathname.match(/^\/content\/[^/]+\.resource/);
 
   if (resourceRootMatch) {
@@ -26,7 +27,10 @@ function getQueryIndexUrls() {
     urls.push(`/content/${repoName}.${refParam}.resource/rapid-edge-pages-index.json`);
   }
 
-  urls.push('/rapid-edge-pages-index.json');
+  if (!isAuthorHost) {
+    // On edge domains use root endpoint.
+    urls.push('/rapid-edge-pages-index.json');
+  }
 
   return [...new Set(urls)];
 }

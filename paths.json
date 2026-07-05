@@ -1,6 +1,8 @@
 {
   "mappings": [
     "/content/rapid-edge/:/",
+    "/content/rapid-edge.resource/query-index.json:/query-index.json",
+    "/content/rapid-edge.resource/rapid-edge-pages-index.json:/rapid-edge-pages-index.json",
     "/content/rapid-edge/configuration:/.helix/config.json",
     "/content/rapid-edge/metadata:/metadata.json"
   ],
