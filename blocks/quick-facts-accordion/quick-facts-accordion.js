@@ -8,39 +8,35 @@ const SORT = {
 const BREAKPOINT_SM = 767;
 let quickFactsInstanceCount = 0;
 
-// Edge Delivery content-bus coordinates (must match fstab.yaml mountpoint:
-// /bin/franklin.delivery/<owner>/<repo>/<branch>). The Git repo name (rapidedge)
-// differs from the AEM content path segment (rapid-edge), so it is pinned here
-// instead of being derived from window.location.
+// Edge Delivery project coordinates (owner/repo come from the fstab.yaml
+// mountpoint /bin/franklin.delivery/<owner>/<repo>/<branch>). The Git repo name
+// (rapidedge) differs from the AEM content path segment (rapid-edge), so it is
+// pinned here instead of being derived from window.location.
 const AEM_OWNER = 'hemanthsreenu';
 const AEM_REPO = 'rapidedge';
 const PAGES_INDEX = 'rapid-edge-pages-index.json';
 
 function getQueryIndexUrls() {
-  const urls = [];
   const isAuthorHost = window.location.hostname.includes('adobeaemcloud.com');
 
-  if (isAuthorHost) {
-    // Universal Editor preview renders on the AEM author. The query index is
-    // served by the Edge Delivery content-bus delivery servlet — the SAME
-    // endpoint declared in fstab.yaml:
-    //   /bin/franklin.delivery/<owner>/<repo>/<branch>/<index>.json
-    // The branch is a PATH segment here (taken from the ?ref preview param,
-    // defaulting to main) — NOT an AEM `.resource` selector.
-    const branch = new URLSearchParams(window.location.search).get('ref') || 'main';
-    urls.push(`/bin/franklin.delivery/${AEM_OWNER}/${AEM_REPO}/${branch}/${PAGES_INDEX}`);
-
-    // Fallback: the stable, branch-agnostic paths.json-mapped resource route.
-    const previewPathMatch = window.location.pathname.match(/^\/content\/([^/.]+)/);
-    if (previewPathMatch) {
-      urls.push(`/content/${previewPathMatch[1]}.resource/${PAGES_INDEX}`);
-    }
-  } else {
-    // Edge (aem.page / aem.live) and published sites serve from the site root.
-    urls.push(`/${PAGES_INDEX}`);
+  if (!isAuthorHost) {
+    // Edge (aem.page / aem.live) and published sites serve the index from root.
+    return [`/${PAGES_INDEX}`];
   }
 
-  return [...new Set(urls)];
+  // Universal Editor preview runs on the AEM author, which does NOT host the
+  // generated query index — the index is built by the Edge Delivery pipeline and
+  // is only available on aem.page (preview) / aem.live (published). Fetch it
+  // cross-origin from the Edge using the branch from the ?ref preview param
+  // (defaults to main). These endpoints send Access-Control-Allow-Origin:* for
+  // JSON resources, so the request is made without credentials.
+  const branch = new URLSearchParams(window.location.search).get('ref') || 'main';
+  const edgeHost = `${branch}--${AEM_REPO}--${AEM_OWNER}`;
+
+  return [
+    `https://${edgeHost}.aem.page/${PAGES_INDEX}`, // branch preview
+    `https://${edgeHost}.aem.live/${PAGES_INDEX}`, // published
+  ];
 }
 
 function parseDate(value) {
@@ -250,7 +246,7 @@ async function fetchQuickFactsItems() {
       title: '',
       items: [],
       errorMessage: isAuthorHost
-        ? 'Custom query index not reachable from author preview. Verify .resource endpoint auth and branch mapping.'
+        ? 'Custom query index not reachable from the Edge (aem.page/aem.live). Preview/publish the pages so the index is generated for this branch.'
         : 'Custom query index endpoint returned no JSON data.',
     };
   } catch (e) {
