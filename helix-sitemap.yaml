@@ -3,3 +3,8 @@ sitemaps:
     source: /query-index.json
     destination: /sitemap.xml
     lastmod: YYYY-MM-DD
+
+  rapid-edge:
+    source: /rapid-edge-pages-index.json
+    destination: /rapid-edge-sitemap.xml
+    lastmod: YYYY-MM-DD

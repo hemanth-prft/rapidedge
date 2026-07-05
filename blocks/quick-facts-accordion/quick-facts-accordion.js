@@ -5,7 +5,8 @@ const SORT = {
   ALPHA_DESC: 'alpha-desc',
 };
 
-const API_URL = 'https://dummyjson.com/c/a408-8046-46a4-8255';
+const QUERY_INDEX_URL = '/rapid-edge-pages-index.json';
+const FALLBACK_API_URL = 'https://dummyjson.com/c/a408-8046-46a4-8255';
 const BREAKPOINT_SM = 767;
 let quickFactsInstanceCount = 0;
 
@@ -72,8 +73,52 @@ function getCellText(row, index) {
 }
 
 async function fetchQuickFactsItems() {
+  const normalizeQueryIndexItems = (payload) => {
+    const rows = payload?.data || payload?.items || payload?.results || payload?.pages || [];
+    if (!Array.isArray(rows)) {
+      return [];
+    }
+
+    return rows
+      .map((row, index) => {
+        const properties = row?.properties || row || {};
+        const linkUrl = row?.path || properties.path || properties.url || '';
+        const title = (properties.title || properties.name || row?.title || '').trim();
+        const description = (properties.description || properties.summary || '').trim();
+        const date = properties.lastModified || properties.lastmod || properties.date || '';
+
+        if (!title || !linkUrl) {
+          return null;
+        }
+
+        return {
+          featuredOrder: index,
+          name: title,
+          description,
+          linkUrl,
+          buttonText: 'Learn More',
+          date,
+          newWindow: false,
+        };
+      })
+      .filter(Boolean);
+  };
+
   try {
-    const response = await fetch(API_URL);
+    const queryResponse = await fetch(QUERY_INDEX_URL);
+    if (queryResponse.ok) {
+      const queryPayload = await queryResponse.json();
+      const indexedItems = normalizeQueryIndexItems(queryPayload);
+
+      if (indexedItems.length) {
+        return {
+          title: queryPayload.title || '',
+          items: indexedItems,
+        };
+      }
+    }
+
+    const response = await fetch(FALLBACK_API_URL);
     if (!response.ok) {
       return { title: '', items: [] };
     }
