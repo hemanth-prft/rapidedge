@@ -16,6 +16,16 @@ function getQueryIndexUrls() {
     urls.push(`${resourceRootMatch[0]}/rapid-edge-pages-index.json`);
   }
 
+  // Author page preview URL pattern:
+  // /content/<repo>/<page>.html?ref=<branch>
+  // Convert to resource URL: /content/<repo>.<branch>.resource/rapid-edge-pages-index.json
+  const previewPathMatch = window.location.pathname.match(/^\/content\/([^/]+)\//);
+  const refParam = new URLSearchParams(window.location.search).get('ref');
+  if (previewPathMatch && refParam) {
+    const repoName = previewPathMatch[1];
+    urls.push(`/content/${repoName}.${refParam}.resource/rapid-edge-pages-index.json`);
+  }
+
   urls.push('/rapid-edge-pages-index.json');
 
   return [...new Set(urls)];
@@ -137,7 +147,12 @@ async function fetchQuickFactsItems() {
     const queryResponses = await Promise.all(
       queryIndexUrls.map(async (url) => {
         try {
-          const queryResponse = await fetch(url, { credentials: 'same-origin' });
+          const queryResponse = await fetch(url, {
+            credentials: 'same-origin',
+            headers: {
+              Accept: 'application/json',
+            },
+          });
           if (!queryResponse.ok) {
             return null;
           }
