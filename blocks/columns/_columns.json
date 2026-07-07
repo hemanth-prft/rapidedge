@@ -96,7 +96,8 @@
         "text",
         "image",
         "button",
-        "title"
+        "title",
+        "card"
       ]
     }
   ]
