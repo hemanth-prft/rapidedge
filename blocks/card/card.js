@@ -1,5 +1,3 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
-
 export default function decorate(block) {
   const rows = [...block.children];
 
@@ -19,15 +17,19 @@ export default function decorate(block) {
   const iconDiv = document.createElement('div');
   iconDiv.className = 'card-icon';
 
-  const img = imageRow?.querySelector('img');
-  if (img) {
-    const optimizedPic = createOptimizedPicture(img.src, img.alt || title, false, [{ width: '120' }]);
-    iconDiv.append(optimizedPic);
+  const existingImg = imageRow?.querySelector('img');
+  if (existingImg) {
+    existingImg.alt = existingImg.alt || title;
+    existingImg.loading = 'lazy';
+    iconDiv.append(existingImg);
   } else {
     const imgUrl = getText(imageRow);
     if (imgUrl && (imgUrl.startsWith('http') || imgUrl.startsWith('/'))) {
-      const pic = createOptimizedPicture(imgUrl, title, false, [{ width: '120' }]);
-      iconDiv.append(pic);
+      const img = document.createElement('img');
+      img.src = imgUrl;
+      img.alt = title;
+      img.loading = 'lazy';
+      iconDiv.append(img);
     }
   }
 
