@@ -182,7 +182,9 @@ function initializeGrid(block, numCols) {
   }
 }
 
-export default function decorate(block) {
+export default async function decorate(block) {
+  const { decorateBlock, loadBlock } = await import('../../scripts/aem.js');
+
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
 
@@ -203,5 +205,24 @@ export default function decorate(block) {
   const numCols = cols.length;
   if (numCols >= 2 && numCols <= 4) {
     initializeGrid(block, numCols);
+  }
+
+  // decorate and load nested blocks inside columns
+  const colCells = block.querySelectorAll(':scope > div > div');
+  colCells.forEach((col) => {
+    [...col.children].forEach((child) => {
+      if (child.tagName === 'DIV' && child.classList.length > 0 && !child.dataset.blockStatus
+        && !child.classList.contains('columns-resizer')
+        && !child.classList.contains('columns-grid-overlay')
+        && !child.classList.contains('columns-img-col')) {
+        decorateBlock(child);
+      }
+    });
+  });
+
+  const nestedBlocks = block.querySelectorAll('.block');
+  for (let i = 0; i < nestedBlocks.length; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    await loadBlock(nestedBlocks[i]);
   }
 }

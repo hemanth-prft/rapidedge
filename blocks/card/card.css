@@ -28,8 +28,8 @@
 }
 
 .card .card-icon img {
-  width: 64px;
-  height: 64px;
+  width: 96px;
+  height: 96px;
   object-fit: contain;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .card .card-title p::after {
-  content: ' \203A';
-  font-size: 18px;
-  font-weight: 400;
+  content: ' \003E';
+  font-size: 16px;
+  font-weight: 600;
 }
