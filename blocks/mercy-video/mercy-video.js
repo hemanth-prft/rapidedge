@@ -291,14 +291,14 @@ export default function decorate(block) {
   if (autoplay && videoType === 'brightcove') {
     const muteBtn = document.createElement('button');
     muteBtn.type = 'button';
-    muteBtn.className = 'btn-mute btn-mute--volume-off';
+    muteBtn.className = 'btn-mute btn-mute-volume-off';
     muteBtn.setAttribute('aria-label', 'Toggle mute');
     muteBtn.addEventListener('click', () => {
       const video = videoWrap.querySelector('video');
       if (!video) return;
       video.muted = !video.muted;
-      muteBtn.classList.toggle('btn-mute--volume-off', video.muted);
-      muteBtn.classList.toggle('btn-mute--volume-up', !video.muted);
+      muteBtn.classList.toggle('btn-mute-volume-off', video.muted);
+      muteBtn.classList.toggle('btn-mute-volume-up', !video.muted);
       muteBtn.setAttribute('aria-label', video.muted ? 'Unmute' : 'Mute');
     });
     videoWrap.appendChild(muteBtn);

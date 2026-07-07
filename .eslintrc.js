@@ -26,6 +26,7 @@ module.exports = {
       'mercy-hero-banner-covered': 5,
       'cta-callout': 6,
       'mercy-hero-banner': 13,
+      'mercy-video': 30,
       'promo-card': 7,
       'quick-facts': 5,
       'split-banner': 6,
