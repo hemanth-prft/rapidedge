@@ -23,6 +23,12 @@ export default function decorate(block) {
   if (img) {
     const optimizedPic = createOptimizedPicture(img.src, img.alt || title, false, [{ width: '120' }]);
     iconDiv.append(optimizedPic);
+  } else {
+    const imgUrl = getText(imageRow);
+    if (imgUrl && (imgUrl.startsWith('http') || imgUrl.startsWith('/'))) {
+      const pic = createOptimizedPicture(imgUrl, title, false, [{ width: '120' }]);
+      iconDiv.append(pic);
+    }
   }
 
   const titleDiv = document.createElement('div');

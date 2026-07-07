@@ -46,6 +46,60 @@
   border-right: none;
 }
 
+/* Card inside column */
+.columns .card-col {
+  display: flex;
+}
+
+.columns .card-col .card-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+  background-color: #f4f8fa;
+  border-radius: 12px;
+  padding: 32px 24px 24px;
+  width: 100%;
+  min-height: 180px;
+  transition: box-shadow 0.2s;
+}
+
+.columns .card-col .card-link:hover {
+  box-shadow: 0 4px 16px rgb(0 0 0 / 10%);
+}
+
+.columns .card-col .card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.columns .card-col .card-icon img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+}
+
+.columns .card-col .card-title p {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #0e7394;
+  text-align: center;
+}
+
+.columns .card-col .card-title p::after {
+  content: ' \003E';
+  font-size: 16px;
+  font-weight: 600;
+}
+
 @media (width >= 900px) {
   .columns > div {
     align-items: center;

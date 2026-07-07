@@ -1,3 +1,5 @@
+import { decorateBlock, loadBlock } from '../../scripts/aem.js';
+
 const GAP = 24;
 const GRID_UNITS = 12;
 
@@ -183,8 +185,6 @@ function initializeGrid(block, numCols) {
 }
 
 export default async function decorate(block) {
-  const { decorateBlock, loadBlock } = await import('../../scripts/aem.js');
-
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
 
@@ -207,22 +207,19 @@ export default async function decorate(block) {
     initializeGrid(block, numCols);
   }
 
-  // decorate and load nested blocks inside columns
-  const colCells = block.querySelectorAll(':scope > div > div');
-  colCells.forEach((col) => {
-    [...col.children].forEach((child) => {
-      if (child.tagName === 'DIV' && child.classList.length > 0 && !child.dataset.blockStatus
-        && !child.classList.contains('columns-resizer')
-        && !child.classList.contains('columns-grid-overlay')
-        && !child.classList.contains('columns-img-col')) {
-        decorateBlock(child);
+  // load all nested blocks inside columns
+  const columnCells = block.querySelectorAll(':scope > div > div');
+  const blockLoads = [];
+  columnCells.forEach((col) => {
+    col.querySelectorAll('div[class]').forEach((nested) => {
+      const hasBlockClass = nested.classList.length > 0
+        && !nested.classList.contains('columns-img-col')
+        && !nested.dataset.blockStatus;
+      if (hasBlockClass) {
+        decorateBlock(nested);
+        blockLoads.push(loadBlock(nested));
       }
     });
   });
-
-  const nestedBlocks = block.querySelectorAll('.block');
-  for (let i = 0; i < nestedBlocks.length; i += 1) {
-    // eslint-disable-next-line no-await-in-loop
-    await loadBlock(nestedBlocks[i]);
-  }
+  await Promise.all(blockLoads);
 }
