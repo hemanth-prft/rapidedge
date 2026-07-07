@@ -1,0 +1,273 @@
+{
+  "definitions": [
+    {
+      "title": "Mercy Video",
+      "id": "mercy-video",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Mercy Video",
+              "model": "mercy-video"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "mercy-video",
+      "fields": [
+        {
+          "component": "select",
+          "name": "videoType",
+          "label": "Video Type",
+          "valueType": "string",
+          "value": "brightcove",
+          "options": [
+            { "name": "Brightcove", "value": "brightcove" },
+            { "name": "YouTube", "value": "youtube" }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "videoID",
+          "label": "Video ID",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "name": "videoPlaylistID",
+          "label": "Video Playlist ID",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "select",
+          "name": "videoOrientation",
+          "label": "Video Orientation",
+          "valueType": "string",
+          "value": "",
+          "options": [
+            { "name": "Auto", "value": "auto" },
+            { "name": "Horizontal", "value": "horizontal" },
+            { "name": "Vertical", "value": "vertical" }
+          ]
+        },
+        {
+          "component": "select",
+          "name": "portraitSize",
+          "label": "Portrait Size",
+          "valueType": "string",
+          "value": "",
+          "options": [
+            { "name": "Full", "value": "full" },
+            { "name": "Small", "value": "small" },
+            { "name": "Medium", "value": "medium" },
+            { "name": "Large", "value": "large" }
+          ]
+        },
+        {
+          "component": "select",
+          "name": "playlistDirection",
+          "label": "Playlist Direction",
+          "valueType": "string",
+          "value": "",
+          "options": [
+            { "name": "Horizontal", "value": "horizontal" },
+            { "name": "Vertical", "value": "vertical" }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "playerId",
+          "label": "Player ID (leave blank for default)",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "checkbox",
+          "name": "videoAutoPlay",
+          "label": "Video Autoplay (Brightcove only)",
+          "valueType": "boolean",
+          "value": false
+        },
+        {
+          "component": "checkbox",
+          "name": "disableControls",
+          "label": "Disable Controls",
+          "valueType": "boolean",
+          "value": false
+        },
+        {
+          "component": "select",
+          "name": "videoTemplate",
+          "label": "Video Template (leave blank for page default)",
+          "valueType": "string",
+          "value": "",
+          "options": [
+            { "name": "Provider", "value": "provider" },
+            { "name": "Services/Locations", "value": "servloc" },
+            { "name": "Patient Wifi", "value": "wifi" }
+          ]
+        },
+        {
+          "component": "select",
+          "name": "videoWidth",
+          "label": "Player Width",
+          "valueType": "string",
+          "value": "full",
+          "options": [
+            { "name": "33%", "value": "third" },
+            { "name": "50%", "value": "half" },
+            { "name": "100%", "value": "full" }
+          ]
+        },
+        {
+          "component": "select",
+          "name": "sidebarPosition",
+          "label": "Sidebar Position",
+          "valueType": "string",
+          "value": "",
+          "options": [
+            { "name": "Right", "value": "right" },
+            { "name": "Bottom", "value": "bottom" }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "heading",
+          "label": "Heading (shown above video)",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "name": "title",
+          "label": "Title",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "name": "subtitle",
+          "label": "Subtitle",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "textarea",
+          "name": "bodyText",
+          "label": "Body Text",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "name": "footing",
+          "label": "Footing",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "name": "buttonText",
+          "label": "Button Text",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "name": "buttonUrl",
+          "label": "Button Link URL (internal or external)",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "name": "buttonDataAttribute",
+          "label": "Button Data Attribute",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "select",
+          "name": "buttonIcon",
+          "label": "Button Icon",
+          "valueType": "string",
+          "value": "",
+          "options": [
+            { "name": "Schedule", "value": "schedule" }
+          ]
+        },
+        {
+          "component": "richtext",
+          "name": "caption",
+          "label": "Caption",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "checkbox",
+          "name": "enableTimer",
+          "label": "Enable Timer",
+          "valueType": "boolean",
+          "value": false
+        },
+        {
+          "component": "text",
+          "name": "timerHeaderText",
+          "label": "Timer Header Text",
+          "valueType": "string",
+          "value": "Establishing Connection in"
+        },
+        {
+          "component": "text",
+          "name": "timer",
+          "label": "Countdown Time (leave blank to sync with video)",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "name": "timerFooterText",
+          "label": "Timer Footer Text",
+          "valueType": "string",
+          "value": "If you have difficulty connecting, please call us at 1-866-440-3399."
+        },
+        {
+          "component": "text",
+          "name": "timerRedirectUrl",
+          "label": "Redirect URL (on video or timer completion)",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "name": "timerDataAttribute",
+          "label": "Timer Data Attribute",
+          "valueType": "string",
+          "value": ""
+        },
+        {
+          "component": "checkbox",
+          "name": "timerShowRedirButton",
+          "label": "Show Button (goes to redirect URL)",
+          "valueType": "boolean",
+          "value": false
+        },
+        {
+          "component": "text",
+          "name": "timerRedirButtonText",
+          "label": "Timer Button Text",
+          "valueType": "string",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "filters": []
+}
