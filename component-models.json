@@ -840,6 +840,10 @@
   },
   {
     "id": "card-block",
+    "fields": []
+  },
+  {
+    "id": "card-item",
     "fields": [
       {
         "component": "reference",

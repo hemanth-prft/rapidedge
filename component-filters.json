@@ -72,5 +72,11 @@
     "components": [
       "mercy-breadcrumb-item"
     ]
+  },
+  {
+    "id": "card-block",
+    "components": [
+      "card-item"
+    ]
   }
 ]
