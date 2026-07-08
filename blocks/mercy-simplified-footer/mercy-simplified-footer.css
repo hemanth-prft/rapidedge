@@ -5,40 +5,39 @@
   margin: 0;
 }
 
-.mercy-simplified-footer__content {
+.mercy-simplified-footer-content {
   display: block;
   padding-top: 24px;
   padding-bottom: 48px;
   text-align: center;
 }
 
-@media (min-width: 576px) {
-  .mercy-simplified-footer__content {
+@media (width >= 576px) {
+  .mercy-simplified-footer-content {
     padding-bottom: 64px;
   }
 }
 
-.mercy-simplified-footer__section {
+.mercy-simplified-footer-section {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: center;
   padding-top: 8px;
   padding-bottom: 8px;
   margin: 0;
 }
 
-.mercy-simplified-footer__logo {
+.mercy-simplified-footer-logo {
   display: block;
   padding: 8px;
   text-decoration: none;
 }
 
-.mercy-simplified-footer__logo:focus {
+.mercy-simplified-footer-logo:focus {
   outline-offset: 0;
 }
 
-.mercy-simplified-footer__logo img {
+.mercy-simplified-footer-logo img {
   display: block;
   max-width: 120px;
   max-height: 56px;
@@ -46,13 +45,13 @@
   height: auto;
 }
 
-.mercy-simplified-footer__links {
+.mercy-simplified-footer-links {
   display: block;
   margin-top: 8px;
   margin-bottom: 8px;
 }
 
-.mercy-simplified-footer__list {
+.mercy-simplified-footer-list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -61,7 +60,7 @@
   line-height: 16px;
 }
 
-.mercy-simplified-footer__item {
+.mercy-simplified-footer-item {
   display: inline;
   border-right: 1px solid #fff;
   padding-left: 8px;
@@ -70,11 +69,11 @@
   color: #fff;
 }
 
-.mercy-simplified-footer__item:last-child {
+.mercy-simplified-footer-item:last-child {
   border-right: 0 none;
 }
 
-.mercy-simplified-footer__link {
+.mercy-simplified-footer-link {
   display: inline;
   color: #fff;
   font-size: 13px;
@@ -82,14 +81,14 @@
   padding: 4px;
 }
 
-.mercy-simplified-footer__link:hover,
-.mercy-simplified-footer__link:focus {
+.mercy-simplified-footer-link:hover,
+.mercy-simplified-footer-link:focus {
   color: #fff;
   text-decoration: underline;
 }
 
-.mercy-simplified-footer__copyright,
-p.mercy-simplified-footer__copyright {
+.mercy-simplified-footer-copyright,
+p.mercy-simplified-footer-copyright {
   display: inline;
   font-size: 13px;
   color: #fff;
@@ -98,6 +97,7 @@ p.mercy-simplified-footer__copyright {
 }
 
 /* ── AEM XF decorator fix ── */
+/* stylelint-disable-next-line selector-class-pattern */
 .mercy-simplified-footer-decorator.aem-GridColumn {
   padding-left: 0;
   padding-right: 0;
