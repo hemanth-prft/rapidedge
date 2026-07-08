@@ -136,6 +136,10 @@
           {
             "name": "Highlight",
             "value": "highlight"
+          },
+          {
+            "name": "Overlay Section",
+            "value": "overlay-section"
           }
         ]
       },
