@@ -1,3 +1,11 @@
+/*
+ * Columns Block Styles
+ *
+ * Change: No new card-specific styles needed here (card block loads its own CSS).
+ * Why: Previously had inline .card-col styles for card content detection inside
+ *      columns. Removed because the card block now handles its own grid layout
+ *      and loads card.css independently via loadBlock().
+ */
 .columns > div {
   display: flex;
   flex-direction: column;

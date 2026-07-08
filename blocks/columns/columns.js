@@ -1,3 +1,17 @@
+/*
+ * Columns Block
+ *
+ * Change: Added import of decorateBlock/loadBlock and nested block loading logic.
+ * Why: By default EDS only decorates top-level blocks (div.section > div > div).
+ *      Blocks placed inside columns (e.g. card-block) were not being detected or
+ *      loaded. Added logic at the end of decorate() to find nested div[class]
+ *      elements inside column cells, call decorateBlock() to assign .block class
+ *      and data-block-name, then loadBlock() to fetch their JS/CSS.
+ *
+ * Change: Added "Column Layout" classes select to _columns.json model.
+ * Why: Authors need to pick predefined column width ratios (e.g. 4/8, 8/4, 3/6/3)
+ *      from Universal Editor without manually resizing.
+ */
 import { decorateBlock, loadBlock } from '../../scripts/aem.js';
 
 const GAP = 24;

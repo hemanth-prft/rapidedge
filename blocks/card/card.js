@@ -1,3 +1,12 @@
+/*
+ * Card Block — Multi-item card grid component
+ *
+ * Change: Created new block to render icon cards in a responsive 3-column grid.
+ * Why: Needed a reusable card component (icon + title + link) that auto-arranges
+ *      into rows of 3. Each row in the block is one card item authored via UE.
+ *      Uses direct img src (not createOptimizedPicture) because images come from
+ *      AEM DAM delivery URLs which are already optimized.
+ */
 export default function decorate(block) {
   const rows = [...block.children];
 

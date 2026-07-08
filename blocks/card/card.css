@@ -1,3 +1,12 @@
+/*
+ * Card Block Styles
+ *
+ * Change: Created new CSS for the card block grid layout.
+ * Why: Cards need to display in a 3-column grid (desktop), 2-column (tablet),
+ *      1-column (mobile). Each card has a light background, centered icon,
+ *      teal title with ">" arrow indicator. Matches the Mercy orthopedics
+ *      specialty card design.
+ */
 .card {
   padding: 0;
 }
