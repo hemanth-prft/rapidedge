@@ -275,3 +275,20 @@ main .section.content-card {
 main .section.content-card > div {
   padding: 0;
 }
+
+/* Section variant: overlay-section — overlaps hero banner from below */
+main .section.overlay-section {
+  position: relative;
+  z-index: 2;
+  background-color: #fff;
+  border-radius: 16px 16px 0 0;
+  margin: -60px auto 0;
+  padding: 32px 40px 40px;
+  max-width: 1325px;
+  box-shadow: 0 -2px 12px rgb(0 0 0 / 8%);
+}
+
+main .section.overlay-section > div {
+  max-width: 100%;
+  padding: 0;
+}
