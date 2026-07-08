@@ -138,6 +138,13 @@
             "value": "highlight"
           }
         ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "classes",
+        "label": "Classes",
+        "description": "Custom CSS class(es) applied to this section"
       }
     ]
   },

@@ -261,3 +261,17 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+/* Section variant: content-card — white contained card with shadow */
+main .section.content-card {
+  background-color: #fff;
+  border-radius: 12px;
+  margin: 24px auto;
+  padding: 40px 32px;
+  max-width: 1325px;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 8%);
+}
+
+main .section.content-card > div {
+  padding: 0;
+}
