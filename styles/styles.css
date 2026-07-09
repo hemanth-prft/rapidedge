@@ -284,7 +284,8 @@ main .section.overlay-section {
   border-radius: 16px 16px 0 0;
   margin: -40px auto 0;
   padding: 24px 24px 40px;
-  max-width: 1060px;
+  max-width: 1440px;
+  width: 90%;
   box-shadow: 0 -2px 12px rgb(0 0 0 / 8%);
 }
 
