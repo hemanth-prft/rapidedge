@@ -208,7 +208,13 @@
   }
 
   .mercy-hero-banner-overlay {
-    display: none;
+    background: linear-gradient(
+      90deg,
+      rgb(0 92 122 / 85%) 0%,
+      rgb(0 92 122 / 70%) 25%,
+      rgb(0 92 122 / 40%) 50%,
+      rgb(0 92 122 / 0%) 70%
+    );
   }
 
   .mercy-hero-banner-content {
