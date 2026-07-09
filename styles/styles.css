@@ -279,16 +279,17 @@ main .section.content-card > div {
 /* Section variant: overlay-section — overlaps hero banner from below */
 main .section.overlay-section {
   position: relative;
+  left: 50%;
   z-index: 9999;
   background-color: #fff;
   border-radius: 0;
-  margin: 0 auto;
+  margin: 0;
   padding: 0 24px 40px;
   max-width: 1440px;
-  width: 90%;
+  width: min(90%, 1440px);
   box-shadow: none;
   overflow: visible;
-  transform: translateY(-40px);
+  transform: translate(-50%, -40px);
 }
 
 main .section.overlay-section > div {
@@ -298,19 +299,19 @@ main .section.overlay-section > div {
 
 @media (width >= 1024px) {
   main .section.overlay-section {
-    transform: translateY(-60px);
+    transform: translate(-50%, -60px);
   }
 }
 
 @media (width >= 768px) and (width < 1024px) {
   main .section.overlay-section {
-    transform: translateY(-40px);
+    transform: translate(-50%, -40px);
   }
 }
 
 @media (width < 768px) {
   main .section.overlay-section {
-    transform: none;
+    transform: translateX(-50%);
     margin-top: 0;
     padding: 16px;
     border-radius: 0;
