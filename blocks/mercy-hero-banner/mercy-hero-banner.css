@@ -148,7 +148,8 @@
 /* ── Desktop (>=1024px) ── */
 @media (width >= 1024px) {
   .mercy-hero-banner-content {
-    padding: 80px max(5%, calc(50% - 720px)) 60px;
+      padding: 35px max(5%, calc(50% - 720px)) 35px;
+      height: fit-content;
   }
 
   .mercy-hero-banner-title {
