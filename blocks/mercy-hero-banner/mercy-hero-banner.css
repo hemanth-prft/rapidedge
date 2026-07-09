@@ -252,7 +252,7 @@
 
   .mercy-hero-banner-image img,
   .mercy-hero-banner-image picture img {
-    min-height: 220px;
+    min-height: 160px;
     object-position: center top;
   }
 }
