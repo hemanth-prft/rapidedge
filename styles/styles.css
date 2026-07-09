@@ -279,16 +279,14 @@ main .section.content-card > div {
 /* Section variant: overlay-section — overlaps hero banner from below */
 main .section.overlay-section {
   position: relative;
-  /* sit above the hero/banner so the overlay visibly overlaps */
   z-index: 9999;
   background-color: #fff;
   border-radius: 0;
-  /* increase overlap to match larger banner heights */
   margin: -112px auto 0;
   padding: 0 24px 40px;
   max-width: 1440px;
   width: 90%;
-  /* stronger shadow and ensure it's visible */
+  margin: auto !important;
   box-shadow: none;
   overflow: visible;
 }
