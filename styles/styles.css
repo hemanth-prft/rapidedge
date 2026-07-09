@@ -282,13 +282,37 @@ main .section.overlay-section {
   z-index: 2;
   background-color: #fff;
   border-radius: 16px 16px 0 0;
-  margin: -60px auto 0;
-  padding: 32px 40px 40px;
-  max-width: 1325px;
+  margin: -40px auto 0;
+  padding: 24px 24px 40px;
+  max-width: 1060px;
   box-shadow: 0 -2px 12px rgb(0 0 0 / 8%);
 }
 
 main .section.overlay-section > div {
   max-width: 100%;
   padding: 0;
+}
+
+@media (width >= 1024px) {
+  main .section.overlay-section {
+    margin-top: -60px;
+    padding: 32px 40px 40px;
+  }
+}
+
+@media (width >= 768px) and (width < 1024px) {
+  main .section.overlay-section {
+    margin-top: -40px;
+    padding: 24px 32px 32px;
+    border-radius: 12px 12px 0 0;
+  }
+}
+
+@media (width < 768px) {
+  main .section.overlay-section {
+    margin-top: 0;
+    padding: 16px;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }

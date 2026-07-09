@@ -159,7 +159,7 @@
   .mercy-hero-banner-title {
     font-size: 5rem;
     line-height: 1.05;
-    max-width: 400px;
+    max-width: 50%;
   }
 
   .mercy-hero-banner-content {
@@ -187,37 +187,23 @@
 
 /* ── Mobile (<768px) ── */
 @media (width < 768px) {
+  .mercy-hero-banner {
+    background-color: transparent;
+  }
+
   .mercy-hero-banner-overlay {
-    background: linear-gradient(
-      180deg,
-      rgb(255 255 255 / 0%) 0%,
-      rgb(255 255 255 / 60%) 35%,
-      rgb(255 255 255 / 95%) 70%,
-      rgb(255 255 255 / 100%) 100%
-    );
+    display: none;
   }
 
   .mercy-hero-banner-content {
-    justify-content: flex-end;
-    align-items: flex-start;
-    padding: 20px;
+    position: static;
+    padding: 20px 16px 0;
+    color: #1a1a1a;
     gap: 8px;
   }
 
   .mercy-hero-banner-bottom {
     display: contents;
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-button {
-    order: -1;
-  }
-
-  .mercy-hero-banner-title {
-    font-size: 2.4rem;
-    line-height: 1.2;
-    max-width: 100%;
-    color: #1a1a1a;
-    order: 0;
   }
 
   .mercy-hero-banner-subtext {
@@ -226,6 +212,12 @@
     padding: 0;
     font-size: 14px;
     font-weight: 500;
-    order: 1;
+  }
+
+  .mercy-hero-banner-title {
+    font-size: 2.4rem;
+    line-height: 1.2;
+    max-width: 100%;
+    color: #1a1a1a;
   }
 }
