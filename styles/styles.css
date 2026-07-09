@@ -306,6 +306,7 @@ main .section.overlay-section > div {
 @media (width >= 768px) and (width < 1024px) {
   main .section.overlay-section {
     transform: translate(-50%, -190px);
+    min-width: 96%;
   }
 }
 

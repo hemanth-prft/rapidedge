@@ -175,8 +175,10 @@
   }
 
   .mercy-hero-banner-content {
-    padding: 25px 10px 20px;
-    gap: 12px;
+    /* padding: 25px 10px 20px;
+    gap: 12px; */
+    padding: 35px max(2%, calc(50% - 720px)) 35px;
+    height: fit-content;
   }
 
   .mercy-hero-banner-image img,
