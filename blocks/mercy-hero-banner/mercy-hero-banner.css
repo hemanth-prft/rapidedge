@@ -28,7 +28,7 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16/9;
+  min-height: 300px;
   object-fit: cover;
   object-position: center center;
 }
@@ -158,7 +158,7 @@
 
   .mercy-hero-banner-image img,
   .mercy-hero-banner-image picture img {
-    aspect-ratio: 16/9;
+    min-height: 500px;
   }
 }
 
@@ -178,7 +178,7 @@
 
   .mercy-hero-banner-image img,
   .mercy-hero-banner-image picture img {
-    aspect-ratio: 16/9;
+    min-height: 380px;
     object-position: center center;
   }
 }
@@ -242,7 +242,7 @@
 
   .mercy-hero-banner-image img,
   .mercy-hero-banner-image picture img {
-    aspect-ratio: 16/9;
+    min-height: 220px;
     object-position: center top;
   }
 }
