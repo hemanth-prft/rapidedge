@@ -74,7 +74,8 @@
 /* ── Title ── */
 .mercy-hero-banner-title {
   margin: 0;
-  max-width: 600px;
+  width: fit-content;
+  max-width: fit-content;
   background: none;
   color: #fff;
   font-family: roboto, sans-serif;
@@ -154,7 +155,8 @@
   .mercy-hero-banner-title {
     font-size: 64px;
     line-height: 1.15;
-    max-width: 500px;
+    max-width: fit-content;
+    width: fit-content;
   }
 
   .mercy-hero-banner-image img,
@@ -168,7 +170,8 @@
   .mercy-hero-banner-title {
     font-size: 50px;
     line-height: 1.1;
-    max-width: 320px;
+    max-width: fit-content;
+    width: fit-content;
     letter-spacing: -0.4px;
   }
 
@@ -245,7 +248,8 @@
   .mercy-hero-banner-title {
     font-size: 24px;
     line-height: 1.25;
-    max-width: 100%;
+    max-width: fit-content;
+    width: fit-content;
     color: #1a1a1a;
     font-weight: 600;
     letter-spacing: -0.3px;
