@@ -5,17 +5,7 @@ export default function decorate(block) {
   const rows = [...block.children];
   const getText = (row) => row?.children[0]?.textContent?.trim() ?? '';
 
-  // Multifield data is serialised as a JSON array in a single row cell.
-  const parseJSON = (row) => {
-    try {
-      const raw = getText(row);
-      return raw ? JSON.parse(raw) : [];
-    } catch {
-      return [];
-    }
-  };
-
-  // ── Tab 1 — Default Address (rows 0–5) ────────────────────────────────
+  // ── Tab 1 — Address (rows 0–5) ────────────────────────────────────────
   const community = getText(rows[0]) || 'St. Louis';
   const streetAddress = getText(rows[1]) || '615 South New Ballas Road';
   const city = getText(rows[2]) || 'Saint Louis';
@@ -23,51 +13,42 @@ export default function decorate(block) {
   const zip = getText(rows[4]) || '63141';
   const phone = getText(rows[5]) || '';
 
-  // ── Segment Addresses multifield (row 6) ─────────────────────────────
-  // Each item: { segment, segmentCommunity, segmentStreetAddress,
-  //              segmentCity, segmentState, segmentZip, segmentPhone }
-  const segmentAddresses = parseJSON(rows[6]);
+  // ── Tab 2 — Footer Links (rows 6–20, 5 fields × 3 slots) ─────────────
+  // Per slot: title, metadataTitle, target, openInNewWindow, noFollow
+  const LINK_OFFSET = 6;
+  const LINK_STRIDE = 5;
+  const LINK_COUNT = 3;
 
-  // Detect the active segment from page metadata or leading URL path part.
-  const pageSegment = (
-    document.querySelector('meta[name="segment"]')?.content
-    || window.location.pathname.split('/').filter(Boolean)[0]
-    || ''
-  ).toLowerCase();
-
-  let addr = {
-    community, streetAddress, city, state, zip, phone,
-  };
-  if (pageSegment && segmentAddresses.length > 0) {
-    const match = segmentAddresses.find((sa) => sa.segment === pageSegment);
-    if (match) {
-      addr = {
-        community: match.segmentCommunity || community,
-        streetAddress: match.segmentStreetAddress || streetAddress,
-        city: match.segmentCity || city,
-        state: match.segmentState || state,
-        zip: match.segmentZip || zip,
-        phone: match.segmentPhone || phone,
-      };
+  const linkItems = [];
+  for (let i = 0; i < LINK_COUNT; i += 1) {
+    const base = LINK_OFFSET + i * LINK_STRIDE;
+    const title = getText(rows[base]);
+    const metadataTitle = getText(rows[base + 1]);
+    const href = getText(rows[base + 2]);
+    const newTab = getText(rows[base + 3]) === 'Yes';
+    const noFollow = getText(rows[base + 4]) === 'Yes';
+    if (title || href) {
+      linkItems.push({
+        title, metadataTitle, href, newTab, noFollow,
+      });
     }
   }
 
-  // ── Footer Links multifield (row 7) ──────────────────────────────────
-  // Each item: { title, metadataTitle, linkTarget, openInNewWindow, noFollow }
-  let linkItems = parseJSON(rows[7]).filter((l) => l.title || l.linkTarget);
   if (linkItems.length === 0) {
-    linkItems = [{
+    linkItems.push({
       title: 'Terms & Privacy',
-      linkTarget: 'https://www.mercy.net/about/legal-notices/',
-      openInNewWindow: 'No',
-      noFollow: 'No',
-    }];
+      metadataTitle: '',
+      href: 'https://www.mercy.net/about/legal-notices/',
+      newTab: false,
+      noFollow: false,
+    });
   }
 
-  // ── Tab 3 — Logo (rows 8–10) ──────────────────────────────────────────
-  const logoImg = rows[8]?.querySelector('picture, img');
-  const logoLinkURL = getText(rows[9]) || '/';
-  const logoTitle = getText(rows[10]) || 'Mercy Home';
+  // ── Tab 3 — Logo (rows 21–23) ─────────────────────────────────────────
+  const LOGO_OFFSET = LINK_OFFSET + LINK_COUNT * LINK_STRIDE; // 21
+  const logoImg = rows[LOGO_OFFSET]?.querySelector('picture, img');
+  const logoLinkURL = getText(rows[LOGO_OFFSET + 1]) || '/';
+  const logoTitle = getText(rows[LOGO_OFFSET + 2]) || 'Mercy Home';
 
   let logoMarkup = '<img src="/blocks/footer/reversedLogo.png" alt="Mercy" />';
   if (logoImg) {
@@ -77,25 +58,25 @@ export default function decorate(block) {
   }
 
   // ── Build address HTML ────────────────────────────────────────────────
-  const cityStateZip = [addr.city, addr.state, addr.zip].filter(Boolean).join(', ');
-  const addressParts = [`Mercy, ${addr.community}`, addr.streetAddress, cityStateZip]
+  const cityStateZip = [city, state, zip].filter(Boolean).join(', ');
+  const addressParts = [`Mercy, ${community}`, streetAddress, cityStateZip]
     .filter(Boolean);
-  if (addr.phone) addressParts.push(addr.phone);
+  if (phone) addressParts.push(phone);
 
   const addressHTML = addressParts
     .map((p) => `<li class="mercy-simplified-footer-item"><span class="mercy-simplified-footer-copyright">${p}</span></li>`)
     .join('');
 
   // ── Build links HTML ──────────────────────────────────────────────────
-  const linkHTML = linkItems.map(({
-    title, metadataTitle, linkTarget, openInNewWindow, noFollow,
-  }) => {
-    const newTab = openInNewWindow === 'Yes';
-    const noFollowFlag = noFollow === 'Yes';
-    const rel = [newTab && 'noopener noreferrer', noFollowFlag && 'nofollow']
+  const linkHTML = linkItems.map((
+    {
+      title, metadataTitle, href, newTab, noFollow,
+    },
+  ) => {
+    const rel = [newTab && 'noopener noreferrer', noFollow && 'nofollow']
       .filter(Boolean).join(' ');
     const attrs = [
-      `href="${linkTarget || '#'}"`,
+      `href="${href || '#'}"`,
       newTab ? 'target="_blank"' : '',
       rel ? `rel="${rel}"` : '',
       metadataTitle ? `title="${metadataTitle}"` : '',

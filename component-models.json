@@ -5320,169 +5320,172 @@
         "value": ""
       },
       {
-        "component": "multifield",
-        "name": "segmentAddresses",
-        "label": "Segment Addresses",
-        "multi": true,
-        "fields": [
-          {
-            "component": "select",
-            "valueType": "string",
-            "name": "segment",
-            "label": "Segment",
-            "options": [
-              {
-                "name": "Ada",
-                "value": "ada"
-              },
-              {
-                "name": "Ardmore",
-                "value": "ardmore"
-              },
-              {
-                "name": "Fort Smith",
-                "value": "fort-smith"
-              },
-              {
-                "name": "Hot Springs",
-                "value": "hot-springs"
-              },
-              {
-                "name": "Joplin",
-                "value": "joplin"
-              },
-              {
-                "name": "Oklahoma City",
-                "value": "oklahoma-city"
-              },
-              {
-                "name": "Rogers",
-                "value": "rogers"
-              },
-              {
-                "name": "Springfield",
-                "value": "springfield"
-              },
-              {
-                "name": "St. Louis",
-                "value": "st-louis"
-              },
-              {
-                "name": "Western Oklahoma",
-                "value": "western-oklahoma"
-              }
-            ]
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "segmentCommunity",
-            "label": "Community Name",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "segmentStreetAddress",
-            "label": "Street Address",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "segmentCity",
-            "label": "City",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "segmentState",
-            "label": "State",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "segmentZip",
-            "label": "Zip Code",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "segmentPhone",
-            "label": "Phone",
-            "description": "Enter in format: 234-234-5678",
-            "value": ""
-          }
-        ]
-      },
-      {
         "component": "tab",
         "label": "Footer Links",
         "name": "footerLinks"
       },
       {
-        "component": "multifield",
-        "name": "links",
-        "label": "Footer Links",
-        "multi": true,
-        "fields": [
+        "component": "text",
+        "valueType": "string",
+        "name": "link1Title",
+        "label": "Link 1 - Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link1MetadataTitle",
+        "label": "Link 1 - Metadata Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link1Target",
+        "label": "Link 1 - Link Target",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "link1OpenInNewWindow",
+        "label": "Link 1 - Open in new window or tab",
+        "value": "No",
+        "options": [
           {
-            "component": "text",
-            "valueType": "string",
-            "name": "title",
-            "label": "Title",
-            "value": ""
+            "name": "No",
+            "value": "No"
           },
           {
-            "component": "text",
-            "valueType": "string",
-            "name": "metadataTitle",
-            "label": "Metadata Title",
-            "value": ""
+            "name": "Yes",
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "link1NoFollow",
+        "label": "Link 1 - No Follow",
+        "value": "No",
+        "options": [
+          {
+            "name": "No",
+            "value": "No"
           },
           {
-            "component": "text",
-            "valueType": "string",
-            "name": "linkTarget",
-            "label": "Link Target",
-            "value": ""
+            "name": "Yes",
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link2Title",
+        "label": "Link 2 - Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link2MetadataTitle",
+        "label": "Link 2 - Metadata Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link2Target",
+        "label": "Link 2 - Link Target",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "link2OpenInNewWindow",
+        "label": "Link 2 - Open in new window or tab",
+        "value": "No",
+        "options": [
+          {
+            "name": "No",
+            "value": "No"
           },
           {
-            "component": "select",
-            "valueType": "string",
-            "name": "openInNewWindow",
-            "label": "Open in a new window or tab",
-            "value": "No",
-            "options": [
-              {
-                "name": "No",
-                "value": "No"
-              },
-              {
-                "name": "Yes",
-                "value": "Yes"
-              }
-            ]
+            "name": "Yes",
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "link2NoFollow",
+        "label": "Link 2 - No Follow",
+        "value": "No",
+        "options": [
+          {
+            "name": "No",
+            "value": "No"
           },
           {
-            "component": "select",
-            "valueType": "string",
-            "name": "noFollow",
-            "label": "No Follow",
-            "value": "No",
-            "options": [
-              {
-                "name": "No",
-                "value": "No"
-              },
-              {
-                "name": "Yes",
-                "value": "Yes"
-              }
-            ]
+            "name": "Yes",
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link3Title",
+        "label": "Link 3 - Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link3MetadataTitle",
+        "label": "Link 3 - Metadata Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link3Target",
+        "label": "Link 3 - Link Target",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "link3OpenInNewWindow",
+        "label": "Link 3 - Open in new window or tab",
+        "value": "No",
+        "options": [
+          {
+            "name": "No",
+            "value": "No"
+          },
+          {
+            "name": "Yes",
+            "value": "Yes"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "link3NoFollow",
+        "label": "Link 3 - No Follow",
+        "value": "No",
+        "options": [
+          {
+            "name": "No",
+            "value": "No"
+          },
+          {
+            "name": "Yes",
+            "value": "Yes"
           }
         ]
       },
