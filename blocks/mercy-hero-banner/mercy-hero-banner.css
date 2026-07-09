@@ -1,372 +1,231 @@
-.mercy-hero-banner-container .mercy-hero-banner-wrapper {
+/* Remove default container constraints */
+.mercy-hero-banner-covered-container .mercy-hero-banner-covered-wrapper {
   max-width: unset;
   padding: 0;
+}
+
+/* ── Block shell ── */
+.mercy-hero-banner-covered {
   position: relative;
-  overflow: clip visible;
-}
-
-.mercy-hero-banner {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 72px 80px 60px;
-  min-height: 350px;
-  max-width: 1600px;
-  margin: 0 auto;
-  background: #fff;
-  overflow: visible;
-}
-
-.mercy-hero-banner::before {
-  content: '';
-  position: absolute;
-  top: -114px;
-  left: calc(-50vw + 50%);
-  width: 100vw;
-  height: 350px;
-  background: #edf6f9;
-  z-index: 0;
-}
-
-/* Left Content */
-.mercy-hero-banner .mercy-hero-banner-content {
-  flex: 1;
-  max-width: 765px;
-  z-index: 2;
-}
-
-.mercy-hero-banner h1,
-.mercy-hero-banner h2 {
-  font-family: Inter, sans-serif;
-  font-size: 72px;
-  font-weight: 800;
-  color: #003b5c;
-  line-height: 0.92;
-  letter-spacing: -0.05em;
-  margin: 0 0 32px;
-}
-
-.mercy-hero-banner h1 em,
-.mercy-hero-banner h2 em {
-  font-style: normal;
-  font-weight: 800;
-  color: #509db7;
-}
-
-/* Quick Prompt Buttons */
-.mercy-hero-banner .mercy-hero-banner-quick-prompt {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 32px;
   width: 100%;
-  max-width: 765px;
+  overflow: hidden;
+  background-color: #005c7a;
+}
+
+/* ── Background image ── */
+.mercy-hero-banner-covered-image {
+  display: block;
+  width: 100%;
+}
+
+.mercy-hero-banner-covered-image picture {
+  display: block;
+  width: 100%;
+}
+
+.mercy-hero-banner-covered-image img,
+.mercy-hero-banner-covered-image picture img {
+  display: block;
+  width: 100%;
   height: auto;
-  align-items: center;
-  overflow: visible;
+  object-fit: cover;
+  object-position: center center;
 }
 
-.mercy-hero-banner .mercy-hero-banner-quick-prompt .button-container {
-  margin: 0;
+/* ── Left-to-transparent teal gradient overlay ── */
+.mercy-hero-banner-covered-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    rgb(0 92 122 / 92%) 0%,
+    rgb(0 92 122 / 75%) 25%,
+    rgb(0 92 122 / 40%) 50%,
+    rgb(0 92 122 / 0%) 70%
+  );
+  pointer-events: none;
 }
 
-.mercy-hero-banner .mercy-hero-banner-quick-prompt a.button {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 8px 12px 8px 20px;
-  border-radius: 32px;
-  border: none;
-  background-color: #0a8ab6;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
-  white-space: nowrap;
-  margin: 0;
-  height: 36px;
-  box-sizing: border-box;
-  transition: background-color 0.2s;
-}
-
-.mercy-hero-banner .mercy-hero-banner-quick-prompt a.button::after {
-  content: '';
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  margin-left: 4px;
-  background: url('/icons/Vector.svg') no-repeat center;
-  background-size: contain;
-}
-
-.mercy-hero-banner .mercy-hero-banner-quick-prompt a.button:hover {
-  background-color: #385b7d;
-  color: #fff;
-  text-decoration: none;
-}
-
-.mercy-hero-banner .mercy-hero-banner-quick-prompt .button-container:last-child a.button {
-  background: linear-gradient(to right, #0a8ab6 40%, rgb(10 138 182 / 20%) 100%);
-}
-
-/* Search Bar */
-.mercy-hero-banner .mercy-hero-banner-search {
-  margin-top: 8px;
-}
-
-.mercy-hero-banner .mercy-hero-banner-search-inner {
+/* ── Content overlay ── */
+.mercy-hero-banner-covered-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 5%;
+  color: #fff;
+  gap: 12px;
+}
+
+/* ── Bottom row: badge on left, button on right ── */
+.mercy-hero-banner-covered-bottom {
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  background: #fff;
-  border: 2px solid rgb(80 157 183 / 25%);
-  border-radius: 16px;
-  padding: 10px 18px 10px 24px;
-  max-width: 765px;
+  justify-content: space-between;
   width: 100%;
-  height: 80px;
-  gap: 10px;
-  box-sizing: border-box;
 }
 
-.mercy-hero-banner .mercy-hero-banner-search-ai-icon {
-  display: flex;
-  align-items: center;
-  margin-right: 12px;
-  flex-shrink: 0;
-}
-
-.mercy-hero-banner .mercy-hero-banner-search-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  color: #333;
-  background: transparent;
-  padding: 10px 0;
-}
-
-.mercy-hero-banner .mercy-hero-banner-search-input::placeholder {
-  color: #8a9aa5;
-}
-
-.mercy-hero-banner .mercy-hero-banner-search-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  width: 117px;
-  height: 44px;
-  padding: 10px 12px 10px 20px;
-  border-radius: 8px;
-  border: none;
-  background-color: #f0545c;
+/* ── Title ── */
+.mercy-hero-banner-covered-title {
+  margin: 0;
+  max-width: 600px;
+  background: none;
   color: #fff;
+  font-family: roboto, sans-serif;
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 1.05;
+  text-align: left;
+}
+
+/* ── Subtext badge ── */
+.mercy-hero-banner-covered-subtext {
+  margin: 0;
+  padding: 8px 40px 8px 0;
+  display: inline-block;
+  background-color: #ffb251;
+  color: #1a1a1a;
+  font-family: roboto, sans-serif;
   font-size: 14px;
   font-weight: 600;
-  cursor: pointer;
+  line-height: 14px;
+}
+
+/* ── CTA button ── */
+.mercy-hero-banner-covered .mercy-hero-banner-covered-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 44px;
+  padding: 0 19px;
+  background-color: #005a70;
+  border: 1px solid #005a70;
+  border-radius: 3px;
+  color: #fff;
+  font-family: roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22px;
+  text-decoration: none;
   white-space: nowrap;
-  justify-content: center;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s ease;
+  margin: 0;
 }
 
-.mercy-hero-banner .mercy-hero-banner-search-btn:hover {
-  background-color: #d94049;
+.mercy-hero-banner-covered .mercy-hero-banner-covered-button::after {
+  content: "";
+  display: inline-block;
+  flex-shrink: 0;
+  width: 9px;
+  height: 9px;
+  border-style: solid;
+  border-color: currentcolor;
+  border-width: 2px 2px 0 0;
+  position: relative;
+  top: 1px;
+  left: 4px;
+  transform: rotate(45deg);
+  vertical-align: top;
 }
 
-.mercy-hero-banner .mercy-hero-banner-search-caption {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 12px 0 0;
-  font-size: 12px;
-  color: #6b7f8c;
-  justify-content: center;
-  max-width: 765px;
+.mercy-hero-banner-covered .mercy-hero-banner-covered-button:hover,
+.mercy-hero-banner-covered .mercy-hero-banner-covered-button:focus {
+  background-color: #004a63;
+  border-color: #004a63;
+  color: #fff;
+  text-decoration: none;
 }
 
-/* Right Image - Circular */
-.mercy-hero-banner .mercy-hero-banner-image-wrap {
-  position: absolute;
-  right: 75px;
-  top: -62px;
-  width: 601px;
-  height: 601px;
-  border-radius: 50%;
-  background: #fff;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mercy-hero-banner .mercy-hero-banner-image-wrap picture {
-  display: block;
-  width: 560px;
-  height: 560px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.mercy-hero-banner .mercy-hero-banner-image-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-/* Decorative Cross */
-.mercy-hero-banner .mercy-hero-banner-cross-decor {
-position: absolute;
-  right: 73px;
-  top: 299px;
-  width: 122px;
-  height: 167px;
-  z-index: 6;
-  opacity: 1;
-}
-
-.mercy-hero-banner .mercy-hero-banner-cross-decor img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* Medium Desktop / Zoomed-in Desktop (900px–1300px) */
-@media (width >= 900px) and (width < 1300px) {
-  .mercy-hero-banner {
-    padding: 60px 60px 50px;
+/* ── Desktop (>=1024px) ── */
+@media (width >= 1024px) {
+  .mercy-hero-banner-covered-content {
+    padding: 40px max(5%, calc(50% - 720px));
   }
 
-  .mercy-hero-banner h1,
-  .mercy-hero-banner h2 {
-    font-size: clamp(36px, 4.5vw, 72px);
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-content {
-    max-width: calc(100% - min(500px, 38vw) - 60px);
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-image-wrap {
-    width: min(500px, 38vw);
-    height: min(500px, 38vw);
-    right: 40px;
-    top: -40px;
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-image-wrap picture {
-    width: calc(min(500px, 38vw) - 40px);
-    height: calc(min(500px, 38vw) - 40px);
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-cross-decor {
-    right: 30px;
-    top: auto;
-    bottom: 10px;
+  .mercy-hero-banner-covered-title {
+    font-size: 64px;
+    line-height: 67px;
   }
 }
 
-/* Tablet */
-@media (width >= 600px) and (width < 900px) {
-  .mercy-hero-banner {
-    flex-direction: column;
+/* ── Tablet (768px - 1023px) ── */
+@media (width >= 768px) and (width < 1024px) {
+  .mercy-hero-banner-covered-title {
+    font-size: 48px;
+    line-height: 52px;
+    max-width: 400px;
+  }
+
+  .mercy-hero-banner-covered-content {
+    padding: 30px 5%;
+  }
+}
+
+/* ── Subtext badge bleeds to left edge (768px–1559px) ── */
+@media (width >= 768px) and (width < 1560px) {
+  .mercy-hero-banner-covered-subtext {
+    margin-left: -9999px;
+    padding-left: 9999px;
+    padding-right: 40px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+/* ── Wide viewport: subtext badge symmetric padding ── */
+@media (width >= 1560px) {
+  .mercy-hero-banner-covered-subtext {
+    padding: 8px 40px;
+  }
+}
+
+/* ── Mobile (<768px) ── */
+@media (width < 768px) {
+  .mercy-hero-banner-covered-overlay {
+    background: linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0%) 0%,
+      rgb(255 255 255 / 60%) 35%,
+      rgb(255 255 255 / 95%) 70%,
+      rgb(255 255 255 / 100%) 100%
+    );
+  }
+
+  .mercy-hero-banner-covered-content {
+    justify-content: flex-end;
     align-items: flex-start;
-    padding: 40px 32px;
-    min-height: auto;
-    overflow: visible;
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-content {
-    max-width: 100%;
-  }
-
-  .mercy-hero-banner h1,
-  .mercy-hero-banner h2 {
-    font-size: 40px;
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-image-wrap {
-    position: relative;
-    right: auto;
-    top: auto;
-    transform: none;
-    width: 350px;
-    height: 350px;
-    align-self: center;
-    margin-top: 32px;
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-cross-decor {
-    right: 20px;
-    bottom: 10px;
-    width: 100px;
-    height: 140px;
-  }
-}
-
-/* Mobile */
-@media (width < 600px) {
-  .mercy-hero-banner {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 32px 16px;
-    min-height: auto;
-    overflow: hidden;
-  }
-
-  .mercy-hero-banner h1,
-  .mercy-hero-banner h2 {
-    font-size: clamp(24px, 7vw, 32px);
-    line-height: 1;
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-content {
-    max-width: 100%;
-    width: 100%;
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-quick-prompt {
-    flex-wrap: wrap;
+    padding: 20px;
     gap: 8px;
+  }
+
+  .mercy-hero-banner-covered-bottom {
+    display: contents;
+  }
+
+  .mercy-hero-banner-covered .mercy-hero-banner-covered-button {
+    order: -1;
+  }
+
+  .mercy-hero-banner-covered-title {
+    font-size: 28px;
+    line-height: 32px;
     max-width: 100%;
+    color: #1a1a1a;
+    order: 0;
   }
 
-  .mercy-hero-banner .mercy-hero-banner-quick-prompt a.button {
-    font-size: 12px;
-    padding: 8px 14px;
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-search-inner {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    padding: 10px 12px;
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-search-caption {
-    max-width: 100%;
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-image-wrap {
-    position: relative;
-    right: auto;
-    top: auto;
-    transform: none;
-    width: min(280px, 70vw);
-    height: min(280px, 70vw);
-    align-self: center;
-    margin-top: 24px;
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-image-wrap picture {
-    width: calc(min(280px, 70vw) - 20px);
-    height: calc(min(280px, 70vw) - 20px);
-  }
-
-  .mercy-hero-banner .mercy-hero-banner-cross-decor {
-    right: 10px;
-    bottom: 10px;
-    width: 70px;
-    height: 100px;
-    opacity: 0.6;
+  .mercy-hero-banner-covered-subtext {
+    background-color: transparent;
+    color: #0e7394;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 500;
+    order: 1;
   }
 }
