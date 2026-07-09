@@ -310,7 +310,7 @@ main .section.overlay-section > div {
   }
 }
 
-@media (max-width : 991px){
+@media (width < 992px) and (width >= 768px) {
   main .section.overlay-section {
     transform: translate(-50%, calc(-7% + 36px));
     min-width: 96%;
