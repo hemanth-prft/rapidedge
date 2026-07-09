@@ -28,7 +28,7 @@
   display: block;
   width: 100%;
   height: auto;
-  min-height: 240px;
+  aspect-ratio: 16/9;
   object-fit: cover;
   object-position: center center;
 }
@@ -56,9 +56,9 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 60px 5%;
+  padding: 80px 5% 60px;
   color: #fff;
-  gap: 12px;
+  gap: 16px;
 }
 
 /* ── Bottom row: badge on left, button on right ── */
@@ -73,14 +73,15 @@
 /* ── Title ── */
 .mercy-hero-banner-title {
   margin: 0;
-  max-width: 500px;
+  max-width: 600px;
   background: none;
   color: #fff;
   font-family: roboto, sans-serif;
-  font-size: 4rem;
+  font-size: 64px;
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.15;
   text-align: left;
+  letter-spacing: -0.5px;
 }
 
 /* ── Subtext badge ── */
@@ -146,30 +147,38 @@
 /* ── Desktop (>=1024px) ── */
 @media (width >= 1024px) {
   .mercy-hero-banner-content {
-    padding: 60px max(5%, calc(50% - 720px));
+    padding: 80px max(5%, calc(50% - 720px)) 60px;
   }
 
   .mercy-hero-banner-title {
-    font-size: 4rem;
-    line-height: 1.1;
+    font-size: 64px;
+    line-height: 1.15;
+    max-width: 650px;
+  }
+
+  .mercy-hero-banner-image img,
+  .mercy-hero-banner-image picture img {
+    aspect-ratio: 16/9;
   }
 }
 
 /* ── Tablet (768px - 1023px) ── */
 @media (width >= 768px) and (width < 1024px) {
   .mercy-hero-banner-title {
-    font-size: 3.125rem;
-    line-height: 1.1;
-    max-width: 45%;
+    font-size: 50px;
+    line-height: 1.12;
+    max-width: 50%;
+    letter-spacing: -0.4px;
   }
 
   .mercy-hero-banner-content {
-    padding: 30px 5%;
+    padding: 60px 5% 50px;
+    gap: 12px;
   }
 
   .mercy-hero-banner-image img,
   .mercy-hero-banner-image picture img {
-    min-height: 320px;
+    aspect-ratio: 16/9;
     object-position: center center;
   }
 }
@@ -204,9 +213,9 @@
 
   .mercy-hero-banner-content {
     position: static;
-    padding: 20px 16px 0;
+    padding: 24px 16px 0;
     color: #1a1a1a;
-    gap: 8px;
+    gap: 12px;
   }
 
   .mercy-hero-banner-bottom {
@@ -216,21 +225,24 @@
   .mercy-hero-banner-subtext {
     background-color: transparent;
     color: #0e7394;
-    padding: 0;
-    font-size: 14px;
+    padding: 0 0 8px;
+    font-size: 13px;
     font-weight: 500;
+    line-height: 1.2;
   }
 
   .mercy-hero-banner-title {
-    font-size: 1.5rem;
-    line-height: 1.2;
+    font-size: 24px;
+    line-height: 1.25;
     max-width: 100%;
     color: #1a1a1a;
+    font-weight: 600;
+    letter-spacing: -0.3px;
   }
 
   .mercy-hero-banner-image img,
   .mercy-hero-banner-image picture img {
-    min-height: 220px;
+    aspect-ratio: 16/9;
     object-position: center top;
   }
 }
