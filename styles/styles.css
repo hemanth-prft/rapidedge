@@ -325,6 +325,6 @@ main .section.overlay-section > div {
     box-shadow: none;
     left: auto;
     transform: none;
-    
+    min-width: none;
   }
 }
