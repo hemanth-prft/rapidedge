@@ -54,8 +54,8 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 40px 5%;
+  justify-content: flex-end;
+  padding: 60px 5%;
   color: #fff;
   gap: 12px;
 }
@@ -145,7 +145,7 @@
 /* ── Desktop (>=1024px) ── */
 @media (width >= 1024px) {
   .mercy-hero-banner-content {
-    padding: 40px max(5%, calc(50% - 720px));
+    padding: 60px max(5%, calc(50% - 720px));
   }
 
   .mercy-hero-banner-title {

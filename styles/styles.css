@@ -281,12 +281,12 @@ main .section.overlay-section {
   position: relative;
   z-index: 2;
   background-color: #fff;
-  border-radius: 16px 16px 0 0;
+  border-radius: 0;
   margin: -40px auto 0;
-  padding: 24px 24px 40px;
+  padding: 0 24px 40px;
   max-width: 1440px;
   width: 90%;
-  box-shadow: 0 -2px 12px rgb(0 0 0 / 8%);
+  box-shadow: none;
 }
 
 main .section.overlay-section > div {
@@ -296,16 +296,15 @@ main .section.overlay-section > div {
 
 @media (width >= 1024px) {
   main .section.overlay-section {
-    margin-top: -60px;
-    padding: 32px 40px 40px;
+    margin-top: -40px;
+    padding: 0 40px 40px;
   }
 }
 
 @media (width >= 768px) and (width < 1024px) {
   main .section.overlay-section {
-    margin-top: -40px;
-    padding: 24px 32px 32px;
-    border-radius: 12px 12px 0 0;
+    margin-top: -30px;
+    padding: 0 32px 32px;
   }
 }
 
