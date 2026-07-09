@@ -31,8 +31,7 @@ module.exports = {
       'quick-facts': 5,
       'split-banner': 6,
       // Simplified footer/header
-      'mercy-simplified-footer': 9,
-      'mercy-simplified-footer-link': 5,
+      'mercy-simplified-footer': 27,
       // Form components
       form: 15,
       wizard: 12,

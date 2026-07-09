@@ -103,11 +103,5 @@
     "components": [
       "mercy-breadcrumb-item"
     ]
-  },
-  {
-    "id": "mercy-simplified-footer",
-    "components": [
-      "mercy-simplified-footer-link"
-    ]
   }
 ]

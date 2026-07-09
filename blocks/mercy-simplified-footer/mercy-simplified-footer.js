@@ -1,37 +1,32 @@
 export default function decorate(block) {
   const currentYear = new Date().getFullYear();
-  const rows = [...block.children];
+  const cells = block.firstElementChild
+    ? [...block.firstElementChild.children]
+    : [];
 
-  // ── Helper: safe text extraction ────────────────────────────────────
+  // ── Helper ────────────────────────────────────────────────────────────
   const getText = (el) => el?.textContent?.trim() ?? '';
 
-  // ── Row 0: parent model fields (address + logo) ──────────────────────
-  const cells = rows[0] ? [...rows[0].children] : [];
+  // ── Tab 1 — Address (cells 0–5) ───────────────────────────────────────
   const community = getText(cells[0]) || 'St. Louis';
   const streetAddress = getText(cells[1]) || '615 South New Ballas Road';
   const city = getText(cells[2]) || 'Saint Louis';
   const state = getText(cells[3]) || 'Missouri';
   const zip = getText(cells[4]) || '63141';
-  const logoLinkURL = getText(cells[7]) || '/';
-  const logoTitle = getText(cells[8]) || 'Mercy Home';
 
-  // Logo: use authored reference image if present, else default reversed logo
-  const logoImg = cells[6]?.querySelector('picture, img');
-  let logoMarkup = '<img src="/blocks/footer/reversedLogo.png" alt="Mercy" />';
-  if (logoImg) {
-    logoMarkup = logoImg.tagName === 'PICTURE'
-      ? logoImg.outerHTML
-      : `<img src="${logoImg.src}" alt="${logoImg.alt || 'Mercy'}" />`;
-  }
+  // ── Tab 2 — Footer Links (cells 5–19, 5 fields × 3 slots) ────────────
+  // Per slot: [title, metadataTitle, target, windowTarget, noFollow]
+  const LINK_OFFSET = 5;
+  const LINK_STRIDE = 5;
+  const LINK_COUNT = 3;
 
-  // ── Rows 1+: footer link child items ─────────────────────────────────
   const linkItems = [];
-  for (let i = 1; i < rows.length; i += 1) {
-    const lc = [...rows[i].children];
-    const title = getText(lc[0]);
-    const href = getText(lc[2]) || getText(lc[1]);
-    const newTab = getText(lc[3]) === 'true';
-    const noFollow = getText(lc[4]) === 'true';
+  for (let i = 0; i < LINK_COUNT; i += 1) {
+    const base = LINK_OFFSET + i * LINK_STRIDE;
+    const title = getText(cells[base]);
+    const href = getText(cells[base + 2]);
+    const newTab = getText(cells[base + 3]) === 'true';
+    const noFollow = getText(cells[base + 4]) === 'true';
     if (title || href) {
       linkItems.push({
         title, href, newTab, noFollow,
@@ -39,7 +34,6 @@ export default function decorate(block) {
     }
   }
 
-  // Default link when none are authored
   if (linkItems.length === 0) {
     linkItems.push({
       title: 'Terms & Privacy',
@@ -49,7 +43,20 @@ export default function decorate(block) {
     });
   }
 
-  // ── Build address list items ──────────────────────────────────────────
+  // ── Tab 3 — Logo (cells 20–22) ────────────────────────────────────────
+  const LOGO_OFFSET = LINK_OFFSET + LINK_COUNT * LINK_STRIDE; // 20
+  const logoImg = cells[LOGO_OFFSET]?.querySelector('picture, img');
+  const logoLinkURL = getText(cells[LOGO_OFFSET + 1]) || '/';
+  const logoTitle = getText(cells[LOGO_OFFSET + 2]) || 'Mercy Home';
+
+  let logoMarkup = '<img src="/blocks/footer/reversedLogo.png" alt="Mercy" />';
+  if (logoImg) {
+    logoMarkup = logoImg.tagName === 'PICTURE'
+      ? logoImg.outerHTML
+      : `<img src="${logoImg.src}" alt="${logoImg.alt || 'Mercy'}" />`;
+  }
+
+  // ── Build HTML ────────────────────────────────────────────────────────
   const addressParts = [
     `Mercy, ${community}`,
     streetAddress,
@@ -57,10 +64,9 @@ export default function decorate(block) {
   ].filter(Boolean);
 
   const addressHTML = addressParts
-    .map((part) => `<li class="mercy-simplified-footer-item"><span class="mercy-simplified-footer-copyright">${part}</span></li>`)
+    .map((p) => `<li class="mercy-simplified-footer-item"><span class="mercy-simplified-footer-copyright">${p}</span></li>`)
     .join('');
 
-  // ── Build footer link list items ──────────────────────────────────────
   const linkHTML = linkItems.map(({
     title, href, newTab, noFollow,
   }) => {
@@ -73,7 +79,6 @@ export default function decorate(block) {
     return `<li class="mercy-simplified-footer-item"><a class="mercy-simplified-footer-link" ${attrs}>${title}</a></li>`;
   }).join('');
 
-  // ── Render ────────────────────────────────────────────────────────────
   block.innerHTML = `
     <div class="mercy-simplified-footer-content">
       <div class="mercy-simplified-footer-section">

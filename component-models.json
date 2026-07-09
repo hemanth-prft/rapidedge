@@ -5272,6 +5272,11 @@
     "id": "mercy-simplified-footer",
     "fields": [
       {
+        "component": "tab",
+        "label": "Address",
+        "name": "address"
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "community",
@@ -5315,6 +5320,175 @@
         "value": ""
       },
       {
+        "component": "tab",
+        "label": "Footer Links",
+        "name": "footerLinks"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link1Title",
+        "label": "Link 1 — Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link1MetadataTitle",
+        "label": "Link 1 — Metadata Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link1Target",
+        "label": "Link 1 — Link Target",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "link1WindowTarget",
+        "label": "Link 1 — Open in new window or tab",
+        "options": [
+          {
+            "name": "No",
+            "value": ""
+          },
+          {
+            "name": "Yes",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "link1NoFollow",
+        "label": "Link 1 — No Follow",
+        "options": [
+          {
+            "name": "No",
+            "value": ""
+          },
+          {
+            "name": "Yes",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link2Title",
+        "label": "Link 2 — Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link2MetadataTitle",
+        "label": "Link 2 — Metadata Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link2Target",
+        "label": "Link 2 — Link Target",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "link2WindowTarget",
+        "label": "Link 2 — Open in new window or tab",
+        "options": [
+          {
+            "name": "No",
+            "value": ""
+          },
+          {
+            "name": "Yes",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "link2NoFollow",
+        "label": "Link 2 — No Follow",
+        "options": [
+          {
+            "name": "No",
+            "value": ""
+          },
+          {
+            "name": "Yes",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link3Title",
+        "label": "Link 3 — Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link3MetadataTitle",
+        "label": "Link 3 — Metadata Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link3Target",
+        "label": "Link 3 — Link Target",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "link3WindowTarget",
+        "label": "Link 3 — Open in new window or tab",
+        "options": [
+          {
+            "name": "No",
+            "value": ""
+          },
+          {
+            "name": "Yes",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "link3NoFollow",
+        "label": "Link 3 — No Follow",
+        "options": [
+          {
+            "name": "No",
+            "value": ""
+          },
+          {
+            "name": "Yes",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "Logo",
+        "name": "logo"
+      },
+      {
         "component": "reference",
         "valueType": "string",
         "name": "logoFileReference",
@@ -5336,64 +5510,6 @@
         "label": "Logo Title",
         "description": "Optional logo description.",
         "value": ""
-      }
-    ]
-  },
-  {
-    "id": "mercy-simplified-footer-link",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "title",
-        "label": "Title",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "metadataTitle",
-        "label": "Metadata Title",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "linkTarget",
-        "label": "Link Target",
-        "value": ""
-      },
-      {
-        "component": "select",
-        "valueType": "string",
-        "name": "windowTarget",
-        "label": "Open in a new window or tab",
-        "options": [
-          {
-            "name": "No",
-            "value": ""
-          },
-          {
-            "name": "Yes",
-            "value": "true"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "valueType": "string",
-        "name": "noFollow",
-        "label": "No Follow",
-        "options": [
-          {
-            "name": "No",
-            "value": ""
-          },
-          {
-            "name": "Yes",
-            "value": "true"
-          }
-        ]
       }
     ]
   },
