@@ -284,18 +284,13 @@ main .section.overlay-section {
   background-color: #fff;
   border-radius: 0;
   /* increase overlap to match larger banner heights */
-  margin: -80px auto 0;
+  margin: -112px auto 0;
   padding: 0 24px 40px;
   max-width: 1440px;
   width: 90%;
   /* stronger shadow and ensure it's visible */
   box-shadow: none;
   overflow: visible;
-  /* force horizontal centering even if other rules override margins */
-  margin-left: auto !important;
-  margin-right: auto !important;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 main .section.overlay-section > div {
@@ -305,15 +300,13 @@ main .section.overlay-section > div {
 
 @media (width >= 1024px) {
   main .section.overlay-section {
-    margin-top: -80px;
-    padding: 0 40px 40px;
+    margin-top: -80px;    
   }
 }
 
 @media (width >= 768px) and (width < 1024px) {
   main .section.overlay-section {
     margin-top: -60px;
-    padding: 0 32px 32px;
   }
 }
 
