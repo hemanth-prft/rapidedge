@@ -1,6 +1,6 @@
 /* break out of section constraints */
 .mercy-breadcrumb-wrapper {
-  background-color: #edf6f9;
+  background-color: #f1f1f1;
   max-width: none !important;
   padding: 0 !important;
 }
@@ -9,17 +9,18 @@
   display: flex;
   width: 100%;
   max-width: 1440px;
-  height: 32px;
-  padding: 0 12px 0 60px;
+  height: 43px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   margin: 0 auto;
-  background-color: #edf6f9;
+  background-color: #f1f1f1;
   gap: 10px;
+  line-height: 13px;
+  font-size: 10px;
 }
 
-.mercy-breadcrumb .breadcrumb-nav ol {
+.mercy-breadcrumb .breadcrumb-nav ul {
   display: flex;
   align-items: center;
   list-style: none;
@@ -27,38 +28,49 @@
   padding: 0;
   gap: 0;
   flex-wrap: wrap;
+  overflow: hidden;
+  padding-left: 30px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.mercy-breadcrumb .breadcrumb-nav ol li {
-  color: #055372;
-  font-family: var(--typography-small-typeface, Inter);
+.mercy-breadcrumb .breadcrumb-nav ul li {
+  color: #000;
+  font-family: var(--body-font-family, Open Sans);
   font-size: 14px;
   font-style: normal;
-  font-weight: 500;
   line-height: 130%;
 }
 
-.mercy-breadcrumb .breadcrumb-nav ol li[data-separator]::after {
-  content: attr(data-separator);
-  margin: 0 8px;
-  color: #055372;
+.mercy-breadcrumb .breadcrumb-nav ul li[data-separator]::after {
+    content: attr(data-separator);  
+    border-style: solid;
+    border-width: 1px 1px 0 0;
+    display: inline-block;
+    height: 5px;
+    left: 5px;
+    margin: 0 15px 0 5px;
+    position: relative;
+    top: 5px;
+    transform: rotate(45deg);
+    vertical-align: top;
+    width: 5px;
 }
 
-.mercy-breadcrumb .breadcrumb-nav ol li a {
-  color: #055372;
+.mercy-breadcrumb .breadcrumb-nav ul li a {
+  color: #000;
   text-decoration: none;
-  font-family: var(--typography-small-typeface, Inter);
+  font-family: var(--body-font-family, Open Sans);
   font-size: 14px;
-  font-weight: 500;
   line-height: 130%;
 }
 
-.mercy-breadcrumb .breadcrumb-nav ol li a:hover {
+.mercy-breadcrumb .breadcrumb-nav ul li a:hover {
   text-decoration: underline;
 }
 
-.mercy-breadcrumb .breadcrumb-nav ol li[aria-current='page'] {
-  color: #055372;
-  font-weight: 600;
+.mercy-breadcrumb .breadcrumb-nav ul li[aria-current='page'] {
+  color: #000;
+  font-family: var(--body-font-family, Open Sans);
   cursor: default;
 }
