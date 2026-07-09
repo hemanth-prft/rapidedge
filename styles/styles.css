@@ -265,7 +265,7 @@ main .section.highlight {
 /* Section variant: content-card — white contained card with shadow */
 main .section.content-card {
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: 0;
   margin: 24px auto;
   padding: 40px 32px;
   max-width: 1325px;
@@ -279,14 +279,18 @@ main .section.content-card > div {
 /* Section variant: overlay-section — overlaps hero banner from below */
 main .section.overlay-section {
   position: relative;
-  z-index: 2;
+  /* sit above the hero/banner so the overlay visibly overlaps */
+  z-index: 9999;
   background-color: #fff;
-  border-radius: 0;
-  margin: -40px auto 0;
+  border-radius: 12px;
+  /* increase overlap to match larger banner heights */
+  margin: -80px auto 0;
   padding: 0 24px 40px;
   max-width: 1440px;
   width: 90%;
+  /* stronger shadow and ensure it's visible */
   box-shadow: none;
+  overflow: visible;
 }
 
 main .section.overlay-section > div {
@@ -296,14 +300,14 @@ main .section.overlay-section > div {
 
 @media (width >= 1024px) {
   main .section.overlay-section {
-    margin-top: -40px;
+    margin-top: -80px;
     padding: 0 40px 40px;
   }
 }
 
 @media (width >= 768px) and (width < 1024px) {
   main .section.overlay-section {
-    margin-top: -30px;
+    margin-top: -60px;
     padding: 0 32px 32px;
   }
 }
