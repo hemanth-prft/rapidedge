@@ -5339,11 +5339,9 @@
         "value": ""
       },
       {
-        "component": "text",
-        "valueType": "string",
+        "component": "aem-content",
         "name": "linkTarget",
-        "label": "Link Target",
-        "value": ""
+        "label": "Link Target"
       },
       {
         "component": "select",
@@ -5393,11 +5391,9 @@
         "description": "Optional logo image to replace the Mercy logo."
       },
       {
-        "component": "text",
-        "valueType": "string",
+        "component": "aem-content",
         "name": "logoLinkURL",
-        "label": "Logo Link URL",
-        "value": ""
+        "label": "Logo Link URL"
       },
       {
         "component": "text",

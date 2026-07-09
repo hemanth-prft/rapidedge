@@ -6,7 +6,7 @@ export default function decorate(block) {
   const getText = (row) => row?.children[0]?.textContent?.trim() ?? '';
 
   // ── Tab 1 — Address (rows 0–5) ────────────────────────────────────────
-  const community = getText(rows[0]) || 'St. Louis';
+  const community = getText(rows[0]);
   const streetAddress = getText(rows[1]) || '615 South New Ballas Road';
   const city = getText(rows[2]) || 'Saint Louis';
   const state = getText(rows[3]) || 'Missouri';

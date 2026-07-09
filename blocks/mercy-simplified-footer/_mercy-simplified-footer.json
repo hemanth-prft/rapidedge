@@ -30,12 +30,12 @@
         { "component": "tab", "label": "Footer Links", "name": "footerLinks" },
         { "component": "text", "valueType": "string", "name": "linkTitle", "label": "Title", "value": "" },
         { "component": "text", "valueType": "string", "name": "linkMetadataTitle", "label": "Metadata Title", "value": "" },
-        { "component": "text", "valueType": "string", "name": "linkTarget", "label": "Link Target", "value": "" },
+        { "component": "aem-content", "name": "linkTarget", "label": "Link Target" },
         { "component": "select", "valueType": "string", "name": "linkOpenInNewWindow", "label": "Open in a new window or tab", "value": "No", "options": [{ "name": "No", "value": "No" }, { "name": "Yes", "value": "Yes" }] },
         { "component": "select", "valueType": "string", "name": "linkNoFollow", "label": "No Follow", "value": "No", "options": [{ "name": "No", "value": "No" }, { "name": "Yes", "value": "Yes" }] },
         { "component": "tab", "label": "Logo", "name": "logo" },
         { "component": "reference", "valueType": "string", "name": "logoFileReference", "label": "Logo", "multi": false, "description": "Optional logo image to replace the Mercy logo." },
-        { "component": "text", "valueType": "string", "name": "logoLinkURL", "label": "Logo Link URL", "value": "" },
+        { "component": "aem-content", "name": "logoLinkURL", "label": "Logo Link URL" },
         { "component": "text", "valueType": "string", "name": "logoTitle", "label": "Logo Title", "value": "", "description": "Optional logo description." }
       ]
     }
