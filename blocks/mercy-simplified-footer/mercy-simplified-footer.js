@@ -13,39 +13,15 @@ export default function decorate(block) {
   const zip = getText(rows[4]) || '63141';
   const phone = getText(rows[5]) || '';
 
-  // ── Tab 2 — Footer Links (rows 6–20, 5 fields × 3 slots) ─────────────
-  // Per slot: title, metadataTitle, target, openInNewWindow, noFollow
-  const LINK_OFFSET = 6;
-  const LINK_STRIDE = 5;
-  const LINK_COUNT = 3;
+  // ── Tab 2 — Footer Links (rows 6–10) ──────────────────────────────────
+  const linkTitle = getText(rows[6]) || 'Terms & Privacy';
+  const linkMetadataTitle = getText(rows[7]);
+  const linkHref = getText(rows[8]) || 'https://www.mercy.net/about/legal-notices/';
+  const linkNewTab = getText(rows[9]) === 'Yes';
+  const linkNoFollow = getText(rows[10]) === 'Yes';
 
-  const linkItems = [];
-  for (let i = 0; i < LINK_COUNT; i += 1) {
-    const base = LINK_OFFSET + i * LINK_STRIDE;
-    const title = getText(rows[base]);
-    const metadataTitle = getText(rows[base + 1]);
-    const href = getText(rows[base + 2]);
-    const newTab = getText(rows[base + 3]) === 'Yes';
-    const noFollow = getText(rows[base + 4]) === 'Yes';
-    if (title || href) {
-      linkItems.push({
-        title, metadataTitle, href, newTab, noFollow,
-      });
-    }
-  }
-
-  if (linkItems.length === 0) {
-    linkItems.push({
-      title: 'Terms & Privacy',
-      metadataTitle: '',
-      href: 'https://www.mercy.net/about/legal-notices/',
-      newTab: false,
-      noFollow: false,
-    });
-  }
-
-  // ── Tab 3 — Logo (rows 21–23) ─────────────────────────────────────────
-  const LOGO_OFFSET = LINK_OFFSET + LINK_COUNT * LINK_STRIDE; // 21
+  // ── Tab 3 — Logo (rows 11–13) ─────────────────────────────────────────
+  const LOGO_OFFSET = 11;
   const logoImg = rows[LOGO_OFFSET]?.querySelector('picture, img');
   const logoLinkURL = getText(rows[LOGO_OFFSET + 1]) || '/';
   const logoTitle = getText(rows[LOGO_OFFSET + 2]) || 'Mercy Home';
@@ -67,22 +43,16 @@ export default function decorate(block) {
     .map((p) => `<li class="mercy-simplified-footer-item"><span class="mercy-simplified-footer-copyright">${p}</span></li>`)
     .join('');
 
-  // ── Build links HTML ──────────────────────────────────────────────────
-  const linkHTML = linkItems.map((
-    {
-      title, metadataTitle, href, newTab, noFollow,
-    },
-  ) => {
-    const rel = [newTab && 'noopener noreferrer', noFollow && 'nofollow']
-      .filter(Boolean).join(' ');
-    const attrs = [
-      `href="${href || '#'}"`,
-      newTab ? 'target="_blank"' : '',
-      rel ? `rel="${rel}"` : '',
-      metadataTitle ? `title="${metadataTitle}"` : '',
-    ].filter(Boolean).join(' ');
-    return `<li class="mercy-simplified-footer-item"><a class="mercy-simplified-footer-link" ${attrs}>${title}</a></li>`;
-  }).join('');
+  // ── Build link HTML ───────────────────────────────────────────────────
+  const linkRel = [linkNewTab && 'noopener noreferrer', linkNoFollow && 'nofollow']
+    .filter(Boolean).join(' ');
+  const linkAttrs = [
+    `href="${linkHref}"`,
+    linkNewTab ? 'target="_blank"' : '',
+    linkRel ? `rel="${linkRel}"` : '',
+    linkMetadataTitle ? `title="${linkMetadataTitle}"` : '',
+  ].filter(Boolean).join(' ');
+  const linkHTML = `<li class="mercy-simplified-footer-item"><a class="mercy-simplified-footer-link" ${linkAttrs}>${linkTitle}</a></li>`;
 
   block.innerHTML = `
     <div class="mercy-simplified-footer-content">
