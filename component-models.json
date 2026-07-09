@@ -5270,7 +5270,132 @@
   },
   {
     "id": "mercy-simplified-footer",
-    "fields": []
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "community",
+        "label": "Community Name",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "streetAddress",
+        "label": "Street Address",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "city",
+        "label": "City",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "state",
+        "label": "State",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "zip",
+        "label": "Zip Code",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "phone",
+        "label": "Phone",
+        "description": "Enter in format: 234-234-5678",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "logoFileReference",
+        "label": "Logo",
+        "description": "Optional logo image to replace the Mercy logo.",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "logoLinkURL",
+        "label": "Logo Link URL",
+        "value": "/"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "logoTitle",
+        "label": "Logo Title",
+        "description": "Optional logo description.",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "mercy-simplified-footer-link",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "metadataTitle",
+        "label": "Metadata Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkTarget",
+        "label": "Link Target",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "windowTarget",
+        "label": "Open in a new window or tab",
+        "options": [
+          {
+            "name": "No",
+            "value": ""
+          },
+          {
+            "name": "Yes",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "noFollow",
+        "label": "No Follow",
+        "options": [
+          {
+            "name": "No",
+            "value": ""
+          },
+          {
+            "name": "Yes",
+            "value": "true"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "mercy-simplified-header",
