@@ -282,7 +282,7 @@ main .section.overlay-section {
   /* sit above the hero/banner so the overlay visibly overlaps */
   z-index: 9999;
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: 0;
   /* increase overlap to match larger banner heights */
   margin: -80px auto 0;
   padding: 0 24px 40px;
@@ -291,6 +291,11 @@ main .section.overlay-section {
   /* stronger shadow and ensure it's visible */
   box-shadow: none;
   overflow: visible;
+  /* force horizontal centering even if other rules override margins */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 main .section.overlay-section > div {
