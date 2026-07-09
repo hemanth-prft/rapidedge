@@ -280,7 +280,8 @@ main .section.content-card > div {
 main .section.overlay-section {
   position: relative;
   left: 50%;
-  z-index: 9999;
+  z-index: 10;
+  isolation: isolate;
   background-color: #fff;
   border-radius: 0;
   margin: 0;
