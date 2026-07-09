@@ -1,11 +1,11 @@
 /* Remove default container constraints */
-.mercy-hero-banner-covered-container .mercy-hero-banner-covered-wrapper {
+.mercy-hero-banner-container .mercy-hero-banner-wrapper {
   max-width: unset;
   padding: 0;
 }
 
 /* ── Block shell ── */
-.mercy-hero-banner-covered {
+.mercy-hero-banner {
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -13,18 +13,18 @@
 }
 
 /* ── Background image ── */
-.mercy-hero-banner-covered-image {
+.mercy-hero-banner-image {
   display: block;
   width: 100%;
 }
 
-.mercy-hero-banner-covered-image picture {
+.mercy-hero-banner-image picture {
   display: block;
   width: 100%;
 }
 
-.mercy-hero-banner-covered-image img,
-.mercy-hero-banner-covered-image picture img {
+.mercy-hero-banner-image img,
+.mercy-hero-banner-image picture img {
   display: block;
   width: 100%;
   height: auto;
@@ -33,7 +33,7 @@
 }
 
 /* ── Left-to-transparent teal gradient overlay ── */
-.mercy-hero-banner-covered-overlay {
+.mercy-hero-banner-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -48,7 +48,7 @@
 }
 
 /* ── Content overlay ── */
-.mercy-hero-banner-covered-content {
+.mercy-hero-banner-content {
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -61,7 +61,7 @@
 }
 
 /* ── Bottom row: badge on left, button on right ── */
-.mercy-hero-banner-covered-bottom {
+.mercy-hero-banner-bottom {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -70,7 +70,7 @@
 }
 
 /* ── Title ── */
-.mercy-hero-banner-covered-title {
+.mercy-hero-banner-title {
   margin: 0;
   max-width: 600px;
   background: none;
@@ -83,7 +83,7 @@
 }
 
 /* ── Subtext badge ── */
-.mercy-hero-banner-covered-subtext {
+.mercy-hero-banner-subtext {
   margin: 0;
   padding: 8px 40px 8px 0;
   display: inline-block;
@@ -96,7 +96,7 @@
 }
 
 /* ── CTA button ── */
-.mercy-hero-banner-covered .mercy-hero-banner-covered-button {
+.mercy-hero-banner .mercy-hero-banner-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -118,7 +118,7 @@
   margin: 0;
 }
 
-.mercy-hero-banner-covered .mercy-hero-banner-covered-button::after {
+.mercy-hero-banner .mercy-hero-banner-button::after {
   content: "";
   display: inline-block;
   flex-shrink: 0;
@@ -134,8 +134,8 @@
   vertical-align: top;
 }
 
-.mercy-hero-banner-covered .mercy-hero-banner-covered-button:hover,
-.mercy-hero-banner-covered .mercy-hero-banner-covered-button:focus {
+.mercy-hero-banner .mercy-hero-banner-button:hover,
+.mercy-hero-banner .mercy-hero-banner-button:focus {
   background-color: #004a63;
   border-color: #004a63;
   color: #fff;
@@ -144,11 +144,11 @@
 
 /* ── Desktop (>=1024px) ── */
 @media (width >= 1024px) {
-  .mercy-hero-banner-covered-content {
+  .mercy-hero-banner-content {
     padding: 40px max(5%, calc(50% - 720px));
   }
 
-  .mercy-hero-banner-covered-title {
+  .mercy-hero-banner-title {
     font-size: 64px;
     line-height: 67px;
   }
@@ -156,20 +156,20 @@
 
 /* ── Tablet (768px - 1023px) ── */
 @media (width >= 768px) and (width < 1024px) {
-  .mercy-hero-banner-covered-title {
+  .mercy-hero-banner-title {
     font-size: 48px;
     line-height: 52px;
     max-width: 400px;
   }
 
-  .mercy-hero-banner-covered-content {
+  .mercy-hero-banner-content {
     padding: 30px 5%;
   }
 }
 
 /* ── Subtext badge bleeds to left edge (768px–1559px) ── */
 @media (width >= 768px) and (width < 1560px) {
-  .mercy-hero-banner-covered-subtext {
+  .mercy-hero-banner-subtext {
     margin-left: -9999px;
     padding-left: 9999px;
     padding-right: 40px;
@@ -180,14 +180,14 @@
 
 /* ── Wide viewport: subtext badge symmetric padding ── */
 @media (width >= 1560px) {
-  .mercy-hero-banner-covered-subtext {
+  .mercy-hero-banner-subtext {
     padding: 8px 40px;
   }
 }
 
 /* ── Mobile (<768px) ── */
 @media (width < 768px) {
-  .mercy-hero-banner-covered-overlay {
+  .mercy-hero-banner-overlay {
     background: linear-gradient(
       180deg,
       rgb(255 255 255 / 0%) 0%,
@@ -197,22 +197,22 @@
     );
   }
 
-  .mercy-hero-banner-covered-content {
+  .mercy-hero-banner-content {
     justify-content: flex-end;
     align-items: flex-start;
     padding: 20px;
     gap: 8px;
   }
 
-  .mercy-hero-banner-covered-bottom {
+  .mercy-hero-banner-bottom {
     display: contents;
   }
 
-  .mercy-hero-banner-covered .mercy-hero-banner-covered-button {
+  .mercy-hero-banner .mercy-hero-banner-button {
     order: -1;
   }
 
-  .mercy-hero-banner-covered-title {
+  .mercy-hero-banner-title {
     font-size: 28px;
     line-height: 32px;
     max-width: 100%;
@@ -220,7 +220,7 @@
     order: 0;
   }
 
-  .mercy-hero-banner-covered-subtext {
+  .mercy-hero-banner-subtext {
     background-color: transparent;
     color: #0e7394;
     padding: 0;
