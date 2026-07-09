@@ -310,12 +310,19 @@ main .section.overlay-section > div {
   }
 }
 
+@media (max-width : 991px){
+  main .section.overlay-section {
+    transform: translate(-50%, calc(-7% + 36px));
+    min-width: 96%;
+  }
+}
+
 @media (width < 768px) {
   main .section.overlay-section {
-    transform: translateX(-50%);
     margin-top: 0;
     padding: 16px;
     border-radius: 0;
     box-shadow: none;
+    min-width: 100%;
   }
 }
