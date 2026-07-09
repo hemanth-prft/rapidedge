@@ -1,13 +1,13 @@
 export default function decorate(block) {
   const rows = [...block.children];
-  // row 0 = image, row 1 = imageAlt, row 2 = title, row 3 = subtext,
-  // row 4 = buttonLabel, row 5 = buttonUrl
+  // row 0 = image + imageAlt (combined into one row, two cells)
+  // row 1 = title, row 2 = subtext, row 3 = buttonLabel, row 4 = buttonUrl
   const imageRow = rows[0];
-  const imageAlt = rows[1]?.textContent?.trim() || '';
-  const title = rows[2]?.textContent?.trim() || '';
-  const subtext = rows[3]?.textContent?.trim() || '';
-  const buttonLabel = rows[4]?.textContent?.trim() || '';
-  const buttonUrl = rows[5]?.textContent?.trim() || '';
+  const imageAlt = rows[0]?.children[1]?.textContent?.trim() || '';
+  const title = rows[1]?.textContent?.trim() || '';
+  const subtext = rows[2]?.textContent?.trim() || '';
+  const buttonLabel = rows[3]?.textContent?.trim() || '';
+  const buttonUrl = rows[4]?.textContent?.trim() || '';
 
   const imageWrap = document.createElement('div');
   imageWrap.className = 'mercy-hero-banner-image';
