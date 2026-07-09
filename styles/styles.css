@@ -312,7 +312,7 @@ main .section.overlay-section > div {
 
 @media (width < 768px) {
   main .section.overlay-section {
-    transform: translateX(-50%);
+    transform: translateX(-50%, calc(-15% + 35px));
     margin-top: 0;
     padding: 16px;
     border-radius: 0;
