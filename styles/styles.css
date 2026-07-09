@@ -305,14 +305,14 @@ main .section.overlay-section > div {
 
 @media (width >= 768px) and (width < 1024px) {
   main .section.overlay-section {
-    transform: translate(-50%, calc(-20% + 35px));
+    transform: translate(-50%, calc(-15% + 35px));
     min-width: 96%;
   }
 }
 
 @media (width < 768px) {
   main .section.overlay-section {
-    transform: translateX(-50%, calc(-15% + 35px));
+    transform: translateX(-50%, calc(-10% + 35px));
     margin-top: 0;
     padding: 16px;
     border-radius: 0;
