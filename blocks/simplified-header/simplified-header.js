@@ -307,7 +307,7 @@ export default function decorate(block) {
   const showAlert = Boolean(model.alertEnabled && model.alertText) || Boolean(model.alertText && model.alertText.replace(/<[^>]+>/g, '').trim());
 
   if (showAlert && model.alertText) {
-    const alert = document.createElement('aside');
+    const alert = document.createElement('div');
     alert.className = `mcy-simplified-header__alert ${model.alertColor}`;
     alert.setAttribute('role', 'status');
     alert.innerHTML = model.alertText;
