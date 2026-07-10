@@ -8,6 +8,7 @@
   --mcy-alert-danger-text: #8a2222;
   --mcy-alert-warning-bg: #fff5dd;
   --mcy-alert-warning-text: #7a5a08;
+  padding: 0 24px;
 
   background: var(--mcy-header-bg);
 }
@@ -29,7 +30,6 @@
   justify-content: space-between;
   gap: 24px;
   min-height: 65px;
-  padding: 12px clamp(20px, 5vw, 40px);
 }
 
 .simplified-header .mcy-simplified-header__logos {
