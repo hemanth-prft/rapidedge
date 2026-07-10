@@ -11,10 +11,12 @@
 
   background: var(--mcy-header-bg);
 }
+.simplified-header-container {
+  background-color: var(--mcy-header-bg);
+}
 
 .simplified-header .mcy-simplified-header {
   background: var(--mcy-header-bg);
-  border-bottom: 1px solid #ebeff2;
   min-height: 65px;
 }
 
@@ -61,10 +63,8 @@
 .simplified-header .mcy-simplified-header__logo,
 .simplified-header .mcy-simplified-header__logo img {
   display: block;
-  width: auto;
-  height: auto;
-  min-height: 24px;
-  max-height: 4.3rem;
+  width: 160px;
+  height: 60px;
   object-fit: contain;
   max-width: 10.9rem;
 }
