@@ -15,7 +15,7 @@
   background-color: var(--mcy-header-bg);
 }
 .simplified-header-wrapper {
-  max-width: 1440px;
+  max-width: 1440px !important;
 }
 
 .simplified-header .mcy-simplified-header {
