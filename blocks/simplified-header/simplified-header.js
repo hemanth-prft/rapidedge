@@ -37,12 +37,35 @@ function getFieldCell(rows, fieldIndex) {
 
 function getFieldText(rows, fieldIndex) {
   const cell = getFieldCell(rows, fieldIndex);
-  return cell ? (cell.textContent || '').trim() : '';
+  if (!cell) {
+    return '';
+  }
+
+  const input = cell.querySelector('input:not([type="checkbox"]):not([type="radio"]), textarea, select');
+  if (input && input.value !== undefined) {
+    return (input.value || '').trim();
+  }
+
+  const dataValue = cell.getAttribute('data-value') || cell.getAttribute('value');
+  if (dataValue) {
+    return dataValue.trim();
+  }
+
+  return (cell.textContent || '').trim();
 }
 
 function getFieldHtml(rows, fieldIndex) {
   const cell = getFieldCell(rows, fieldIndex);
-  return cell ? cell.innerHTML.trim() : '';
+  if (!cell) {
+    return '';
+  }
+
+  const richTextContent = cell.querySelector('[data-richtext], .richtext, .text, p, div');
+  if (richTextContent && richTextContent.innerHTML.trim()) {
+    return richTextContent.innerHTML.trim();
+  }
+
+  return cell.innerHTML.trim();
 }
 
 function getFieldLink(rows, fieldIndex, fallback = '') {
@@ -67,9 +90,12 @@ function getFieldBoolean(rows, fieldIndex, fallback = false) {
     return fallback;
   }
 
-  const checkbox = cell.querySelector('input[type="checkbox"]');
+  const checkbox = cell.querySelector('input[type="checkbox"], input[type="radio"], [role="checkbox"], [role="switch"]');
   if (checkbox) {
-    return checkbox.checked;
+    const checked = checkbox.checked || checkbox.getAttribute('aria-checked') === 'true';
+    if (checked !== undefined) {
+      return checked;
+    }
   }
 
   const ariaChecked = cell.querySelector('[aria-checked]')?.getAttribute('aria-checked');
@@ -97,16 +123,35 @@ function getFieldPicture(rows, fieldIndex) {
   const pic = cell.querySelector('picture');
   if (pic) return pic;
 
-  // Fallback: document-based authoring or plain img.
-  const img = cell.querySelector('img');
-  if (img) {
-    return createOptimizedPicture(img.src, img.alt || '', false, [{ width: '400' }]);
+  const image = cell.querySelector('img');
+  if (image) {
+    const src = image.getAttribute('src')
+      || image.getAttribute('data-src')
+      || image.getAttribute('srcset')
+      || '';
+
+    if (src) {
+      const firstSrc = src.split(',')[0].trim().split(' ')[0];
+      return createOptimizedPicture(firstSrc, image.getAttribute('alt') || '', false, [{ width: '400' }]);
+    }
   }
 
-  // Fallback: DAM path as text.
-  const src = cell.textContent.trim();
-  if (src && src.startsWith('/')) {
-    return createOptimizedPicture(src, '', false, [{ width: '400' }]);
+  const source = cell.querySelector('source');
+  if (source) {
+    const src = source.getAttribute('srcset')
+      || source.getAttribute('src')
+      || '';
+
+    if (src) {
+      const firstSrc = src.split(',')[0].trim().split(' ')[0];
+      return createOptimizedPicture(firstSrc, '', false, [{ width: '400' }]);
+    }
+  }
+
+  // Fallback: DAM path or URL entered as text.
+  const rawText = cell.textContent.trim();
+  if (rawText && (/^https?:\/\//i.test(rawText) || rawText.startsWith('/') || rawText.startsWith('data:')).test(rawText)) {
+    return createOptimizedPicture(rawText, '', false, [{ width: '400' }]);
   }
 
   return null;
@@ -149,6 +194,7 @@ function normalizeAlertColor(value) {
 
 function readModel(block) {
   const rows = [...block.children].filter((child) => child instanceof HTMLDivElement);
+  const alertText = getFieldHtml(rows, 8) || getFieldText(rows, 8);
   const data = {
     logoPicture: getFieldPicture(rows, 0),
     logoLinkURL: getFieldLink(rows, 1, DEFAULT_LOGO_LINK),
@@ -156,9 +202,9 @@ function readModel(block) {
     coBrandingLogoPicture: getFieldPicture(rows, 3),
     coBrandingLogoLinkURL: getFieldLink(rows, 4, ''),
     coBrandingLogoTitle: getFieldText(rows, 5),
-    alertEnabled: getFieldBoolean(rows, 6, false),
+    alertEnabled: getFieldBoolean(rows, 6, Boolean(alertText)),
     alertColor: normalizeAlertColor(getFieldText(rows, 7)),
-    alertText: getFieldHtml(rows, 8) || getFieldText(rows, 8),
+    alertText,
   };
 
   if (!data.logoPicture) {
@@ -258,7 +304,9 @@ export default function decorate(block) {
   root.append(content);
   block.append(root);
 
-  if (model.alertEnabled && model.alertText) {
+  const showAlert = Boolean(model.alertEnabled && model.alertText) || Boolean(model.alertText && model.alertText.replace(/<[^>]+>/g, '').trim());
+
+  if (showAlert && model.alertText) {
     const alert = document.createElement('aside');
     alert.className = `mcy-simplified-header__alert ${model.alertColor}`;
     alert.setAttribute('role', 'status');
