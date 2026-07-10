@@ -11,32 +11,56 @@ function getCell(row, index) {
   return cells[index];
 }
 
-function getFieldCell(rows, fieldIndex) {
+function normalizeLabelText(text) {
+  return (text || '').toString().replace(/[\s\u00A0]+/g, ' ').trim().toLowerCase();
+}
+
+function getFieldCell(rows, fieldIndex, labelMatchers = []) {
   if (!rows.length) {
     return null;
   }
 
-  // Single-row layout: all fields are columns in the first row.
-  if (rows.length === 1) {
-    return getCell(rows[0], fieldIndex);
-  }
-
-  // Multi-row layout: each field is its own row, usually [label, value].
   const row = rows[fieldIndex];
-  if (!row) {
+  if (row) {
+    const cells = [...row.children];
+    if (cells.length) {
+      return cells[cells.length - 1];
+    }
+  }
+
+  if (!labelMatchers.length) {
     return null;
   }
 
-  const cells = [...row.children];
-  if (!cells.length) {
+  const normalizedMatchers = labelMatchers.map(normalizeLabelText).filter(Boolean);
+  if (!normalizedMatchers.length) {
     return null;
   }
 
-  return cells[cells.length - 1];
+  for (const candidate of rows) {
+    const candidateText = normalizeLabelText([
+      candidate.getAttribute('aria-label'),
+      candidate.querySelector('label')?.textContent,
+      candidate.textContent,
+    ].filter(Boolean).join(' '));
+
+    if (!candidateText) {
+      continue;
+    }
+
+    if (normalizedMatchers.some((matcher) => candidateText.includes(matcher))) {
+      const cells = [...candidate.children];
+      if (cells.length) {
+        return cells[cells.length - 1];
+      }
+    }
+  }
+
+  return null;
 }
 
-function getFieldText(rows, fieldIndex) {
-  const cell = getFieldCell(rows, fieldIndex);
+function getFieldText(rows, fieldIndex, labelMatchers = []) {
+  const cell = getFieldCell(rows, fieldIndex, labelMatchers);
   if (!cell) {
     return '';
   }
@@ -54,8 +78,8 @@ function getFieldText(rows, fieldIndex) {
   return (cell.textContent || '').trim();
 }
 
-function getFieldHtml(rows, fieldIndex) {
-  const cell = getFieldCell(rows, fieldIndex);
+function getFieldHtml(rows, fieldIndex, labelMatchers = []) {
+  const cell = getFieldCell(rows, fieldIndex, labelMatchers);
   if (!cell) {
     return '';
   }
@@ -68,8 +92,8 @@ function getFieldHtml(rows, fieldIndex) {
   return cell.innerHTML.trim();
 }
 
-function getFieldLink(rows, fieldIndex, fallback = '') {
-  const cell = getFieldCell(rows, fieldIndex);
+function getFieldLink(rows, fieldIndex, fallback = '', labelMatchers = []) {
+  const cell = getFieldCell(rows, fieldIndex, labelMatchers);
   if (!cell) {
     return fallback;
   }
@@ -84,8 +108,8 @@ function getFieldLink(rows, fieldIndex, fallback = '') {
   return text || fallback;
 }
 
-function getFieldBoolean(rows, fieldIndex, fallback = false) {
-  const cell = getFieldCell(rows, fieldIndex);
+function getFieldBoolean(rows, fieldIndex, fallback = false, labelMatchers = []) {
+  const cell = getFieldCell(rows, fieldIndex, labelMatchers);
   if (!cell) {
     return fallback;
   }
@@ -115,8 +139,8 @@ function getFieldBoolean(rows, fieldIndex, fallback = false) {
   return fallback;
 }
 
-function getFieldPicture(rows, fieldIndex) {
-  const cell = getFieldCell(rows, fieldIndex);
+function getFieldPicture(rows, fieldIndex, labelMatchers = []) {
+  const cell = getFieldCell(rows, fieldIndex, labelMatchers);
   if (!cell) return null;
 
   // UE delivery: <picture> element rendered directly in cell.
@@ -149,8 +173,8 @@ function getFieldPicture(rows, fieldIndex) {
   }
 
   // Fallback: DAM path or URL entered as text.
-  const rawText = cell.textContent.trim();
-  if (rawText && (/^https?:\/\//i.test(rawText) || rawText.startsWith('/') || rawText.startsWith('data:')).test(rawText)) {
+  const rawText = (cell.textContent || '').trim();
+  if (rawText && (/^https?:\/\//i.test(rawText) || rawText.startsWith('/') || rawText.startsWith('data:'))) {
     return createOptimizedPicture(rawText, '', false, [{ width: '400' }]);
   }
 
@@ -194,16 +218,16 @@ function normalizeAlertColor(value) {
 
 function readModel(block) {
   const rows = [...block.children].filter((child) => child instanceof HTMLDivElement);
-  const alertText = getFieldHtml(rows, 8) || getFieldText(rows, 8);
+  const alertText = getFieldHtml(rows, 8, ['alert content', 'alert text']) || getFieldText(rows, 8, ['alert content', 'alert text']);
   const data = {
-    logoPicture: getFieldPicture(rows, 0),
-    logoLinkURL: getFieldLink(rows, 1, DEFAULT_LOGO_LINK),
-    logoTitle: getFieldText(rows, 2) || DEFAULT_LOGO_TITLE,
-    coBrandingLogoPicture: getFieldPicture(rows, 3),
-    coBrandingLogoLinkURL: getFieldLink(rows, 4, ''),
-    coBrandingLogoTitle: getFieldText(rows, 5),
-    alertEnabled: getFieldBoolean(rows, 6, Boolean(alertText)),
-    alertColor: normalizeAlertColor(getFieldText(rows, 7)),
+    logoPicture: getFieldPicture(rows, 0, ['logo', 'primary logo']),
+    logoLinkURL: getFieldLink(rows, 1, DEFAULT_LOGO_LINK, ['logo link url', 'logo link']),
+    logoTitle: getFieldText(rows, 2, ['logo title']) || DEFAULT_LOGO_TITLE,
+    coBrandingLogoPicture: getFieldPicture(rows, 3, ['co-branding logo', 'co branding logo']),
+    coBrandingLogoLinkURL: getFieldLink(rows, 4, '', ['co-branding logo link url', 'co branding logo link']),
+    coBrandingLogoTitle: getFieldText(rows, 5, ['co-branding logo title', 'co branding logo title']),
+    alertEnabled: getFieldBoolean(rows, 6, false, ['enable alert', 'enable alert banner']),
+    alertColor: normalizeAlertColor(getFieldText(rows, 7, ['alert color'])),
     alertText,
   };
 
@@ -304,13 +328,29 @@ export default function decorate(block) {
   root.append(content);
   block.append(root);
 
-  const showAlert = Boolean(model.alertEnabled && model.alertText) || Boolean(model.alertText && model.alertText.replace(/<[^>]+>/g, '').trim());
+  const showAlert = model.alertEnabled && model.alertText && model.alertText.replace(/<[^>]+>/g, '').trim();
 
-  if (showAlert && model.alertText) {
-    const alert = document.createElement('div');
+  if (showAlert) {
+    const alert = document.createElement('aside');
     alert.className = `mcy-simplified-header__alert ${model.alertColor}`;
     alert.setAttribute('role', 'status');
-    alert.innerHTML = model.alertText;
+
+    const alertIcon = document.createElement('span');
+    alertIcon.className = 'mcy-simplified-header__alert-icon';
+    alertIcon.textContent = '⚠️';
+
+    const alertContent = document.createElement('div');
+    alertContent.className = 'mcy-simplified-header__alert-content';
+    alertContent.innerHTML = model.alertText;
+
+    const closeButton = document.createElement('button');
+    closeButton.type = 'button';
+    closeButton.className = 'mcy-simplified-header__alert-close';
+    closeButton.setAttribute('aria-label', 'Dismiss alert');
+    closeButton.innerHTML = '&times;';
+    closeButton.addEventListener('click', () => alert.remove());
+
+    alert.append(alertIcon, alertContent, closeButton);
     block.append(alert);
   }
 }

@@ -88,15 +88,52 @@
 }
 
 .simplified-header .mcy-simplified-header__alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: relative;
   margin: 0;
-  padding: 10px clamp(20px, 5vw, 40px);
+  padding: 14px clamp(20px, 5vw, 40px);
   border-top: 1px solid var(--mcy-header-border);
   font-size: 0.98rem;
   line-height: 1.45;
 }
 
-.simplified-header .mcy-simplified-header__alert p {
+.simplified-header .mcy-simplified-header__alert-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  font-size: 1.15rem;
+}
+
+.simplified-header .mcy-simplified-header__alert-content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.simplified-header .mcy-simplified-header__alert-content p {
   margin: 0;
+}
+
+.simplified-header .mcy-simplified-header__alert-close {
+  flex: 0 0 auto;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  text-align: center;
+}
+
+.simplified-header .mcy-simplified-header__alert-close:hover,
+.simplified-header .mcy-simplified-header__alert-close:focus {
+  opacity: 0.8;
 }
 
 .simplified-header .mcy-simplified-header__alert.halert-primary {
