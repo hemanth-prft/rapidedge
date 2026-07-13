@@ -48,34 +48,33 @@ function getRowLink(row, fallback = '') {
 }
 
 function getRowBoolean(row, fallback = false) {
-  const cell = getValueCell(row);
-  if (!cell) {
-    return fallback;
-  }
+  if (!row) return fallback;
 
-  // UE sometimes stores the value in data-aue-value on the row or cell itself.
-  const aueVal = (row?.getAttribute('data-aue-value') || cell.getAttribute('data-aue-value') || '').toLowerCase();
+  // UE boolean fields carry data-aue-value directly on the element.
+  const aueVal = (row.getAttribute('data-aue-value') || '').trim().toLowerCase();
   if (aueVal === 'true') return true;
   if (aueVal === 'false') return false;
 
-  const checkbox = cell.querySelector('input[type="checkbox"]');
-  if (checkbox) {
-    return checkbox.checked;
+  const cell = getValueCell(row);
+  if (!cell) return fallback;
+
+  // Also check data-aue-value on any nested element.
+  const aueValEl = row.querySelector('[data-aue-value]');
+  if (aueValEl) {
+    const val = (aueValEl.getAttribute('data-aue-value') || '').trim().toLowerCase();
+    if (val === 'true') return true;
+    if (val === 'false') return false;
   }
+
+  const checkbox = cell.querySelector('input[type="checkbox"]');
+  if (checkbox) return checkbox.checked;
 
   const ariaChecked = cell.querySelector('[aria-checked]')?.getAttribute('aria-checked');
-  if (ariaChecked === 'true' || ariaChecked === 'false') {
-    return ariaChecked === 'true';
-  }
+  if (ariaChecked === 'true' || ariaChecked === 'false') return ariaChecked === 'true';
 
-  const text = (cell.textContent || '').trim().toLowerCase();
-  if (BOOLEAN_TRUE_RE.test(text)) {
-    return true;
-  }
-
-  if (BOOLEAN_FALSE_RE.test(text)) {
-    return false;
-  }
+  const text = (cell.textContent || row.textContent || '').trim().toLowerCase();
+  if (BOOLEAN_TRUE_RE.test(text)) return true;
+  if (BOOLEAN_FALSE_RE.test(text)) return false;
 
   return fallback;
 }
@@ -125,7 +124,9 @@ function buildFieldMap(rows) {
 
     const prop = propEl.getAttribute('data-aue-prop') || propEl.getAttribute('data-richtext-prop');
     if (prop && !(prop in map)) {
-      map[prop] = row;
+      // Store propEl (the element that carries data-aue-value / data-aue-type)
+      // not the outer row, so value attributes are always directly accessible.
+      map[prop] = propEl;
     }
   });
 
