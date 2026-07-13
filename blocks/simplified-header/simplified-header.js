@@ -246,21 +246,18 @@ function readModel(block) {
   // --- debug: inspect exactly what UE delivers for the boolean toggle ---
   const alertRow = fieldMap.enableAlert;
   if (alertRow) {
+    const allAttrs = Object.fromEntries(
+      [...alertRow.attributes].map((a) => [a.name, a.value]),
+    );
     // eslint-disable-next-line no-console
-    console.log('[simplified-header] enableAlert raw row:', alertRow.outerHTML);
+    console.log('[simplified-header] enableAlert element — all attributes:', allAttrs);
     // eslint-disable-next-line no-console
-    console.log('[simplified-header] enableAlert textContent:', JSON.stringify(alertRow.textContent));
+    console.log('[simplified-header] enableAlert textContent:', JSON.stringify(alertRow.textContent?.trim()));
     // eslint-disable-next-line no-console
-    console.log('[simplified-header] enableAlert data-aue-value:', alertRow.getAttribute('data-aue-value'));
-    const cb = alertRow.querySelector('input[type="checkbox"]');
-    // eslint-disable-next-line no-console
-    console.log('[simplified-header] enableAlert checkbox found:', cb ? `checked=${cb.checked}` : 'none');
-    const ac = alertRow.querySelector('[aria-checked]');
-    // eslint-disable-next-line no-console
-    console.log('[simplified-header] enableAlert aria-checked el:', ac ? ac.outerHTML : 'none');
+    console.log('[simplified-header] enableAlert outerHTML:', alertRow.outerHTML);
   } else {
     // eslint-disable-next-line no-console
-    console.warn('[simplified-header] enableAlert row NOT found in fieldMap. Keys:', Object.keys(fieldMap));
+    console.warn('[simplified-header] enableAlert NOT found. fieldMap keys:', Object.keys(fieldMap));
   }
   // --- end debug ---
 
