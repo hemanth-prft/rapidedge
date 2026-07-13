@@ -103,3 +103,13 @@ p.mercy-simplified-footer-copyright {
   padding-right: 0;
   overflow: visible;
 }
+
+/* ── Full-width section reset ── */
+main > .section:has(.mercy-simplified-footer) {
+  margin: 0;
+}
+
+main > .section:has(.mercy-simplified-footer) > div {
+  max-width: 100%;
+  padding: 0;
+}
