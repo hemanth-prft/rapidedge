@@ -236,7 +236,14 @@ function readModel(block) {
   if (!data.logoPicture) {
     data.logoPicture = getPictureFromSource(DEFAULT_LOGO_SRC, DEFAULT_LOGO_TITLE);
   }
- 
+
+  // eslint-disable-next-line no-console
+  console.log('[simplified-header] alert content:', {
+    alertEnabled: data.alertEnabled,
+    alertColor: data.alertColor,
+    alertText: data.alertText,
+  });
+
   return data;
 }
  
