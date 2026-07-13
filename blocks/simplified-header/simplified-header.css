@@ -8,8 +8,8 @@
   --mcy-alert-danger-text: #8a2222;
   --mcy-alert-warning-bg: #fff5dd;
   --mcy-alert-warning-text: #7a5a08;
+  --mcy-alert-icon: #b33a24;
   padding: 0 24px;
-
   background: var(--mcy-header-bg);
 }
 .simplified-header-container {
@@ -18,211 +18,224 @@
 .simplified-header-wrapper {
   max-width: 1440px !important;
 }
-
+ 
 .simplified-header .mcy-simplified-header {
   background: var(--mcy-header-bg);
-  min-height: 65px;
+  min-height: 80px;
 }
-
+ 
+.simplified-header .mcy-simplified-header__inner {
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+ 
 .simplified-header .mcy-simplified-header__content {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  min-height: 65px;
+  min-height: 80px;
+  padding: 12px 0;
 }
-
+ 
 .simplified-header .mcy-simplified-header__logos {
   display: flex;
   align-items: center;
   min-width: 0;
   flex: 1 1 auto;
 }
-
+ 
 .simplified-header .mcy-simplified-header__logo-wrapper {
   display: flex;
   align-items: center;
   min-width: 0;
   flex: 0 0 auto;
 }
-
 .simplified-header .mcy-simplified-header__logo-wrapper--co-branding {
   margin-left: 18px;
   padding-left: 18px;
   border-left: 1px solid var(--mcy-header-border);
 }
-
+ 
 .simplified-header .mcy-simplified-header__logo-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   line-height: 0;
 }
-
 .simplified-header .mcy-simplified-header__logo-wrapper picture {
   display: block;
 }
-
+ 
 .simplified-header .mcy-simplified-header__logo,
 .simplified-header .mcy-simplified-header__logo img {
   display: block;
-  width: 160px;
-  height: 60px;
   object-fit: contain;
-  max-width: 10.9rem;
 }
+ 
+.simplified-header .mcy-simplified-header__logo-image--primary {
+  width: 170px;
+  height: auto;
+  max-height: 88px;
+}
+ 
+.simplified-header .mcy-simplified-header__logo-image--co-branding {
+  width: 110px;
+  height: auto;
+  max-height: 72px;
+}
+ 
 .simplified-header .mcy-simplified-header__tagline {
   margin: 0;
   margin-left: auto;
   text-align: right;
   flex: 0 1 auto;
 }
-
+ 
 .simplified-header .mcy-simplified-header__tagline {
   color: var(--mcy-header-accent);
-  font-size: clamp(1.1rem, 1rem + 0.45vw, 2rem);
+  font-size: clamp(1.2rem, 1rem + 0.9vw, 2.75rem);
   font-style: italic;
   font-weight: 400;
   line-height: 1.1;
   white-space: nowrap;
 }
-
+ 
 .simplified-header .mcy-simplified-header__alert {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  position: relative;
   margin: 0;
-  padding: 14px clamp(20px, 5vw, 40px);
+  padding: 0;
   border-top: 1px solid var(--mcy-header-border);
   font-size: 0.98rem;
   line-height: 1.45;
 }
-
-.simplified-header .mcy-simplified-header__alert-icon {
-  display: inline-flex;
+ 
+.simplified-header .mcy-simplified-header__alert-inner {
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  font-size: 1.15rem;
+  gap: 14px;
 }
-
+ 
+.simplified-header .mcy-simplified-header__alert-icon {
+  color: var(--mcy-alert-icon);
+  font-weight: 700;
+  line-height: 1;
+}
+ 
 .simplified-header .mcy-simplified-header__alert-content {
   flex: 1 1 auto;
   min-width: 0;
 }
-
-.simplified-header .mcy-simplified-header__alert-content p {
+ 
+.simplified-header .mcy-simplified-header__alert p {
   margin: 0;
 }
-
+ 
 .simplified-header .mcy-simplified-header__alert-close {
-  flex: 0 0 auto;
-  border: none;
-  background: transparent;
-  color: inherit;
-  font-size: 1.4rem;
+  background: none;
+  border: 0;
+  color: currentcolor;
+  font-size: 2rem;
   line-height: 1;
-  cursor: pointer;
   padding: 0;
-  width: 1.6rem;
-  height: 1.6rem;
-  text-align: center;
+  cursor: pointer;
 }
-
+ 
 .simplified-header .mcy-simplified-header__alert-close:hover,
-.simplified-header .mcy-simplified-header__alert-close:focus {
+.simplified-header .mcy-simplified-header__alert-close:focus-visible {
   opacity: 0.8;
 }
-
 .simplified-header .mcy-simplified-header__alert.halert-primary {
   background: var(--mcy-alert-primary-bg);
   color: var(--mcy-alert-primary-text);
 }
-
+ 
 .simplified-header .mcy-simplified-header__alert.halert-danger {
   background: var(--mcy-alert-danger-bg);
   color: var(--mcy-alert-danger-text);
 }
-
+ 
 .simplified-header .mcy-simplified-header__alert.halert-warning {
   background: var(--mcy-alert-warning-bg);
   color: var(--mcy-alert-warning-text);
 }
-
+ 
 @media (max-width: 1024px) {
   .simplified-header .mcy-simplified-header {
-    min-height: 65px;
+    min-height: 72px;
   }
-
+ 
+  .simplified-header .mcy-simplified-header__inner {
+    padding: 0 16px;
+  }
+ 
   .simplified-header .mcy-simplified-header__content {
-    min-height: 65px;
+    min-height: 72px;
     gap: 16px;
-    padding: 10px clamp(16px, 4vw, 28px);
+    padding: 10px 0;
   }
-
-  .simplified-header .mcy-simplified-header__logo,
-  .simplified-header .mcy-simplified-header__logo img {
-    max-height: 4.3rem;
+ 
+  .simplified-header .mcy-simplified-header__logo-image--primary {
+    width: 132px;
+    max-height: 64px;
   }
-
+ 
+  .simplified-header .mcy-simplified-header__logo-image--co-branding {
+    width: 92px;
+    max-height: 58px;
+  }
+ 
   .simplified-header .mcy-simplified-header__tagline {
-    font-size: clamp(1rem, 0.95rem + 0.4vw, 1.8rem);
+    font-size: clamp(1rem, 0.92rem + 0.5vw, 1.5rem);
   }
-
-  .simplified-header .mcy-simplified-header__alert {
-    padding: 10px clamp(16px, 4vw, 28px);
+ 
+  .simplified-header .mcy-simplified-header__alert-inner {
+    padding: 10px 16px;
   }
 }
-
+ 
 @media (max-width: 767px) {
   .simplified-header .mcy-simplified-header {
-    min-height: 65px;
+    min-height: 64px;
   }
-
+ 
   .simplified-header .mcy-simplified-header__content {
-    min-height: 65px;
+    min-height: 64px;
     gap: 12px;
-    padding: 8px 16px;
+    padding: 8px 0;
   }
-
-  .simplified-header .mcy-simplified-header__logo,
-  .simplified-header .mcy-simplified-header__logo img {
-    max-height: 4.3rem;
-    max-width: 10.9rem;
+ 
+  .simplified-header .mcy-simplified-header__logo-image--primary {
+    width: 120px;
+    max-height: 54px;
   }
-
+ 
+  .simplified-header .mcy-simplified-header__logo-image--co-branding {
+    width: 70px;
+    max-height: 42px;
+  }
+ 
   .simplified-header .mcy-simplified-header__logo-wrapper--co-branding {
     margin-left: 12px;
     padding-left: 12px;
   }
-
+ 
   .simplified-header .mcy-simplified-header__tagline {
     margin-left: auto;
     text-align: right;
     white-space: nowrap;
-    font-size: clamp(0.9rem, 0.82rem + 0.28vw, 1.2rem);
+    font-size: clamp(0.75rem, 0.72rem + 0.2vw, 0.95rem);
   }
-
-  .simplified-header .mcy-simplified-header__alert {
+ 
+  .simplified-header .mcy-simplified-header__alert-inner {
     padding: 10px 16px;
+    gap: 10px;
   }
-}
-
-@media (min-width: 992px) {
-  .simplified-header .mcy-simplified-header {
-    min-height: 80px;
-  }
-
-  .simplified-header .mcy-simplified-header__content {
-    min-height: 80px;
-    padding-top: 12px;
-    padding-bottom: 12px;
-  }
-
-  .simplified-header .mcy-simplified-header__logo,
-  .simplified-header .mcy-simplified-header__logo img {
-    max-height: 5.5rem;
+ 
+  .simplified-header .mcy-simplified-header__alert-close {
+    font-size: 1.6rem;
   }
 }
