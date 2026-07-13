@@ -50,15 +50,12 @@ function getRowLink(row, fallback = '') {
 function getRowBoolean(row, fallback = false) {
   if (!row) return fallback;
 
-  // UE boolean fields carry data-aue-value directly on the element.
+  // 1. data-aue-value on the element itself (most direct UE pattern).
   const aueVal = (row.getAttribute('data-aue-value') || '').trim().toLowerCase();
   if (aueVal === 'true') return true;
   if (aueVal === 'false') return false;
 
-  const cell = getValueCell(row);
-  if (!cell) return fallback;
-
-  // Also check data-aue-value on any nested element.
+  // 2. data-aue-value on any descendant.
   const aueValEl = row.querySelector('[data-aue-value]');
   if (aueValEl) {
     const val = (aueValEl.getAttribute('data-aue-value') || '').trim().toLowerCase();
@@ -66,13 +63,20 @@ function getRowBoolean(row, fallback = false) {
     if (val === 'false') return false;
   }
 
-  const checkbox = cell.querySelector('input[type="checkbox"]');
-  if (checkbox) return checkbox.checked;
+  // 3. aria-checked on the element itself or a descendant.
+  const ariaEl = row.matches('[aria-checked]') ? row : row.querySelector('[aria-checked]');
+  if (ariaEl) {
+    const ac = ariaEl.getAttribute('aria-checked');
+    if (ac === 'true') return true;
+    if (ac === 'false') return false;
+  }
 
-  const ariaChecked = cell.querySelector('[aria-checked]')?.getAttribute('aria-checked');
-  if (ariaChecked === 'true' || ariaChecked === 'false') return ariaChecked === 'true';
+  // 4. Checkbox — element itself or a descendant.
+  const cb = row.matches('input[type="checkbox"]') ? row : row.querySelector('input[type="checkbox"]');
+  if (cb) return cb.checked;
 
-  const text = (cell.textContent || row.textContent || '').trim().toLowerCase();
+  // 5. Plain text "true" / "false" anywhere in the element's text.
+  const text = (row.textContent || '').trim().toLowerCase();
   if (BOOLEAN_TRUE_RE.test(text)) return true;
   if (BOOLEAN_FALSE_RE.test(text)) return false;
 
@@ -231,7 +235,12 @@ function readModel(block) {
       coBrandingLogoPicture: getRowPicture(fieldMap.coBrandingLogo),
       coBrandingLogoLinkURL: getRowLink(fieldMap.coBrandingLogoLinkURL, ''),
       coBrandingLogoTitle: getRowText(fieldMap.coBrandingLogoTitle),
-      alertEnabled: getRowBoolean(fieldMap.enableAlert, false),
+      // Prefer fieldMap entry; fall back to a direct querySelector in case the
+      // boolean element was not indexed (e.g. nested outside a direct-child row).
+      alertEnabled: getRowBoolean(
+        fieldMap.enableAlert || block.querySelector('[data-aue-prop="enableAlert"]'),
+        false,
+      ),
       alertColor: normalizeAlertColor(getRowText(fieldMap.alertColor)),
       alertText: getRowHtml(fieldMap.alertText) || getRowText(fieldMap.alertText),
     };
@@ -243,27 +252,31 @@ function readModel(block) {
     data.logoPicture = getPictureFromSource(DEFAULT_LOGO_SRC, DEFAULT_LOGO_TITLE);
   }
 
-  // --- debug: dump all block rows + enableAlert details ---
+  // --- debug ---
   // eslint-disable-next-line no-console
   console.log('[simplified-header] fieldMap keys:', Object.keys(fieldMap));
+  const enableAlertEl = fieldMap.enableAlert
+    || block.querySelector('[data-aue-prop="enableAlert"]');
   // eslint-disable-next-line no-console
-  console.log('[simplified-header] ALL block rows HTML:', rows.map((r) => r.outerHTML));
-  const enableAlertEl = fieldMap.enableAlert;
-  // eslint-disable-next-line no-console
-  console.log('[simplified-header] enableAlert el:', enableAlertEl ? {
-    outerHTML: enableAlertEl.outerHTML,
-    textContent: JSON.stringify(enableAlertEl.textContent?.trim()),
-    'data-aue-value': enableAlertEl.getAttribute('data-aue-value'),
-    'data-aue-type': enableAlertEl.getAttribute('data-aue-type'),
-  } : 'NOT FOUND');
-  // --- end debug ---
-
+  console.log('[simplified-header] enableAlert el:', enableAlertEl
+    ? {
+      outerHTML: enableAlertEl.outerHTML,
+      'data-aue-value': enableAlertEl.getAttribute('data-aue-value'),
+      'data-aue-type': enableAlertEl.getAttribute('data-aue-type'),
+      textContent: JSON.stringify((enableAlertEl.textContent || '').trim()),
+    }
+    : 'NOT FOUND — block outerHTML below');
+  if (!enableAlertEl) {
+    // eslint-disable-next-line no-console
+    console.log('[simplified-header] block.outerHTML:', block.outerHTML);
+  }
   // eslint-disable-next-line no-console
   console.log('[simplified-header] alert content:', {
     alertEnabled: data.alertEnabled,
     alertColor: data.alertColor,
     alertText: data.alertText,
   });
+  // --- end debug ---
 
   return data;
 }
