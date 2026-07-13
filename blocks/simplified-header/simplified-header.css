@@ -6,8 +6,8 @@
   --mcy-alert-primary-text: #0f4d75;
   --mcy-alert-danger-bg: #ffe8e7;
   --mcy-alert-danger-text: #8a2222;
-  --mcy-alert-warning-bg: #fff5dd;
-  --mcy-alert-warning-text: #7a5a08;
+  --mcy-alert-warning-bg: #f5c518;
+  --mcy-alert-warning-text: #3b2a00;
   --mcy-alert-icon: #b33a24;
   padding: 0px;
   background: var(--mcy-header-bg);
@@ -161,6 +161,95 @@
 .simplified-header .mcy-simplified-header__alert.halert-warning {
   background: var(--mcy-alert-warning-bg);
   color: var(--mcy-alert-warning-text);
+}
+
+/* ── Standalone alert banner (rendered outside .simplified-header-wrapper) ── */
+.mcy-simplified-header__alert {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.mcy-simplified-header__alert-inner {
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mcy-simplified-header__alert-icon {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.mcy-simplified-header__alert-icon::before {
+  content: '▲';
+  margin-right: 4px;
+}
+
+.mcy-simplified-header__alert-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: center;
+}
+
+.mcy-simplified-header__alert p {
+  margin: 0;
+}
+
+.mcy-simplified-header__alert-close {
+  background: none;
+  border: 0;
+  color: currentcolor;
+  font-size: 1.4rem;
+  line-height: 1;
+  padding: 0 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+.mcy-simplified-header__alert-close:hover,
+.mcy-simplified-header__alert-close:focus-visible {
+  opacity: 1;
+}
+
+.mcy-simplified-header__alert.halert-primary {
+  background: #e7f4ff;
+  color: #0f4d75;
+}
+
+.mcy-simplified-header__alert.halert-danger {
+  background: #ffe8e7;
+  color: #8a2222;
+}
+
+.mcy-simplified-header__alert.halert-warning {
+  background: #f5c518;
+  color: #3b2a00;
+}
+
+@media (max-width: 1024px) {
+  .mcy-simplified-header__alert-inner {
+    padding: 10px 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .mcy-simplified-header__alert-inner {
+    padding: 10px 16px;
+    gap: 10px;
+  }
+
+  .mcy-simplified-header__alert-close {
+    font-size: 1.2rem;
+  }
 }
  
 @media (max-width: 1024px) {

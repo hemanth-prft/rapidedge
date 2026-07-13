@@ -387,6 +387,12 @@ export default function decorate(block) {
   block.append(root);
  
   if (model.alertEnabled && model.alertText) {
-    block.append(buildAlert(model));
+    const alertEl = buildAlert(model);
+    const wrapper = block.closest('.simplified-header-wrapper');
+    if (wrapper) {
+      wrapper.insertAdjacentElement('afterend', alertEl);
+    } else {
+      block.append(alertEl);
+    }
   }
 }
