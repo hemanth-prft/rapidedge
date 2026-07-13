@@ -243,22 +243,19 @@ function readModel(block) {
     data.logoPicture = getPictureFromSource(DEFAULT_LOGO_SRC, DEFAULT_LOGO_TITLE);
   }
 
-  // --- debug: inspect exactly what UE delivers for the boolean toggle ---
-  const alertRow = fieldMap.enableAlert;
-  if (alertRow) {
-    const allAttrs = Object.fromEntries(
-      [...alertRow.attributes].map((a) => [a.name, a.value]),
-    );
-    // eslint-disable-next-line no-console
-    console.log('[simplified-header] enableAlert element — all attributes:', allAttrs);
-    // eslint-disable-next-line no-console
-    console.log('[simplified-header] enableAlert textContent:', JSON.stringify(alertRow.textContent?.trim()));
-    // eslint-disable-next-line no-console
-    console.log('[simplified-header] enableAlert outerHTML:', alertRow.outerHTML);
-  } else {
-    // eslint-disable-next-line no-console
-    console.warn('[simplified-header] enableAlert NOT found. fieldMap keys:', Object.keys(fieldMap));
-  }
+  // --- debug: dump all block rows + enableAlert details ---
+  // eslint-disable-next-line no-console
+  console.log('[simplified-header] fieldMap keys:', Object.keys(fieldMap));
+  // eslint-disable-next-line no-console
+  console.log('[simplified-header] ALL block rows HTML:', rows.map((r) => r.outerHTML));
+  const enableAlertEl = fieldMap.enableAlert;
+  // eslint-disable-next-line no-console
+  console.log('[simplified-header] enableAlert el:', enableAlertEl ? {
+    outerHTML: enableAlertEl.outerHTML,
+    textContent: JSON.stringify(enableAlertEl.textContent?.trim()),
+    'data-aue-value': enableAlertEl.getAttribute('data-aue-value'),
+    'data-aue-type': enableAlertEl.getAttribute('data-aue-type'),
+  } : 'NOT FOUND');
   // --- end debug ---
 
   // eslint-disable-next-line no-console
