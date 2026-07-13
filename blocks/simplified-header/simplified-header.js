@@ -6,6 +6,11 @@ const DEFAULT_LOGO_TITLE = 'Home';
 const DEFAULT_LOGO_LINK = '/';
 const DEFAULT_TAGLINE = 'Your life is our life\'s work.';
 const DEFAULT_ALERT_ARIA_LABEL = 'Dismiss alert';
+
+const BOOLEAN_TRUE_RE = /^(?:true|yes|on|enabled|checked|1)$/;
+const BOOLEAN_FALSE_RE = /^(?:false|no|off|0|disabled|unchecked)$/;
+const BOOLEAN_TEXT_RE = /^(?:true|false|yes|no|on|off|enabled|disabled|checked|unchecked|1|0)$/i;
+const ALERT_COLOR_RE = /halert-(?:primary|danger|warning)|high alert|normal alert|generic/i;
  
 function getValueCell(row) {
   if (!row) {
@@ -59,11 +64,11 @@ function getRowBoolean(row, fallback = false) {
   }
 
   const text = (cell.textContent || '').trim().toLowerCase();
-  if (/^(true|yes|on|enabled|checked|1)$/.test(text)) {
+  if (BOOLEAN_TRUE_RE.test(text)) {
     return true;
   }
 
-  if (/^(false|no|off|0|disabled|unchecked)$/.test(text)) {
+  if (BOOLEAN_FALSE_RE.test(text)) {
     return false;
   }
 
@@ -147,9 +152,6 @@ function normalizeAlertColor(value) {
  
   return 'halert-primary';
 }
-
-const ALERT_COLOR_RE = /halert-(?:primary|danger|warning)|high alert|normal alert|generic/i;
-const BOOLEAN_TEXT_RE = /^(?:true|false|yes|no|on|off|enabled|disabled|checked|unchecked|1|0)$/i;
 
 function rowIsBoolean(row) {
   const cell = getValueCell(row);
